@@ -6,18 +6,20 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:36:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/17 11:58:30 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:09:02 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Should len == 0 and s == NULL return an empty string instead of NULL?
+// (len == 0 and s == NULL) returns an empty string instead of just NULL
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*r;
 
+	if (!len)
+		return (ft_strdup(""));
 	if (!s)
 		return (NULL);
 	i = 0;
