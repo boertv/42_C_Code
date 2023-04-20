@@ -12,10 +12,10 @@
 
 #include "ft_printf.h"
 
-// for the minimum field width flag: the function doesn't print anything if it's >= INT_MAX (2147483647)
+// for the minimum field width flag: the function doesn't print anything if it's >= INT_MAX (2147483647) (OR EQUAL TO)
 //	(and returns -1 ofc)
 
-// include any 'filler' in whatever conversion happens after in
+// include any 'filler' in whatever conversion happens after it
 static const char	*ft_output_filler(const char *format, size_t *char_count)
 {
 	if (!format)

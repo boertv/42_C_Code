@@ -2,8 +2,8 @@
 
 int main(void)
 {
-//    int i = 42;
+    int i = 12;
 
-    printf("\n|%i|\n|%i|\n", printf("|%--+-3%|wajo nice.|%3%|\n"), printf("okokokoktranquille%%aitaithearmeoutnow%3000000000%\n"));
-//    printf("%5%%5i wajo nice.\n", i);
+//    printf("\n|%i|\n|%i|\n", printf("|%--+-3%|wajo nice.|%3%|\n"), printf("okokokoktranquille%%aitaithearmeoutnow%3000000000%\n"));
+    printf("aa |%#X| bb\n", i);
 }
