@@ -6,14 +6,15 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 10:34:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/17 11:49:17 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:51:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 // Removes start- and end-characters regardless of order.
-// Should 'if (!set && s1)' return strdup(s1)?
+// Should 'if (!set && s1)' return strdup(s1)? Feel like we want an error
+//  instead of output that is probably unwanted.
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	l;
@@ -28,7 +29,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		l++;
 	if (l)
 		l--;
-	while (*(s1 + l) && ft_strchr(set, *(s1 + l)))
+	while (l && ft_strchr(set, *(s1 + l)))
 		l--;
 	if (*s1)
 		l++;
