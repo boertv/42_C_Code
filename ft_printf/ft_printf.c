@@ -24,7 +24,7 @@ static const char	*ft_sub_format(const char **ptr_format)
 	char	set[10];
 	char	*sub_format;
 
-	if (!ptr_format || !*ptr_format)
+	if (!ptr_format || !*ptr_format || !**ptr_format)
 		return (ft_error_null("input", "ft_sub_format"));
 	l = 0;
 	ft_strlcpy(set, "cspdiuxX%", 10);
@@ -36,6 +36,7 @@ static const char	*ft_sub_format(const char **ptr_format)
 		l++;
 	if (*ptr_format[l] && ft_strchr(set, *ptr_format[l]))
 		l++;
+	// could also just use ft_substr.c
 	sub_format = (char *) malloc(l + 1);
 	if (!sub_format)
 		return (ft_error_null("malloc", "ft_sub_format"));
