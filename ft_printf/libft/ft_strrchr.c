@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:31:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:51 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/04/04 14:51:35 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/04/17 11:45:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <unistd.h>
-# include "libft.h"
+char	*ft_strrchr(const char *s, int c)
+{
+	char			ch;
+	unsigned long	i;
 
-int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function);
-
-#endif
+	if (!s)
+		return (NULL);
+	ch = (char) c;
+	i = 0;
+	while (*(s + i))
+		i++;
+	if (!ch)
+		return ((char *)(s + i));
+	while (i-- > 0)
+	{
+		if (*(s + i) == ch)
+			return ((char *)(s + i));
+	}
+	return (NULL);
+}

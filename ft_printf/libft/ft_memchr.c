@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:31:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:51 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/04/06 10:37:08 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/04/06 16:29:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <unistd.h>
-# include "libft.h"
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	ch;
+	unsigned char	*st;
+	size_t			i;
 
-int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function);
-
-#endif
+	if (!s)
+		return (NULL);
+	ch = (unsigned char) c;
+	st = (unsigned char *) s;
+	i = 0;
+	while (i++ < n)
+		if (*(st + i - 1) == ch)
+			return ((st + i - 1));
+	return (NULL);
+}

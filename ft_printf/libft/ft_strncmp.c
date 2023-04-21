@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:31:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:51 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/04/04 15:15:35 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/04/10 16:42:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <unistd.h>
-# include "libft.h"
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t				i;
+	const unsigned char	*s3;
+	const unsigned char	*s4;
 
-int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function);
-
-#endif
+	s3 = (unsigned char *) s1;
+	s4 = (unsigned char *) s2;
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	while (i < n && (*(s3 + i) || *(s4 + i)))
+	{
+		if (*(s3 + i) != *(s4 + i))
+			return (*(s3 + i) - *(s4 + i));
+		i++;
+	}
+	return (0);
+}

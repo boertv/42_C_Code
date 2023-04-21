@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:31:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:51 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/04/05 16:48:08 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/04/06 16:33:30 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <unistd.h>
-# include "libft.h"
-
-int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function);
-
-#endif
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		c += ('A' - 'a');
+	return (c);
+}

@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:31:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:51 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/04/03 15:37:23 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/04/17 11:31:13 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <unistd.h>
-# include "libft.h"
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	ch;
+	char			*bu;
 
-int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function);
-
-#endif
+	if (!len)
+		return (b);
+	if (!b)
+		return (NULL);
+	ch = (unsigned char) c;
+	bu = (char *) b;
+	while (len-- > 0)
+		*(bu + len) = ch;
+	return ((void *) bu);
+}

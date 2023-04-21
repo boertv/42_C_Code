@@ -2,8 +2,13 @@
 
 int main(void)
 {
-    int i = 12;
+    int i = 20;
 
 //    printf("\n|%i|\n|%i|\n", printf("|%--+-3%|wajo nice.|%3%|\n"), printf("okokokoktranquille%%aitaithearmeoutnow%3000000000%\n"));
-    printf("aa |%#X| bb\n", i);
+    printf("   |%6.X| \n", i);
+    printf("   |%.6X| \n", i);
+    printf("   |%06.4X| \n", i);
+    printf("   |%-6.4X| \n", i);
+    printf("\n   |%##########00006X| \n", i);
+    printf("   |%##########06X| \n", i);
 }

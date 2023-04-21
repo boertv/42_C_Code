@@ -15,55 +15,59 @@
 // for the minimum field width flag: the function doesn't print anything if it's >= INT_MAX (2147483647) (OR EQUAL TO)
 //	(and returns -1 ofc)
 
-// include any 'filler' in whatever conversion happens after it
-static const char	*ft_output_filler(const char *format, size_t *char_count)
-{
-	if (!format)
-		return (NULL);
-	while (*format && *format != '%')
-	{
-		if (write(0, format++, 1) < 1)
-		{
-			write(0, "\n Error in 'ft_output_filler'\n", 30);
-			return (NULL);
-		}
-		*char_count++;
-	}
-	return (format);
-}
-
-static const char	*ft_output_conversion(const char *format, )
-{
-}
-
-static const char	*ft_conversion_generator(const char *format)
+// Cuts a string out of the format. Including one specifier and preceding loose chars.
+// Increments the format so we are up to date.
+// ... I think ...
+static const char	*ft_sub_format(const char **ptr_format)
 {
 	size_t	l;
 	char	set[10];
+	char	*sub_format;
 
-	if (!format || *format != '%')
-	{
-		write(0, "\n Bad input for 'ft_conversion_generator'\n", 42)
-		return (NULL);
-	}
+	if (!ptr_format || !*ptr_format)
+		return (ft_error_null("input", "ft_sub_format"));
 	l = 0;
 	ft_strlcpy(set, "cspdiuxX%", 10);
-	while (*format/*&& something else, a set or sumn*/)
-	{
-	}
+	while (*ptr_format[l] && **ptr_format != '%')
+		l++;
+	if (*ptr_format[l] == '%')
+		l++;
+	while (*ptr_format[l] && !ft_strchr(set, *ptr_format[l]))
+		l++;
+	if (*ptr_format[l] && ft_strchr(set, *ptr_format[l]))
+		l++;
+	sub_format = (char *) malloc(l + 1);
+	if (!sub_format)
+		return (ft_error_null("malloc", "ft_sub_format"));
+	ft_strlcpy(sub_format, *ptr_format, l + 1);
+	*ptr_format += l;
+	return (sub_format)
+}
+
+static const char	*ft_output_conversion(const char *sub_format)
+{
 }
 
 int	ft_printf(const char *format, ...)
 {
 	size_t	char_count;
-	char	*conv;
+	char	*sub_format;
+	char	*to_print;
 
 	char_count = 0;
 	while (format && *format)
 	{
-	format = ft_output_filler(format, &char_count);
-	conv = ft_conversion_generator(format);
-	format = ft_output_conversion(format, &char_count);
+	sub_format = ft_sub_format(&format);
+	if (!sub_format)
+		return (-1);
+	to_print = ft_output_conversion(sub_format);
+	free(sub_format);
+	if (!to_print)
+		return (-1);
+	char_count += ft_strlen(to_print);
+	if (!ft_print_output(to_print))
+		format = NULL;
+	free(to_print);
 	}
 	if (!format)
 		return (-1);

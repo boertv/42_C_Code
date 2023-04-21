@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:31:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:51 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/04/06 13:20:01 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/04/10 13:12:19 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <unistd.h>
-# include "libft.h"
+char	*ft_strdup(const char *s1)
+{
+	size_t	l;
+	char	*s2;
 
-int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function);
-
-#endif
+	if (!s1)
+		return (NULL);
+	l = 0;
+	while (*(s1 + l))
+		l++;
+	s2 = (char *) ft_calloc(l + 1, sizeof(char));
+	if (!s2)
+		return (NULL);
+	ft_strlcpy(s2, s1, l + 1);
+	return (s2);
+}
