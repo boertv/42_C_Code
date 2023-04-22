@@ -14,9 +14,10 @@
 # define FT_PRINTF_H
 
 # include <unistd.h>
+# include <stdarg.h>
 # include "libft.h"
 
 int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function);
+void    *ft_error_null(const char *error, const char *function, va_list specifier);
 
 #endif

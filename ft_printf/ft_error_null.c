@@ -12,8 +12,9 @@
 
 #include "ft_printf.h"
 
-void    *ft_error_null(const char *error, const char *function)
+void    *ft_error_null(const char *error, const char *function, va_list specifier)
 {
+    va_end(specifier);
     if (!function)
         return (NULL);
     write(0, "\nAn error occured in '", 22);
