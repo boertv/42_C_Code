@@ -47,8 +47,13 @@ const char	*ft_sub_format(const char **ptr_format, va_list specifier)
 }
 
 // calls a different function depending on the specifier type.
-const char	*ft_output_conversion(const char *sub_format, va_list specifier)
+char	*ft_output_conversion(const char *sub_format, va_list specifier)
 {
+	char	c_spec;
+	
+	c_spec = sub_format[ft_strlen(sub_format) - 1];
+	if (c_spec == 'c')
+		return (ft_conversion_char(sub_format, specifier));
 }
 
 int	ft_printf(const char *format, ...)

@@ -19,5 +19,6 @@
 
 int     ft_printf(const char *format, ...);
 void    *ft_error_null(const char *error, const char *function, va_list specifier);
+char    *ft_conversion_char(char *sub_format, va_list specifier);
 
 #endif
