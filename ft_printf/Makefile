@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 SRCS = ft_printf.c \
 	   ft_error_null.c \

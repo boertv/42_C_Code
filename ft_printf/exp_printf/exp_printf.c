@@ -2,17 +2,19 @@
 
 int main(void)
 {
-//    int     i = 20;
-    char    c = 'y';
+/*  int i = 19;  
+    printf("   |%6.i| \n", i);
+    printf("   |%.6i| \n", i);
+    printf("   |%  - -  - 6i| \n\n", i);
 
-//    printf("\n|%i|\n|%i|\n", printf("|%--+-3%|wajo nice.|%3%|\n"), printf("okokokoktranquille%%aitaithearmeoutnow%3000000000%\n"));
-/*    printf("   |%6.X| \n", i);
-    printf("   |%.6X| \n", i);
-    printf("   |%06.4X| \n", i);
-    printf("   |%-6.4X| \n", i);
-    printf("\n   |%##########00006X| \n", i);
-    printf("   |%##########06X| \n", i);
+    printf("   |%06i| \n", i);
+    printf("   |%06.4i| \n", i);
+    printf("%i\n\n", printf("   hallo?|%.2147483647i| \n\n", i));
+
+    printf("   |%6i| \n", i);
 */
+    char    c = 'c';
     printf("abc |%c| def\n", c);
     printf("abc |%-20c| def\n", c);
+
 }

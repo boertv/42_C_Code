@@ -19,41 +19,39 @@
 // Cuts a string out of the format. Including one specifier and preceding loose chars.
 // Increments the format so we are up to date.
 // ... I think ...
-const char	*ft_sub_format(const char **ptr_format, va_list specifier)
+static const char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 {
 	size_t	l;
-	char	set[10];
 	char	*sub_format;
 
 	if (!ptr_format || !*ptr_format || !**ptr_format)
-		return (ft_error_null("input", "ft_sub_format", specifier));
+		return (ft_error_null("input", "ft_sub_format", ptr_spec));
 	l = 0;
-	ft_strlcpy(set, "cspdiuxX%", 10);
 	while (*ptr_format[l] && **ptr_format != '%')
 		l++;
 	if (*ptr_format[l] == '%')
 		l++;
-	while (*ptr_format[l] && !ft_strchr(set, *ptr_format[l]))
+	while (*ptr_format[l] && !ft_strchr("cspdiuxX%", *ptr_format[l]))
 		l++;
-	if (*ptr_format[l] && ft_strchr(set, *ptr_format[l]))
+	if (*ptr_format[l] && ft_strchr("cspdiuxX%", *ptr_format[l]))
 		l++;
 	// could also just use ft_substr.c
 	sub_format = (char *) malloc(l + 1);
 	if (!sub_format)
-		return (ft_error_null("malloc", "ft_sub_format", specifier));
+		return (ft_error_null("malloc", "ft_sub_format", ptr_spec));
 	ft_strlcpy(sub_format, *ptr_format, l + 1);
 	*ptr_format += l;
 	return (sub_format);
 }
 
 // calls a different function depending on the specifier type.
-char	*ft_output_conversion(const char *sub_format, va_list specifier)
+static char	*ft_output_conversion(const char *sub_format, va_list *ptr_spec)
 {
-	char	c_spec;
+	char	conv_spec;
 	
-	c_spec = sub_format[ft_strlen(sub_format) - 1];
-	if (c_spec == 'c')
-		return (ft_conversion_char(sub_format, specifier));
+	conv_spec = sub_format[ft_strlen(sub_format) - 1];
+	if (conv_spec == 'c')
+		return (ft_conversion_char(sub_format, ptr_spec));
 }
 
 int	ft_printf(const char *format, ...)
@@ -67,10 +65,10 @@ int	ft_printf(const char *format, ...)
 	va_start(specifier, format);
 	while (format && *format)
 	{
-	sub_format = ft_sub_format(&format, specifier);
+	sub_format = ft_sub_format(&format, &specifier);
 	if (!sub_format)
 		return (-1);
-	to_print = ft_output_conversion(sub_format, specifier);
+	to_print = ft_output_conversion(sub_format, &specifier);
 	free(sub_format);
 	if (!to_print)
 		return (-1);
