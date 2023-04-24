@@ -6,18 +6,18 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 15:35:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/04/21 15:35:58 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/04/24 17:24:59 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c \
-	   ft_error_null.c \
+SRCS = $(wildcard *.c) \
+	   $(wildcard libft/*.c)
 
 OBJS = $(SRCS:c=o)
 
-INCLUDES = ./libft/libft.h \
+INCLUDES = libft/libft.h \
 		  ft_printf.h
 
 all: $(NAME)
@@ -32,7 +32,7 @@ $(NAME): $(OBJS) $(INCLUDES)
 	ar -rcs $(NAME) $(OBJS)
 
 %.o: %.c Makefile
-	${CC} ${CFLAGS} -c $< -I $(INCLUDES)
+	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)

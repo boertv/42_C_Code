@@ -19,7 +19,7 @@
 // Cuts a string out of the format. Including one specifier and preceding loose chars.
 // Increments the format so we are up to date.
 // ... I think ...
-static const char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
+static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 {
 	size_t	l;
 	char	*sub_format;
@@ -45,13 +45,15 @@ static const char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 }
 
 // calls a different function depending on the specifier type.
-static char	*ft_output_conversion(const char *sub_format, va_list *ptr_spec)
+static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 {
 	char	conv_spec;
 	
 	conv_spec = sub_format[ft_strlen(sub_format) - 1];
 	if (conv_spec == 'c')
 		return (ft_conversion_char(sub_format, ptr_spec));
+	//temp
+	return (ft_conversion_char(sub_format, ptr_spec));
 }
 
 int	ft_printf(const char *format, ...)
@@ -59,7 +61,7 @@ int	ft_printf(const char *format, ...)
 	size_t	char_count;
 	char	*sub_format;
 	char	*to_print;
-	va_list	*specifier;
+	va_list	specifier;
 
 	char_count = 0;
 	va_start(specifier, format);

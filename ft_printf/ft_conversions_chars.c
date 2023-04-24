@@ -12,6 +12,28 @@
 
 #include "ft_printf.h"
 
+static void ft_fill_char_specifier(char *dst, va_list *ptr_spec, int fw, int lj)
+{
+    char    c;
+
+    c = (char) va_arg(*ptr_spec, int);
+    while (*dst)
+        dst++;
+    if (lj)
+    {
+        *dst = c;
+        dst++;
+    }
+    while (--fw)
+    {
+        *dst = ' ';
+        dst++;
+    }
+    if (!lj)
+        *dst = c;
+    return ;
+}
+
 char    *ft_conversion_char(char *sub_format, va_list *ptr_spec)
 {
     size_t  len;
@@ -34,26 +56,4 @@ char    *ft_conversion_char(char *sub_format, va_list *ptr_spec)
     ft_fill_char_specifier(to_print, ptr_spec,
         field_width, ft_left_just(sub_format + len - field_width));
     return (to_print);
-}
-
-static void ft_fill_char_specifier(char *dst, va_list *ptr_spec, int fw, int lj)
-{
-    char    c;
-
-    c = va_arg(*ptr_spec, char);
-    while (*dst)
-        dst++;
-    if (lj)
-    {
-        *dst = c;
-        dst++;
-    }
-    while (--fw)
-    {
-        *dst = ' ';
-        dst++;
-    }
-    if (!lj)
-        *dst = c;
-    return ;
 }

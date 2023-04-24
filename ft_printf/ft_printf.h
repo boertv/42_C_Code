@@ -18,8 +18,8 @@
 # include "libft/libft.h"
 
 int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function, va_list specifier);
-char    *ft_conversion_char(char *sub_format, va_list specifier);
+void    *ft_error_null(const char *error, const char *function, va_list *ptr_spec);
+char    *ft_conversion_char(char *sub_format, va_list *ptr_spec);
 int     ft_field_width(char *sub_format);
 int     ft_precision(char *sub_format);
 int     ft_left_just(char *sub_format);

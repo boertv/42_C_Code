@@ -12,6 +12,16 @@
 
 #include "ft_printf.h"
 
+static int ft_atoi_overflow(char *sub_format)
+{
+    int nb;
+
+    nb = ft_atoi(sub_format);
+        if (!nb || nb == 2147483647)
+            nb = -1;
+    return (nb);
+}
+
 // returns 0 for no flag, -1 on error
 int	ft_field_width(char *sub_format)
 {
@@ -65,16 +75,6 @@ int ft_precision(char *sub_format)
     if (!*sub_format || !ft_strchr("cspdiuxX%", *sub_format))
         return (-1);
     return (pr);
-}
-
-static int ft_atoi_overflow(char *sub_format)
-{
-    int nb;
-
-    nb = ft_atoi(sub_format);
-        if (!nb || nb == 2147483647)
-            nb = -1;
-    return (nb);
 }
 
 // returns 0 for no flag, -1 on error

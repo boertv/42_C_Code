@@ -1,3 +1,4 @@
 *a.out
 *.DS_store
-
+*.gch
+*.swp
