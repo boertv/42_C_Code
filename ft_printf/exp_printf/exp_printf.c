@@ -1,4 +1,5 @@
-#include <stdio.h>
+//#include <stdio.h>
+#include <unistd.h>
 
 int main(void)
 {
@@ -19,5 +20,10 @@ int main(void)
 *//*
     char *s = "abc";
     printf("xx |%5s| zz\n", s);
-*/
+*////*
+    int		a = 42;
+	void	*p = &a;
+    write(0, &p, 16);
+//	printf("--|%-16p|--\n", p);
+//*/
 }

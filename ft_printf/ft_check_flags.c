@@ -42,3 +42,12 @@ int ft_check_char(char *sub_format)
         return (-1);
     return (0);
 }
+
+int ft_check_int(char *sub_format)
+{
+    if (ft_hashtag(sub_format))
+        return (-1);
+    if (ft_check_errors(sub_format) == -1)
+        return (-1);
+    return (0);
+}

@@ -52,12 +52,16 @@ static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 	if (!ft_strrchr(sub_format, '%'))
 		return (ft_strdup(sub_format));
 	conv_spec = sub_format[ft_strlen(sub_format) - 1];
-	if (conv_spec == 'c')
-		return (ft_conversion_char(sub_format, ptr_spec));
+	if (conv_spec == 'c' || conv_spec == '%')
+		return (ft_conversion_char(sub_format, ptr_spec, conv_spec));
 	if (conv_spec == 's')
 		return (ft_conversion_str(sub_format, ptr_spec));
-	//temp?
-	return (NULL);
+//	run char flag checks and then #x print?
+//	if (conv_spec == 'p')
+//		return (ft_conversion_ptr(sub_format, ptr_spec));
+//	if (conv_spec == 'i' || conv_spec == 'd')
+//		return (ft_conversion_int(sub_format, ptr_spec));
+	return (ft_error_null("specifier", "ft_output_conversion", ptr_spec));
 }
 
 int	ft_printf(const char *format, ...)

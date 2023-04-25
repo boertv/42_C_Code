@@ -3,14 +3,27 @@
 
 int	main(void)
 {
+//	printf("\n%i\n", ft_printf("1234567890"));
 /*
 	char	c = 'c';
-	printf("---\na: %3c\nb: %-3c\nc: %3c\n---\n", c, c, c);
-	ft_printf("|---\na: %3c\nb: %-3c\nc: %3c\n---|", c, c, c);
+	printf("---\na: %3c\nb: %-3c\nc: %%\n---\n", c, c);
+	ft_printf("|---\na: %3c\nb: %-3c\nc: %%\n---|", c, c);
 	printf("\nfin");
-*/
+*//*
 	char	*s = "test";
 	printf("---\na:%6s\nb:%-6s\nc:%6s\n---\n", s, s, s);
 	ft_printf("---\na:%6s\nb:%-6s\nc:%6s\n---\n", s, s, s);
 	printf("\nfin");
+*/
+	int	i = 42;
+	printf("---\na:%10i\nb:%-10i\nc:%10i\n---\n", i, i, i);
+	ft_printf("---\na:%10i\nb:%-10i\nc:%10i\n---\n", i, i, i);
+	printf("\nfin");
+/*
+	int		a = 42;
+	void	*p = &a;
+	printf("---\na:%10p\nb:%-10p\nc:%10p\n---\n", p, p, p);
+	ft_printf("---\na:%10p\nb:%-10p\nc:%10p\n---\n", p, p, p);
+	printf("\nfin");
+*/
 }
