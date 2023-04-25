@@ -4,6 +4,7 @@
 int	main(void)
 {
 	char	c = 'c';
-	printf("allo%c\n", c);
-	ft_printf("allo%c\n", c);
+	printf("---\na: %3c\nb: %-3c\nc: %3c\n---\n", c, c, c);
+	ft_printf("|---\na: %3c\nb: %-3c\nc: %3c\n---|", c, c, c);
+	printf("\nfin");
 }
