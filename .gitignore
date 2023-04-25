@@ -1,5 +1,5 @@
-*a.out
-*.DS_store
-*.gch
-*.swp
-*.o
+**/*a.out
+**/*.DS_store
+**/*.gch
+**/*.swp
+**/*.o
