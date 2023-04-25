@@ -54,8 +54,10 @@ static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 	conv_spec = sub_format[ft_strlen(sub_format) - 1];
 	if (conv_spec == 'c')
 		return (ft_conversion_char(sub_format, ptr_spec));
-	//temp
-	return (ft_conversion_char(sub_format, ptr_spec));
+	if (conv_spec == 's')
+		return (ft_conversion_str(sub_format, ptr_spec));
+	//temp?
+	return (NULL);
 }
 
 int	ft_printf(const char *format, ...)
