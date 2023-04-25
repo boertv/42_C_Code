@@ -72,18 +72,24 @@ static int ft_field_width_str(char *sub_format, char *str)
 
 static void ft_fill_str_specifier(char *dst, char *str, int fw, int lj)
 {
-    fw -= ft_strlen(str);
+    int len;
+
+    len = ft_strlen(str);
+    fw -= len;
     while (*dst)
         dst++;
     if (lj)
-        ft_strlcat(dst, str, ft_strlen(str));
+    {
+        ft_strlcat(dst, str, len + 1);
+        dst += len;
+    }
     while (fw-- > 0)
     {
         *dst = ' ';
         dst++;
     }
     if (!lj)
-        ft_strlcat(dst, str, ft_strlen(str));
+        ft_strlcat(dst, str, len + 1);
 }
 
 char    *ft_conversion_str(char *sub_format, va_list *ptr_spec)
