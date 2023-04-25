@@ -42,7 +42,7 @@ int	ft_field_width(char *sub_format)
         }
         sub_format++;
     }
-    if (!*sub_format || !ft_strchr("cspdiuxX%.", *sub_format))
+    if (fw && (!*sub_format || !ft_strchr("cspdiuxX%.", *sub_format)))
         return (-1);
     return (fw);
 }
@@ -72,7 +72,7 @@ int ft_precision(char *sub_format)
         }
         sub_format++;
     }
-    if (!*sub_format || !ft_strchr("cspdiuxX%", *sub_format))
+    if (pr && (!*sub_format || !ft_strchr("cspdiuxX%", *sub_format)))
         return (-1);
     return (pr);
 }

@@ -27,13 +27,13 @@ static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 	if (!ptr_format || !*ptr_format || !**ptr_format)
 		return (ft_error_null("input", "ft_sub_format", ptr_spec));
 	l = 0;
-	while (*ptr_format[l] && **ptr_format != '%')
+	while ((*ptr_format)[l] && (*ptr_format)[l] != '%')
 		l++;
-	if (*ptr_format[l] == '%')
+	if ((*ptr_format)[l] == '%')
 		l++;
-	while (*ptr_format[l] && !ft_strchr("cspdiuxX%", *ptr_format[l]))
+	while ((*ptr_format)[l] && !ft_strchr("cspdiuxX%", (*ptr_format)[l]))
 		l++;
-	if (*ptr_format[l] && ft_strchr("cspdiuxX%", *ptr_format[l]))
+	if ((*ptr_format)[l] && ft_strchr("cspdiuxX%", (*ptr_format)[l]))
 		l++;
 	// could also just use ft_substr.c
 	sub_format = (char *) malloc(l + 1);
@@ -49,6 +49,8 @@ static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 {
 	char	conv_spec;
 	
+	if (!ft_strrchr(sub_format, '%'))
+		return (ft_strdup(sub_format));
 	conv_spec = sub_format[ft_strlen(sub_format) - 1];
 	if (conv_spec == 'c')
 		return (ft_conversion_char(sub_format, ptr_spec));

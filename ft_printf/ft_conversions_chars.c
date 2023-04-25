@@ -44,14 +44,14 @@ char    *ft_conversion_char(char *sub_format, va_list *ptr_spec)
     while (sub_format[len] && (sub_format[len] != '%'))
         len++;
     if (ft_check_char(sub_format + len) == -1)
-        return (ft_error_null("ft_conversion_char", "flags", ptr_spec));
+        return (ft_error_null("flags", "ft_conversion_char", ptr_spec));
     field_width = ft_field_width((sub_format + len));
     if (!field_width)
         field_width = 1;
     len += field_width;
     to_print = calloc(len + 1, sizeof(char));
     if (!to_print)
-        return (ft_error_null("ft_conversion_char", "calloc", ptr_spec));
+        return (ft_error_null("calloc", "ft_conversion_char", ptr_spec));
     ft_strlcpy(to_print, sub_format, len - field_width + 1);
     ft_fill_char_specifier(to_print, ptr_spec,
         field_width, ft_left_just(sub_format + len - field_width));

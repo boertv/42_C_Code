@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 15:35:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/04/24 17:24:59 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/04/25 13:06:03 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 $(NAME): $(OBJS) $(INCLUDES)
-	ar -rcs $(NAME) $(OBJS)
+	@ar -rcs $(NAME) $(OBJS)
+	@echo "creating library"
 
 %.o: %.c Makefile
 	${CC} ${CFLAGS} -c $< -o $@
