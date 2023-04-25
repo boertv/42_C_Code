@@ -30,5 +30,8 @@ int     ft_hashtag(char *sub_format);
 int     ft_plus(char *sub_format);
 int     ft_space(char *sub_format);
 int     ft_check_char(char *sub_format);
+int     ft_check_int(char *sub_format);
+int     ft_nblen(int n);
+char	*ft_putnbr_str(int n);
 
 #endif

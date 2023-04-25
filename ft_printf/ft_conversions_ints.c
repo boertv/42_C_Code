@@ -21,4 +21,6 @@ char	*ft_conversion_int(char *sub_format, va_list *ptr_spec)
         len++;
     if (ft_check_int(sub_format + len) == -1)
         return (ft_error_null("flags", "ft_conversion_str", ptr_spec));
+    // calculate nb length for field_width < nb_len and calloc
+    // FREE nb_str after copying to to_print
 }
