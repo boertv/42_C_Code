@@ -12,25 +12,25 @@
 
 #include "ft_printf.h"
 
-int	ft_nblen(char *sub_format, int n)
+int	ft_nblen(char *sub_format, int nb)
 {
 	int	l;
 
 	l = 0;
-	if (ft_plus(sub_format) || ft_space(sub_format) || n < 0
-		|| (!n && ft_precision(sub_format) != -2))
+	if (ft_plus(sub_format) || ft_space(sub_format) || nb < 0
+		|| (!nb && ft_precision(sub_format) != -2))
 		l++;
-	while (n)
+	while (nb)
 	{
-		n /= 10;
+		nb /= 10;
 		l++;
 	}
 	return (l);
 }
 
-static void	ft_write_sign(char *sub_format, char *dst, int n)
+static void	ft_write_sign(char *sub_format, char *dst, int nb)
 {
-	if (n < 0)
+	if (nb < 0)
 		*dst = '-';
 	else if (ft_space(sub_format))
 		*dst = ' ';
@@ -38,40 +38,45 @@ static void	ft_write_sign(char *sub_format, char *dst, int n)
 		*dst = '+';
 }
 
-static void	ft_writing(char *dst, int n, int l)
+static void	ft_writing(char *dst, int nb, int l)
 {
-	if (n < 0)
+	if (nb < 0)
 	{
-		dst[l] = -(n % 10) + '0';
-		n /= -10;
+		dst[l] = -(nb % 10) + '0';
+		nb /= -10;
 		l--;
 	}
-	while (n)
+	while (nb)
 	{
-		dst[l] = (n % 10) + '0';
-		n /= 10;
+		dst[l] = (nb % 10) + '0';
+		nb /= 10;
 		l--;
 	}
 	return ;
 }
 
-void	ft_putnbr_str(char *sub_format, char *dst, int n)
+void	ft_putnbr_str(char *sub_format, char *dst, int nb, int pr)
 {
 	int	l;
 
-	l = ft_nblen(sub_format, n);
+	l = ft_nblen(sub_format, nb);
 	if (!l)
 		return ;
-	ft_write_sign(sub_format, dst, n);
-	if (!n)
-		*dst = '0';
+	ft_write_sign(sub_format, dst, nb);
+	if (!nb)
+		pr++;
+	if (*dst)
+		ft_putnchr(dst + 1, '0', pr);
 	else
-		ft_writing(dst, n, l - 1);
+		ft_putnchr(dst, '0', pr);
+	ft_writing(dst, nb, l + pr - 1);
 	return ;
 }
 
 void	ft_putnchr(char *dst, char c, int n)
 {
+	if (n <= 0)
+		return ;
 	while (n--)
 		dst[n] = c;
 	return ;

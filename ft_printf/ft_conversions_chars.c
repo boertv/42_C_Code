@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	ft_fill_char_specifier(char *dst, char c, int fw, int lj)
+static void	ft_fill_char_print(char *dst, char c, int fw, int lj)
 {
 	while (*dst)
 		dst++;
@@ -52,7 +52,7 @@ char	*ft_conversion_char(char *sub_format, va_list *ptr_spec, char c)
 	ft_strlcpy(to_print, sub_format, len - field_width + 1);
 	if (c == 'c')
 		c = (char) va_arg(*ptr_spec, int);
-	ft_fill_char_specifier(to_print, c,
+	ft_fill_char_print(to_print, c,
 		field_width, ft_left_just(sub_format + len - field_width));
 	return (to_print);
 }
@@ -69,7 +69,7 @@ static int	ft_fieldwidth_str(char *sub_format, char *str)
 	return (fw);
 }
 
-static void	ft_fill_str_specifier(char *dst, char *str, int fw, int lj)
+static void	ft_fill_str_print(char *dst, char *str, int fw, int lj)
 {
 	int	len;
 
@@ -110,7 +110,7 @@ char	*ft_conversion_str(char *sub_format, va_list *ptr_spec)
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conversion_str", ptr_spec));
 	ft_strlcpy(to_print, sub_format, len - field_width + 1);
-	ft_fill_str_specifier(to_print, str,
+	ft_fill_str_print(to_print, str,
 		field_width, ft_left_just(sub_format + len - field_width));
 	return (to_print);
 }

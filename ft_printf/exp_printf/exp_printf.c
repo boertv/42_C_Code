@@ -8,8 +8,8 @@ int main(void)
 	printf("   |%.6i| \n", i);
 	printf("   |%  - -  - 6i| \n\n", i);
 
-	printf("   |%+i| \n", i);
-	printf("   |%06.4i| \n", i);
+	printf("   |%6.3i| \n", i);
+	printf("   |%06.i| \n", i);
 	printf("%i\n\n", printf("   hallo?|%.2147483647i| \n\n", i));
 
 	printf("   |%6i| \n", i);

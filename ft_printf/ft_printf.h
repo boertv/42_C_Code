@@ -31,8 +31,16 @@ int		ft_plus(char *sub_format);
 int		ft_space(char *sub_format);
 int		ft_check_char(char *sub_format);
 int		ft_check_int(char *sub_format);
-int		ft_nblen(char *sub_format, int n);
-void	ft_putnbr_str(char *sub_format, char *dst, int n);
+
+typedef struct	s_speclens
+{
+	int	nblen;
+	int	fw;
+	int	pr;
+}				t_speclens;
+
+int		ft_nblen(char *sub_format, int nb);
+void	ft_putnbr_str(char *sub_format, char *dst, int nb, int pr);
 void	ft_putnchr(char *dst, char c, int n);
 
 #endif

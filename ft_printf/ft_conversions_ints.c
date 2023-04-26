@@ -12,13 +12,13 @@
 
 #include "ft_printf.h"
 
-static int	ft_fieldwidth_int(char *sub_format, int nb, int pr)
+static int	ft_fieldwidth_int(char *sub_format, int nb, int nblen, int pr)
 {
 	int	fw;
-	int	nblen;
 
-	nblen = ft_nblen(sub_format, nb);
 	fw = ft_field_width(sub_format);
+	if (pr < 0)
+		pr = 0;
 	if (fw <= nblen + pr)
 		fw = 0;
 	else
@@ -26,35 +26,61 @@ static int	ft_fieldwidth_int(char *sub_format, int nb, int pr)
 	return (fw);
 }
 
-static int	ft_precision_int(char *sub_format, int nb)
+static int	ft_precision_int(char *sub_format, int nb, int nblen)
 {
 	int	pr;
-	int	nblen;
 
-	nblen = ft_nblen(sub_format, nb);
 	pr = ft_precision(sub_format);
-	if (pr <= nblen)
+	if (pr > 0 && pr <= nblen)
 		pr = 0;
-	else
+	else if (pr > 0)
 		pr -= nblen;
 	return (pr);
 }
 
+static void	ft_fill_int_print(char *dst, char *sub_format, int nb, t_speclens specl)
+{
+	int	lj;
+
+	lj = ft_left_just(sub_format);
+	if (lj)
+	{
+		ft_putnbr_str(sub_format, dst, nb, specl.pr);
+		while (*dst)
+			dst++;
+	}
+	if (specl.pr || !ft_zeroes(sub_format))
+		ft_putnchr(dst, ' ', specl.fw);
+	else
+		ft_putnchr(dst, '0', specl.fw);
+	if (!lj)
+		ft_putnbr_str(sub_format, dst + specl.fw, nb, specl.pr);
+	return ;
+}
+
 char	*ft_conversion_int(char *sub_format, va_list *ptr_spec)
 {
-	size_t	len;
+	size_t	charslen;
 	int		nb;
-	int		field_width;
-	int		precision;
+	t_speclens specl;
 	char	*to_print;
 
-	len = 0;
-	while (sub_format[len] && (sub_format[len] != '%'))
-		len++;
-	if (ft_check_int(sub_format + len) == -1)
+	charslen = 0;
+	while (sub_format[charslen] && (sub_format[charslen] != '%'))
+		charslen++;
+	if (ft_check_int(sub_format + charslen) == -1)
 		return (ft_error_null("flags", "ft_conversion_int", ptr_spec));
 	nb = va_arg(*ptr_spec, int);
-	precision = ft_precision_int(sub_format + len, nb);
-	field_width = ft_fieldwidth_int(sub_format + len, nb, precision);
-	// calculate nb length for field_width < nb_len,,, but also precision
+	specl.nblen = ft_nblen(sub_format, nb);
+	specl.pr = ft_precision_int(sub_format + charslen, nb, specl.nblen);
+	specl.fw = ft_fieldwidth_int(sub_format + charslen, nb, specl.nblen, specl.pr);
+	if (specl.pr > 0)
+		to_print = ft_calloc(charslen + specl.nblen + specl.fw + specl.pr, sizeof(char));
+	else
+		to_print = ft_calloc(charslen + specl.nblen + specl.fw, sizeof(char));
+	if (!to_print)
+		return (ft_error_null("calloc", "ft_conversion_int", ptr_spec));
+	ft_strlcpy(to_print, sub_format, charslen + 1);
+	ft_fill_int_print(to_print + charslen, sub_format, nb, specl);
+	return (to_print);
 }
