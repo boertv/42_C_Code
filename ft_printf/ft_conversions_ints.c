@@ -74,17 +74,18 @@ char	*ft_conversion_int(char *sub_format, va_list *ptr_spec)
 	if (ft_check_int(sub_format + charslen) == -1)
 		return (ft_error_null("flags", "ft_conversion_int", ptr_spec));
 	nb = va_arg(*ptr_spec, int);
-	specl.nblen = ft_nblen(sub_format, nb);
+	specl.nblen = ft_nblen(sub_format + charslen, nb);
 	specl.pr = ft_precision_int(sub_format + charslen, specl.nblen);
 	specl.fw = ft_fieldwidth_int(sub_format + charslen, specl.nblen, specl.pr);
-	printf("|-{nblen:%i pr:%i fw:%i}-|", specl.nblen, specl.pr, specl.fw);
+		//AAAAAAAAAAAAAH
+	//printf("\n|-{nblen:%i pr:%i fw:%i}-|\n", specl.nblen, specl.pr, specl.fw);
 	if (specl.pr > 0)
-		to_print = ft_calloc(charslen + specl.nblen + specl.fw + specl.pr, sizeof(char));
+		to_print = ft_calloc(charslen + specl.nblen + specl.fw + specl.pr + 1, sizeof(char));
 	else
-		to_print = ft_calloc(charslen + specl.nblen + specl.fw, sizeof(char));
+		to_print = ft_calloc(charslen + specl.nblen + specl.fw + 1, sizeof(char));
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conversion_int", ptr_spec));
 	ft_strlcpy(to_print, sub_format, charslen + 1);
-	ft_fill_int_print(to_print + charslen, sub_format, nb, specl);
+	ft_fill_int_print(to_print + charslen, sub_format + charslen, nb, specl);
 	return (to_print);
 }

@@ -35,11 +35,9 @@ static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 		l++;
 	if ((*ptr_format)[l] && ft_strchr("cspdiuxX%", (*ptr_format)[l]))
 		l++;
-	// could also just use ft_substr.c
-	sub_format = (char *) malloc(l + 1);
+	sub_format = ft_substr(*ptr_format, 0, l);
 	if (!sub_format)
-		return (ft_error_null("malloc", "ft_sub_format", ptr_spec));
-	ft_strlcpy(sub_format, *ptr_format, l + 1);
+		return (ft_error_null("ft_substr(malloc?)", "ft_sub_format", ptr_spec));
 	*ptr_format += l;
 	return (sub_format);
 }
