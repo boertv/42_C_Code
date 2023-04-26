@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_fieldwidth_int(char *sub_format, int nb, int nblen, int pr)
+static int	ft_fieldwidth_int(char *sub_format, int nblen, int pr)
 {
 	int	fw;
 
@@ -26,7 +26,7 @@ static int	ft_fieldwidth_int(char *sub_format, int nb, int nblen, int pr)
 	return (fw);
 }
 
-static int	ft_precision_int(char *sub_format, int nb, int nblen)
+static int	ft_precision_int(char *sub_format, int nblen)
 {
 	int	pr;
 
@@ -58,6 +58,9 @@ static void	ft_fill_int_print(char *dst, char *sub_format, int nb, t_speclens sp
 	return ;
 }
 
+	//AAAAAAAAAH
+#include <stdio.h>
+
 char	*ft_conversion_int(char *sub_format, va_list *ptr_spec)
 {
 	size_t	charslen;
@@ -72,8 +75,9 @@ char	*ft_conversion_int(char *sub_format, va_list *ptr_spec)
 		return (ft_error_null("flags", "ft_conversion_int", ptr_spec));
 	nb = va_arg(*ptr_spec, int);
 	specl.nblen = ft_nblen(sub_format, nb);
-	specl.pr = ft_precision_int(sub_format + charslen, nb, specl.nblen);
-	specl.fw = ft_fieldwidth_int(sub_format + charslen, nb, specl.nblen, specl.pr);
+	specl.pr = ft_precision_int(sub_format + charslen, specl.nblen);
+	specl.fw = ft_fieldwidth_int(sub_format + charslen, specl.nblen, specl.pr);
+	printf("|-{nblen:%i pr:%i fw:%i}-|", specl.nblen, specl.pr, specl.fw);
 	if (specl.pr > 0)
 		to_print = ft_calloc(charslen + specl.nblen + specl.fw + specl.pr, sizeof(char));
 	else
