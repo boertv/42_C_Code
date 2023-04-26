@@ -12,23 +12,15 @@
 
 #include "ft_printf.h"
 
-void    *ft_error_null(const char *error, const char *function, va_list *ptr_spec)
+void	*ft_error_null(const char *error, const char *func, va_list *ptr_spec)
 {
-    va_end(*ptr_spec);
-    if (!function)
-        return (NULL);
-    write(0, "\nAn error occured in '", 22);
-    while (*function)
-    {
-        write(0, function, 1);
-        function++;
-    }
-    write(0, "' concerning the '", 18);
-    while (*error)
-    {
-        write(0, error, 1);
-        error++;
-    }
-    write(0, "'\n", 2);
-    return (NULL);
+	va_end(*ptr_spec);
+	if (!func)
+		return (NULL);
+	write(0, "\nAn error occured in '", 22);
+	write(0, func, ft_strlen(func));
+	write(0, "' concerning the '", 18);
+	write(0, error, ft_strlen(error));
+	write(0, "'\n", 2);
+	return (NULL);
 }

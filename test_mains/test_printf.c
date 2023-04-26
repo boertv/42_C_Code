@@ -16,8 +16,9 @@ int	main(void)
 	printf("\nfin");
 */
 	int	i = 42;
-	printf("---\na:%10i\nb:%-10i\nc:%10i\n---\n", i, i, i);
-	ft_printf("---\na:%10i\nb:%-10i\nc:%10i\n---\n", i, i, i);
+	int	j = -2147483648;
+	printf("---\na:%10i\nb:%-10i\nc:%6i\n---\n", i, i, j);
+	ft_printf("---\na:%10i\nb:%-10i\nc:%6i\n---\n", i, i, j);
 	printf("\nfin");
 /*
 	int		a = 42;

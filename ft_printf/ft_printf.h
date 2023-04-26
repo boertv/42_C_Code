@@ -17,21 +17,22 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-int     ft_printf(const char *format, ...);
-void    *ft_error_null(const char *error, const char *function, va_list *ptr_spec);
-char    *ft_conversion_char(char *sub_format, va_list *ptr_spec, char c);
-char    *ft_conversion_str(char *sub_format, va_list *ptr_spec);
-char    *ft_conversion_int(char *sub_format, va_list *ptr_spec);
-int     ft_field_width(char *sub_format);
-int     ft_precision(char *sub_format);
-int     ft_left_just(char *sub_format);
-int     ft_zeroes(char *sub_format);
-int     ft_hashtag(char *sub_format);
-int     ft_plus(char *sub_format);
-int     ft_space(char *sub_format);
-int     ft_check_char(char *sub_format);
-int     ft_check_int(char *sub_format);
-int     ft_nblen(int n);
-char	*ft_putnbr_str(int n);
+int		ft_printf(const char *format, ...);
+void	*ft_error_null(const char *error, const char *function, va_list *ptr_spec);
+char	*ft_conversion_char(char *sub_format, va_list *ptr_spec, char c);
+char	*ft_conversion_str(char *sub_format, va_list *ptr_spec);
+char	*ft_conversion_int(char *sub_format, va_list *ptr_spec);
+int		ft_field_width(char *sub_format);
+int		ft_precision(char *sub_format);
+int		ft_left_just(char *sub_format);
+int		ft_zeroes(char *sub_format);
+int		ft_hashtag(char *sub_format);
+int		ft_plus(char *sub_format);
+int		ft_space(char *sub_format);
+int		ft_check_char(char *sub_format);
+int		ft_check_int(char *sub_format);
+int		ft_nblen(char *sub_format, int n);
+void	ft_putnbr_str(char *sub_format, char *dst, int n);
+void	ft_putnchr(char *dst, char c, int n);
 
 #endif

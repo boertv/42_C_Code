@@ -13,58 +13,58 @@
 #include "ft_printf.h"
 
 // no errors possible in most of these functions
-int ft_zeroes(char *sub_format)
+int	ft_zeroes(char *sub_format)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (sub_format[i])
-    {
-        if (sub_format[i] == '0' && (!i
-            || sub_format[i - 1] <= '0' || sub_format[i - 1] >= '9'))
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (sub_format[i])
+	{
+		if (sub_format[i] == '0' && (!i
+				|| sub_format[i - 1] <= '0' || sub_format[i - 1] >= '9'))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-int ft_hashtag(char *sub_format)
+int	ft_hashtag(char *sub_format)
 {
-    while (*sub_format)
-    {
-        if (*sub_format == '#')
-            return (1);
-        sub_format++;
-    }
-    return (0);
+	while (*sub_format)
+	{
+		if (*sub_format == '#')
+			return (1);
+		sub_format++;
+	}
+	return (0);
 }
 
-int ft_plus(char *sub_format)
+int	ft_plus(char *sub_format)
 {
-    while (*sub_format)
-    {
-        if (*sub_format == '+')
-            return (1);
-        sub_format++;
-    }
-    return (0);
+	while (*sub_format)
+	{
+		if (*sub_format == '+')
+			return (1);
+		sub_format++;
+	}
+	return (0);
 }
 
 // -1 on error: if '+' is present
-int ft_space(char *sub_format)
+int	ft_space(char *sub_format)
 {
-    int p;
+	int	p;
 
-    p = ft_plus(sub_format);
-    while (*sub_format)
-    {
-        if (*sub_format == ' ')
-        {
-            if (p)
-                return (-1);
-            return (1);
-        }
-        sub_format++;
-    }
-    return (0);
+	p = ft_plus(sub_format);
+	while (*sub_format)
+	{
+		if (*sub_format == ' ')
+		{
+			if (p)
+				return (-1);
+			return (1);
+		}
+		sub_format++;
+	}
+	return (0);
 }

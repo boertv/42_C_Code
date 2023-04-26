@@ -12,12 +12,13 @@
 
 #include "ft_printf.h"
 
-int	ft_nblen(int n)
+int	ft_nblen(char *sub_format, int n)
 {
-	int l;
+	int	l;
 
 	l = 0;
-	if (n <= 0)
+	if (ft_plus(sub_format) || ft_space(sub_format) || n < 0
+		|| (!n && ft_precision(sub_format) != -2))
 		l++;
 	while (n)
 	{
@@ -27,40 +28,51 @@ int	ft_nblen(int n)
 	return (l);
 }
 
-static char	*ft_writing(char *dst, int n)
+static void	ft_write_sign(char *sub_format, char *dst, int n)
+{
+	if (n < 0)
+		*dst = '-';
+	else if (ft_space(sub_format))
+		*dst = ' ';
+	else if (ft_plus(sub_format))
+		*dst = '+';
+}
+
+static void	ft_writing(char *dst, int n, int l)
 {
 	if (n < 0)
 	{
-		*dst = -(n % 10) + '0';
+		dst[l] = -(n % 10) + '0';
 		n /= -10;
-		dst++;
+		l--;
 	}
 	while (n)
 	{
-		*dst = (n % 10) + '0';
+		dst[l] = (n % 10) + '0';
 		n /= 10;
-		dst++;
+		l--;
 	}
-	return (dst);
+	return ;
 }
 
-// does it work with INT_MIN?
-char	*ft_putnbr_str(int n)
+void	ft_putnbr_str(char *sub_format, char *dst, int n)
 {
-	int		l;
-	char	*dst;
+	int	l;
 
-	l = ft_nblen(n);
-	dst = (char) ft_calloc(l + 1, sizeof(char));
+	l = ft_nblen(sub_format, n);
+	if (!l)
+		return ;
+	ft_write_sign(sub_format, dst, n);
 	if (!n)
-	{
 		*dst = '0';
-		return (dst);
-	}
-	if (n < 0)
-	{
-		*dst = '-';
-		ft_writing(dst + 1, n);
-	}
-	ft_writing(dst, n);
+	else
+		ft_writing(dst, n, l - 1);
+	return ;
+}
+
+void	ft_putnchr(char *dst, char c, int n)
+{
+	while (n--)
+		dst[n] = c;
+	return ;
 }

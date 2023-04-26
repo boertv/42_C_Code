@@ -16,7 +16,7 @@
 //	it's >= INT_MAX (2147483647) (OR EQUAL TO)
 //	(and returns -1 ofc)
 
-// Cuts a string out of the format. Including one specifier and preceding loose chars.
+// Cuts a string out of 'format'. Including one specifier and preceding chars.
 // Increments the format so we are up to date.
 // ... I think ...
 static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
@@ -48,7 +48,7 @@ static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 {
 	char	conv_spec;
-	
+
 	if (!ft_strrchr(sub_format, '%'))
 		return (ft_strdup(sub_format));
 	conv_spec = sub_format[ft_strlen(sub_format) - 1];
@@ -59,8 +59,8 @@ static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 //	run char flag checks and then #x print?
 //	if (conv_spec == 'p')
 //		return (ft_conversion_ptr(sub_format, ptr_spec));
-//	if (conv_spec == 'i' || conv_spec == 'd')
-//		return (ft_conversion_int(sub_format, ptr_spec));
+	if (conv_spec == 'i' || conv_spec == 'd')
+		return (ft_conversion_int(sub_format, ptr_spec));
 	return (ft_error_null("specifier", "ft_output_conversion", ptr_spec));
 }
 
@@ -75,15 +75,15 @@ int	ft_printf(const char *format, ...)
 	va_start(specifier, format);
 	while (format && *format)
 	{
-	sub_format = ft_sub_format(&format, &specifier);
-	if (!sub_format)
-		return (-1);
-	to_print = ft_output_conversion(sub_format, &specifier);
-	free(sub_format);
-	if (!to_print)
-		return (-1);
-	char_count += write(0, to_print, ft_strlen(to_print));
-	free(to_print);
+		sub_format = ft_sub_format(&format, &specifier);
+		if (!sub_format)
+			return (-1);
+		to_print = ft_output_conversion(sub_format, &specifier);
+		free(sub_format);
+		if (!to_print)
+			return (-1);
+		char_count += write(0, to_print, ft_strlen(to_print));
+		free(to_print);
 	}
 	va_end(specifier);
 	if (!format)
