@@ -51,14 +51,20 @@ static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 		return (ft_strdup(sub_format));
 	conv_spec = sub_format[ft_strlen(sub_format) - 1];
 	if (conv_spec == 'c' || conv_spec == '%')
-		return (ft_conversion_char(sub_format, ptr_spec, conv_spec));
+		return (ft_conv_char(sub_format, ptr_spec, conv_spec));
 	if (conv_spec == 's')
-		return (ft_conversion_str(sub_format, ptr_spec));
+		return (ft_conv_str(sub_format, ptr_spec));
+	if (conv_spec == 'i' || conv_spec == 'd')
+		return (ft_conv_nb(sub_format, ptr_spec, "0123456789", 1));
+	if (conv_spec == 'u')
+		return (ft_conv_nb(sub_format, ptr_spec, "0123456789", 0));
+	if (conv_spec == 'x')
+		return (ft_conv_nb(sub_format, ptr_spec, "0123456789abcdef", 0));
+	if (conv_spec == 'X')
+		return (ft_conv_nb(sub_format, ptr_spec, "0123456789ABCDEF", 0));
 //	run char flag checks and then #x print?
 //	if (conv_spec == 'p')
 //		return (ft_conversion_ptr(sub_format, ptr_spec));
-	if (conv_spec == 'i' || conv_spec == 'd')
-		return (ft_conversion_int(sub_format, ptr_spec));
 	return (ft_error_null("specifier", "ft_output_conversion", ptr_spec));
 }
 
@@ -69,9 +75,11 @@ int	ft_printf(const char *format, ...)
 	char	*to_print;
 	va_list	specifier;
 
+	if (!format)
+		return (-1);
 	char_count = 0;
 	va_start(specifier, format);
-	while (format && *format)
+	while (*format)
 	{
 		sub_format = ft_sub_format(&format, &specifier);
 		if (!sub_format)
@@ -84,7 +92,5 @@ int	ft_printf(const char *format, ...)
 		free(to_print);
 	}
 	va_end(specifier);
-	if (!format)
-		return (-1);
 	return (char_count);
 }

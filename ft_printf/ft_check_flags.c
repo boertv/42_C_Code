@@ -43,10 +43,14 @@ int	ft_check_char(char *sub_format)
 	return (0);
 }
 
-int	ft_check_int(char *sub_format)
+int	ft_check_nb(char *sub_format, int baselen, int sign)
 {
-	if (ft_hashtag(sub_format))
-		return (-1);
+	if (baselen == 10)
+		if (ft_hashtag(sub_format))
+			return (-1);
+	if (!sign)
+		if (ft_space(sub_format) || ft_plus(sub_format))
+			return (-1);
 	if (ft_check_errors(sub_format) == -1)
 		return (-1);
 	return (0);

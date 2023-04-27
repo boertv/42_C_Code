@@ -3,10 +3,11 @@
 
 int main(void)
 {
-	int	i = 0;  
-	printf("   |%6.i| \n", i);
-	printf("   |%.6i| \n", i);
-	printf("   |%  - -  - 6i| \n\n", i);
+	int	i = -3;
+	unsigned int	j = -3;
+	printf("   |%012x| \n", i);
+	printf("   |%0#12x| \n", j);
+	printf("   |%#14.10x| \n\n", i);
 
 	printf("   |%6.3i| \n", i);
 	printf("   |%06.i| \n", i);

@@ -31,7 +31,7 @@ static void	ft_fill_char_print(char *dst, char c, int fw, int lj)
 	return ;
 }
 
-char	*ft_conversion_char(char *sub_format, va_list *ptr_spec, char c)
+char	*ft_conv_char(char *sub_format, va_list *ptr_spec, char c)
 {
 	size_t	len;
 	int		field_width;
@@ -41,14 +41,14 @@ char	*ft_conversion_char(char *sub_format, va_list *ptr_spec, char c)
 	while (sub_format[len] && (sub_format[len] != '%'))
 		len++;
 	if (ft_check_char(sub_format + len) == -1)
-		return (ft_error_null("flags", "ft_conversion_char", ptr_spec));
+		return (ft_error_null("flags", "ft_conv_char", ptr_spec));
 	field_width = ft_field_width((sub_format + len));
 	if (!field_width)
 		field_width = 1;
 	len += field_width;
 	to_print = calloc(len + 1, sizeof(char));
 	if (!to_print)
-		return (ft_error_null("calloc", "ft_conversion_char", ptr_spec));
+		return (ft_error_null("calloc", "ft_conv_char", ptr_spec));
 	ft_strlcpy(to_print, sub_format, len - field_width + 1);
 	if (c == 'c')
 		c = (char) va_arg(*ptr_spec, int);
@@ -91,7 +91,7 @@ static void	ft_fill_str_print(char *dst, char *str, int fw, int lj)
 		ft_strlcat(dst, str, len + 1);
 }
 
-char	*ft_conversion_str(char *sub_format, va_list *ptr_spec)
+char	*ft_conv_str(char *sub_format, va_list *ptr_spec)
 {
 	size_t	len;
 	int		field_width;
@@ -102,13 +102,13 @@ char	*ft_conversion_str(char *sub_format, va_list *ptr_spec)
 	while (sub_format[len] && (sub_format[len] != '%'))
 		len++;
 	if (ft_check_char(sub_format + len) == -1)
-		return (ft_error_null("flags", "ft_conversion_str", ptr_spec));
+		return (ft_error_null("flags", "ft_conv_str", ptr_spec));
 	str = va_arg(*ptr_spec, char *);
 	field_width = ft_fieldwidth_str((sub_format + len), str);
 	len += field_width;
 	to_print = calloc(len + 1, sizeof(char));
 	if (!to_print)
-		return (ft_error_null("calloc", "ft_conversion_str", ptr_spec));
+		return (ft_error_null("calloc", "ft_conv_str", ptr_spec));
 	ft_strlcpy(to_print, sub_format, len - field_width + 1);
 	ft_fill_str_print(to_print, str,
 		field_width, ft_left_just(sub_format + len - field_width));
