@@ -16,9 +16,8 @@
 //	it's >= INT_MAX (2147483647) (OR EQUAL TO)
 //	(and returns -1 ofc)
 
-// Cuts a string out of 'format'. Including one specifier and preceding chars.
+// Cuts out a 'sub_format'. Including one specifier and preceding chars.
 // Increments the format so we are up to date.
-// ... I think ...
 static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 {
 	size_t	l;
@@ -62,9 +61,8 @@ static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 		return (ft_conv_nb(sub_format, ptr_spec, "0123456789abcdef", 0));
 	if (conv_spec == 'X')
 		return (ft_conv_nb(sub_format, ptr_spec, "0123456789ABCDEF", 0));
-//	run char flag checks and then #x print?
-//	if (conv_spec == 'p')
-//		return (ft_conversion_ptr(sub_format, ptr_spec));
+	if (conv_spec == 'p')
+		return (ft_conv_ptr(sub_format, ptr_spec));
 	return (ft_error_null("specifier", "ft_output_conversion", ptr_spec));
 }
 

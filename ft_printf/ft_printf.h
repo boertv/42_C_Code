@@ -22,6 +22,7 @@ void	*ft_error_null(const char *error, const char *func, va_list *ptr_spec);
 char	*ft_conv_char(char *sub_format, va_list *ptr_spec, char c);
 char	*ft_conv_str(char *sub_format, va_list *ptr_spec);
 char	*ft_conv_nb(char *sub_format, va_list *ptr_spec, char *base, int sign);
+char	*ft_conv_ptr(char *sub_format, va_list *ptr_spec);
 int		ft_field_width(char *sub_format);
 int		ft_precision(char *sub_format);
 int		ft_left_just(char *sub_format);
@@ -42,8 +43,10 @@ typedef struct	s_nb_attr
 	int		pr;
 }				t_nb_attr;
 
-int		ft_nblen(char *sub_format, int nb, int baselen);
-void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *nb_attr);
+int		ft_nblen(char *sub_format, int nb, int baselen, int sign);
+void	ft_fill_nbstruct(char *sf, t_nb_attr *na, int sign);
+void	ft_fill_nb_print(char *dst, char *sub_format, t_nb_attr *nb_attr, int sign);
+void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *nb_attr, int sign);
 void	ft_putnchr(char *dst, char c, int n);
 
 #endif

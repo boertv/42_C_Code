@@ -14,21 +14,30 @@ int	main(void)
 	printf("---\na:%6s\nb:%-6s\nc:%6s\n---\n", s, s, s);
 	ft_printf("---\na:%6s\nb:%-6s\nc:%6s\n---\n", s, s, s);
 	printf("\nfin\n\n");
-*/
+*//*
 	int	i = 42;
 	int	j = -2147483648;
 	int	k = 0;
-	printf("ori:--- |%06.4d|   |%04d|   |%.6d| ---\n", i, i, j);
-	ft_printf("cpy:--- |%06.4d|   |%04d|   |%.6d| ---\n", i, i, j);
+	printf("ori:--- |%06.4i|   |%04i|   |%.6u| ---\n", i, i, j);
+	ft_printf("cpy:--- |%06.4i|   |%04i|   |%.6u| ---\n", i, i, j);
 	i = printf("\nori:--- |% d|   |%+.d|   |%.0d| ---\n", k, k, k);
 	j = ft_printf("cpy:--- |% d|   |%+.d|   |%.0d| ---\n", k, k, k);
 	ft_printf("ori: %i / cpy: %i\n", i - 1, j);
 	printf("fin\n\n");
-/*
-	int		a = 42;
-	void	*p = &a;
-	printf("---\na:%10p\nb:%-10p\nc:%10p\n---\n", p, p, p);
-	ft_printf("---\na:%10p\nb:%-10p\nc:%10p\n---\n", p, p, p);
-	printf("\nfin\n\n");
+*//*
+	int	i = 42;
+	int	j = 0;
+	printf("ori:--- |%#08x|   |%#8X|   |%-#x| ---\n", i, i, i);
+	ft_printf("cpy:--- |%#08x|   |%#8X|   |%-#x| ---\n", i, i, i);
+	i = printf("\nori:--- |%x|   |%.x|   |%.0x| ---\n", j, j, j);
+	j = ft_printf("cpy:--- |%x|   |%.x|   |%.0x| ---\n", j, j, j);
+	ft_printf("ori: %i / cpy: %i\n", i - 1, j);
+	printf("fin\n\n");
 */
+	int		t = 42;
+	void	*p = &t;
+	int a = printf("ori:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
+	int b = ft_printf("cpy:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
+	ft_printf("ori: %i / cpy: %i\n", a, b);
+	printf("fin\n\n");
 }
