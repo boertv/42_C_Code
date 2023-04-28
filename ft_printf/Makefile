@@ -37,6 +37,8 @@ RM = rm -f
 
 all: $(NAME)
 
+bonus: all
+
 $(LIBFT):
 	make -C libft
 
@@ -46,7 +48,7 @@ $(NAME): $(LIBFT) $(OBJS) $(INCLUDES)
 	@ar -rcs $(NAME) $(OBJS)
 
 %.o: %.c Makefile
-	${CC} ${CFLAGS} -c $< -o $@
+	${CC} ${CFLAGS} -c $< -I $(INCLUDES)
 
 clean:
 	make clean -C libft
@@ -59,4 +61,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re bonus
