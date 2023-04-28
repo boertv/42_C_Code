@@ -33,27 +33,26 @@ static void	ft_fill_char_print(char *dst, char c, int fw, int lj)
 
 char	*ft_conv_char(char *sub_format, va_list *ptr_spec, char c)
 {
-	size_t	len;
+	size_t	charslen;
 	int		field_width;
 	char	*to_print;
 
-	len = 0;
-	while (sub_format[len] && (sub_format[len] != '%'))
-		len++;
-	if (ft_check_char(sub_format + len) == -1)
+	charslen = 0;
+	while (sub_format[charslen] && (sub_format[charslen] != '%'))
+		charslen++;
+	if (ft_check_char(sub_format + charslen) == -1)
 		return (ft_error_null("flags", "ft_conv_char", ptr_spec));
-	field_width = ft_field_width((sub_format + len));
+	field_width = ft_field_width((sub_format + charslen));
 	if (!field_width)
 		field_width = 1;
-	len += field_width;
-	to_print = calloc(len + 1, sizeof(char));
+	to_print = calloc(charslen + field_width + 1, sizeof(char));
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conv_char", ptr_spec));
-	ft_strlcpy(to_print, sub_format, len - field_width + 1);
+	ft_strlcpy(to_print, sub_format, charslen + 1);
 	if (c == 'c')
 		c = (char) va_arg(*ptr_spec, int);
 	ft_fill_char_print(to_print, c,
-		field_width, ft_left_just(sub_format + len - field_width));
+		field_width, ft_left_just(sub_format + charslen));
 	return (to_print);
 }
 
@@ -69,7 +68,7 @@ static int	ft_fieldwidth_str(char *sub_format, char *str)
 	return (fw);
 }
 
-static void	ft_fill_str_print(char *dst, char *str, int fw, int lj)
+static void	ft_fill_str_print(char *dst, const char *str, int fw, int lj)
 {
 	int	len;
 
@@ -93,24 +92,29 @@ static void	ft_fill_str_print(char *dst, char *str, int fw, int lj)
 
 char	*ft_conv_str(char *sub_format, va_list *ptr_spec)
 {
-	size_t	len;
+	size_t	charslen;
 	int		field_width;
 	char	*to_print;
 	char	*str;
 
-	len = 0;
-	while (sub_format[len] && (sub_format[len] != '%'))
-		len++;
-	if (ft_check_char(sub_format + len) == -1)
+	charslen = 0;
+	while (sub_format[charslen] && (sub_format[charslen] != '%'))
+		charslen++;
+	if (ft_check_char(sub_format + charslen) == -1)
 		return (ft_error_null("flags", "ft_conv_str", ptr_spec));
 	str = va_arg(*ptr_spec, char *);
-	field_width = ft_fieldwidth_str((sub_format + len), str);
-	len += field_width;
-	to_print = calloc(len + 1, sizeof(char));
+	if (str)
+		field_width = ft_fieldwidth_str((sub_format + charslen), str);
+	else
+		field_width = 6;
+	to_print = calloc(charslen + field_width + 1, sizeof(char));
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conv_str", ptr_spec));
-	ft_strlcpy(to_print, sub_format, len - field_width + 1);
-	ft_fill_str_print(to_print, str,
-		field_width, ft_left_just(sub_format + len - field_width));
+	ft_strlcpy(to_print, sub_format, charslen + 1);
+	if (str)
+		ft_fill_str_print(to_print, str, field_width,
+			ft_left_just(sub_format + charslen));
+	else
+		ft_fill_str_print(to_print, "(null)", 6, 0);
 	return (to_print);
 }
