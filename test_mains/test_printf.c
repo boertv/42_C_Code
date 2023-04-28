@@ -3,53 +3,69 @@
 
 int	main(void)
 {
+	int	i;
+	int	j;
 	ft_printf("char:\n");
 
 	char	c = 'c';
-	printf("ori:---|%3c|  |%-3c|  |%%|\n", c, c);
-	ft_printf("cpy:---|%3c|  |%-3c|  |%%|\n", c, c);
+	i = printf("ori:---|%3c|  |%-3c|  |%%|\n", c, c);
+	j = ft_printf("cpy:---|%3c|  |%-3c|  |%%|\n", c, c);
+	ft_printf("ori = %i, cpy = %i\n", i, j);
 	ft_printf("test met '%%%%' en niets buiten de specifier:\n|");
-	ft_printf("%%");
-	ft_printf("|\ntest met lege format:\n|");
-	ft_printf("");
-	printf("|\nfin\n\n");
+	j = ft_printf("%%");
+	ft_printf("| = %i\ntest met lege format:\n|", j);
+	j = ft_printf("");
+	printf("| = %i\nfin\n\n", j);
 
 	ft_printf("string:\n");
 
 	char	*s = "test";
-	printf("ori:---|%6s|  |%-6s|  |%6s|---\n", s, s, s);
-	ft_printf("cpy:---|%6s|  |%-6s|  |%6s|---\n", s, s, s);
+	ft_printf("laatste test is met fw = INT_MAX\n");
+	i = printf("ori:---|%6s|  |%-6s|  |%2147483647s|---", s, s, s);
+	printf("\n");
+	j = ft_printf("cpy:---|%6s|  |%-6s|  |%2147483647s|---", s, s, s);
+	ft_printf("\nori = %i, cpy = %i\n", i, j);
+	ft_printf("\nnu gaan we nen NULL pointer doorgeven:\n");
+	s = NULL;
+	i = printf("|%s|\n", s);
+	j = ft_printf("|%s|\n", s);
+	ft_printf("ori = %i, cpy = %i\n", i, j);
 	printf("fin\n\n");
 
 	ft_printf("int and decimal:\n");
 
-	int	i = 42;
-	int	j = -2147483648;
+	i = 42;
+	j = -2147483648;
 	int	k = 0;
 	printf("ori:--- |%06.4i|   |%04i|   |%.6u| ---\n", i, i, j);
-	ft_printf("cpy:--- |%06.4i|   |%04i|   |%.6u| ---\n", i, i, j);
-	i = printf("\nori:--- |% d|   |%+.d|   |%.0d| ---\n", k, k, k);
+	ft_printf("cpy:--- |%06.4i|   |%04i|   |%.6u| ---\n\n", i, i, j);
+	i = printf("ori:--- |% d|   |%+.d|   |%.0d| ---\n", k, k, k);
 	j = ft_printf("cpy:--- |% d|   |%+.d|   |%.0d| ---\n", k, k, k);
-	ft_printf("ori: %i / cpy: %i\n", i - 1, j);
+	ft_printf("ori: %i / cpy: %i\n", i, j);
 	printf("fin\n\n");
 
 	ft_printf("hexadecimal:\n");
 
 	int	e = 42;
 	int	f = 0;
-	printf("ori:--- |%#08x|   |%#8X|   |%-#x| ---\n", e, e, e);
-	ft_printf("cpy:--- |%#08x|   |%#8X|   |%-#x| ---\n", e, e, e);
-	e = printf("\nori:--- |%x|   |%.x|   |%.0x| ---\n", f, f, f);
-	f = ft_printf("cpy:--- |%x|   |%.x|   |%.0x| ---\n", f, f, f);
-	ft_printf("ori: %i / cpy: %i\n", e - 1, f);
+	i = printf("ori:--- |%#08x|   |%#8X|   |%-#x| ---\n", e, e, e);
+	j = ft_printf("cpy:--- |%#08x|   |%#8X|   |%-#x| ---\n", e, e, e);
+	ft_printf("ori: %i / cpy: %i\n\n", i, j);
+	i = printf("ori:--- |%x|   |%.x|   |%.0x| ---\n", f, f, f);
+	j = ft_printf("cpy:--- |%x|   |%.x|   |%.0x| ---\n", f, f, f);
+	ft_printf("ori: %i / cpy: %i\n", i, j);
 	printf("fin\n\n");
 
 	ft_printf("pointer:\n");
 
 	int		t = 42;
 	void	*p = &t;
-	int a = printf("ori:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
-	int b = ft_printf("cpy:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
-	ft_printf("ori: %i / cpy: %i\n", a, b);
+	i = printf("ori:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
+	j = ft_printf("cpy:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
+	ft_printf("ori: %i / cpy: %i\n\nand now a NULL pointer:\n", i, j);
+	p = NULL;
+	i = printf("|%p|\n", p);
+	j = ft_printf("|%p|\n", p);
+	ft_printf("ori: %i / cpy: %i\n", i, j);
 	ft_printf("fin\n\n");
 }

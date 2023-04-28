@@ -15,6 +15,7 @@
 void	*ft_error_null(const char *error, const char *func, va_list *ptr_spec)
 {
 	va_end(*ptr_spec);
+	return (NULL);
 	if (!func)
 		return (NULL);
 	write(0, "\nAn error occured in '", 22);

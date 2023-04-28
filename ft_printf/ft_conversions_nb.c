@@ -55,9 +55,6 @@ char	*ft_conv_ptr(char *sub_format, va_list *ptr_spec)
 	if (ft_check_char(sub_format + charslen) == -1)
 		return (ft_error_null("flags", "ft_conv_ptr", ptr_spec));
 	snb.nb = (long)((unsigned long) va_arg(*ptr_spec, void *));
-	// should print "(null)" instead i think..
-	if (!snb.nb)
-		return (ft_error_null("NULL pointer", "ft_conv_ptr", ptr_spec));
 	sub_format[charslen] = '#';
 	ft_fill_nbstruct(sub_format + charslen, &snb, 0);
 	if (snb.pr > 0)
