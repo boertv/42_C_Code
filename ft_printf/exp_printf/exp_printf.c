@@ -26,6 +26,10 @@ int main(void)
 	void	*p = &a;
 	void	*q = NULL;
 	printf("--|%20p|  |%-20p|--\n", p, p);
-	printf("--|%p|  |%5p|--\n", q, q);
+	printf("--|%20p|  |%-20p|--\n", q, q);
 
+	int		pi = (int) p;
+	unsigned int pj = (unsigned int) p;
+	long	pl = (long) p;
+	printf("int: |%x|  unsigned: |%x|  long: |%lx|\n", pi, pj, pl);
 }

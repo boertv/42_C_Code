@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_nblen(char *sub_format, int nb, int baselen, int sign)
+int	ft_nblen(char *sub_format, long nb, int baselen, int sign)
 {
 	int	l;
 
@@ -28,7 +28,7 @@ int	ft_nblen(char *sub_format, int nb, int baselen, int sign)
 	return (l);
 }
 
-static void	ft_write_sign(char *sub_format, char *dst, int nb)
+static void	ft_write_sign(char *sub_format, char *dst, long nb)
 {
 	if (nb < 0)
 		*dst = '-';
@@ -38,15 +38,11 @@ static void	ft_write_sign(char *sub_format, char *dst, int nb)
 		*dst = '+';
 }
 
-	//AAAAAAAAAAAh
-	//#include <stdio.h>
-
 static void	ft_writing(char *dst, t_nb_attr *nb_attr, int local_pr)
 {
 	int	i;
 
 	i = nb_attr->nblen + local_pr - 1;
-	///**/	printf("\nnb = %li  baselen = %i  base = %s\n", nb_attr->nb, nb_attr->baselen, nb_attr->base);
 	if (nb_attr->nb < 0)
 	{
 		dst[i] = nb_attr->base[-(nb_attr->nb % nb_attr->baselen)];
