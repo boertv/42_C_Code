@@ -12,15 +12,22 @@
 
 NAME = libftprintf.a
 
-SRCS = $(wildcard *.c) \
-	   $(wildcard libft/*.c)
+LIBFT = libft/libft.a
+
+SRCS = ft_printf.c \
+	   ft_conversions_chars.c \
+	   ft_conversions_nb.c \
+	   ft_check_flags.c \
+	   ft_flags.c \
+	   ft_flags_2.c \
+	   ft_putnbr.c \
+	   ft_fill_nb.c \
+	   ft_error_null.c
 
 OBJS = $(SRCS:c=o)
 
 INCLUDES = libft/libft.h \
 		  ft_printf.h
-
-all: $(NAME)
 
 CC = cc
 
@@ -28,17 +35,26 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-$(NAME): $(OBJS) $(INCLUDES)
+all: $(NAME)
+
+$(LIBFT):
+	make -C libft
+
+$(NAME): $(LIBFT) $(OBJS) $(INCLUDES)
+	@cp $(LIBFT) $(NAME)
+	@echo "creating printf library.."
 	@ar -rcs $(NAME) $(OBJS)
-	@echo "creating library"
 
 %.o: %.c Makefile
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	make clean -C libft
+	@echo "cleaning printf folder.."
+	@$(RM) $(OBJS)
 
 fclean: clean
+	$(RM) $(LIBFT)
 	$(RM) $(NAME)
 
 re: fclean all

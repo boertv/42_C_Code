@@ -1,107 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_conversions_nb.c                              :+:      :+:    :+:   */
+/*   ft_conversions_nb.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 16:23:39 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/25 16:24:40 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/04/27 16:00:07 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/04/27 16:00:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_fieldwidth_nb(char *sub_format, int nblen, int pr)
+char	*ft_conv_nb(char *sub_format, va_list *ptr_spec, char *base, int sign)
 {
-	int	fw;
+	size_t		charslen;
+	t_nb_attr	sbn;
+	char		*to_print;
 
-	fw = ft_field_width(sub_format);
-	if (pr < 0)
-		pr = 0;
-	if (fw <= nblen + pr)
-		fw = 0;
+	sbn.base = base;
+	sbn.baselen = ft_strlen(base);
+	charslen = 0;
+	while (sub_format[charslen] && (sub_format[charslen] != '%'))
+		charslen++;
+	if (ft_check_nb(sub_format + charslen, sbn.baselen, sign) == -1)
+		return (ft_error_null("flags", "ft_conv_nb", ptr_spec));
+	if (sign)
+		sbn.nb = (long) va_arg(*ptr_spec, int);
 	else
-		fw -= nblen + pr;
-	if (fw < 2 && ft_hashtag(sub_format))
-		fw = 2;
-	return (fw);
-}
-
-static int	ft_precision_nb(char *sub_format, int nblen)
-{
-	int	pr;
-
-	pr = ft_precision(sub_format);
-	if (pr > 0 && pr <= nblen)
-		pr = 0;
-	else if (pr > 0)
-		pr -= nblen;
-	return (pr);
-}
-
-void	ft_fill_nbstruct(char *sf, t_nb_attr *na, int sign)
-{
-	na->nblen = ft_nblen(sf, na->nb, na->baselen, sign);
-	na->pr = ft_precision_nb(sf, na->nblen);
-	na->fw = ft_fieldwidth_nb(sf, na->nblen, na->pr);
-}
-static void	ft_fill_nb_fw(char *dst, char *sub_format, t_nb_attr *sbn, int h)
-{
-	if (sbn->pr || !ft_zeroes(sub_format))
-	{
-		ft_putnchr(dst, ' ', sbn->fw);
-		if (h)
-		{
-			dst[sbn->fw - 2] = '0';
-			dst[sbn->fw - 1] = sbn->base[10] + 23;
-		}
-	}
+		sbn.nb = (long)((unsigned int) va_arg(*ptr_spec, int));
+	ft_fill_nbstruct(sub_format + charslen, &sbn, sign);
+	if (sbn.pr > 0)
+		to_print = ft_calloc(charslen + sbn.nblen + sbn.fw + sbn.pr + 1, 1);
 	else
-	{
-		ft_putnchr(dst, '0', sbn->fw);
-		if (h)
-			dst[1] = sbn->base[10] + 23;
-	}
+		to_print = ft_calloc(charslen + sbn.nblen + sbn.fw + 1, 1);
+	if (!to_print)
+		return (ft_error_null("calloc", "ft_conv_nb", ptr_spec));
+	ft_strlcpy(to_print, sub_format, charslen + 1);
+	ft_fill_nb(to_print + charslen, sub_format + charslen, &sbn, sign);
+	return (to_print);
 }
 
-void	ft_fill_nb(char *dst, char *sub_format, t_nb_attr *sbn, int sign)
+char	*ft_conv_ptr(char *sub_format, va_list *ptr_spec)
 {
-	int	lj;
-	int	h;
+	size_t		charslen;
+	t_nb_attr	snb;
+	char		*to_print;
 
-	lj = ft_left_just(sub_format);
-	h = ft_hashtag(sub_format);
-	if (lj)
-	{
-		if (h)
-		{
-			*dst++ = '0';
-			*dst++ = sbn->base[10] + 23;
-			h = 0;
-			sbn->fw -= 2;
-		}
-		ft_putnbr_str(sub_format, dst, sbn, sign);
-		while (*dst)
-			dst++;
-	}
-	ft_fill_nb_fw(dst, sub_format, sbn, h);
-	// if (sbn->pr || !ft_zeroes(sub_format))
-	// {
-	// 	ft_putnchr(dst, ' ', sbn->fw);
-	// 	if (h)
-	// 	{
-	// 		dst[sbn->fw - 2] = '0';
-	// 		dst[sbn->fw - 1] = sbn->base[10] + 23;
-	// 	}
-	// }
-	// else
-	// {
-	// 	ft_putnchr(dst, '0', sbn->fw);
-	// 	if (h)
-	// 		dst[1] = sbn->base[10] + 23;
-	// }
-	if (!lj)
-		ft_putnbr_str(sub_format, dst + sbn->fw, sbn, sign);
-	return ;
+	snb.base = "0123456789abcdef";
+	snb.baselen = 16;
+	charslen = 0;
+	while (sub_format[charslen] && (sub_format[charslen] != '%'))
+		charslen++;
+	if (ft_check_char(sub_format + charslen) == -1)
+		return (ft_error_null("flags", "ft_conv_ptr", ptr_spec));
+	snb.nb = (long)((unsigned long) va_arg(*ptr_spec, void *));
+	sub_format[charslen] = '#';
+	ft_fill_nbstruct(sub_format + charslen, &snb, 0);
+	if (snb.pr > 0)
+		to_print = ft_calloc(charslen + snb.nblen + snb.fw + snb.pr + 1, 1);
+	else
+		to_print = ft_calloc(charslen + snb.nblen + snb.fw + 1, 1);
+	if (!to_print)
+		return (ft_error_null("calloc", "ft_conv_ptr", ptr_spec));
+	ft_strlcpy(to_print, sub_format, charslen + 1);
+	ft_fill_nb(to_print + charslen, sub_format + charslen, &snb, 0);
+	return (to_print);
 }

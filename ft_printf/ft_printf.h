@@ -33,7 +33,7 @@ int		ft_space(char *sub_format);
 int		ft_check_char(char *sub_format);
 int		ft_check_nb(char *sub_format, int baselen, int sign);
 
-typedef struct	s_nb_attr
+typedef struct s_nb_attr
 {
 	long	nb;
 	int		nblen;
@@ -44,9 +44,9 @@ typedef struct	s_nb_attr
 }				t_nb_attr;
 
 int		ft_nblen(char *sub_format, long nb, int baselen, int sign);
-void	ft_fill_nbstruct(char *sf, t_nb_attr *na, int sign);
-void	ft_fill_nb(char *dst, char *sub_format, t_nb_attr *nb_attr, int sign);
-void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *nb_attr, int sign);
+void	ft_fill_nbstruct(char *sf, t_nb_attr *snb, int sign);
+void	ft_fill_nb(char *dst, char *sub_format, t_nb_attr *snb, int sign);
+void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *snb, int sign);
 void	ft_putnchr(char *dst, char c, int n);
 
 #endif

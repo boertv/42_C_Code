@@ -6,9 +6,13 @@ int	main(void)
 	ft_printf("char:\n");
 
 	char	c = 'c';
-	printf("%3c|  |%-3c|  |%%\n", c, c);
-	ft_printf("%3c|  |%-3c|  |%%", c, c);
-	printf("\nfin\n\n");
+	printf("ori:---|%3c|  |%-3c|  |%%|\n", c, c);
+	ft_printf("cpy:---|%3c|  |%-3c|  |%%|\n", c, c);
+	ft_printf("test met '%%%%' en niets buiten de specifier:\n|");
+	ft_printf("%%");
+	ft_printf("|\ntest met lege format:\n|");
+	ft_printf("");
+	printf("|\nfin\n\n");
 
 	ft_printf("string:\n");
 

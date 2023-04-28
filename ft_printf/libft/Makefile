@@ -72,17 +72,20 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 $(NAME): $(OBJS) $(INCLUDE)
-	ar -rcs $(NAME) $(OBJS)
+	@echo "creating libft library.."
+	@ar -rcs $(NAME) $(OBJS)
 
 bonus: $(OBJS) $(OBJS_B) $(INCLUDE)
-	ar -rcs $(NAME) $(OBJS) $(OBJS_B)
+	@echo "creating libft bonus library.."
+	@ar -rcs $(NAME) $(OBJS) $(OBJS_B)
 
 %.o: %.c Makefile
 	${CC} ${CFLAGS} -c $< -I $(INCLUDE)
 
 clean:
-	$(RM) $(OBJS)
-	$(RM) $(OBJS_B)
+	@echo "cleaning libft folder.."
+	@$(RM) $(OBJS)
+	@$(RM) $(OBJS_B)
 
 fclean: clean
 	$(RM) $(NAME)

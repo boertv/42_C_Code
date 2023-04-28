@@ -38,42 +38,42 @@ static void	ft_write_sign(char *sub_format, char *dst, long nb)
 		*dst = '+';
 }
 
-static void	ft_writing(char *dst, t_nb_attr *nb_attr, int local_pr)
+static void	ft_writing(char *dst, t_nb_attr *snb, int local_pr)
 {
 	int	i;
 
-	i = nb_attr->nblen + local_pr - 1;
-	if (nb_attr->nb < 0)
+	i = snb->nblen + local_pr - 1;
+	if (snb->nb < 0)
 	{
-		dst[i] = nb_attr->base[-(nb_attr->nb % nb_attr->baselen)];
-		nb_attr->nb /= -nb_attr->baselen;
+		dst[i] = snb->base[-(snb->nb % snb->baselen)];
+		snb->nb /= -snb->baselen;
 		i--;
 	}
-	while (nb_attr->nb)
+	while (snb->nb)
 	{
-		dst[i] = nb_attr->base[(nb_attr->nb % nb_attr->baselen)];
-		nb_attr->nb /= nb_attr->baselen;
+		dst[i] = snb->base[(snb->nb % snb->baselen)];
+		snb->nb /= snb->baselen;
 		i--;
 	}
 	return ;
 }
 
-void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *nb_attr, int sign)
+void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *snb, int sign)
 {
 	int	local_pr;
 
-	if (!nb_attr->nblen)
+	if (!snb->nblen)
 		return ;
-	local_pr = nb_attr->pr;
+	local_pr = snb->pr;
 	if (sign)
-		ft_write_sign(sub_format, dst, nb_attr->nb);
-	if (!nb_attr->nb)
+		ft_write_sign(sub_format, dst, snb->nb);
+	if (!snb->nb)
 		local_pr++;
 	if (*dst)
 		ft_putnchr(dst + 1, '0', local_pr);
 	else
 		ft_putnchr(dst, '0', local_pr);
-	ft_writing(dst, nb_attr, local_pr);
+	ft_writing(dst, snb, local_pr);
 	return ;
 }
 
