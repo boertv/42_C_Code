@@ -86,7 +86,7 @@ int	ft_printf(const char *format, ...)
 		free(sub_format);
 		if (!to_print)
 			return (-1);
-		char_count += write(0, to_print, ft_strlen(to_print));
+		char_count += write(1, to_print, ft_strlen(to_print));
 		free(to_print);
 	}
 	va_end(specifier);
