@@ -18,16 +18,26 @@ int main(void)
 	char    c = 'c';
 	printf("abc |%c| def\n", c);
 	printf("abc |%-20c| def\n", c);
-*/
+*//*
 	char *s = "abc";
 	printf("|%s| .1:|%.1s| .s:|%.s| .6:|%.6s|\n", s, s, s, s);
 	s = NULL;
 	printf("|%s| .1:|%.1s|\n", s, s);
 
-/*
+*/
 	int		a = 42;
 	void	*p = &a;
 	void	*q = NULL;
+	printf("sizeof(void *) = %lu or %lu\n", sizeof(void *), sizeof(p));
+	printf("sizes: int = %lu long = %lu unsigned = %lu\n", sizeof(int), sizeof(long), sizeof(unsigned));
+	printf("       unsigned long = %lu long long = %lu\n", sizeof(unsigned long), sizeof(long long));
+	p = (void *) -1;
+	long	l = (long) p;
+	unsigned long	u = (unsigned long) p;
+	long	b = (long) u;
+	printf("(void *)-1 = %p long = %#lx uns long = %#lx back to long = %#lx\n", p, l, u, b);
+
+	printf("\n");
 	printf("--|%20p|  |%-20p|--\n", p, p);
 	printf("--|%20p|  |%-20p|--\n", q, q);
 
@@ -35,5 +45,5 @@ int main(void)
 	unsigned int pj = (unsigned int) p;
 	long	pl = (long) p;
 	printf("int: |%x|  unsigned: |%x|  long: |%lx|\n", pi, pj, pl);
-*/
+
 }

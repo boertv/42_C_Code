@@ -43,9 +43,9 @@ char	*ft_conv_nb(char *sform, va_list *ptr_va, char *base, int sign)
 
 char	*ft_conv_ptr(char *sform, va_list *ptr_va)
 {
-	size_t		chars;
-	t_nb_attr	snb;
-	char		*to_print;
+	size_t			chars;
+	t_nb_attr		snb;
+	char			*to_print;
 
 	snb.base = "0123456789abcdef";
 	snb.baselen = 16;
@@ -54,7 +54,7 @@ char	*ft_conv_ptr(char *sform, va_list *ptr_va)
 		chars++;
 	if (ft_check_char(sform + chars) == -1)
 		return (ft_error_null("flags", "ft_conv_ptr", ptr_va));
-	snb.nb = (long long)((unsigned long) va_arg(*ptr_va, void *));
+	snb.nb = (long long) (unsigned long) va_arg(*ptr_va, void *);
 	sform[chars] = '#';
 	ft_fill_nbstruct(sform + chars, &snb, 0);
 	if (snb.pr > 0)

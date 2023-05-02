@@ -85,7 +85,12 @@ int	main(void)
 	void	*p = &t;
 	i = printf("ori:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
 	j = ft_printf("cpy:--- |%20p|   |%-20p|   |%p| ---\n", p, p, p);
-	ft_printf("ori: %i / cpy: %i\n\nand now a NULL pointer:\n", i, j);
+	ft_printf("ori: %i / cpy: %i\n(void *)-1:\n");
+	p = (void *) -1;
+	i = printf("ori: %p\n", p);
+	j = ft_printf("cpy: %p\n", p);
+	ft_printf("ori = %i / cpy = %i\n", i, j);
+	ft_printf("\nand now a NULL pointer:\n", i, j);
 	p = NULL;
 	i = printf("|%p|\n", p);
 	j = ft_printf("|%p|\n", p);
