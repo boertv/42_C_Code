@@ -26,9 +26,9 @@ char	*ft_conv_nb(char *sub_format, va_list *ptr_va, char *base, int sign)
 	if (ft_check_nb(sub_format + charslen, sbn.baselen, sign) == -1)
 		return (ft_error_null("flags", "ft_conv_nb", ptr_va));
 	if (sign)
-		sbn.nb = (long) va_arg(*ptr_va, int);
+		sbn.nb = (long long) va_arg(*ptr_va, int);
 	else
-		sbn.nb = (long)((unsigned int) va_arg(*ptr_va, int));
+		sbn.nb = (long long)((unsigned int) va_arg(*ptr_va, int));
 	ft_fill_nbstruct(sub_format + charslen, &sbn, sign);
 	if (sbn.pr > 0)
 		to_print = ft_calloc(charslen + sbn.nblen + sbn.fw + sbn.pr + 1, 1);
@@ -54,7 +54,7 @@ char	*ft_conv_ptr(char *sub_format, va_list *ptr_va)
 		charslen++;
 	if (ft_check_char(sub_format + charslen) == -1)
 		return (ft_error_null("flags", "ft_conv_ptr", ptr_va));
-	snb.nb = (long)((unsigned long) va_arg(*ptr_va, void *));
+	snb.nb = (long long)((unsigned long) va_arg(*ptr_va, void *));
 	sub_format[charslen] = '#';
 	ft_fill_nbstruct(sub_format + charslen, &snb, 0);
 	if (snb.pr > 0)

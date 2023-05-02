@@ -35,12 +35,12 @@ int		ft_check_nb(char *sub_format, int baselen, int sign);
 
 typedef struct s_nb_attr
 {
-	long	nb;
-	int		nblen;
-	char	*base;
-	int		baselen;
-	int		fw;
-	int		pr;
+	long long	nb;
+	int			nblen;
+	char		*base;
+	int			baselen;
+	int			fw;
+	int			pr;
 }				t_nb_attr;
 
 int		ft_nblen(char *sub_format, long nb, int baselen, int sign);
