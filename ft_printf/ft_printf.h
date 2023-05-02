@@ -30,8 +30,18 @@ int		ft_zeroes(char *sform);
 int		ft_hashtag(char *sform);
 int		ft_plus(char *sform);
 int		ft_space(char *sform);
+
+typedef struct s_str_attr
+{
+	char	*str;
+	int		pr;
+	int		fw;
+}			t_str_attr;
+
 int		ft_check_char(char *sform);
-int		ft_check_nb(char *sform, int baselen, int sign);
+int		ft_check_str(char *sform);
+void	ft_fill_char_print(char *dst, char c, int fw, int lj);
+void	ft_fill_str_print(char *dst, t_str_attr *sstr, int lj);
 
 typedef struct s_nb_attr
 {
@@ -43,6 +53,7 @@ typedef struct s_nb_attr
 	int			pr;
 }				t_nb_attr;
 
+int		ft_check_nb(char *sform, int baselen, int sign);
 int		ft_nblen(char *sform, long nb, int baselen, int sign);
 void	ft_fill_nbstruct(char *sf, t_nb_attr *snb, int sign);
 void	ft_fill_nb(char *dst, char *sform, t_nb_attr *snb, int sign);

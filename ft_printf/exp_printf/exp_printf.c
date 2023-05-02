@@ -20,7 +20,10 @@ int main(void)
 	printf("abc |%-20c| def\n", c);
 */
 	char *s = "abc";
-	printf("|%s| .1:|%.1s| .s:|%.s|\n", s, s, s);
+	printf("|%s| .1:|%.1s| .s:|%.s| .6:|%.6s|\n", s, s, s, s);
+	s = NULL;
+	printf("|%s| .1:|%.1s|\n", s, s);
+
 /*
 	int		a = 42;
 	void	*p = &a;

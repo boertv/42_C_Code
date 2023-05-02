@@ -26,10 +26,8 @@ static int	ft_check_errors(char *sform)
 	return (0);
 }
 
-int	ft_check_char(char *sform)
+int	ft_check_str(char *sform)
 {
-	if (ft_precision(sform))
-		return (-1);
 	if (ft_zeroes(sform))
 		return (-1);
 	if (ft_plus(sform))
@@ -37,6 +35,17 @@ int	ft_check_char(char *sform)
 	if (ft_space(sform))
 		return (-1);
 	if (ft_hashtag(sform))
+		return (-1);
+	if (ft_check_errors(sform) == -1)
+		return (-1);
+	return (0);
+}
+
+int	ft_check_char(char *sform)
+{
+	if (ft_precision(sform))
+		return (-1);
+	if (ft_check_str(sform) == -1)
 		return (-1);
 	if (ft_check_errors(sform) == -1)
 		return (-1);

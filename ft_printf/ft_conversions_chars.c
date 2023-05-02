@@ -12,25 +12,6 @@
 
 #include "ft_printf.h"
 
-static void	ft_fill_char_print(char *dst, char c, int fw, int lj)
-{
-	while (*dst)
-		dst++;
-	if (lj)
-	{
-		*dst = c;
-		dst++;
-	}
-	while (--fw)
-	{
-		*dst = ' ';
-		dst++;
-	}
-	if (!lj)
-		*dst = c;
-	return ;
-}
-
 char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *printlen)
 {
 	size_t	chars;
@@ -57,64 +38,65 @@ char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *printlen)
 	return (to_print);
 }
 
-static int	ft_fieldwidth_str(char *sform, char *str)
+static int	ft_precision_str(char *sform, char *str)
 {
-	size_t	fw;
-	size_t	len;
+	int	pr;
+	int	len;
 
-	fw = (size_t) ft_field_width(sform);
-	len = ft_strlen(str);
-	if (fw < len)
-		fw = len;
+	pr = ft_precision(sform);
+	len = (int) ft_strlen(str);
+	if (pr == 0)
+		pr = len;
+	else if (pr == -2)
+		pr = 0;
+	else if (pr > len)
+		pr = len;
+	return (pr);
+}
+
+static int	ft_fieldwidth_str(char *sform, int pr)
+{
+	int	fw;
+
+	fw = ft_field_width(sform);
+	if (fw < pr)
+		fw = pr;
 	return (fw);
 }
 
-static void	ft_fill_str_print(char *dst, const char *str, int fw, int lj)
+static char	*ft_initialise_str(char *str, va_list *ptr_va, int *ns)
 {
-	int	len;
-
-	len = ft_strlen(str);
-	fw -= len;
-	while (*dst)
-		dst++;
-	if (lj)
+	*ns = 0;
+	str = va_arg(*ptr_va, char *);
+	if (!str)
 	{
-		ft_strlcat(dst, str, len + 1);
-		dst += len;
+		str = ft_strdup("(null)");
+		*ns = 1;
 	}
-	while (fw-- > 0)
-	{
-		*dst = ' ';
-		dst++;
-	}
-	if (!lj)
-		ft_strlcat(dst, str, len + 1);
+	return (str);
 }
 
 char	*ft_conv_str(char *sform, va_list *ptr_va)
 {
-	size_t	chars;
-	int		fw;
-	char	*to_print;
-	char	*str;
+	size_t		chars;
+	t_str_attr	sstr;
+	char		*to_print;
+	int			ns;
 
 	chars = 0;
 	while (sform[chars] && (sform[chars] != '%'))
 		chars++;
-	if (ft_check_char(sform + chars) == -1)
+	if (ft_check_str(sform + chars) == -1)
 		return (ft_error_null("flags", "ft_conv_str", ptr_va));
-	str = va_arg(*ptr_va, char *);
-	if (str)
-		fw = ft_fieldwidth_str((sform + chars), str);
-	else
-		fw = ft_fieldwidth_str((sform + chars), "(null)");
-	to_print = calloc(chars + fw + 1, sizeof(char));
+	sstr.str = ft_initialise_str(sstr.str, ptr_va, &ns);
+	sstr.pr = ft_precision_str(sform, sstr.str);
+	sstr.fw = ft_fieldwidth_str((sform + chars), sstr.pr);
+	to_print = calloc(chars + sstr.fw + 1, sizeof(char));
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conv_str", ptr_va));
 	ft_strlcpy(to_print, sform, chars + 1);
-	if (str)
-		ft_fill_str_print(to_print, str, fw, ft_left_just(sform + chars));
-	else
-		ft_fill_str_print(to_print, "(null)", fw, ft_left_just(sform + chars));
+	ft_fill_str_print(to_print, &sstr, ft_left_just(sform + chars));
+	if (ns)
+		free(sstr.str);
 	return (to_print);
 }
