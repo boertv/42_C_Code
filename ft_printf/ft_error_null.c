@@ -16,12 +16,12 @@ void	*ft_error_null(const char *error, const char *func, va_list *ptr_va)
 {
 	va_end(*ptr_va);
 	return (NULL);
-	if (!func)
+	if (!func || !error)
 		return (NULL);
-	write(0, "\nAn error occured in '", 22);
-	write(0, func, ft_strlen(func));
-	write(0, "' concerning the '", 18);
-	write(0, error, ft_strlen(error));
-	write(0, "'\n", 2);
+	write(1, "\nAn error occured in '", 22);
+	write(1, func, ft_strlen(func));
+	write(1, "' concerning the '", 18);
+	write(1, error, ft_strlen(error));
+	write(1, "'\n", 2);
 	return (NULL);
 }

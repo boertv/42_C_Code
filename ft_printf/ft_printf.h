@@ -19,7 +19,7 @@
 
 int		ft_printf(const char *format, ...);
 void	*ft_error_null(const char *error, const char *func, va_list *ptr_va);
-char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *count);
+char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *printlen);
 char	*ft_conv_str(char *sform, va_list *ptr_va);
 char	*ft_conv_nb(char *sform, va_list *ptr_va, char *base, int sign);
 char	*ft_conv_ptr(char *sform, va_list *ptr_va);

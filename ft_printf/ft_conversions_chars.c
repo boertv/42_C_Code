@@ -31,7 +31,7 @@ static void	ft_fill_char_print(char *dst, char c, int fw, int lj)
 	return ;
 }
 
-char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *count)
+char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *printlen)
 {
 	size_t	chars;
 	int		fw;
@@ -45,14 +45,13 @@ char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *count)
 	fw = ft_field_width((sform + chars));
 	if (!fw)
 		fw = 1;
-	to_print = calloc(chars + fw + 1, sizeof(char));
+	*printlen = chars + fw;
+	to_print = calloc(*printlen + 1, sizeof(char));
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conv_char", ptr_va));
 	ft_strlcpy(to_print, sform, chars + 1);
 	if (c == 'c')
 		c = (char) va_arg(*ptr_va, int);
-	if (c == '\0')
-		(*count)++;
 	ft_fill_char_print(to_print, c,
 		fw, ft_left_just(sform + chars));
 	return (to_print);
@@ -114,8 +113,7 @@ char	*ft_conv_str(char *sform, va_list *ptr_va)
 		return (ft_error_null("calloc", "ft_conv_str", ptr_va));
 	ft_strlcpy(to_print, sform, chars + 1);
 	if (str)
-		ft_fill_str_print(to_print, str, fw,
-			ft_left_just(sform + chars));
+		ft_fill_str_print(to_print, str, fw, ft_left_just(sform + chars));
 	else
 		ft_fill_str_print(to_print, "(null)", fw, ft_left_just(sform + chars));
 	return (to_print);

@@ -42,15 +42,16 @@ static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 }
 
 // calls a different function depending on the specifier type.
-static char	*ft_output_conv(char *sform, va_list *ptr_spec, size_t *count)
+static char	*ft_output_conv(char *sform, va_list *ptr_spec, size_t *printlen)
 {
 	char	conv_spec;
 
+	*printlen = 0;
 	if (!ft_strrchr(sform, '%'))
 		return (ft_strdup(sform));
 	conv_spec = sform[ft_strlen(sform) - 1];
 	if (conv_spec == 'c' || conv_spec == '%')
-		return (ft_conv_char(sform, ptr_spec, conv_spec, count));
+		return (ft_conv_char(sform, ptr_spec, conv_spec, printlen));
 	if (conv_spec == 's')
 		return (ft_conv_str(sform, ptr_spec));
 	if (conv_spec == 'i' || conv_spec == 'd')
@@ -66,11 +67,19 @@ static char	*ft_output_conv(char *sform, va_list *ptr_spec, size_t *count)
 	return (ft_error_null("specifier", "ft_output_conversion", ptr_spec));
 }
 
+static int	ft_printlen(int printlen, char *to_print)
+{
+	if (!printlen)
+		printlen = ft_strlen(to_print);
+	return (printlen);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	size_t	char_count;
 	char	*sform;
 	char	*to_print;
+	size_t	printlen;
 	va_list	specifier;
 
 	if (!format)
@@ -82,11 +91,12 @@ int	ft_printf(const char *format, ...)
 		sform = ft_sub_format(&format, &specifier);
 		if (!sform)
 			return (-1);
-		to_print = ft_output_conv(sform, &specifier, &char_count);
+		to_print = ft_output_conv(sform, &specifier, &printlen);
 		free(sform);
 		if (!to_print)
 			return (-1);
-		char_count += write(1, to_print, ft_strlen(to_print));
+		printlen = ft_printlen(printlen, to_print);
+		char_count += write(1, to_print, printlen);
 		free(to_print);
 	}
 	va_end(specifier);

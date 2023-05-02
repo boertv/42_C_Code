@@ -20,6 +20,9 @@ int	main(void)
 	i = printf("ori: variabele |%c| litteral |%c|\n", c, '\0');
 	j = ft_printf("cpy: variabele |%c| litteral |%c|\n", c, '\0');
 	ft_printf("ori = %i, cpy = %i\n", i, j);
+	i = printf("ori: |%c| |%4c| |%-4c| \n", '\0', 0, c);
+	j = ft_printf("cpy: |%c| |%4c| |%-4c| \n", '\0', 0, c);
+	ft_printf("ori = %i, cpy = %i\n", i, j);
 	printf("fin\n\n");
 
 	ft_printf("string:\n");
@@ -30,10 +33,17 @@ int	main(void)
 	printf("\n");
 	j = ft_printf("cpy:---|%6s|  |%-6s|  |%2147483647s|---", s, s, s);
 	ft_printf("\nori = %i, cpy = %i\n", i, j);
+
+	s = "";
+	ft_printf("\nnou me ne lege string:\n");
+	i = printf("|%s| |%4s| |%-4s|\n", s, s, s);
+	j = ft_printf("|%s| |%4s| |%-4s|\n", s, s, s);
+	ft_printf("ori = %i, cpy = %i\n", i, j);
+
 	ft_printf("\nnu gaan we nen NULL pointer doorgeven:\n");
 	s = NULL;
-	i = printf("|%s|\n", s);
-	j = ft_printf("|%s|\n", s);
+	i = printf("|%s| |%10s| |%-10s|\n", s, s, s);
+	j = ft_printf("|%s| |%10s| |%-10s|\n", s, s, s);
 	ft_printf("ori = %i, cpy = %i\n", i, j);
 	printf("fin\n\n");
 
