@@ -12,13 +12,13 @@
 
 #include "ft_printf.h"
 
-int	ft_nblen(char *sub_format, long nb, int baselen, int sign)
+int	ft_nblen(char *sform, long nb, int baselen, int sign)
 {
 	int	l;
 
 	l = 0;
-	if (ft_plus(sub_format) || ft_space(sub_format) || (nb < 0 && sign)
-		|| (!nb && ft_precision(sub_format) != -2))
+	if (ft_plus(sform) || ft_space(sform) || (nb < 0 && sign)
+		|| (!nb && ft_precision(sform) != -2))
 		l++;
 	while (nb)
 	{
@@ -28,13 +28,13 @@ int	ft_nblen(char *sub_format, long nb, int baselen, int sign)
 	return (l);
 }
 
-static void	ft_write_sign(char *sub_format, char *dst, long nb)
+static void	ft_write_sign(char *sform, char *dst, long nb)
 {
 	if (nb < 0)
 		*dst = '-';
-	else if (ft_space(sub_format))
+	else if (ft_space(sform))
 		*dst = ' ';
-	else if (ft_plus(sub_format))
+	else if (ft_plus(sform))
 		*dst = '+';
 }
 
@@ -58,7 +58,7 @@ static void	ft_writing(char *dst, t_nb_attr *snb, int local_pr)
 	return ;
 }
 
-void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *snb, int sign)
+void	ft_putnbr_str(char *sform, char *dst, t_nb_attr *snb, int sign)
 {
 	int	local_pr;
 
@@ -66,7 +66,7 @@ void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *snb, int sign)
 		return ;
 	local_pr = snb->pr;
 	if (sign)
-		ft_write_sign(sub_format, dst, snb->nb);
+		ft_write_sign(sform, dst, snb->nb);
 	if (!snb->nb)
 		local_pr++;
 	if (*dst)

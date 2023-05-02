@@ -13,58 +13,58 @@
 #include "ft_printf.h"
 
 // no errors possible in most of these functions
-int	ft_zeroes(char *sub_format)
+int	ft_zeroes(char *sform)
 {
 	int	i;
 
 	i = 0;
-	while (sub_format[i])
+	while (sform[i])
 	{
-		if (sub_format[i] == '0' && (!i
-				|| sub_format[i - 1] <= '0' || sub_format[i - 1] >= '9'))
+		if (sform[i] == '0' && (!i
+				|| sform[i - 1] <= '0' || sform[i - 1] >= '9'))
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	ft_hashtag(char *sub_format)
+int	ft_hashtag(char *sform)
 {
-	while (*sub_format)
+	while (*sform)
 	{
-		if (*sub_format == '#')
+		if (*sform == '#')
 			return (1);
-		sub_format++;
+		sform++;
 	}
 	return (0);
 }
 
-int	ft_plus(char *sub_format)
+int	ft_plus(char *sform)
 {
-	while (*sub_format)
+	while (*sform)
 	{
-		if (*sub_format == '+')
+		if (*sform == '+')
 			return (1);
-		sub_format++;
+		sform++;
 	}
 	return (0);
 }
 
 // -1 on error: if '+' is present
-int	ft_space(char *sub_format)
+int	ft_space(char *sform)
 {
 	int	p;
 
-	p = ft_plus(sub_format);
-	while (*sub_format)
+	p = ft_plus(sform);
+	while (*sform)
 	{
-		if (*sub_format == ' ')
+		if (*sform == ' ')
 		{
 			if (p)
 				return (-1);
 			return (1);
 		}
-		sub_format++;
+		sform++;
 	}
 	return (0);
 }

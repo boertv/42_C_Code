@@ -13,45 +13,45 @@
 #include "ft_printf.h"
 
 // all functions here return -1 on error
-static int	ft_check_errors(char *sub_format)
+static int	ft_check_errors(char *sform)
 {
-	if (ft_field_width(sub_format) == -1)
+	if (ft_field_width(sform) == -1)
 		return (-1);
-	if (ft_precision(sub_format) == -1)
+	if (ft_precision(sform) == -1)
 		return (-1);
-	if (ft_left_just(sub_format) == -1)
+	if (ft_left_just(sform) == -1)
 		return (-1);
-	if (ft_space(sub_format) == -1)
+	if (ft_space(sform) == -1)
 		return (-1);
 	return (0);
 }
 
-int	ft_check_char(char *sub_format)
+int	ft_check_char(char *sform)
 {
-	if (ft_precision(sub_format))
+	if (ft_precision(sform))
 		return (-1);
-	if (ft_zeroes(sub_format))
+	if (ft_zeroes(sform))
 		return (-1);
-	if (ft_plus(sub_format))
+	if (ft_plus(sform))
 		return (-1);
-	if (ft_space(sub_format))
+	if (ft_space(sform))
 		return (-1);
-	if (ft_hashtag(sub_format))
+	if (ft_hashtag(sform))
 		return (-1);
-	if (ft_check_errors(sub_format) == -1)
+	if (ft_check_errors(sform) == -1)
 		return (-1);
 	return (0);
 }
 
-int	ft_check_nb(char *sub_format, int baselen, int sign)
+int	ft_check_nb(char *sform, int baselen, int sign)
 {
 	if (baselen == 10)
-		if (ft_hashtag(sub_format))
+		if (ft_hashtag(sform))
 			return (-1);
 	if (!sign)
-		if (ft_space(sub_format) || ft_plus(sub_format))
+		if (ft_space(sform) || ft_plus(sform))
 			return (-1);
-	if (ft_check_errors(sub_format) == -1)
+	if (ft_check_errors(sform) == -1)
 		return (-1);
 	return (0);
 }

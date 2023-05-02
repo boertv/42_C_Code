@@ -21,7 +21,7 @@
 static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 {
 	size_t	l;
-	char	*sub_format;
+	char	*sform;
 
 	if (!ptr_format || !*ptr_format || !**ptr_format)
 		return (ft_error_null("input", "ft_sub_format", ptr_spec));
@@ -34,42 +34,42 @@ static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 		l++;
 	if ((*ptr_format)[l] && ft_strchr("cspdiuxX%", (*ptr_format)[l]))
 		l++;
-	sub_format = ft_substr(*ptr_format, 0, l);
-	if (!sub_format)
+	sform = ft_substr(*ptr_format, 0, l);
+	if (!sform)
 		return (ft_error_null("ft_substr(malloc?)", "ft_sub_format", ptr_spec));
 	*ptr_format += l;
-	return (sub_format);
+	return (sform);
 }
 
 // calls a different function depending on the specifier type.
-static char	*ft_output_conv(char *sub_format, va_list *ptr_spec, size_t *count)
+static char	*ft_output_conv(char *sform, va_list *ptr_spec, size_t *count)
 {
 	char	conv_spec;
 
-	if (!ft_strrchr(sub_format, '%'))
-		return (ft_strdup(sub_format));
-	conv_spec = sub_format[ft_strlen(sub_format) - 1];
+	if (!ft_strrchr(sform, '%'))
+		return (ft_strdup(sform));
+	conv_spec = sform[ft_strlen(sform) - 1];
 	if (conv_spec == 'c' || conv_spec == '%')
-		return (ft_conv_char(sub_format, ptr_spec, conv_spec, count));
+		return (ft_conv_char(sform, ptr_spec, conv_spec, count));
 	if (conv_spec == 's')
-		return (ft_conv_str(sub_format, ptr_spec));
+		return (ft_conv_str(sform, ptr_spec));
 	if (conv_spec == 'i' || conv_spec == 'd')
-		return (ft_conv_nb(sub_format, ptr_spec, "0123456789", 1));
+		return (ft_conv_nb(sform, ptr_spec, "0123456789", 1));
 	if (conv_spec == 'u')
-		return (ft_conv_nb(sub_format, ptr_spec, "0123456789", 0));
+		return (ft_conv_nb(sform, ptr_spec, "0123456789", 0));
 	if (conv_spec == 'x')
-		return (ft_conv_nb(sub_format, ptr_spec, "0123456789abcdef", 0));
+		return (ft_conv_nb(sform, ptr_spec, "0123456789abcdef", 0));
 	if (conv_spec == 'X')
-		return (ft_conv_nb(sub_format, ptr_spec, "0123456789ABCDEF", 0));
+		return (ft_conv_nb(sform, ptr_spec, "0123456789ABCDEF", 0));
 	if (conv_spec == 'p')
-		return (ft_conv_ptr(sub_format, ptr_spec));
+		return (ft_conv_ptr(sform, ptr_spec));
 	return (ft_error_null("specifier", "ft_output_conversion", ptr_spec));
 }
 
 int	ft_printf(const char *format, ...)
 {
 	size_t	char_count;
-	char	*sub_format;
+	char	*sform;
 	char	*to_print;
 	va_list	specifier;
 
@@ -79,11 +79,11 @@ int	ft_printf(const char *format, ...)
 	va_start(specifier, format);
 	while (*format)
 	{
-		sub_format = ft_sub_format(&format, &specifier);
-		if (!sub_format)
+		sform = ft_sub_format(&format, &specifier);
+		if (!sform)
 			return (-1);
-		to_print = ft_output_conv(sub_format, &specifier, &char_count);
-		free(sub_format);
+		to_print = ft_output_conv(sform, &specifier, &char_count);
+		free(sform);
 		if (!to_print)
 			return (-1);
 		char_count += write(1, to_print, ft_strlen(to_print));

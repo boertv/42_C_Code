@@ -19,19 +19,19 @@
 
 int		ft_printf(const char *format, ...);
 void	*ft_error_null(const char *error, const char *func, va_list *ptr_va);
-char	*ft_conv_char(char *sub_format, va_list *ptr_va, char c, size_t *count);
-char	*ft_conv_str(char *sub_format, va_list *ptr_va);
-char	*ft_conv_nb(char *sub_format, va_list *ptr_va, char *base, int sign);
-char	*ft_conv_ptr(char *sub_format, va_list *ptr_va);
-int		ft_field_width(char *sub_format);
-int		ft_precision(char *sub_format);
-int		ft_left_just(char *sub_format);
-int		ft_zeroes(char *sub_format);
-int		ft_hashtag(char *sub_format);
-int		ft_plus(char *sub_format);
-int		ft_space(char *sub_format);
-int		ft_check_char(char *sub_format);
-int		ft_check_nb(char *sub_format, int baselen, int sign);
+char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *count);
+char	*ft_conv_str(char *sform, va_list *ptr_va);
+char	*ft_conv_nb(char *sform, va_list *ptr_va, char *base, int sign);
+char	*ft_conv_ptr(char *sform, va_list *ptr_va);
+int		ft_field_width(char *sform);
+int		ft_precision(char *sform);
+int		ft_left_just(char *sform);
+int		ft_zeroes(char *sform);
+int		ft_hashtag(char *sform);
+int		ft_plus(char *sform);
+int		ft_space(char *sform);
+int		ft_check_char(char *sform);
+int		ft_check_nb(char *sform, int baselen, int sign);
 
 typedef struct s_nb_attr
 {
@@ -43,10 +43,10 @@ typedef struct s_nb_attr
 	int			pr;
 }				t_nb_attr;
 
-int		ft_nblen(char *sub_format, long nb, int baselen, int sign);
+int		ft_nblen(char *sform, long nb, int baselen, int sign);
 void	ft_fill_nbstruct(char *sf, t_nb_attr *snb, int sign);
-void	ft_fill_nb(char *dst, char *sub_format, t_nb_attr *snb, int sign);
-void	ft_putnbr_str(char *sub_format, char *dst, t_nb_attr *snb, int sign);
+void	ft_fill_nb(char *dst, char *sform, t_nb_attr *snb, int sign);
+void	ft_putnbr_str(char *sform, char *dst, t_nb_attr *snb, int sign);
 void	ft_putnchr(char *dst, char c, int n);
 
 #endif

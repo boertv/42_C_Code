@@ -12,86 +12,86 @@
 
 #include "ft_printf.h"
 
-static int	ft_atoi_overflow(char *sub_format)
+static int	ft_atoi_overflow(char *sform)
 {
 	int	nb;
 
-	nb = ft_atoi(sub_format);
+	nb = ft_atoi(sform);
 	if (!nb || nb == 2147483647)
 		nb = -1;
 	return (nb);
 }
 
 // returns 0 for no flag, -1 on error
-int	ft_field_width(char *sub_format)
+int	ft_field_width(char *sform)
 {
 	int	fw;
 
 	fw = 0;
-	while (*sub_format)
+	while (*sform)
 	{
-		if (*sub_format == '.')
-			while (*sub_format >= '0' && *sub_format <= '9')
-				sub_format++;
-		if (*sub_format >= '1' && *sub_format <= '9')
+		if (*sform == '.')
+			while (*sform >= '0' && *sform <= '9')
+				sform++;
+		if (*sform >= '1' && *sform <= '9')
 		{
-			fw = ft_atoi_overflow(sub_format);
-			while (*sub_format >= '0' && *sub_format <= '9')
-				sub_format++;
+			fw = ft_atoi_overflow(sform);
+			while (*sform >= '0' && *sform <= '9')
+				sform++;
 			break ;
 		}
-		sub_format++;
+		sform++;
 	}
-	if (fw && (!*sub_format || !ft_strchr("cspdiuxX%.", *sub_format)))
+	if (fw && (!*sform || !ft_strchr("cspdiuxX%.", *sform)))
 		return (-1);
 	return (fw);
 }
 
 // returns 0 for no flag, -1 on error, -2 for flag of size 0
-int	ft_precision(char *sub_format)
+int	ft_precision(char *sform)
 {
 	int	pr;
 
 	pr = 0;
-	while (*sub_format)
+	while (*sform)
 	{
-		if (*sub_format == '.')
+		if (*sform == '.')
 		{
-			sub_format++;
-			while (*sub_format == '0')
-				sub_format++;
-			if (*sub_format >= '1' && *sub_format <= '9')
+			sform++;
+			while (*sform == '0')
+				sform++;
+			if (*sform >= '1' && *sform <= '9')
 			{
-				pr = ft_atoi_overflow(sub_format);
-				while (*sub_format >= '0' && *sub_format <= '9')
-					sub_format++;
+				pr = ft_atoi_overflow(sform);
+				while (*sform >= '0' && *sform <= '9')
+					sform++;
 			}
 			else
 				pr = -2;
 			break ;
 		}
-		sub_format++;
+		sform++;
 	}
-	if (pr && (!*sub_format || !ft_strchr("cspdiuxX%", *sub_format)))
+	if (pr && (!*sform || !ft_strchr("cspdiuxX%", *sform)))
 		return (-1);
 	return (pr);
 }
 
 // returns 0 for no flag, -1 on error
-int	ft_left_just(char *sub_format)
+int	ft_left_just(char *sform)
 {
 	int	i;
 	int	l;
 
 	i = 0;
 	l = 0;
-	while (sub_format[i])
+	while (sform[i])
 	{
-		if (sub_format[i] == '-')
+		if (sform[i] == '-')
 		{
 			l = 1;
-			if (i && (sub_format[i - 1] == '.'
-					|| (sub_format[i - 1] >= '0' && sub_format[i - 1] <= '9')))
+			if (i && (sform[i - 1] == '.'
+					|| (sform[i - 1] >= '0' && sform[i - 1] <= '9')))
 				return (-1);
 		}
 		i++;
