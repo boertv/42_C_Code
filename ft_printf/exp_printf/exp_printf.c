@@ -18,10 +18,10 @@ int main(void)
 	char    c = 'c';
 	printf("abc |%c| def\n", c);
 	printf("abc |%-20c| def\n", c);
-*//*
-	char *s = "abc";
-	printf("xx |%5s| zz\n", s);
 */
+	char *s = "abc";
+	printf("|%s| .1:|%.1s| .s:|%.s|\n", s, s, s);
+/*
 	int		a = 42;
 	void	*p = &a;
 	void	*q = NULL;
@@ -32,4 +32,5 @@ int main(void)
 	unsigned int pj = (unsigned int) p;
 	long	pl = (long) p;
 	printf("int: |%x|  unsigned: |%x|  long: |%lx|\n", pi, pj, pl);
+*/
 }

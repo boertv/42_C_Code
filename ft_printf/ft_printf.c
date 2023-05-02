@@ -12,10 +12,6 @@
 
 #include "ft_printf.h"
 
-// for the minimum field width flag: the function doesn't print anything if
-//	it's >= INT_MAX (2147483647) (OR EQUAL TO)
-//	(and returns -1 ofc)
-
 // Cuts out a 'sub_format'. Including one specifier and preceding chars.
 // Increments the format so we are up to date.
 static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
