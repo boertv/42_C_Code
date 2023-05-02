@@ -15,7 +15,12 @@ int	main(void)
 	j = ft_printf("%%");
 	ft_printf("| = %i\ntest met lege format:\n|", j);
 	j = ft_printf("");
-	printf("| = %i\nfin\n\n", j);
+	ft_printf("| = %i\ntest met leeg character:\n", j);
+	c = '\0';
+	i = printf("ori: variabele |%c| litteral |%c|\n", c, '\0');
+	j = ft_printf("cpy: variabele |%c| litteral |%c|\n", c, '\0');
+	ft_printf("ori = %i, cpy = %i\n", i, j);
+	printf("fin\n\n");
 
 	ft_printf("string:\n");
 

@@ -18,11 +18,11 @@
 # include "libft/libft.h"
 
 int		ft_printf(const char *format, ...);
-void	*ft_error_null(const char *error, const char *func, va_list *ptr_spec);
-char	*ft_conv_char(char *sub_format, va_list *ptr_spec, char c);
-char	*ft_conv_str(char *sub_format, va_list *ptr_spec);
-char	*ft_conv_nb(char *sub_format, va_list *ptr_spec, char *base, int sign);
-char	*ft_conv_ptr(char *sub_format, va_list *ptr_spec);
+void	*ft_error_null(const char *error, const char *func, va_list *ptr_va);
+char	*ft_conv_char(char *sub_format, va_list *ptr_va, char c, size_t *count);
+char	*ft_conv_str(char *sub_format, va_list *ptr_va);
+char	*ft_conv_nb(char *sub_format, va_list *ptr_va, char *base, int sign);
+char	*ft_conv_ptr(char *sub_format, va_list *ptr_va);
 int		ft_field_width(char *sub_format);
 int		ft_precision(char *sub_format);
 int		ft_left_just(char *sub_format);

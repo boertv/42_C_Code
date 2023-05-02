@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-void	*ft_error_null(const char *error, const char *func, va_list *ptr_spec)
+void	*ft_error_null(const char *error, const char *func, va_list *ptr_va)
 {
-	va_end(*ptr_spec);
+	va_end(*ptr_va);
 	return (NULL);
 	if (!func)
 		return (NULL);

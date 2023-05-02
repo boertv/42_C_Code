@@ -42,7 +42,7 @@ static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
 }
 
 // calls a different function depending on the specifier type.
-static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
+static char	*ft_output_conv(char *sub_format, va_list *ptr_spec, size_t *count)
 {
 	char	conv_spec;
 
@@ -50,7 +50,7 @@ static char	*ft_output_conversion(char *sub_format, va_list *ptr_spec)
 		return (ft_strdup(sub_format));
 	conv_spec = sub_format[ft_strlen(sub_format) - 1];
 	if (conv_spec == 'c' || conv_spec == '%')
-		return (ft_conv_char(sub_format, ptr_spec, conv_spec));
+		return (ft_conv_char(sub_format, ptr_spec, conv_spec, count));
 	if (conv_spec == 's')
 		return (ft_conv_str(sub_format, ptr_spec));
 	if (conv_spec == 'i' || conv_spec == 'd')
@@ -82,7 +82,7 @@ int	ft_printf(const char *format, ...)
 		sub_format = ft_sub_format(&format, &specifier);
 		if (!sub_format)
 			return (-1);
-		to_print = ft_output_conversion(sub_format, &specifier);
+		to_print = ft_output_conv(sub_format, &specifier, &char_count);
 		free(sub_format);
 		if (!to_print)
 			return (-1);

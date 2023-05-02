@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*ft_conv_nb(char *sub_format, va_list *ptr_spec, char *base, int sign)
+char	*ft_conv_nb(char *sub_format, va_list *ptr_va, char *base, int sign)
 {
 	size_t		charslen;
 	t_nb_attr	sbn;
@@ -24,24 +24,24 @@ char	*ft_conv_nb(char *sub_format, va_list *ptr_spec, char *base, int sign)
 	while (sub_format[charslen] && (sub_format[charslen] != '%'))
 		charslen++;
 	if (ft_check_nb(sub_format + charslen, sbn.baselen, sign) == -1)
-		return (ft_error_null("flags", "ft_conv_nb", ptr_spec));
+		return (ft_error_null("flags", "ft_conv_nb", ptr_va));
 	if (sign)
-		sbn.nb = (long) va_arg(*ptr_spec, int);
+		sbn.nb = (long) va_arg(*ptr_va, int);
 	else
-		sbn.nb = (long)((unsigned int) va_arg(*ptr_spec, int));
+		sbn.nb = (long)((unsigned int) va_arg(*ptr_va, int));
 	ft_fill_nbstruct(sub_format + charslen, &sbn, sign);
 	if (sbn.pr > 0)
 		to_print = ft_calloc(charslen + sbn.nblen + sbn.fw + sbn.pr + 1, 1);
 	else
 		to_print = ft_calloc(charslen + sbn.nblen + sbn.fw + 1, 1);
 	if (!to_print)
-		return (ft_error_null("calloc", "ft_conv_nb", ptr_spec));
+		return (ft_error_null("calloc", "ft_conv_nb", ptr_va));
 	ft_strlcpy(to_print, sub_format, charslen + 1);
 	ft_fill_nb(to_print + charslen, sub_format + charslen, &sbn, sign);
 	return (to_print);
 }
 
-char	*ft_conv_ptr(char *sub_format, va_list *ptr_spec)
+char	*ft_conv_ptr(char *sub_format, va_list *ptr_va)
 {
 	size_t		charslen;
 	t_nb_attr	snb;
@@ -53,8 +53,8 @@ char	*ft_conv_ptr(char *sub_format, va_list *ptr_spec)
 	while (sub_format[charslen] && (sub_format[charslen] != '%'))
 		charslen++;
 	if (ft_check_char(sub_format + charslen) == -1)
-		return (ft_error_null("flags", "ft_conv_ptr", ptr_spec));
-	snb.nb = (long)((unsigned long) va_arg(*ptr_spec, void *));
+		return (ft_error_null("flags", "ft_conv_ptr", ptr_va));
+	snb.nb = (long)((unsigned long) va_arg(*ptr_va, void *));
 	sub_format[charslen] = '#';
 	ft_fill_nbstruct(sub_format + charslen, &snb, 0);
 	if (snb.pr > 0)
@@ -62,7 +62,7 @@ char	*ft_conv_ptr(char *sub_format, va_list *ptr_spec)
 	else
 		to_print = ft_calloc(charslen + snb.nblen + snb.fw + 1, 1);
 	if (!to_print)
-		return (ft_error_null("calloc", "ft_conv_ptr", ptr_spec));
+		return (ft_error_null("calloc", "ft_conv_ptr", ptr_va));
 	ft_strlcpy(to_print, sub_format, charslen + 1);
 	ft_fill_nb(to_print + charslen, sub_format + charslen, &snb, 0);
 	return (to_print);
