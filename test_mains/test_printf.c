@@ -28,11 +28,19 @@ int	main(void)
 	ft_printf("string:\n");
 
 	char	*s = "test";
-	ft_printf("laatste test is met fw = INT_MAX\n");
-	i = printf("ori:---|%6s|  |%-6s|  |%2147483647s|---", s, s, s);
+	ft_printf("vierde test is met fw = INT_MAX\n");
+	i = printf("ori:---|%s|  |%-6s|  |%6s|  |%2147483647s|---", s, s, s, s);
 	printf("\n");
-	j = ft_printf("cpy:---|%6s|  |%-6s|  |%2147483647s|---", s, s, s);
+	j = ft_printf("cpy:---|%s|  |%-6s|  |%6s|  |%2147483647s|---", s, s, s, s);
 	ft_printf("\nori = %i, cpy = %i\n", i, j);
+	s = "abcd";
+	i = printf("|%s| |%.2s| |%-.2s|\n", s, s, s);
+	j = ft_printf("|%s| |%.2s| |%-.2s|\n", s, s, s);
+	ft_printf("ori = %i, cpy = %i\n", i, j);
+	i = printf("|%.s| |%4.2s| |%-4.2s|\n", s, s, s);
+	j = ft_printf("|%.s| |%4.2s| |%-4.2s|\n", s, s, s);
+	ft_printf("ori = %i, cpy = %i\n", i, j);
+	
 
 	s = "";
 	ft_printf("\nnou me ne lege string:\n");
