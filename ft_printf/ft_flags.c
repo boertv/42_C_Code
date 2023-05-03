@@ -31,8 +31,11 @@ int	ft_field_width(char *sform)
 	while (*sform)
 	{
 		if (*sform == '.')
+		{
+			sform++;
 			while (*sform >= '0' && *sform <= '9')
 				sform++;
+		}
 		if (*sform >= '1' && *sform <= '9')
 		{
 			fw = ft_atoi_overflow(sform);
@@ -40,7 +43,8 @@ int	ft_field_width(char *sform)
 				sform++;
 			break ;
 		}
-		sform++;
+		if (*sform)
+			sform++;
 	}
 	if (fw && (!*sform || !ft_strchr("cspdiuxX%.", *sform)))
 		return (-1);
@@ -92,6 +96,8 @@ int	ft_left_just(char *sform)
 			l = 1;
 			if (i && (sform[i - 1] == '.'
 					|| (sform[i - 1] >= '0' && sform[i - 1] <= '9')))
+				return (-1);
+			if (ft_zeroes(sform))
 				return (-1);
 		}
 		i++;

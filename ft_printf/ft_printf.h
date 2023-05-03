@@ -45,19 +45,23 @@ void	ft_fill_str_print(char *dst, t_str_attr *sstr, int lj);
 
 typedef struct s_nb_attr
 {
-	long long	nb;
-	int			nblen;
-	char		*base;
-	int			baselen;
-	int			fw;
-	int			pr;
-}				t_nb_attr;
+	unsigned long	unb;
+	long			lnb;
+	int				sign;
+	int				nblen;
+	char			*base;
+	int				baselen;
+	int				fw;
+	int				pr;
+}					t_nb_attr;
 
 int		ft_check_nb(char *sform, int baselen, int sign);
-int		ft_nblen(char *sform, long nb, int baselen, int sign);
+int		ft_lnblen(char *sform, long nb, int baselen);
+int		ft_unblen(char *sform, unsigned long nb, int baselen);
 void	ft_fill_nbstruct(char *sf, t_nb_attr *snb, int sign);
-void	ft_fill_nb(char *dst, char *sform, t_nb_attr *snb, int sign);
-void	ft_putnbr_str(char *sform, char *dst, t_nb_attr *snb, int sign);
+void	ft_fill_nb(char *dst, char *sform, t_nb_attr *snb);
+void	ft_putnbr_str(char *dst, t_nb_attr *snb);
+void	ft_write_sign(char *sform, char *dst, long nb, int sign);
 void	ft_putnchr(char *dst, char c, int n);
 
 #endif

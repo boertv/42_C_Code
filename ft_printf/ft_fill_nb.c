@@ -28,66 +28,89 @@ static int	ft_fieldwidth_nb(char *sform, int nblen, int pr)
 	return (fw);
 }
 
-static int	ft_precision_nb(char *sform, int nblen)
+static int	ft_precision_nb(char *sform, t_nb_attr *snb, int sign)
 {
 	int	pr;
 
 	pr = ft_precision(sform);
-	if (pr > 0 && pr <= nblen)
-		pr = 0;
-	else if (pr > 0)
-		pr -= nblen;
+	if (pr > 0 && pr < snb->nblen)
+		return (0);
+	if (pr > 0)
+	{
+		if ((sign && snb->lnb < 0) || ft_plus(sform) || ft_space(sform))
+			return (pr - snb->nblen + 1);
+		else
+			return (pr - snb->nblen);
+	}
 	return (pr);
 }
 
 void	ft_fill_nbstruct(char *sf, t_nb_attr *snb, int sign)
 {
-	snb->nblen = ft_nblen(sf, snb->nb, snb->baselen, sign);
-	snb->pr = ft_precision_nb(sf, snb->nblen);
+	if (sign)
+		snb->nblen = ft_lnblen(sf, snb->lnb, snb->baselen);
+	else
+		snb->nblen = ft_unblen(sf, snb->unb, snb->baselen);
+	snb->sign = sign;
+	snb->pr = ft_precision_nb(sf, snb, sign);
 	snb->fw = ft_fieldwidth_nb(sf, snb->nblen, snb->pr);
 }
 
-static void	ft_fill_nb_fw(char *dst, char *sform, t_nb_attr *sbn, int h)
+static int	ft_fill_nb_fw(char *dst, char *sform, t_nb_attr *snb, int h)
 {
-	if (sbn->pr || !ft_zeroes(sform))
+	if (ft_precision(sform) || !ft_zeroes(sform))
 	{
-		ft_putnchr(dst, ' ', sbn->fw);
+		ft_putnchr(dst, ' ', snb->fw);
 		if (h)
 		{
-			dst[sbn->fw - 2] = '0';
-			dst[sbn->fw - 1] = sbn->base[10] + 23;
+			dst[snb->fw - 2] = '0';
+			dst[snb->fw - 1] = snb->base[10] + 23;
 		}
+		return (0);
 	}
 	else
 	{
-		ft_putnchr(dst, '0', sbn->fw);
+		ft_write_sign(sform, dst, snb->lnb, snb->sign);
+		if (*dst)
+			dst++;
+		ft_putnchr(dst, '0', snb->fw);
 		if (h)
-			dst[1] = sbn->base[10] + 23;
+			dst[1] = snb->base[10] + 23;
+		return (1);
 	}
 }
 
-void	ft_fill_nb(char *dst, char *sform, t_nb_attr *sbn, int sign)
+void	ft_fill_nb(char *dst, char *sform, t_nb_attr *snb)
 {
 	int	lj;
 	int	h;
+	int	s;
 
 	lj = ft_left_just(sform);
 	h = ft_hashtag(sform);
+	s = 0;
 	if (lj)
 	{
 		if (h)
 		{
 			*dst++ = '0';
-			*dst++ = sbn->base[10] + 23;
+			*dst++ = snb->base[10] + 23;
 			h = 0;
-			sbn->fw -= 2;
+			snb->fw -= 2;
 		}
-		ft_putnbr_str(sform, dst, sbn, sign);
+		ft_write_sign(sform, dst, snb->lnb, snb->sign);
+		s = 1;
+		ft_putnbr_str(dst, snb);
 		while (*dst)
 			dst++;
 	}
-	ft_fill_nb_fw(dst, sform, sbn, h);
+	if (ft_fill_nb_fw(dst, sform, snb, h))
+		s = 1;
 	if (!lj)
-		ft_putnbr_str(sform, dst + sbn->fw, sbn, sign);
+	{
+		if (!s)
+			ft_write_sign(sform, dst + snb->fw, snb->lnb, snb->sign);
+		ft_putnbr_str(dst + snb->fw, snb);
+	}
 	return ;
 }

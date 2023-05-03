@@ -45,12 +45,10 @@ static int	ft_precision_str(char *sform, char *str)
 
 	pr = ft_precision(sform);
 	len = (int) ft_strlen(str);
-	if (pr == 0)
-		pr = len;
-	else if (pr == -2)
-		pr = 0;
-	else if (pr > len)
-		pr = len;
+	if (pr == 0 || pr > len)
+		return (len);
+	if (pr == -2)
+		return (0);
 	return (pr);
 }
 
@@ -60,7 +58,7 @@ static int	ft_fieldwidth_str(char *sform, int pr)
 
 	fw = ft_field_width(sform);
 	if (fw < pr)
-		fw = pr;
+		return (pr);
 	return (fw);
 }
 

@@ -20,8 +20,8 @@ int	ft_zeroes(char *sform)
 	i = 0;
 	while (sform[i])
 	{
-		if (sform[i] == '0' && (!i
-				|| sform[i - 1] <= '0' || sform[i - 1] >= '9'))
+		if (sform[i] == '0' && (!i || ((sform[i - 1] <= '0'
+						|| sform[i - 1] >= '9') && sform[i - 1] != '.')))
 			return (1);
 		i++;
 	}

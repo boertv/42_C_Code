@@ -21,6 +21,7 @@ SRCS = ft_printf.c \
 	   ft_flags.c \
 	   ft_flags_2.c \
 	   ft_putnbr.c \
+	   ft_nblen.c \
 	   ft_fill_char.c \
 	   ft_fill_nb.c \
 	   ft_error_null.c
