@@ -84,8 +84,8 @@ int	main(void)
 	i = printf("ori:--- |%#08x|   |%#8X|   |%-#x| ---\n", e, e, e);
 	j = ft_printf("cpy:--- |%#08x|   |%#8X|   |%-#x| ---\n", e, e, e);
 	ft_printf("ori: %i / cpy: %i\n\n", i, j);
-	i = printf("ori:--- |%x|   |%.x|   |%.0x| ---\n", f, f, f);
-	j = ft_printf("cpy:--- |%x|   |%.x|   |%.0x| ---\n", f, f, f);
+	i = printf("ori:--- |%#x|   |%.x|   |%.0x| ---\n", f, f, f);
+	j = ft_printf("cpy:--- |%#x|   |%.x|   |%.0x| ---\n", f, f, f);
 	ft_printf("ori: %i / cpy: %i\n", i, j);
 	printf("fin\n");
 

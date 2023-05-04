@@ -24,6 +24,7 @@ SRCS = ft_printf.c \
 	   ft_nblen.c \
 	   ft_fill_char.c \
 	   ft_fill_nb.c \
+	   ft_fill_nbstruct.c \
 	   ft_error_null.c
 
 OBJS = $(SRCS:c=o)

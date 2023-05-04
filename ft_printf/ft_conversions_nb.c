@@ -29,7 +29,7 @@ char	*ft_conv_nb(char *sform, va_list *ptr_va, char *base, int sign)
 		snb.lnb = (long) va_arg(*ptr_va, int);
 	else
 		snb.unb = (unsigned long)((unsigned int) va_arg(*ptr_va, int));
-	ft_fill_nbstruct(sform + chars, &snb, sign);
+	ft_fill_nbstruct(sform + chars, &snb, sign, 0);
 	if (snb.pr > 0)
 		to_print = ft_calloc(chars + snb.nblen + snb.fw + snb.pr + 1, 1);
 	else
@@ -37,7 +37,7 @@ char	*ft_conv_nb(char *sform, va_list *ptr_va, char *base, int sign)
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conv_nb", ptr_va));
 	ft_strlcpy(to_print, sform, chars + 1);
-	ft_fill_nb(to_print + chars, sform + chars, &snb);
+	ft_fill_nb(to_print + chars, sform + chars, &snb, 0);
 	return (to_print);
 }
 
@@ -56,7 +56,7 @@ char	*ft_conv_ptr(char *sform, va_list *ptr_va)
 		return (ft_error_null("flags", "ft_conv_ptr", ptr_va));
 	snb.unb = (unsigned long) va_arg(*ptr_va, void *);
 	sform[chars] = '#';
-	ft_fill_nbstruct(sform + chars, &snb, 0);
+	ft_fill_nbstruct(sform + chars, &snb, 0, 1);
 	if (snb.pr > 0)
 		to_print = ft_calloc(chars + snb.nblen + snb.fw + snb.pr + 1, 1);
 	else
@@ -64,6 +64,6 @@ char	*ft_conv_ptr(char *sform, va_list *ptr_va)
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conv_ptr", ptr_va));
 	ft_strlcpy(to_print, sform, chars + 1);
-	ft_fill_nb(to_print + chars, sform + chars, &snb);
+	ft_fill_nb(to_print + chars, sform + chars, &snb, 1);
 	return (to_print);
 }
