@@ -42,7 +42,6 @@ static char	*ft_fill_nb_lj(char *dst, char *sform, t_nb_attr *snb, int h)
 	{
 		*dst++ = '0';
 		*dst++ = snb->base[10] + 23;
-		h = 0;
 		snb->fw -= 2;
 	}
 	ft_write_sign(sform, dst, snb->lnb, snb->sign);
@@ -66,6 +65,7 @@ void	ft_fill_nb(char *dst, char *sform, t_nb_attr *snb, int ptr_ind)
 	if (lj)
 	{
 		dst = ft_fill_nb_lj(dst, sform, snb, h);
+		h = 0;
 		s = 1;
 	}
 	if (ft_fill_nb_fw(dst, sform, snb, h))
