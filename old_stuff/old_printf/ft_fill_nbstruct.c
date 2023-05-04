@@ -19,13 +19,14 @@ static int	ft_precision_nb(char *sform, t_nb_attr *snb, int sign)
 	pr = ft_precision(sform);
 	if (pr > 0 && pr < snb->nblen)
 		return (0);
-	if (pr <= 0)
-		return (pr);
-	if (((sign && snb->lnb) || (!sign && snb->unb))
-		&& ((sign && snb->lnb < 0) || ft_plus(sform) || ft_space(sform)))
-		return (pr - snb->nblen + 1);
-	else
-		return (pr - snb->nblen);
+	if (pr > 0)
+	{
+		if ((sign && snb->lnb < 0) || ft_plus(sform) || ft_space(sform))
+			return (pr - snb->nblen + 1);
+		else
+			return (pr - snb->nblen);
+	}
+	return (pr);
 }
 
 static int	ft_fieldwidth_nb(char *sform, int nblen, int pr, int h_ind)

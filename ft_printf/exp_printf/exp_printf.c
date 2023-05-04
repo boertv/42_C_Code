@@ -2,22 +2,29 @@
 
 int main(void)
 {
+		/*		fw, -, 0, ., ' ', +, #		*/
+	// int	i = -3;
+	// unsigned int	j = -3;
+	// printf("    |%012x| \n", i);
+	// printf("    |%0#12x| \n", j);
+	// printf("    |%#14.10x| \n\n", i);
 
-	int	i = -3;
-	unsigned int	j = -3;
-	printf("    |%012x| \n", i);
-	printf("    |%0#12x| \n", j);
-	printf("    |%#14.10x| \n\n", i);
+	// printf("    |%6.3i| \n", i);
+	// printf("06.i|%06.i| \n", i);
+	// printf("%i\n\n", printf("   hallo?|%.2147483647i| \n\n", i));
 
-	printf("    |%6.3i| \n", i);
-	printf("06.i|%06.i| \n", i);
-	printf("%i\n\n", printf("   hallo?|%.2147483647i| \n\n", i));
-
-	printf("    |%6i| \n", i);
+	// printf("    |%6i| \n", i);
 
 	// char    c = 'c';
 	// printf("abc |%c| def\n", c);
 	// printf("abc |%-20c| def\n", c);
+
+	printf("	|%-05%|  |%#%|\n");
+	printf("	|%-5%| |%5%|\n");
+	// ' ' & '+' & '#' don't do nothing but will compile
+	// '.' fully ignored, doesn't influence '0'
+	// '0' works
+	// '-' works but if present ignores '0'
 
 	// char *s = "abc";
 	// printf("|%s| .1:|%.1s| .s:|%.s| .6:|%.6s|\n", s, s, s, s);

@@ -17,9 +17,8 @@ int	ft_lnblen(char *sform, long nb, int baselen)
 	int	l;
 
 	l = 0;
-	if (ft_plus(sform) || ft_space(sform) || nb < 0)
-		l++;
-	if (!nb && ft_precision(sform) != -2)
+	if (ft_plus(sform) || ft_space(sform) || nb < 0
+		|| (!nb && ft_precision(sform) != -2))
 		l++;
 	while (nb)
 	{

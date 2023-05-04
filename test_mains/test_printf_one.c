@@ -3,9 +3,9 @@
 
 int	main(void)
 {
-	int a = 42;
-	void *p = &a;
-	int i = printf("\t|%-20p|\n", p);
-	int j = ft_printf("\t|%-20p|\n", p);
+	int a = 0;
+//	void *p = &a;
+	int i = printf("|%+0i|\n", a);
+	int j = ft_printf("|%+0i|\n", a);
 	ft_printf("  ori = %i / cpy = %i\n", i, j);
 }
