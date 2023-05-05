@@ -1,27 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_null.c                                    :+:      :+:    :+:   */
+/*   ft_nblen.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 16:20:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/21 16:20:44 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/05/03 11:58:51 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/05/05 14:14:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*ft_error_null(const char *error, const char *func, va_list *ptr_va)
+int	ft_lnblen(char *sform, long nb, int baselen)
 {
-	va_end(*ptr_va);
-	return (NULL);
-	if (!func || !error)
-		return (NULL);
-	write(1, "\nAn error occured in '", 22);
-	write(1, func, ft_strlen(func));
-	write(1, "' concerning the '", 18);
-	write(1, error, ft_strlen(error));
-	write(1, "'\n", 2);
-	return (NULL);
+	int	l;
+
+	l = 0;
+	if (ft_plus(sform) || ft_space(sform) || nb < 0)
+		l++;
+	if (!nb && ft_precision(sform) != -2)
+		l++;
+	while (nb)
+	{
+		nb /= baselen;
+		l++;
+	}
+	return (l);
+}
+
+int	ft_unblen(char *sform, unsigned long nb, int baselen)
+{
+	int	l;
+
+	l = 0;
+	if (!nb && ft_precision(sform) != -2)
+		l++;
+	while (nb)
+	{
+		nb /= baselen;
+		l++;
+	}
+	return (l);
 }

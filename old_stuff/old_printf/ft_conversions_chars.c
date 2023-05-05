@@ -87,8 +87,8 @@ char	*ft_conv_str(char *sform, va_list *ptr_va)
 	if (ft_check_str(sform + chars) == -1)
 		return (ft_error_null("flags", "ft_conv_str", ptr_va));
 	sstr.str = ft_initialise_str(sstr.str, ptr_va, &ns);
-	sstr.pr = ft_precision_str(sform, sstr.str);
-	sstr.fw = ft_fieldwidth_str((sform + chars), sstr.pr);
+	sstr.pr = ft_precision_str(sform + chars, sstr.str);
+	sstr.fw = ft_fieldwidth_str(sform + chars, sstr.pr);
 	to_print = calloc(chars + sstr.fw + 1, sizeof(char));
 	if (!to_print)
 		return (ft_error_null("calloc", "ft_conv_str", ptr_va));

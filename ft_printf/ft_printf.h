@@ -5,63 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:31:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:31:51 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/05/05 13:20:21 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/05/05 17:37:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
-# include <stdarg.h>
-# include "libft/libft.h"
+#include <unistd.h>
+#include <stdarg.h>
+#include "libft/libft.h"
 
-int		ft_printf(const char *format, ...);
-void	*ft_error_null(const char *error, const char *func, va_list *ptr_va);
-char	*ft_conv_char(char *sform, va_list *ptr_va, char c, size_t *printlen);
-char	*ft_conv_str(char *sform, va_list *ptr_va);
-char	*ft_conv_nb(char *sform, va_list *ptr_va, char *base, int sign);
-char	*ft_conv_ptr(char *sform, va_list *ptr_va);
-int		ft_field_width(char *sform);
-int		ft_precision(char *sform);
-int		ft_left_just(char *sform);
-int		ft_zeroes(char *sform);
-int		ft_hashtag(char *sform);
-int		ft_plus(char *sform);
-int		ft_space(char *sform);
-
-typedef struct s_str_attr
+typedef struct s_flag
 {
-	char	*str;
-	int		pr;
+	char	*sform;
+	int		clen;
 	int		fw;
-}			t_str_attr;
+	int		pr;
+	short	lj;
+	short	zs;
+	short	ht;
+	short	sp;
+	short	pl;
+}		t_flag;
 
-int		ft_check_char(char *sform);
-int		ft_check_str(char *sform);
-void	ft_fill_char_print(char *dst, char c, int fw, int lj);
-void	ft_fill_str_print(char *dst, t_str_attr *sstr, int lj);
-
-typedef struct s_nb_attr
+typedef	struct s_nb_attr
 {
+	short			s;
 	unsigned long	unb;
 	long			lnb;
-	int				sign;
 	int				nblen;
-	char			*base;
+	const char		*base;
 	int				baselen;
-	int				fw;
-	int				pr;
 }					t_nb_attr;
 
-int		ft_check_nb(char *sform, int baselen, int sign);
-int		ft_lnblen(char *sform, long nb, int baselen);
-int		ft_unblen(char *sform, unsigned long nb, int baselen);
-void	ft_fill_nbstruct(char *sf, t_nb_attr *snb, int sign, int ptr_ind);
-void	ft_fill_nb(char *dst, char *sform, t_nb_attr *snb, int ptr_ind);
-void	ft_putnbr_str(char *dst, t_nb_attr *snb);
-void	ft_write_sign(char *sform, char *dst, long nb, int sign);
-void	ft_putnchr(char *dst, char c, int n);
+int		ft_printf(const char *format, ...);
+short	ft_error_minone(const char *error, const char *func, va_list *p_va);
+void	*ft_error_null(const char *error, const char *func, va_list *p_va);
+char	*ft_conv_hub(char *sform, int *mlen, va_list *pva);
+int		ft_field_width(char *sform);
+int		ft_precision(char *sform);
+short	ft_left_just(char *sform);
+short	ft_zeroes(char *sform);
+short	ft_hashtag(char *sform);
+short	ft_plus(char *sform);
+short	ft_space(char *sform);
+short	ft_flag_errors(t_flag *pflag);
+short	ft_flag_str(t_flag *pflag);
+short	ft_flag_char(t_flag *pflag);
+short	ft_flag_nb(t_flag *pflag, t_nb_attr *pnb);
 
 #endif

@@ -7,11 +7,11 @@ int main(void)
 	// unsigned int	j = -3;
 	// printf("    |%012x| \n", i);
 	// printf("    |%0#12x| \n", j);
-	// printf("    |%#14.10x| \n\n", i);
+	// printf("    |%-.5i| \n\n", 19);
 
 	// printf("    |%6.3i| \n", i);
 	// printf("06.i|%06.i| \n", i);
-	// printf("%i\n\n", printf("   hallo?|%.2147483647i| \n\n", i));
+	// printf("%i\n\n", printf("hoi%i\n   hallo?\n . hiiiiiii\n|%.2147483647i| \n\n", 42, 42));
 
 	// printf("    |%6i| \n", i);
 
@@ -19,8 +19,8 @@ int main(void)
 	// printf("abc |%c| def\n", c);
 	// printf("abc |%-20c| def\n", c);
 
-	printf("	|%-05%|  |%#%|\n");
-	printf("	|%-5%| |%5%|\n");
+	// printf("	|%-05%|  |%#%|\n");
+	// printf("	|%-5%| |%5%|\n");
 	// ' ' & '+' & '#' don't do nothing but will compile
 	// '.' fully ignored, doesn't influence '0'
 	// '0' works

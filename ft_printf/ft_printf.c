@@ -5,96 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 14:44:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/19 15:20:38 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/05/05 13:17:15 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/05/05 17:36:19 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// Cuts out a 'sub_format'. Including one specifier and preceding chars.
-// Increments the format so we are up to date.
-static char	*ft_sub_format(const char **ptr_format, va_list *ptr_spec)
+// returns NULL on error, char* on success
+static char	*ft_cut_format(char **pform)
 {
-	size_t	l;
 	char	*sform;
+	int		flen;
 
-	if (!ptr_format || !*ptr_format || !**ptr_format)
-		return (ft_error_null("input", "ft_sub_format", ptr_spec));
-	l = 0;
-	while ((*ptr_format)[l] && (*ptr_format)[l] != '%')
-		l++;
-	if ((*ptr_format)[l] == '%')
-		l++;
-	while ((*ptr_format)[l] && !ft_strchr("cspdiuxX%", (*ptr_format)[l]))
-		l++;
-	if ((*ptr_format)[l] && ft_strchr("cspdiuxX%", (*ptr_format)[l]))
-		l++;
-	sform = ft_substr(*ptr_format, 0, l);
+	if (!pform)
+		return (NULL);
+	flen = 0;
+	while ((*pform)[flen] && (*pform)[flen] != '%')
+		flen++;
+	if ((*pform)[flen] == '%')
+		flen++;
+	while ((*pform)[flen] && !ft_strchr("cspdiuxX%", (*pform)[flen]))
+		flen++;
+	if ((*pform)[flen] && ft_strchr("cspdiuxX%", (*pform)[flen]))
+		flen++;
+	sform = ft_substr(*pform, 0, flen);
 	if (!sform)
-		return (ft_error_null("ft_substr(malloc?)", "ft_sub_format", ptr_spec));
-	*ptr_format += l;
+		return (NULL);
+	*pform += flen;
 	return (sform);
 }
 
-// calls a different function depending on the specifier type.
-static char	*ft_output_conv(char *sform, va_list *ptr_spec, size_t *printlen)
+// returns -1 on failure, else returns 0
+static short	ft_writing(char *src, int *mlen, int *rlen, va_list *pva)
 {
-	char	conv_spec;
+	int	check;
 
-	*printlen = 0;
-	if (!ft_strrchr(sform, '%'))
-		return (ft_strdup(sform));
-	conv_spec = sform[ft_strlen(sform) - 1];
-	if (conv_spec == 'c' || conv_spec == '%')
-		return (ft_conv_char(sform, ptr_spec, conv_spec, printlen));
-	if (conv_spec == 's')
-		return (ft_conv_str(sform, ptr_spec));
-	if (conv_spec == 'i' || conv_spec == 'd')
-		return (ft_conv_nb(sform, ptr_spec, "0123456789", 1));
-	if (conv_spec == 'u')
-		return (ft_conv_nb(sform, ptr_spec, "0123456789", 0));
-	if (conv_spec == 'x')
-		return (ft_conv_nb(sform, ptr_spec, "0123456789abcdef", 0));
-	if (conv_spec == 'X')
-		return (ft_conv_nb(sform, ptr_spec, "0123456789ABCDEF", 0));
-	if (conv_spec == 'p')
-		return (ft_conv_ptr(sform, ptr_spec));
-	return (ft_error_null("specifier", "ft_output_conversion", ptr_spec));
-}
-
-static int	ft_printlen(int printlen, char *to_print)
-{
-	if (!printlen)
-		printlen = ft_strlen(to_print);
-	return (printlen);
+	if (!src)
+		return (-1);
+	check = write(1, src, *mlen);
+	free (src);
+	if (check == -1)
+		return (ft_error_minone("write", "writing", pva));
+	*rlen += check;
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	size_t	char_count;
+	va_list	va;
+	int		rlen;
 	char	*sform;
 	char	*to_print;
-	size_t	printlen;
-	va_list	specifier;
+	int		mlen;
 
 	if (!format)
 		return (-1);
-	char_count = 0;
-	va_start(specifier, format);
+	rlen = 0;
+	va_start(va, format);
 	while (*format)
 	{
-		sform = ft_sub_format(&format, &specifier);
+		sform = ft_cut_format(&format);
 		if (!sform)
-			return (-1);
-		to_print = ft_output_conv(sform, &specifier, &printlen);
+			return (ft_error_minone("cut_format", "printf", &va));
+		to_print = ft_conv_hub(sform, &mlen, &va);
 		free(sform);
-		if (!to_print)
+		if (ft_writing(to_print, &mlen, &rlen, &va))
 			return (-1);
-		printlen = ft_printlen(printlen, to_print);
-		char_count += write(1, to_print, printlen);
-		free(to_print);
 	}
-	va_end(specifier);
-	return (char_count);
+	va_end(va);
+	return (rlen);
 }

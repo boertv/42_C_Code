@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 15:35:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/04/25 13:06:03 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/05/05 13:54:40 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ all: $(NAME)
 bonus: all
 
 $(LIBFT):
-	make -C libft
+	make bonus -C libft
 
 $(NAME): $(LIBFT) $(OBJS) $(INCLUDES)
 	@cp $(LIBFT) $(NAME)

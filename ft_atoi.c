@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 12:19:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/17 10:12:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:58:30 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	ft_overflow(short sign)
 		return (-1);
 }
 
+// can return 0 or -1 for overflow
 int	ft_atoi(const char *str)
 {
 	long long	n;

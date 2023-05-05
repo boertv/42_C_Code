@@ -5,30 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 14:46:37 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/24 14:46:39 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/05/05 14:14:47 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/05/05 17:11:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// no errors possible in most of these functions
-int	ft_zeroes(char *sform)
+// returns 0 for no flag, else returns 1
+short	ft_zeroes(char *sform)
 {
 	int	i;
 
 	i = 0;
 	while (sform[i])
 	{
-		if (sform[i] == '0' && (!i || ((sform[i - 1] <= '0'
-						|| sform[i - 1] >= '9') && sform[i - 1] != '.')))
+		if (sform[i] == '0' && (!i || ((sform[i - 1] < '0'
+						|| sform[i - 1] > '9') && sform[i - 1] != '.')))
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	ft_hashtag(char *sform)
+// returns 0 for no flag, else returns 1
+short	ft_hashtag(char *sform)
 {
 	while (*sform)
 	{
@@ -39,7 +40,8 @@ int	ft_hashtag(char *sform)
 	return (0);
 }
 
-int	ft_plus(char *sform)
+// returns 0 for no flag, else returns 1
+short	ft_plus(char *sform)
 {
 	while (*sform)
 	{
@@ -50,20 +52,13 @@ int	ft_plus(char *sform)
 	return (0);
 }
 
-// -1 on error: if '+' is present
-int	ft_space(char *sform)
+// returns 0 for no flag, else returns 1
+short	ft_space(char *sform)
 {
-	int	p;
-
-	p = ft_plus(sform);
 	while (*sform)
 	{
 		if (*sform == ' ')
-		{
-			if (p)
-				return (-1);
 			return (1);
-		}
 		sform++;
 	}
 	return (0);

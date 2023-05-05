@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 12:11:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/24 12:12:56 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/05/05 14:14:40 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/05/05 17:10:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	ft_atoi_overflow(char *sform)
 	int	nb;
 
 	nb = ft_atoi(sform);
-	if (!nb || nb == 2147483647)
-		nb = -1;
+	if (nb == -1 || nb == 2147483647)
+		return (ft_error_minone("overflow", "fw or pr", NULL));
 	return (nb);
 }
 
@@ -47,7 +47,7 @@ int	ft_field_width(char *sform)
 			sform++;
 	}
 	if (fw && (!*sform || !ft_strchr("cspdiuxX%.", *sform)))
-		return (-1);
+		return (ft_error_minone("invalid conversion specifier", "fw", NULL));
 	return (fw);
 }
 
@@ -77,30 +77,18 @@ int	ft_precision(char *sform)
 		sform++;
 	}
 	if (pr && (!*sform || !ft_strchr("cspdiuxX%", *sform)))
-		return (-1);
+		return (ft_error_minone("invalid conversion specifier", "pr", NULL));
 	return (pr);
 }
 
-// returns 0 for no flag, -1 on error
-int	ft_left_just(char *sform)
+// returns 0 for no flag, else returns 1
+short	ft_left_just(char *sform)
 {
-	int	i;
-	int	l;
-
-	i = 0;
-	l = 0;
-	while (sform[i])
+	while (*sform)
 	{
-		if (sform[i] == '-')
-		{
-			l = 1;
-			if (i && (sform[i - 1] == '.'
-					|| (sform[i - 1] >= '0' && sform[i - 1] <= '9')))
-				return (-1);
-			if (ft_zeroes(sform))
-				return (-1);
-		}
-		i++;
+		if (*sform == '-')
+			return (1);
+		sform++;
 	}
-	return (l);
+	return (0);
 }
