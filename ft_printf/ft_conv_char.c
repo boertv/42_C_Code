@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:13:17 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 15:10:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:05:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_conv_char(t_flag *flag, int *mlen, va_list *pva)
 
 char	*ft_conv_mod(t_flag *flag, int *mlen, va_list *pva)
 {
-	char *to_print;
+	char	*to_print;
 
 	if (flag->fw < 1)
 		flag->fw = 1;

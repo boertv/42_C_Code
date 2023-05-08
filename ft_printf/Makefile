@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 15:35:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/08 16:52:55 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/05/08 17:14:17 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = ft_printf.c \
 	   ft_conv_hub.c \
 	   ft_conv_char.c \
 	   ft_conv_str.c \
+	   ft_conv_nb.c \
 	   ft_check_flags.c \
 	   ft_flags.c \
 	   ft_flags_2.c \

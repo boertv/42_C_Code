@@ -6,21 +6,20 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 16:52:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:31:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <unistd.h>
-#include <stdarg.h>
-#include "libft/libft.h"
+# include <unistd.h>
+# include <stdarg.h>
+# include "libft/libft.h"
 
 typedef struct s_flag
 {
 	char	*sform;
-	int		clen;
 	int		fw;
 	int		pr;
 	short	lj;
@@ -30,7 +29,7 @@ typedef struct s_flag
 	short	pl;
 }		t_flag;
 
-typedef	struct s_nb_attr
+typedef struct s_nb_attr
 {
 	short			s;
 	unsigned long	unb;
@@ -59,5 +58,6 @@ void	ft_putnfw(char *dst, short zs, int n);
 char	*ft_conv_char(t_flag *flag, int *mlen, va_list *pva);
 char	*ft_conv_mod(t_flag *flag, int *mlen, va_list *pva);
 char	*ft_conv_str(t_flag *flag, int *mlen, va_list *pva);
+char	*ft_conv_nb(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva);
 
 #endif

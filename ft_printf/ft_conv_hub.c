@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:16:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 16:48:34 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:07:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_fill_flag(char *sform, t_flag *flag, int* mlen)
+static void	ft_fill_flag(char *sform, t_flag *flag, int *mlen)
 {
 	*mlen = 0;
 	while (sform[*mlen] != '%' && sform[*mlen])
@@ -35,18 +35,14 @@ static void	ft_fill_flag(char *sform, t_flag *flag, int* mlen)
 
 static char	*ft_conv_iux(char cs, t_flag *flag, int *mlen, va_list *pva)
 {
-	(void) cs;
-	(void) flag;
-	(void) mlen;
-	(void) pva;
-	// t_nb_attr	nb;
+	t_nb_attr	nb;
 
-	// if (cs == 'i' || cs == 'd')
-	// {
-	// 	nb.s = 1;
-	// 	nb.base = "0123456789";
-	// 	return (ft_conv_nb(flag, &nb, mlen, pva));
-	// }
+	if (cs == 'i' || cs == 'd')
+	{
+		nb.s = 1;
+		nb.base = "0123456789";
+		return (ft_conv_nb(flag, &nb, mlen, pva));
+	}
 	// nb.s = 0;
 	// if (cs == 'u')
 	// {

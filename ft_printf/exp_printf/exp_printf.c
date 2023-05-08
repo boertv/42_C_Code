@@ -3,15 +3,6 @@
 int main(void)
 {
 		/*		fw, -, 0, ., ' ', +, #		*/
-	// int	i = -3;
-	// unsigned int	j = -3;
-	// printf("    |%012x| \n", i);
-	// printf("    |%0#12x| \n", j);
-	// printf("    |%-.5i| \n\n", 19);
-
-	// printf("    |%6.3i| \n", i);
-	// printf("06.i|%06.i| \n", i);
-	// printf("%i\n\n", printf("hoi%i\n   hallo?\n . hiiiiiii\n|%.2147483647i| \n\n", 42, 42));
 
 	// printf("    |% s| \n", "abc");
 
@@ -28,13 +19,18 @@ int main(void)
 	// '0' works but ignored when '-' is present
 	// '-' works
 
-	char *s = "abc";
-	printf("|%s| 6.1:|%6.1s| -6.1s:|%-6.1s| #s:|%#s|\n", s, s, s, s);
-	s = NULL;
-	printf("|%s| .1:|%.1s|\n", s, s);
+	// char *s = "abc";
+	// printf("|%s| 6.1:|%6.1s| -6.1s:|%-6.1s| #s:|%#s|\n", s, s, s, s);
+	// s = NULL;
+	// printf("|%s| .1:|%.1s|\n", s, s);
 	// NULL will print "(null)" (depending on precision still)
 	// works: '.' '-'
 	// undefined: ' ' '+' '0' '#'
+
+	printf("  |%.4i|  |%04i|  |%i|\n", -42, 42, 42);
+	// works: deja tous
+	// special: '0' ignored when '.' present
+	// undefined: '#'
 
 	// int		a = 42;
 	// void	*p = &a;
