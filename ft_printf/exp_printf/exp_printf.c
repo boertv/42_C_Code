@@ -13,24 +13,28 @@ int main(void)
 	// printf("06.i|%06.i| \n", i);
 	// printf("%i\n\n", printf("hoi%i\n   hallo?\n . hiiiiiii\n|%.2147483647i| \n\n", 42, 42));
 
-	// printf("    |%6i| \n", i);
+	// printf("    |% s| \n", "abc");
 
 	// char    c = 'c';
-	// printf("abc |%c| def\n", c);
+	// printf(" |%03c| \n", 'c');
 	// printf("abc |%-20c| def\n", c);
+	// ' ' & '+' & '#' & '0' & '.' all undefined
+	// '-' works
 
 	// printf("	|%-05%|  |%#%|\n");
 	// printf("	|%-5%| |%5%|\n");
 	// ' ' & '+' & '#' don't do nothing but will compile
 	// '.' fully ignored, doesn't influence '0'
-	// '0' works
-	// '-' works but if present ignores '0'
+	// '0' works but ignored when '-' is present
+	// '-' works
 
-	// char *s = "abc";
-	// printf("|%s| .1:|%.1s| .s:|%.s| .6:|%.6s|\n", s, s, s, s);
-	// s = NULL;
-	// printf("|%s| .1:|%.1s|\n", s, s);
-
+	char *s = "abc";
+	printf("|%s| 6.1:|%6.1s| -6.1s:|%-6.1s| #s:|%#s|\n", s, s, s, s);
+	s = NULL;
+	printf("|%s| .1:|%.1s|\n", s, s);
+	// NULL will print "(null)" (depending on precision still)
+	// works: '.' '-'
+	// undefined: ' ' '+' '0' '#'
 
 	// int		a = 42;
 	// void	*p = &a;

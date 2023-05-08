@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 15:35:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/05 13:54:40 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/05/08 16:52:55 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,13 @@ NAME = libftprintf.a
 LIBFT = libft/libft.a
 
 SRCS = ft_printf.c \
-	   ft_conversions_chars.c \
-	   ft_conversions_nb.c \
+	   ft_conv_hub.c \
+	   ft_conv_char.c \
+	   ft_conv_str.c \
 	   ft_check_flags.c \
 	   ft_flags.c \
 	   ft_flags_2.c \
-	   ft_putnbr.c \
-	   ft_nblen.c \
-	   ft_fill_char.c \
-	   ft_fill_nb.c \
-	   ft_fill_nbstruct.c \
-	   ft_error_null.c
+	   ft_error.c
 
 OBJS = $(SRCS:c=o)
 

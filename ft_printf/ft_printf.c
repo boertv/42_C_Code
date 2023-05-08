@@ -6,14 +6,14 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:17:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/05 17:36:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:48:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 // returns NULL on error, char* on success
-static char	*ft_cut_format(char **pform)
+static char	*ft_cut_format(const char **pform)
 {
 	char	*sform;
 	int		flen;
@@ -37,14 +37,14 @@ static char	*ft_cut_format(char **pform)
 }
 
 // returns -1 on failure, else returns 0
-static short	ft_writing(char *src, int *mlen, int *rlen, va_list *pva)
+static short	ft_writing(char *to_print, int *mlen, int *rlen, va_list *pva)
 {
 	int	check;
 
-	if (!src)
+	if (!to_print)
 		return (-1);
-	check = write(1, src, *mlen);
-	free (src);
+	check = write(1, to_print, *mlen);
+	free (to_print);
 	if (check == -1)
 		return (ft_error_minone("write", "writing", pva));
 	*rlen += check;
