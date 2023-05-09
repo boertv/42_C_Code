@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:16:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 17:07:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:03:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static char	*ft_conv_iux(char cs, t_flag *flag, int *mlen, va_list *pva)
 		nb.base = "0123456789";
 		return (ft_conv_nb(flag, &nb, mlen, pva));
 	}
-	// nb.s = 0;
-	// if (cs == 'u')
-	// {
-	// 	nb.base = "0123456789";
-	// 	return (ft_conv_nb(flag, &nb, mlen, pva));
-	// }
+	nb.s = 0;
+	if (cs == 'u')
+	{
+		nb.base = "0123456789";
+		return (ft_conv_nb(flag, &nb, mlen, pva));
+	}
 	// if (cs == 'x')
 	// {
 	// 	nb.base = "0123456789abcdef";

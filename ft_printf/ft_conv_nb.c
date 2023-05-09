@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:12:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 18:04:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:39:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	ft_lnblen(t_flag *flag, t_nb_attr *nb, int *mlen)
 		temp /= nb->baselen;
 		nb->nblen++;
 	}
+	*mlen += nb->nblen;
 }
 
 static void	ft_unblen(t_flag *flag, t_nb_attr *nb, int *mlen)
@@ -40,6 +41,7 @@ static void	ft_unblen(t_flag *flag, t_nb_attr *nb, int *mlen)
 		temp /= nb->baselen;
 		nb->nblen++;
 	}
+	*mlen += nb->nblen;
 }
 
 static void	ft_nb_pr(t_flag *flag, t_nb_attr *nb, int *mlen)
@@ -57,8 +59,18 @@ static void	ft_nb_fw(t_flag *flag, t_nb_attr *nb, int *mlen)
 		flag->fw = 0;
 	else
 		flag->fw -= nb->nblen + flag->pr;
-	if (nb->s && (flag->pl || flag->sp || nb->lnb < 0))
-		flag->fw++;
+	if (nb->s && (nb->lnb < 0 || flag->pl || flag->sp))
+	{
+		flag->fw += (flag->fw == 0);
+		if (nb->lnb < 0)
+			nb->sign = '-';
+		else if (flag->pl)
+			nb->sign = '+';
+		else if (flag->sp)
+			nb->sign = ' ';
+	}
+	else
+		nb->sign = 0;
 	*mlen += flag->fw;
 }
 
@@ -85,6 +97,6 @@ char	*ft_conv_nb(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva)
 	to_print = ft_calloc(*mlen + 1, 1);
 	if (!to_print)
 		return (ft_error_null("calloc", "conv_nb", pva));
-	ft_fill_nb(char *to_print, t_flag *flag, t_nb_attr *nb, int *mlen);
+	ft_fill_nb(to_print, flag, nb, mlen);
 	return (to_print);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:17:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 14:48:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:27:11 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*ft_cut_format(const char **pform)
 }
 
 // returns -1 on failure, else returns 0
-static short	ft_writing(char *to_print, int *mlen, int *rlen, va_list *pva)
+static short	ft_output(char *to_print, int *mlen, int *rlen)
 {
 	int	check;
 
@@ -46,7 +46,7 @@ static short	ft_writing(char *to_print, int *mlen, int *rlen, va_list *pva)
 	check = write(1, to_print, *mlen);
 	free (to_print);
 	if (check == -1)
-		return (ft_error_minone("write", "writing", pva));
+		return (ft_error_minone("write", "output", NULL));
 	*rlen += check;
 	return (0);
 }
@@ -70,8 +70,8 @@ int	ft_printf(const char *format, ...)
 			return (ft_error_minone("cut_format", "printf", &va));
 		to_print = ft_conv_hub(sform, &mlen, &va);
 		free(sform);
-		if (ft_writing(to_print, &mlen, &rlen, &va))
-			return (-1);
+		if (ft_output(to_print, &mlen, &rlen))
+			return (ft_error_minone(NULL, NULL, &va));
 	}
 	va_end(va);
 	return (rlen);
