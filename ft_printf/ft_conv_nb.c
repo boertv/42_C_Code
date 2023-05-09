@@ -6,40 +6,37 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:12:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/09 13:39:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/09 22:48:53 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_lnblen(t_flag *flag, t_nb_attr *nb, int *mlen)
+static void	ft_nblen(t_flag *flag, t_nb_attr *nb, int *mlen)
 {
-	long	temp;
+	long			ltemp;
+	unsigned long	utemp;
 
-	temp = nb->lnb;
 	nb->nblen = 0;
-	if (!nb->lnb && flag->pr != -2)
+	if (flag->pr != -2 && ((nb->s && !nb->lnb) || (!nb->s && !nb->unb)))
 		nb->nblen++;
-	while (temp)
+	if (nb->s)
 	{
-		temp /= nb->baselen;
-		nb->nblen++;
+		ltemp = nb->lnb;
+		while (ltemp)
+		{
+			ltemp /= nb->baselen;
+			nb->nblen++;
+		}
 	}
-	*mlen += nb->nblen;
-}
-
-static void	ft_unblen(t_flag *flag, t_nb_attr *nb, int *mlen)
-{
-	unsigned long	temp;
-
-	temp = nb->unb;
-	nb->nblen = 0;
-	if (!nb->unb && flag->pr != -2)
-		nb->nblen++;
-	while (temp)
+	else
 	{
-		temp /= nb->baselen;
-		nb->nblen++;
+		utemp = nb->unb;
+		while (utemp)
+		{
+			utemp /= nb->baselen;
+			nb->nblen++;
+		}
 	}
 	*mlen += nb->nblen;
 }
@@ -83,17 +80,16 @@ char	*ft_conv_nb(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva)
 	if (ft_flag_nb(flag, nb))
 		return (ft_error_null(NULL, NULL, pva));
 	if (nb->s)
-	{
 		nb->lnb = va_arg(*pva, int);
-		ft_lnblen(flag, nb, mlen);
-	}
 	else
-	{
 		nb->unb = (unsigned int) va_arg(*pva, int);
-		ft_unblen(flag, nb, mlen);
-	}
+	ft_nblen(flag, nb, mlen);
 	ft_nb_pr(flag, nb, mlen);
 	ft_nb_fw(flag, nb, mlen);
+	if (!nb->s && nb->unb && flag->ht)
+		flag->fw += 2 * (flag->fw == 0) + (flag->fw == 1);
+	else
+		flag->ht = 0;
 	to_print = ft_calloc(*mlen + 1, 1);
 	if (!to_print)
 		return (ft_error_null("calloc", "conv_nb", pva));

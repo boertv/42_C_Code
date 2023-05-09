@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:04:22 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/09 13:24:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/09 22:48:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ static void	ft_write_sign(char *to_print, t_flag *flag, t_nb_attr *nb, int *l)
 		nb->sign = 0;
 		flag->fw--;
 		++*l;
+	}
+	else if (flag->ht)
+	{
+		*to_print = '0';
+		to_print[1] = nb->base[10] + 23;
+		flag->ht = 0;
+		flag->fw -= 2;
+		*l += 2;
 	}
 }
 
@@ -80,7 +88,8 @@ void	ft_fill_nb(char *to_print, t_flag *flag, t_nb_attr *nb, int *mlen)
 	else
 	{
 		ft_putnfw(to_print + *mlen, 0, flag->fw);
-		ft_write_sign(to_print + *mlen + flag->fw - 1, flag, nb, mlen);
+		ft_write_sign(to_print + *mlen + flag->fw
+			- (nb->sign != 0) - (2 * (flag->ht != 0)), flag, nb, mlen);
 		ft_print_nb(to_print + *mlen + flag->fw, flag, nb, mlen);
 	}
 	*mlen += flag->fw;
