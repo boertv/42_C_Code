@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:48:01 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 16:59:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:52:03 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ short	ft_flag_errors(t_flag *flag)
 	return (0);
 }
 
-// for now just returns 0 for francinette
+// for now just returns 0 for tests
 // returns -1 on error, else 0
 short	ft_flag_str(t_flag *flag)
 {
@@ -38,7 +38,7 @@ short	ft_flag_str(t_flag *flag)
 	return (0);
 }
 
-// for now just returns 0 for francinette
+// for now just returns 0 for tests
 // returns -1 on error, else 0
 short	ft_flag_char(t_flag *flag)
 {
@@ -50,7 +50,7 @@ short	ft_flag_char(t_flag *flag)
 	return (0);
 }
 
-// for now just returns 0 for francinette
+// for now just returns 0 for tests
 // returns -1 on error, else 0
 short	ft_flag_nb(t_flag *flag, t_nb_attr *pnb)
 {
