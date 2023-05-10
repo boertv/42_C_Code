@@ -115,4 +115,17 @@ int	main(void)
 	j = ft_printf("|%p|\n", p);
 	ft_printf("ori: %i / cpy: %i\n\n", i, j);
 	ft_printf("fin\n\n");
+
+	ft_printf("\n\t >>>>> BAD SPECIFIERS <<<<<\n\n");
+
+	ft_printf(" '%%'\n|");
+	j = ft_printf("%");
+	ft_printf("|\n\t%i\n '%%10'\n|", j);
+	j = ft_printf("%10");
+	ft_printf("|\n\t%i\n '%%z'\n|", j);
+	j = ft_printf("%z");
+	ft_printf("|\n\t%i\n '%%10z'\n|", j);
+	j = ft_printf("%10z");
+	ft_printf("|\n\t%i\n\n", j);
+
 }

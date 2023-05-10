@@ -6,11 +6,22 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:17:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/09 13:27:11 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:33:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static short	ft_check_spec(const char *format, const char *set)
+{
+	while (*format)
+	{
+		if (ft_strchr(set, *format))
+			return (1);
+		format++;
+	}
+	return (0);
+}
 
 // returns NULL on error, char* on success
 static char	*ft_cut_format(const char **pform)
@@ -24,14 +35,18 @@ static char	*ft_cut_format(const char **pform)
 	while ((*pform)[flen] && (*pform)[flen] != '%')
 		flen++;
 	if ((*pform)[flen] == '%')
+	{
 		flen++;
+		if (!ft_check_spec(*pform + flen, "cspdiuxX%"))
+			return (ft_error_null("no specifier", "cut_format", NULL));
+	}
 	while ((*pform)[flen] && !ft_strchr("cspdiuxX%", (*pform)[flen]))
 		flen++;
 	if ((*pform)[flen] && ft_strchr("cspdiuxX%", (*pform)[flen]))
 		flen++;
 	sform = ft_substr(*pform, 0, flen);
 	if (!sform)
-		return (NULL);
+		return (ft_error_null("ft_substr", "cut_format", NULL));
 	*pform += flen;
 	return (sform);
 }
@@ -67,7 +82,7 @@ int	ft_printf(const char *format, ...)
 	{
 		sform = ft_cut_format(&format);
 		if (!sform)
-			return (ft_error_minone("cut_format", "printf", &va));
+			return (ft_error_minone(NULL, NULL, &va));
 		to_print = ft_conv_hub(sform, &mlen, &va);
 		free(sform);
 		if (ft_output(to_print, &mlen, &rlen))

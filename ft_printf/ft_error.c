@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 14:13:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 17:03:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:34:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ short	ft_error_minone(const char *error, const char *func, va_list *pva)
 	}
 	if (error)
 	{
-		write(1, "' error concerning '", 20);
+		write(1, "'\nError concerning '", 20);
 		write(1, error, ft_strlen(error));
 	}
 	if (func || error)
