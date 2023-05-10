@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:12:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/09 22:48:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:18:36 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,34 @@ char	*ft_conv_nb(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva)
 	ft_nb_pr(flag, nb, mlen);
 	ft_nb_fw(flag, nb, mlen);
 	if (!nb->s && nb->unb && flag->ht)
+	{
+		*mlen += 2 * (flag->fw == 0) + (flag->fw == 1);
 		flag->fw += 2 * (flag->fw == 0) + (flag->fw == 1);
+	}
 	else
 		flag->ht = 0;
+	to_print = ft_calloc(*mlen + 1, 1);
+	if (!to_print)
+		return (ft_error_null("calloc", "conv_nb", pva));
+	ft_fill_nb(to_print, flag, nb, mlen);
+	return (to_print);
+}
+
+char	*ft_conv_ptr(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva)
+{
+	char	*to_print;
+
+	nb->baselen = ft_strlen(nb->base);
+	flag->zs *= (flag->pr == 0);
+	flag->ht = 1;
+	if (ft_flag_nb(flag, nb))
+		return (ft_error_null(NULL, NULL, pva));
+	nb->unb = (unsigned long) va_arg(*pva, void *);
+	ft_nblen(flag, nb, mlen);
+	ft_nb_pr(flag, nb, mlen);
+	ft_nb_fw(flag, nb, mlen);
+	*mlen += 2 * (flag->fw == 0) + (flag->fw == 1);
+	flag->fw += 2 * (flag->fw == 0) + (flag->fw == 1);
 	to_print = ft_calloc(*mlen + 1, 1);
 	if (!to_print)
 		return (ft_error_null("calloc", "conv_nb", pva));

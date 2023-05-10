@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:16:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/09 22:48:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:46:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_fill_flag(char *sform, t_flag *flag, int *mlen)
 	flag->ht = ft_hashtag(sform + *mlen);
 }
 
-static char	*ft_conv_iux(char cs, t_flag *flag, int *mlen, va_list *pva)
+static char	*ft_conv_iuxp(char cs, t_flag *flag, int *mlen, va_list *pva)
 {
 	t_nb_attr	nb;
 
@@ -44,11 +44,11 @@ static char	*ft_conv_iux(char cs, t_flag *flag, int *mlen, va_list *pva)
 	nb.s = 0;
 	if (cs == 'u')
 		return (ft_conv_nb(flag, &nb, mlen, pva));
+	nb.base = "0123456789abcdef";
 	if (cs == 'x')
-	{
-		nb.base = "0123456789abcdef";
 		return (ft_conv_nb(flag, &nb, mlen, pva));
-	}
+	if (cs == 'p')
+		return (ft_conv_ptr(flag, &nb, mlen, pva));
 	if (cs == 'X')
 	{
 		nb.base = "0123456789ABCDEF";
@@ -81,7 +81,5 @@ char	*ft_conv_hub(char *sform, int *mlen, va_list *pva)
 		return (ft_conv_mod(&flag, mlen, pva));
 	if (conv_spec == 's')
 		return (ft_conv_str(&flag, mlen, pva));
-	// if (conv_spec == 'p')
-	// 	return (ft_conv_ptr(&flag, mlen, pva));
-	return (ft_conv_iux(conv_spec, &flag, mlen, pva));
+	return (ft_conv_iuxp(conv_spec, &flag, mlen, pva));
 }

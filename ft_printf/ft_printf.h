@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/09 13:04:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/10 11:49:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*ft_conv_char(t_flag *flag, int *mlen, va_list *pva);
 char	*ft_conv_mod(t_flag *flag, int *mlen, va_list *pva);
 char	*ft_conv_str(t_flag *flag, int *mlen, va_list *pva);
 char	*ft_conv_nb(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva);
+char	*ft_conv_ptr(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva);
 void	ft_fill_nb(char *to_print, t_flag *flag, t_nb_attr *nb, int *mlen);
 
 #endif
