@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 14:14:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/05 17:10:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:06:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_precision(char *sform)
 		}
 		sform++;
 	}
-	if (pr && (!*sform || !ft_strchr("cspdiuxX%", *sform)))
+	if (pr && (!*sform || !ft_strchr(SPECIFIERS, *sform)))
 		return (ft_error_minone("invalid conversion specifier", "pr", NULL));
 	return (pr);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:17:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/10 14:33:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:00:00 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static char	*ft_cut_format(const char **pform)
 	if ((*pform)[flen] == '%')
 	{
 		flen++;
-		if (!ft_check_spec(*pform + flen, "cspdiuxX%"))
+		if (!ft_check_spec(*pform + flen, SPECIFIERS))
 			return (ft_error_null("no specifier", "cut_format", NULL));
 	}
-	while ((*pform)[flen] && !ft_strchr("cspdiuxX%", (*pform)[flen]))
+	while ((*pform)[flen] && !ft_strchr(SPECIFIERS, (*pform)[flen]))
 		flen++;
-	if ((*pform)[flen] && ft_strchr("cspdiuxX%", (*pform)[flen]))
+	if ((*pform)[flen] && ft_strchr(SPECIFIERS, (*pform)[flen]))
 		flen++;
 	sform = ft_substr(*pform, 0, flen);
 	if (!sform)

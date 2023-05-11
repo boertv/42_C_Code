@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 15:35:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/09 13:03:53 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/05/11 17:24:40 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS = ft_printf.c \
 OBJS = $(SRCS:c=o)
 
 INCLUDES = libft/libft.h \
-		  ft_printf.h
+		   ft_printf.h
 
 CC = cc
 

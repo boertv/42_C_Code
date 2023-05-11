@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/10 11:49:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:44:00 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "libft/libft.h"
+
+# define SPECIFIERS "cspdiuxX%"
 
 typedef struct s_flag
 {
