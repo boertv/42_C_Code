@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:25:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/11 15:02:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:54:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 5
 # endif
 
 # include <stdlib.h>
@@ -22,6 +22,6 @@
 
 char	*get_next_line(int fd);
 ssize_t	ft_seek_nl(char *str);
-char	*ft_null(char *line, char *buffer);
+char	*ft_null(char *line, char **buffer);
 
 #endif

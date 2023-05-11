@@ -7,7 +7,12 @@
 int	main(void)
 {
 	int fd = open("nbs.txt", O_RDONLY);
-	printf("\t\tfd = %i\n\n", fd);
+	printf("\nfd = %i\n\n", fd);
+	printf("buffer = %s\n\n", get_next_line(fd));
+	printf("buffer = %s\n\n", get_next_line(fd));
+	printf("buffer = %s\n\n", get_next_line(fd));
+	printf("buffer = %s\n\n", get_next_line(fd));
+	printf("buffer = %s\n\n", get_next_line(fd));
 	printf("buffer = %s\n\n", get_next_line(fd));
 	printf("buffer = %s\n\n", get_next_line(fd));
 	printf("buffer = %s\n\n", get_next_line(fd));

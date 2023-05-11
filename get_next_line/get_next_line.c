@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/11 15:00:36 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:08:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static char	*ft_newbuf_freeline(char **buffer, char *line)
 
 	free(line);
 	i = 0;
-	while ((*buffer)[i] != '\n')
+	while ((*buffer)[i] && (*buffer)[i] != '\n')
 		i++;
 	end = ++i;
 	while ((*buffer)[end])
 		end++;
 	new = malloc(end - i + 1);
 	if (!new)
-		return (ft_null(NULL, *buffer));
+		return (ft_null(NULL, buffer));
 	new[end - i] = 0;
 	while (end-- > i)
 		new[end - i] = (*buffer)[end];
@@ -58,13 +58,13 @@ static char	*ft_append_res(char *line, char **buffer, ssize_t i)
 
 	ft_conform_input(&line, &i, buffer);
 	if (!line)
-		return (ft_null(NULL, *buffer));
+		return (ft_null(NULL, buffer));
 	len = 0;
 	while (line[len])
 		len++;
 	res = malloc(len + i + 1);
 	if (!res)
-		return (ft_null(line, *buffer));
+		return (ft_null(line, buffer));
 	res[len + i] = 0;
 	while (i--)
 		res[len + i] = (*buffer)[i];
@@ -84,9 +84,10 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (!buffer)
 	{
-		buffer = malloc(BUFFER_SIZE);
+		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
 			return (NULL);
+		*buffer = 0;
 	}
 	check = 1;
 	while (check > 0)
@@ -99,5 +100,5 @@ char	*get_next_line(int fd)
 			return (NULL);
 		check = read(fd, buffer, BUFFER_SIZE);
 	}
-	return (ft_null(line, buffer));
+	return (ft_null(line, &buffer));
 }

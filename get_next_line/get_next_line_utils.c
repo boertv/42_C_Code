@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:33:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/11 14:46:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:50:02 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ ssize_t	ft_seek_nl(char *str)
 	return (-1);
 }
 
-char	*ft_null(char *line, char *buffer)
+char	*ft_null(char *line, char **buffer)
 {
 	if (line)
 		free(line);
-	if (buffer)
-		free(buffer);
+	if (*buffer)
+		free(*buffer);
+	*buffer = NULL;
 	return (NULL);
 }
