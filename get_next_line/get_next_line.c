@@ -6,43 +6,41 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/11 18:08:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:25:51 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_newbuf_freeline(char **buffer, char *line)
+static char	*ft_newbuf_freeline(char *buffer, char *line)
 {
 	char	*new;
 	size_t	i;
 	size_t	end;
 
-	free(line);
+//printf("##############################\nnewbuf input:\nbuffer = \n|%s|\nline = \n|%s|\n\n", buffer, line);
 	i = 0;
-	while ((*buffer)[i] && (*buffer)[i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	end = ++i;
-	while ((*buffer)[end])
+	if (buffer[i] == '\n')
+		i++;
+	end = i;
+	while (buffer[end])
 		end++;
-	new = malloc(end - i + 1);
+	new = malloc(BUFFER_SIZE + 1);
 	if (!new)
-		return (ft_null(NULL, buffer));
+		return (ft_null(NULL, &buffer));
 	new[end - i] = 0;
 	while (end-- > i)
-		new[end - i] = (*buffer)[end];
-	free(*buffer);
+		new[end - i] = buffer[end];
+	free(line);
+	free(buffer);
+//printf("newbuf output = \n|%s|\n##############################\n\n\n", new);
 	return (new);
 }
 
-static void	ft_conform_input(char **line, ssize_t *i, char **buffer)
+static void	ft_conform_input(ssize_t *i, char **buffer)
 {
-	if (!*line)
-	{
-		*line = malloc(1);
-		if (*line)
-			**line = 0;
-	}
 	if (*i == -1)
 	{
 		*i = 0;
@@ -56,21 +54,27 @@ static char	*ft_append_res(char *line, char **buffer, ssize_t i)
 	size_t	len;
 	char	*res;
 
-	ft_conform_input(&line, &i, buffer);
-	if (!line)
-		return (ft_null(NULL, buffer));
+	ft_conform_input(&i, buffer);
+//printf("\n\n\t%%%050%\nappend_res input:\ni = %zd\nline = \n|%s|\nbuffer = \n|%s|\n\n", i, line, *buffer);
 	len = 0;
 	while (line[len])
 		len++;
+//printf("\n1-coucou i = %zd /// len = %zu\n", i, len);
+//printf("\nline = %p\nbuffer = %p\n&buffer = %p\n\n", line, *buffer, buffer);
 	res = malloc(len + i + 1);
+//printf("\nres = %p\nline = %p\nbuffer = %p\n&buffer = %p\n\n", res, line, *buffer, buffer);
 	if (!res)
 		return (ft_null(line, buffer));
+//write(1, "\n2-coucou\n", 10);
 	res[len + i] = 0;
 	while (i--)
 		res[len + i] = (*buffer)[i];
+//write(1, "\n3-coucou\n", 10);
 	while (len--)
 		res[len] = line[len];
-	*buffer = ft_newbuf_freeline(buffer, line);
+//printf("after line cpy = |%s|\n", res);
+//printf("append_res: output = \n|%s|\n\t%%%050%\n\n\n", res);
+	*buffer = ft_newbuf_freeline(*buffer, line);
 	return (res);
 }
 
@@ -81,15 +85,9 @@ char	*get_next_line(int fd)
 	ssize_t		check;
 	ssize_t		i;
 
-	line = NULL;
-	if (!buffer)
-	{
-		buffer = malloc(BUFFER_SIZE + 1);
-		if (!buffer)
-			return (NULL);
-		*buffer = 0;
-	}
-	check = 1;
+	check = ft_initialise(&line, &buffer);
+	if (!check)
+		return (ft_null(line, &buffer));
 	while (check > 0)
 	{
 		i = ft_seek_nl(buffer);
@@ -99,6 +97,8 @@ char	*get_next_line(int fd)
 		if (!line || !buffer)
 			return (NULL);
 		check = read(fd, buffer, BUFFER_SIZE);
+		buffer[check] = 0;
 	}
+//printf("\n--------------- THAT WAS ALL FOLKS ---------------\n");
 	return (ft_null(line, &buffer));
 }
