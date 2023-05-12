@@ -6,11 +6,14 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/12 14:45:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:41:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+						//AAAAAAAAAAAAAAAAH
+						#include <stdio.h>
 
 static char	*ft_newbuf_freeline(char *buffer, char *line)
 {
@@ -18,6 +21,7 @@ static char	*ft_newbuf_freeline(char *buffer, char *line)
 	size_t	i;
 	size_t	end;
 
+	free(line);
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
@@ -32,7 +36,6 @@ static char	*ft_newbuf_freeline(char *buffer, char *line)
 	new[end - i] = 0;
 	while (end-- > i)
 		new[end - i] = buffer[end];
-	free(line);
 	free(buffer);
 	return (new);
 }
@@ -68,6 +71,13 @@ static char	*ft_append_res(char *line, char **buffer, ssize_t i)
 	return (res);
 }
 
+char	*ft_exit(char *line, char **buffer, ssize_t check)
+{
+	if (check == -1 || (line && !*line))
+		return (ft_null(line, buffer));
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*buffer = NULL;
@@ -75,19 +85,25 @@ char	*get_next_line(int fd)
 	ssize_t		check;
 	ssize_t		i;
 
+	if (fd < 0 || fd > OPEN_MAX)
+		return (NULL);
 	check = ft_initialise(&line, &buffer);
 	if (!check)
 		return (ft_null(line, &buffer));
 	while (check > 0)
 	{
 		i = ft_seek_nl(buffer);
+//printf("i = %zd\n", i);
 		if (i != -1)
 			return (ft_append_res(line, &buffer, i));
 		line = ft_append_res(line, &buffer, i);
 		if (!line || !buffer)
-			return (NULL);
+			return (ft_null(line, &buffer));
 		check = read(fd, buffer, BUFFER_SIZE);
-		buffer[check] = 0;
+		if (check >= 0)
+			buffer[check] = 0;
+//printf("check = %zd\tbuffer = |%s|\n", check, buffer);
 	}
-	return (ft_null(line, &buffer));
+//printf("line = |%s| (>.<) buffer = |%s|\n", line, buffer);
+	return (ft_exit(line, &buffer, check));
 }

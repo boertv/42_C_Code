@@ -4,9 +4,11 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-int	main(void)
+int	main(int ac, char *av[])
 {
-	int fd = open("nbs.txt", O_RDONLY);
+	if (ac != 2)
+		return (0);
+	int fd = open(av[1], O_RDONLY);
 	char *output = "blablablablablablablablablablablablablablablablabla";
 
 	printf("\n\t\t\t-----fd = |%i|-----\n\n", fd);
