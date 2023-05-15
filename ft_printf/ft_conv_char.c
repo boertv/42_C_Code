@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:13:17 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/15 13:57:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:12:11 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_conv_char(t_flag *flag, int *mlen, va_list *pva)
 	return (to_print);
 }
 
-char	*ft_conv_mod(t_flag *flag, int *mlen, va_list *pva)
+char	*ft_conv_mod(t_flag *flag, int *mlen)
 {
 	char	*to_print;
 

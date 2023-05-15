@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:16:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/15 13:59:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:13:09 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_conv_hub(char *sform, int *mlen, va_list *pva)
 	if (conv_spec == 'c')
 		return (ft_conv_char(&flag, mlen, pva));
 	if (conv_spec == '%')
-		return (ft_conv_mod(&flag, mlen, pva));
+		return (ft_conv_mod(&flag, mlen));
 	if (conv_spec == 's')
 		return (ft_conv_str(&flag, mlen, pva));
 	return (ft_conv_iuxp(conv_spec, &flag, mlen, pva));

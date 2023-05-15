@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/11 16:44:00 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:12:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ short	ft_flag_char(t_flag *pflag);
 short	ft_flag_nb(t_flag *pflag, t_nb_attr *pnb);
 void	ft_putnfw(char *dst, short zs, int n);
 char	*ft_conv_char(t_flag *flag, int *mlen, va_list *pva);
-char	*ft_conv_mod(t_flag *flag, int *mlen, va_list *pva);
+char	*ft_conv_mod(t_flag *flag, int *mlen);
 char	*ft_conv_str(t_flag *flag, int *mlen, va_list *pva);
 char	*ft_conv_nb(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva);
 char	*ft_conv_ptr(t_flag *flag, t_nb_attr *nb, int *mlen, va_list *pva);
