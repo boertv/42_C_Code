@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 13:13:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/08 16:53:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:57:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_conv_str(t_flag *flag, int *mlen, va_list *pva)
 	char	*str;
 
 	if (ft_flag_str(flag))
-		return (ft_error_null(NULL, "flag_str", pva));
+		return (ft_error_null(NULL, "flag_str", NULL));
 	str = va_arg(*pva, char *);
 	if (!str)
 		str = "(null)";
@@ -62,7 +62,7 @@ char	*ft_conv_str(t_flag *flag, int *mlen, va_list *pva)
 	ft_str_fw(flag, mlen);
 	to_print = ft_calloc(*mlen + 1, 1);
 	if (!to_print)
-		return (ft_error_null("calloc", "conv_str", pva));
+		return (ft_error_null("calloc", "conv_str", NULL));
 	ft_fill_str(to_print, str, flag, mlen);
 	return (to_print);
 }

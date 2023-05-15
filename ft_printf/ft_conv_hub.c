@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:16:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/10 15:38:11 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:59:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*ft_conv_iuxp(char cs, t_flag *flag, int *mlen, va_list *pva)
 		return (ft_conv_nb(flag, &nb, mlen, pva));
 	if (cs == 'p')
 		return (ft_conv_ptr(flag, &nb, mlen, pva));
-	return (ft_error_null("bad specifier", "ft_conv_hub", pva));
+	return (ft_error_null("bad specifier", "ft_conv_hub", NULL));
 }
 
 char	*ft_conv_hub(char *sform, int *mlen, va_list *pva)
@@ -72,13 +72,13 @@ char	*ft_conv_hub(char *sform, int *mlen, va_list *pva)
 	{
 		to_print = ft_strdup(sform);
 		if (!to_print)
-			return (ft_error_null("strdup", "conv_hub", pva));
+			return (ft_error_null("strdup", "conv_hub", NULL));
 		*mlen = ft_strlen(sform);
 		return (to_print);
 	}
 	ft_fill_flag(sform, &flag, mlen);
 	if (ft_flag_errors(&flag))
-		return (ft_error_null(NULL, NULL, pva));
+		return (NULL);
 	conv_spec = sform[ft_strlen(sform) - 1];
 	if (conv_spec == 'c')
 		return (ft_conv_char(&flag, mlen, pva));
