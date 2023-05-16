@@ -6,14 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/12 17:41:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:11:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-						//AAAAAAAAAAAAAAAAH
-						#include <stdio.h>
 
 static char	*ft_newbuf_freeline(char *buffer, char *line)
 {
@@ -93,7 +90,6 @@ char	*get_next_line(int fd)
 	while (check > 0)
 	{
 		i = ft_seek_nl(buffer);
-//printf("i = %zd\n", i);
 		if (i != -1)
 			return (ft_append_res(line, &buffer, i));
 		line = ft_append_res(line, &buffer, i);
@@ -102,8 +98,6 @@ char	*get_next_line(int fd)
 		check = read(fd, buffer, BUFFER_SIZE);
 		if (check >= 0)
 			buffer[check] = 0;
-//printf("check = %zd\tbuffer = |%s|\n", check, buffer);
 	}
-//printf("line = |%s| (>.<) buffer = |%s|\n", line, buffer);
 	return (ft_exit(line, &buffer, check));
 }

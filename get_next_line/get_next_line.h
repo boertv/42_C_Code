@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:25:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/12 17:40:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:11:48 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # ifdef BUFFER_SIZE
 #  if BUFFER_SIZE < 1
-#   undef BUFFER_SIZE
-#   define BUFFER_SIZE -1
-#  endif
-#  if BUFFER_SIZE > INT_MAX
 #   undef BUFFER_SIZE
 #   define BUFFER_SIZE -1
 #  endif
