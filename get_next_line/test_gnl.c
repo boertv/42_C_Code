@@ -10,13 +10,15 @@ int	main(int ac, char *av[])
 	if (ac < 2)
 		return (0);
 
-/* test die door een bestand gaat en het dan sluit voor het volgende te openen. */
+/*################################################################################*/
+/*# test die door een bestand gaat en het dan sluit voor het volgende te openen. #*/
+/*################################################################################*/
 
 	// int	n = 0;
 	// while (av[++n])
 	// {
 	// 	int fd = open(av[n], O_RDONLY);
-	// 	write(1, "\n\t\t\t  {", 6);
+	// 	write(1, "\n\t\t\t  {", 7);
 	// 	write(1, av[n], strlen(av[n]));
 	// 	char *output = "blablablablablablablablablablablablablablablablabla";
 
@@ -25,13 +27,17 @@ int	main(int ac, char *av[])
 	// 	{
 	// 		output = get_next_line(fd);
 	// 		printf(">>>>> |%s| <<<<<\n", output);
+	// 		if (output)
+	// 			free(output);
 	// 	}
 	// 	printf("\n\tFIN\n\n");
 	// 	close (fd);
 	// }
 
 
-/* test die effectief verschillende bestanden tegelijk opvraagt. lijn per lijn */
+/*###############################################################################*/
+/*# test die effectief verschillende bestanden tegelijk opvraagt. lijn per lijn #*/
+/*###############################################################################*/
 
 	int n = 1;
 	char *print;
@@ -62,7 +68,11 @@ int	main(int ac, char *av[])
 					fd[n] = -1;
 					i--;
 				}
+				else
+					free(print);
 			}
 		}
 	}
+
+	system("Leaks a.out");
 }
