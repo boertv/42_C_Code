@@ -6,19 +6,18 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/16 14:14:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:46:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*ft_newbuf_freeline(t_fdl **element, t_fdl **list, char *line)
+static char	*ft_newbuf_freeline(t_fdl **element)
 {
 	char	*new;
 	size_t	i;
 	size_t	end;
 
-	free(line);
 	i = 0;
 	while ((*element)->buffer[i] && (*element)->buffer[i] != '\n')
 		i++;
@@ -29,7 +28,10 @@ static char	*ft_newbuf_freeline(t_fdl **element, t_fdl **list, char *line)
 		end++;
 	new = malloc(BUFFER_SIZE + 1);
 	if (!new)
-		return (ft_null(NULL, list, (*element)->fd));
+	{
+		free((*element)->buffer);
+		return (NULL);
+	}
 	new[end - i] = 0;
 	while (end-- > i)
 		new[end - i] = (*element)->buffer[end];
@@ -39,7 +41,7 @@ static char	*ft_newbuf_freeline(t_fdl **element, t_fdl **list, char *line)
 
 static void	ft_conform_input(ssize_t *i, char *buffer)
 {
-	if (*i == -1)
+	if (*i == -1 && buffer)
 	{
 		*i = 0;
 		while (buffer[*i])
@@ -64,7 +66,10 @@ static char	*ft_append_res(char *line, t_fdl **el, t_fdl **list, ssize_t i)
 		res[len + i] = (*el)->buffer[i];
 	while (len--)
 		res[len] = line[len];
-	(*el)->buffer = ft_newbuf_freeline(el, list, line);
+	free(line);
+	(*el)->buffer = ft_newbuf_freeline(el);
+	if (!(*el)->buffer)
+		return (ft_null(res, list, (*el)->fd));
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:33:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/16 15:28:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:17:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	ft_clear_list(t_fdl **list)
 	*list = NULL;
 }
 
-// returns NULL. can clear a list if fd = -1;
+// returns NULL. can clear a list if fd == -1;
 char	*ft_null(char *line, t_fdl **list, int fd)
 {
 	t_fdl	*temp;
