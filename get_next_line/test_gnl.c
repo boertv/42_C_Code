@@ -74,5 +74,6 @@ int	main(int ac, char *av[])
 		}
 	}
 
+	printf("\n\n\n");
 	system("Leaks a.out");
 }
