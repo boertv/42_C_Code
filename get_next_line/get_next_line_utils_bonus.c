@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:33:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/16 14:58:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:28:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ ssize_t	ft_seek_nl(char *str)
 	return (-1);
 }
 
+static int	ft_add_el(t_fdl **list, int fd)
+{
+	*list = malloc (sizeof(t_fdl));
+	if (!*list)
+		return (0);
+	(*list)->fd = fd;
+	(*list)->next = NULL;
+	(*list)->buffer = malloc(BUFFER_SIZE + 1);
+	if (!(*list)->buffer)
+		return (0);
+	(*list)->buffer[0] = 0;
+	return (1);
+}
+
+// returns 0 on error, else returns 1
 ssize_t	ft_initialise(char **line, t_fdl **element, t_fdl **list, int fd)
 {
 	*line = malloc(2);
@@ -42,13 +57,8 @@ ssize_t	ft_initialise(char **line, t_fdl **element, t_fdl **list, int fd)
 	}
 	if (list && !*list)
 	{
-		*list = malloc (sizeof(t_fdl));
-		if (!*list)
+		if (!ft_add_el(list, fd))
 			return (0);
-		(*list)->fd = fd;
-		(*list)->next = NULL;
-		(*list)->buffer = malloc(BUFFER_SIZE + 1);
-		(*list)->buffer[0] = 0;
 		*element = *list;
 	}
 	return (1);
@@ -83,7 +93,8 @@ char	*ft_null(char *line, t_fdl **list, int fd)
 			list = &((*list)->next);
 		if (!*list)
 			return (NULL);
-		free((*list)->buffer);
+		if ((*list)->buffer)
+			free((*list)->buffer);
 		temp = *list;
 		*list = (*list)->next;
 		free(temp);
