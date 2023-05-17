@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   gnlub_old.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:33:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/17 12:07:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:06:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "gnlb_old.h"
 
 // returns -1 if no \n found, else returns index of \n
 ssize_t	ft_seek_nl(char *str)
@@ -32,6 +32,9 @@ static int	ft_add_el(t_fdl **list, int fd)
 		return (0);
 	(*list)->fd = fd;
 	(*list)->next = NULL;
+	(*list)->buffer = malloc(BUFFER_SIZE + 1);
+	if (!(*list)->buffer)
+		return (0);
 	(*list)->buffer[0] = 0;
 	return (1);
 }
@@ -69,6 +72,7 @@ static void	ft_clear_list(t_fdl **list)
 	tl = *list;
 	while (tl)
 	{
+		free(tl->buffer);
 		temp = tl;
 		tl = tl->next;
 		free(temp);
@@ -89,6 +93,8 @@ char	*ft_null(char *line, t_fdl **list, int fd)
 			list = &((*list)->next);
 		if (!*list)
 			return (NULL);
+		if ((*list)->buffer)
+			free((*list)->buffer);
 		temp = *list;
 		*list = (*list)->next;
 		free(temp);

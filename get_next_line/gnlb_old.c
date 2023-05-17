@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   gnlb_old.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/17 12:06:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:06:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "gnlb_old.h"
 
-static void	ft_newbuf(t_fdl **element)
+static char	*ft_newbuf_freeline(t_fdl **element)
 {
+	char	*new;
 	size_t	i;
-	size_t	j;
+	size_t	end;
 
 	i = 0;
 	while ((*element)->buffer[i] && (*element)->buffer[i] != '\n')
 		i++;
-	j = i + 1;
-	while ((*element)->buffer[i++])
-		(*element)->buffer[i - j] = (*element)->buffer[i];
+	if ((*element)->buffer[i] == '\n')
+		i++;
+	end = i;
+	while ((*element)->buffer[end])
+		end++;
+	new = malloc(BUFFER_SIZE + 1);
+	if (!new)
+	{
+		free((*element)->buffer);
+		return (NULL);
+	}
+	new[end - i] = 0;
+	while (end-- > i)
+		new[end - i] = (*element)->buffer[end];
+	free((*element)->buffer);
+	return (new);
 }
 
 static void	ft_conform_input(ssize_t *i, char *buffer)
@@ -53,7 +67,9 @@ static char	*ft_append_res(char *line, t_fdl **el, t_fdl **list, ssize_t i)
 	while (len--)
 		res[len] = line[len];
 	free(line);
-	ft_newbuf(el);
+	(*el)->buffer = ft_newbuf_freeline(el);
+	if (!(*el)->buffer)
+		return (ft_null(res, list, (*el)->fd));
 	return (res);
 }
 
@@ -83,7 +99,7 @@ char	*get_next_line(int fd)
 		if (i != -1)
 			return (ft_append_res(line, &element, &list, i));
 		line = ft_append_res(line, &element, &list, i);
-		if (!line)
+		if (!line || !(element->buffer))
 			return (ft_null(line, &list, fd));
 		check = read(fd, element->buffer, BUFFER_SIZE);
 		if (check >= 0)
