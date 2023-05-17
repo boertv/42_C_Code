@@ -1,2 +1,2 @@
 # Libft
-My updated libft library.
+My updated 42 library.
