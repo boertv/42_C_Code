@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:19:16 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/25 15:47:40 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/05/25 16:04:47 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(CLEAN_LIBS): %.clean:
 clean: $(CLEAN_LIBS)
 
 fclean:	clean
-	@echo "$(RED)Deleting executable...$(NO_COLOR)"
+	@echo "$(RED)Deleting executable...\n$(NO_COLOR)"
 	@rm -f $(NAME)
 
 re: fclean all
