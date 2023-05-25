@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/10 14:06:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/25 15:44:02 by bvercaem         ###   ########.fr        #
+#    Created: 2023/05/24 17:24:39 by bvercaem          #+#    #+#              #
+#    Updated: 2023/05/25 15:43:59 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= legacy
+NAME			= get_next_line
 
 STATIC_NAME		= ../libft.a
 
@@ -29,51 +29,10 @@ FLAGS			=	-Wall -Werror -Wextra
 
 #-------------------SOURCES FILES----------------------
 
-HEADERS			=	$(HEADER_WD)libft.h
+HEADERS			=	$(HEADER_WD)get_next_line_bonus.h
 
-SRCS			=	$(SOURCES)ft_isalpha.c \
-					$(SOURCES)ft_isdigit.c \
-					$(SOURCES)ft_isalnum.c \
-					$(SOURCES)ft_isascii.c \
-					$(SOURCES)ft_isprint.c \
-					$(SOURCES)ft_strlen.c \
-					$(SOURCES)ft_memset.c \
-					$(SOURCES)ft_bzero.c \
-					$(SOURCES)ft_memcpy.c \
-					$(SOURCES)ft_memmove.c \
-					$(SOURCES)ft_strlcpy.c \
-					$(SOURCES)ft_strlcat.c \
-					$(SOURCES)ft_toupper.c \
-					$(SOURCES)ft_tolower.c \
-					$(SOURCES)ft_strchr.c \
-					$(SOURCES)ft_strrchr.c \
-					$(SOURCES)ft_strncmp.c \
-					$(SOURCES)ft_memchr.c \
-					$(SOURCES)ft_memcmp.c \
-					$(SOURCES)ft_strnstr.c \
-					$(SOURCES)ft_atoi.c \
-					$(SOURCES)ft_calloc.c \
-					$(SOURCES)ft_strdup.c \
-					$(SOURCES)ft_substr.c \
-					$(SOURCES)ft_strjoin.c \
-					$(SOURCES)ft_strtrim.c \
-					$(SOURCES)ft_split.c \
-					$(SOURCES)ft_itoa.c \
-					$(SOURCES)ft_strmapi.c \
-					$(SOURCES)ft_striteri.c \
-					$(SOURCES)ft_putchar_fd.c \
-					$(SOURCES)ft_putstr_fd.c \
-					$(SOURCES)ft_putendl_fd.c \
-					$(SOURCES)ft_putnbr_fd.c \
-					$(SOURCES)ft_lstnew.c \
-					$(SOURCES)ft_lstadd_front.c \
-					$(SOURCES)ft_lstsize.c \
-					$(SOURCES)ft_lstlast.c \
-					$(SOURCES)ft_lstadd_back.c \
-					$(SOURCES)ft_lstdelone.c \
-					$(SOURCES)ft_lstclear.c \
-					$(SOURCES)ft_lstiter.c \
-					$(SOURCES)ft_lstmap.c \
+SRCS			=	$(SOURCES)get_next_line_bonus.c \
+					$(SOURCES)get_next_line_utils_bonus.c \
 
 #-------------------OBJECTS----------------------
 
@@ -107,9 +66,9 @@ all:	$(NAME)
 	@$(CC) $(FLAGS) $(I_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS)
-	@touch $(NAME)
 	@printf "$(GREEN)Linking $(NAME)... %45c\n$(NO_COLOR)" ' '
 	@ar -rcs $(STATIC_NAME) $(OBJS)
+	@touch $(NAME)
 
 clean:
 	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"

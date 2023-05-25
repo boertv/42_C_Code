@@ -6,18 +6,17 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 14:13:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/11 17:09:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:35:57 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// just calls va_end and then returns NULL for moulinette
+// calls va_end, prints given error and returns null.
 void	*ft_error_null(const char *error, const char *func, va_list *pva)
 {
 	if (pva)
 		va_end(*pva);
-	return (NULL);
 	if (func)
 	{
 		write(1, "\nAn error occured in '", 22);
@@ -33,12 +32,11 @@ void	*ft_error_null(const char *error, const char *func, va_list *pva)
 	return (NULL);
 }
 
-// just calls va_end and then returns -1 for moulinette
+// calls va_end, prints given error and returns -1.
 short	ft_error_minone(const char *error, const char *func, va_list *pva)
 {
 	if (pva)
 		va_end(*pva);
-	return (-1);
 	if (func)
 	{
 		write(1, "\nAn error occured in '", 22);

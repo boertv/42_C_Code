@@ -5,61 +5,88 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/21 15:35:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/11 17:24:40 by bvercaem         ###   ########.fr        #
+#    Created: 2023/05/24 17:20:59 by bvercaem          #+#    #+#              #
+#    Updated: 2023/05/25 15:43:50 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME			= ft_printf
 
-LIBFT = libft/libft.a
+STATIC_NAME		= ../libft.a
 
-SRCS = ft_printf.c \
-	   ft_conv_hub.c \
-	   ft_conv_char.c \
-	   ft_conv_str.c \
-	   ft_conv_nb.c \
-	   ft_fill_nb.c \
-	   ft_check_flags.c \
-	   ft_flags.c \
-	   ft_flags_2.c \
-	   ft_error.c
+#-------------------PATH-----------------------------
 
-OBJS = $(SRCS:c=o)
+SOURCES			= ./
 
-INCLUDES = libft/libft.h \
-		   ft_printf.h
+HEADER_WD		= ./
 
-CC = cc
+#-------------------COMPILATION----------------------
 
-CFLAGS = -Wall -Wextra -Werror
+CC				=	cc
+FLAGS			=	-Wall -Werror -Wextra
+# FLAGS			=	-Wall -Werror -Wextra -g
+# FLAGS			=	-Wall -Werror -Wextra -fsanitize=address
 
-RM = rm -f
+#-------------------SOURCES FILES----------------------
 
-all: $(NAME)
+HEADERS			=	$(HEADER_WD)ft_printf.h \
+					$(HEADER_WD)../legacy/libft.h \
 
-bonus: all
+SRCS			=	$(SOURCES)ft_printf.c \
+					$(SOURCES)ft_conv_hub.c \
+					$(SOURCES)ft_conv_char.c \
+					$(SOURCES)ft_conv_str.c \
+					$(SOURCES)ft_conv_nb.c \
+					$(SOURCES)ft_check_flags.c \
+					$(SOURCES)ft_flags.c \
+					$(SOURCES)ft_flags_2.c \
+					$(SOURCES)ft_fill_nb.c \
+					$(SOURCES)ft_error.c \
 
-$(LIBFT):
-	make bonus -C libft
+#-------------------OBJECTS----------------------
 
-$(NAME): $(LIBFT) $(OBJS) $(INCLUDES)
-	@cp $(LIBFT) $(NAME)
-	@echo "creating printf library.."
-	@ar -rcs $(NAME) $(OBJS)
+OBJS			=	$(SRCS:.c=.o)
 
-%.o: %.c Makefile
-	${CC} ${CFLAGS} -c $< -I $(INCLUDES)
+#-------------------HEADERS----------------------
+
+I_HEADER		=	$(addprefix( -include, $(HEADERS)))
+
+#-------------------COLORS-----------------------
+
+RED				=	\x1b[31m
+
+YELLOW			=	\x1b[33m
+
+GREEN			=	\x1b[32m
+
+NO_COLOR		=	\x1b[0m
+
+BOLD			= 	\x1b[1m
+
+BOLD_OFF		=	\x1b[21m
+
+
+#-------------------RULES-----------------------
+
+all:	$(NAME)
+
+%.o: %.c
+	@printf "$(YELLOW)Generating $(NAME) objects... %-45.45s\r$(NO_COLOR)" $@
+	@$(CC) $(FLAGS) $(I_HEADER) -c $< -o $@
+
+$(NAME):	$(OBJS)
+	@printf "$(GREEN)Linking $(NAME)... %45c\n$(NO_COLOR)" ' '
+	@ar -rcs $(STATIC_NAME) $(OBJS)
+	@touch $(NAME)
 
 clean:
-	make clean -C libft
-	@echo "cleaning printf folder.."
-	@$(RM) $(OBJS)
+	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
+	@rm -rf $(OBJS) $(NAME)
 
-fclean: clean
-	$(RM) $(LIBFT)
-	$(RM) $(NAME)
+fclean:	clean
+	@echo "$(RED)Deleting executables...$(NO_COLOR)"
+	@rm -f $(STATIC_NAME)
 
 re: fclean all
 
-.PHONY: clean fclean all re bonus
+.PHONY: all clean fclean re $(STATIC_NAME)
