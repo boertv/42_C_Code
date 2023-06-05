@@ -1,14 +1,26 @@
-NAME			=
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
+#    Updated: 2023/06/05 17:55:12 by bvercaem         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME			= push_swap
 
 BONUS_NAME		=
 
 #-------------------PATH-----------------------------
 
-SOURCES_WD		=
+SOURCES_WD		= ./
 
 BONUS_WD		=
 
-HEADER_WD		=
+HEADER_WD		= ./
 
 BONUS_HEADER_WD	=
 
@@ -22,18 +34,19 @@ FLAGS			=	-Wall -Werror -Wextra
 
 #-------------------SOURCES FILES----------------------
 
-HEADERS			=	$(HEADER_WD)___.h
+HEADERS			=	$(HEADER_WD)push_swap.h \
+					./libft/legacy/libft.h \
+					./libft/ft_printf/ft_printf.h
 
 BONUS_HEADERS 	=
 
-H_LIB 			= 	$(___ _WD)___.h \
-					$(___ _WD)___.h
+MAIN			=	$(SOURCES_WD)ps_main.c
 
-MAIN			=	$(SOURCES_WD)main.c
-
-SRCS			=	$(SOURCES_WD)___.c \
-					$(SOURCES_WD)___.c \
-					$(SOURCES_WD)___.c \
+SRCS			=	$(SOURCES_WD)ps_initialise_stack.c \
+					$(SOURCES_WD)ps_error.c \
+					$(SOURCES_WD)ps_checks.c \
+					$(SOURCES_WD)ps_operations.c \
+					$(SOURCES_WD)ps_oprs_utils.c
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
 
