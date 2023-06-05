@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:10:02 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/05 16:12:57 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:05:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_error(void)
+int	ps_error(void)
 {
 	write(2, "Error\n", 6);
 	return 0;
