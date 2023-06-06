@@ -6,11 +6,11 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 17:24:39 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/25 15:43:59 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/06 14:22:24 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= get_next_line
+NAME			= get_next_line.tmp
 
 STATIC_NAME		= ../libft.a
 

@@ -6,11 +6,11 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/10 14:06:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/25 15:44:02 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/06 14:22:24 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= legacy
+NAME			= legacy.tmp
 
 STATIC_NAME		= ../libft.a
 

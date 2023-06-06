@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= get_next_line
+NAME			= get_next_line.tmp
 
 STATIC_NAME		= ../libft.a
 

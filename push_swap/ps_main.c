@@ -6,21 +6,21 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/05 18:10:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:00:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* THIS IS A TEST FUNCTION TO PRINT MY ARRAY */
 void	test_print(t_stack a, char c, char	*str)
 {
+/* THIS IS A TEST FUNCTION TO PRINT MY ARRAY */
 	size_t	i;
 
 	i = 0;
 	if (str)
 		ft_printf("Action performed = %s\n", str);
-	ft_printf("%c: %i\n{", c, a->size);
+	ft_printf("%c[%i] {", c, a->size);
 	while (i + 1 < a->size)
 	{
 		ft_printf("%i, ", a->array[i]);
@@ -41,7 +41,7 @@ int	main(int ac, char *av[])
 
 /* THIS IS THE START OF MY LITTLE TEST AREA */
 test_print(&a, 'a', NULL);
-test_print(&b, 'b', NULL);
+// test_print(&b, 'b', NULL);
 ps_swap(&a);
 test_print(&a, 'a', "sa");
 // ps_push(&a, &b);
