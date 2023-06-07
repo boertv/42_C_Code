@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/05 18:06:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:58:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// returns -1 on error, else 0.
+// returns 0 on error, else 1.
 static int	ps_isvalid(char *str)
 {
 	if (*str == '-')
@@ -20,10 +20,10 @@ static int	ps_isvalid(char *str)
 	while (*str)
 	{
 		if (*str < '0' || '9' < *str)
-			return (-1);
+			return (0);
 		str++;
 	}
-	return (0);
+	return (1);
 }
 
 // returns 0 or -1 if that is represented by str, else 1.
@@ -50,40 +50,41 @@ static int	ps_iszerone(char *str)
 	return (nb * sign);
 }
 
-// returns -1 on duplicate, else 0.
-static int	ps_check_dup(int nb, t_stack a, size_t start)
+// returns 0 on duplicate, else 1.
+static int	ps_isunique(int nb, t_stack *a)
 {
-	while (start < a->size)
+	t_dlilist	*list;
+
+	list = a->start;
+	while (list)
 	{
-		if (nb == a->array[start])
-			return (-1);
-		start++;
+		if (list->nb == nb)
+			return (0);
+		list = list->next;
 	}
-	return (0);
+	return (1);
 }
 
-// returns -1 on error, else 0.
-int	ps_initialise_stack(int ac, char *av[], t_stack a, t_stack b)
+// returns 0 on error, else 1.
+int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
 {
-	int	tempa[ac];
-	int	tempb[ac];
-	int	bin;
+	int	temp;
 
-	a->size = ac;
+	a->size = 0;
 	b->size = 0;
-	a->array = tempa;
-	b->array = tempb;
-	while (ac > 0)
+	b->start = NULL;
+	b->end = NULL;
+	while (ac-- > 1)
 	{
-		if (ps_isvalid(av[ac]))
-			return (-1);
-		bin = ft_atoi(av[ac]);
-		if ((bin == 0 || bin == -1) && bin != ps_iszerone(av[ac]))
-			return (-1);
-		if (ps_check_dup(bin, a, ac))
-			return (-1);
-		a->array[ac - 1] = bin;
-		ac--;
+		if (!ps_isvalid(av[ac]))
+			return (0);
+		temp = ft_atoi(av[ac]);
+		if ((temp == 0 || temp == -1) && temp != ps_iszerone(av[ac]))
+			return (0);
+		if (!ps_isunique(temp, a))
+			return (0);
+		if (!ps_add_front(a, ps_create_element(temp)))
+			return (0);
 	}
-	return (0);
+	return (1);
 }

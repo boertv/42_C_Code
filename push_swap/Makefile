@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/05 18:04:54 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/07 15:32:21 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRCS			=	$(SOURCES_WD)ps_initialise_stack.c \
 					$(SOURCES_WD)ps_error.c \
 					$(SOURCES_WD)ps_checks.c \
 					$(SOURCES_WD)ps_operations.c \
-					$(SOURCES_WD)ps_oprs_utils.c
+					$(SOURCES_WD)ps_list_utils.c
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
 
@@ -105,7 +105,9 @@ clean:
 	@make clean -C libft/
 	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ)
 
-fclean:	clean
+fclean:
+	@echo "$(RED)Deleting objects...$(NO_COLOR)"
+	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ)
 	@echo "$(RED)Deleting executables...$(NO_COLOR)"
 	@make fclean -C libft/
 	@rm -f $(NAME) $(BONUS_NAME)

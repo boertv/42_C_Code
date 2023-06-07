@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/05 17:43:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:20:27 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,32 @@
 # include "./libft/legacy/libft.h"
 # include "./libft/ft_printf/ft_printf.h"
 
+typedef struct	s_dlilist
+{
+	int					nb;
+	struct	s_dlilist	*next;
+	struct	s_dlilist	*prev;
+}				t_dlilist;
+
 typedef	struct	s_stack
 {
-	int		*array;
-	size_t	size;
-}				*t_stack;
+	t_dlilist	*start;
+	t_dlilist	*end;
+	size_t		size;
+}				t_stack;
 
-int		ps_initialise_stack(int ac, char *av[], t_stack a, t_stack b);
-void	ps_swap(t_stack a);
-void	ps_push(t_stack src, t_stack dst);
-void	ps_rotate(t_stack a);
-void	ps_rrotate(t_stack a);
-void	ps_shiftup(t_stack a);
-void	ps_shiftdown(t_stack a);
-int		ps_error(void);
+int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
+void		ps_swap(t_stack *a);
+void		ps_push(t_stack *src, t_stack *dst);
+void		ps_rotate(t_stack *a);
+void		ps_rrotate(t_stack *a);
+// void		ps_shiftup(t_stack *a);
+// void		ps_shiftdown(t_stack *a);
+int			ps_error(void);
+int			ps_del_back(t_stack *a, short f);
+int			ps_del_front(t_stack *a, short f);
+int			ps_add_back(t_stack *a, t_dlilist *el);
+int			ps_add_front(t_stack *a, t_dlilist *el);
+t_dlilist	*ps_create_element(int nb);
 
 #endif

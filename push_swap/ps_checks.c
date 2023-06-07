@@ -6,23 +6,23 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/05 17:43:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:46:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // returns 1 if stack is sorted, else 0.
-int	ps_sorted(t_stack a)
+int	ps_sorted(t_stack *a)
 {
-	size_t	i;
+	t_dlilist	*list;
 
-	i = 0;
-	while (i + 1 < a->size)
+	list = a->start;
+	while (list && list->next)
 	{
-		if (a->array[i] > a->array[i + 1])
+		if (list->nb > list->next->nb)
 			return (0);
-		i++;
+		list = list->next;
 	}
 	return (1);
 }
