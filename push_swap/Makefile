@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/07 15:32:21 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/07 18:15:03 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ BONUS_HEADER_WD	=
 
 CC				=	cc
 FLAGS			=	-Wall -Werror -Wextra
-# FLAGS			=	-Wall -Werror -Wextra -g
 # FLAGS			=	-Wall -Werror -Wextra -fsanitize=address
 
 #-------------------SOURCES FILES----------------------
@@ -46,6 +45,7 @@ SRCS			=	$(SOURCES_WD)ps_initialise_stack.c \
 					$(SOURCES_WD)ps_error.c \
 					$(SOURCES_WD)ps_checks.c \
 					$(SOURCES_WD)ps_operations.c \
+					$(SOURCES_WD)ps_double_operations.c \
 					$(SOURCES_WD)ps_list_utils.c
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c

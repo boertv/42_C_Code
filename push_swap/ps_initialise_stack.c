@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 14:58:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:14:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
 
 	a->size = 0;
 	b->size = 0;
+	a->start = NULL;
+	a->end = NULL;
 	b->start = NULL;
 	b->end = NULL;
 	while (ac-- > 1)

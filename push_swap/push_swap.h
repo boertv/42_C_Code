@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 15:20:27 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:04:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ typedef	struct	s_stack
 }				t_stack;
 
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
-void		ps_swap(t_stack *a);
-void		ps_push(t_stack *src, t_stack *dst);
-void		ps_rotate(t_stack *a);
-void		ps_rrotate(t_stack *a);
-// void		ps_shiftup(t_stack *a);
-// void		ps_shiftdown(t_stack *a);
+void		ps_swap(t_stack *a, char c);
+void		ps_ss(t_stack *a, t_stack *b);
+void		ps_push(t_stack *src, t_stack *dst, char c);
+void		ps_rotate(t_stack *a, char c);
+void		ps_rr(t_stack *a, t_stack *b);
+void		ps_rrotate(t_stack *a, char c);
+void		ps_rrr(t_stack *a, t_stack *b);
 int			ps_error(void);
 int			ps_del_back(t_stack *a, short f);
 int			ps_del_front(t_stack *a, short f);

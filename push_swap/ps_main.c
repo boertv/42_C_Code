@@ -6,20 +6,18 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 15:26:03 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:03:08 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	test_print(t_stack *a, char c, char	*str)
+static void	test_print(t_stack *a, char c)
 {
-/* THIS IS A TEST FUNCTION TO PRINT MY ARRAY */
+/* THIS IS A TEST FUNCTION TO PRINT MY CONTAINERS */
 	t_dlilist	*list;
 
 	list = a->start;
-	if (str)
-		ft_printf("Action performed = %s\n", str);
 	ft_printf("%c[%i] {", c, a->size);
 	while (list && list->next)
 	{
@@ -29,6 +27,10 @@ static void	test_print(t_stack *a, char c, char	*str)
 	if (list)
 		ft_printf("%i", list->nb);
 	ft_printf("}\n");
+	if (a->end->nb != list->nb)
+	{
+		ft_printf("LIST END IS NOT CORRECT!!! end = %i\n\n", a->end->nb);
+	}
 }
 
 int	main(int ac, char *av[])
@@ -41,17 +43,14 @@ int	main(int ac, char *av[])
 
 /* THIS IS THE START OF MY LITTLE TEST AREA */
 
-	test_print(&a, 'a', NULL);
-	test_print(&b, 'b', NULL);
-	ps_swap(&a);
-	test_print(&a, 'a', "sa");
-	ps_push(&a, &b);
-	test_print(&a, 'a', "pb");
-	test_print(&b, 'b', NULL);
-	ps_rotate(&a);
-	test_print(&a, 'a', "rotate");
-	ps_rrotate(&a);
-	test_print(&a, 'a', "reverse rotate");
+test_print(&a, 'a');
+ps_push(&a, &b, 'b');
+ps_push(&a, &b, 'b');
+test_print(&a, 'a');
+test_print(&b, 'b');
+ps_ss(&a, &b);
+test_print(&a, 'a');
+test_print(&b, 'b');
 
 /* THIS IS THE END OF MY LITTLE TEST AREA */
 
