@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 16:04:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:09:45 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ typedef	struct	s_stack
 	t_dlilist	*start;
 	t_dlilist	*end;
 	size_t		size;
+	int			max;
+	int			min;
 }				t_stack;
 
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
+t_dlilist	*ps_create_element(int nb);
 void		ps_swap(t_stack *a, char c);
 void		ps_ss(t_stack *a, t_stack *b);
 void		ps_push(t_stack *src, t_stack *dst, char c);
@@ -38,11 +41,18 @@ void		ps_rotate(t_stack *a, char c);
 void		ps_rr(t_stack *a, t_stack *b);
 void		ps_rrotate(t_stack *a, char c);
 void		ps_rrr(t_stack *a, t_stack *b);
+void		ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
 int			ps_error(void);
 int			ps_del_back(t_stack *a, short f);
 int			ps_del_front(t_stack *a, short f);
 int			ps_add_back(t_stack *a, t_dlilist *el);
 int			ps_add_front(t_stack *a, t_dlilist *el);
-t_dlilist	*ps_create_element(int nb);
+int			ps_issorted(t_stack *a, short as);
+int			ps_ismaxmin(t_stack *a, short x);
+void		ps_isnewattribute(t_stack *a, int nb);
+void		ps_isoldattribute(t_stack *a, int nb);
+void		ps_addnewattribute(t_stack *a, int nb);
+
+void		ps_small_sorts(t_stack *a, t_stack *b, int size);
 
 #endif

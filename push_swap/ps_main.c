@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 18:03:08 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:16:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	test_print(t_stack *a, char c)
 	}
 	if (list)
 		ft_printf("%i", list->nb);
-	ft_printf("}\n");
-	if (a->end->nb != list->nb)
+	ft_printf("}  (%i, %i)\n", a->min, a->max);
+	if (a->size && (a->end->nb != list->nb))
 	{
 		ft_printf("LIST END IS NOT CORRECT!!! end = %i\n\n", a->end->nb);
 	}
@@ -40,17 +40,23 @@ int	main(int ac, char *av[])
 
 	if (!ps_initialise_stack(ac, av, &a, &b))
 		return (ps_error());
+	if (ac <= 6)
+		ps_small_sorts(&a, &b, ac - 1);
 
 /* THIS IS THE START OF MY LITTLE TEST AREA */
 
-test_print(&a, 'a');
-ps_push(&a, &b, 'b');
-ps_push(&a, &b, 'b');
+ft_printf("-----------\n");
 test_print(&a, 'a');
 test_print(&b, 'b');
-ps_ss(&a, &b);
-test_print(&a, 'a');
-test_print(&b, 'b');
+// ps_push(&a, &b, 'b');
+// test_print(&a, 'a');
+// test_print(&b, 'b');
+// ps_push(&b, &a, 'a');
+// test_print(&a, 'a');
+// test_print(&b, 'b');
+// ps_push(&b, &a, 'a');
+// test_print(&a, 'a');
+// test_print(&b, 'b');
 
 /* THIS IS THE END OF MY LITTLE TEST AREA */
 

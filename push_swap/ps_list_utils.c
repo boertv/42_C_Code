@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 13:09:33 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 15:19:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:30:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,15 @@ int	ps_add_front(t_stack *a, t_dlilist *el)
 	el->prev = NULL;
 	el->next = a->start;
 	if (!a->start)
+	{
 		a->end = el;
+		ps_addnewattribute(a, el->nb);
+	}
 	else
+	{
 		a->start->prev = el;
+		ps_isnewattribute(a, el->nb);
+	}
 	a->start = el;
 	a->size++;
 	return (1);
@@ -50,9 +56,15 @@ int	ps_add_back(t_stack *a, t_dlilist *el)
 	el->next = NULL;
 	el->prev = a->end;
 	if (!a->end)
+	{
 		a->start = el;
+		ps_addnewattribute(a, el->nb);
+	}
 	else
+	{
 		a->end->next = el;
+		ps_isnewattribute(a, el->nb);
+	}
 	a->end = el;
 	a->size++;
 	return (1);
@@ -72,9 +84,10 @@ int	ps_del_front(t_stack *a, short f)
 		a->end = NULL;
 	else
 		a->start->prev = NULL;
+	a->size--;
+	ps_isoldattribute(a, bin->nb);
 	if (f == 1)
 		free(bin);
-	a->size--;
 	return (1);
 }
 
@@ -92,8 +105,9 @@ int	ps_del_back(t_stack *a, short f)
 		a->start = NULL;
 	else
 		a->end->next = NULL;
+	a->size--;
+	ps_isoldattribute(a, bin->nb);
 	if (f == 1)
 		free(bin);
-	a->size--;
 	return (1);
 }
