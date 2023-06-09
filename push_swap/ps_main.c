@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/09 13:37:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:19:03 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char *av[])
 	t_stack	b;
 
 	if (!ps_initialise_stack(ac, av, &a, &b))
-		return (ps_error());
+		return (ps_error(&a, &b));
 	if (ac <= 6)
 		ps_small_sorts(&a, &b, ac - 1);
 

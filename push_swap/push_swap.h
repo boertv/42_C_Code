@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/09 13:55:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:19:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		ps_rr(t_stack *a, t_stack *b);
 void		ps_rrotate(t_stack *a, char c);
 void		ps_rrr(t_stack *a, t_stack *b);
 void		ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
-int			ps_error(void);
+int			ps_error(t_stack *a, t_stack *b);
 int			ps_del_back(t_stack *a, short f);
 int			ps_del_front(t_stack *a, short f);
 int			ps_add_back(t_stack *a, t_dlilist *el);
