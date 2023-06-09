@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/08 19:20:08 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:50:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// THIS FUNCTION NO WORKIE!!
+// pushes 'nb' from 'src' to 'dst' with the least amount of (r)rotates
 void	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 {
 	t_dlilist	*list;
@@ -27,7 +27,7 @@ void	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 	}
 	if (list->nb != nb || (csrc != 'a' && csrc != 'b'))
 		return ;
-	if (i <= (src->size / 2))
+	if (i <= (src->size / 2 + 1))
 	{
 		while (--i)
 			ps_rotate(src, csrc);

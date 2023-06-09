@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/08 18:16:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:37:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,19 @@ int	main(int ac, char *av[])
 /* THIS IS THE START OF MY LITTLE TEST AREA */
 
 ft_printf("-----------\n");
-test_print(&a, 'a');
-test_print(&b, 'b');
+if (b.size)
+{
+	ft_printf("!!STACK 'b' ISN'T EMPTY!!\n");
+	test_print(&b, 'b');
+}
+if (!ps_issorted(&a, 1))
+{
+	ft_printf("!!STACK 'a' ISN'T SORTED!!\n");
+	test_print(&a, 'a');
+}
+else if (!b.size)
+	ft_printf("all looks good!\n");
+
 // ps_push(&a, &b, 'b');
 // test_print(&a, 'a');
 // test_print(&b, 'b');
