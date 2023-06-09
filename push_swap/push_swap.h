@@ -6,24 +6,24 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/08 19:09:45 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:55:13 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP
-# define PUSH_SWAP
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include "./libft/legacy/libft.h"
 # include "./libft/ft_printf/ft_printf.h"
 
-typedef struct	s_dlilist
+typedef struct s_dlilist
 {
 	int					nb;
-	struct	s_dlilist	*next;
-	struct	s_dlilist	*prev;
+	struct s_dlilist	*next;
+	struct s_dlilist	*prev;
 }				t_dlilist;
 
-typedef	struct	s_stack
+typedef struct s_stack
 {
 	t_dlilist	*start;
 	t_dlilist	*end;

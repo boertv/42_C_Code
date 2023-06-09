@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 17:58:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:56:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ps_swap(t_stack *a, char c)
 
 void	ps_push(t_stack *src, t_stack *dst, char c)
 {
-	if (c != '0')
-		ft_printf("p%c\n", c);
 	t_dlilist	*temp;
 
+	if (c != '0')
+		ft_printf("p%c\n", c);
 	temp = src->start;
 	ps_del_front(src, 0);
 	ps_add_front(dst, temp);
@@ -42,10 +42,10 @@ void	ps_push(t_stack *src, t_stack *dst, char c)
 
 void	ps_rotate(t_stack *a, char c)
 {
-	if (c != '0')
-		ft_printf("r%c\n", c);
 	t_dlilist	*temp;
 
+	if (c != '0')
+		ft_printf("r%c\n", c);
 	temp = a->start;
 	ps_del_front(a, 0);
 	ps_add_back(a, temp);
@@ -53,10 +53,10 @@ void	ps_rotate(t_stack *a, char c)
 
 void	ps_rrotate(t_stack *a, char c)
 {
-	if (c != '0')
-		ft_printf("rr%c\n", c);
 	t_dlilist	*temp;
 
+	if (c != '0')
+		ft_printf("rr%c\n", c);
 	temp = a->end;
 	ps_del_back(a, 0);
 	ps_add_front(a, temp);
