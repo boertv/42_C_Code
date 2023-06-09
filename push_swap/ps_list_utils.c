@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 13:09:33 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/08 16:30:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:37:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ps_add_front(t_stack *a, t_dlilist *el)
 		return (0);
 	el->prev = NULL;
 	el->next = a->start;
+	a->size++;
 	if (!a->start)
 	{
 		a->end = el;
@@ -44,7 +45,6 @@ int	ps_add_front(t_stack *a, t_dlilist *el)
 		ps_isnewattribute(a, el->nb);
 	}
 	a->start = el;
-	a->size++;
 	return (1);
 }
 
@@ -55,6 +55,7 @@ int	ps_add_back(t_stack *a, t_dlilist *el)
 		return (0);
 	el->next = NULL;
 	el->prev = a->end;
+	a->size++;
 	if (!a->end)
 	{
 		a->start = el;
@@ -66,7 +67,6 @@ int	ps_add_back(t_stack *a, t_dlilist *el)
 		ps_isnewattribute(a, el->nb);
 	}
 	a->end = el;
-	a->size++;
 	return (1);
 }
 

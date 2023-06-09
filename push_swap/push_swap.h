@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/09 14:19:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:35:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_stack
 	size_t		size;
 	int			max;
 	int			min;
+	int			avg;
+	int			cta;
 }				t_stack;
 
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
@@ -49,6 +51,8 @@ int			ps_add_back(t_stack *a, t_dlilist *el);
 int			ps_add_front(t_stack *a, t_dlilist *el);
 int			ps_issorted(t_stack *a, short as);
 int			ps_ismaxmin(t_stack *a, short x);
+int			ps_isavg(t_stack *a);
+int			ps_closesttoavg(t_stack *a);
 void		ps_isnewattribute(t_stack *a, int nb);
 void		ps_isoldattribute(t_stack *a, int nb);
 void		ps_addnewattribute(t_stack *a, int nb);
