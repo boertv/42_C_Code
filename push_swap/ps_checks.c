@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/09 16:43:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:30:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	ps_isnewattribute(t_stack *a, int nb)
 		a->max = nb;
 	if (a->min > nb)
 		a->min = nb;
-	if (a->size <= 50)
-		a->avg = ps_isavg(a);
-	else
-		a->avg += nb / a->size;
+	// if (a->size <= 50)
+	// 	a->avg = ps_isavg(a);
+	// else
+	// 	a->avg += nb / a->size;
 }
 
 // doesn't update a->cta
@@ -53,10 +53,10 @@ void	ps_isoldattribute(t_stack *a, int nb)
 		a->max = ps_ismaxmin(a, 1);
 	if (a->min == nb)
 		a->min = ps_ismaxmin(a, 0);
-	if (a->size <= 50)
-		a->avg = ps_isavg(a);
-	else
-		a->avg -= nb / a->size;
+	// if (a->size <= 50)
+	// 	a->avg = ps_isavg(a);
+	// else
+	// 	a->avg -= nb / a->size;
 }
 
 void	ps_addnewattribute(t_stack *a, int nb)
