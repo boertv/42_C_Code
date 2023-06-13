@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/12 16:00:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:15:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ static int	ps_isunique(int nb, t_stack *a)
 	}
 	return (1);
 }
-
-// static void	ps_calc_attributes(t_stack *a)
-// {
-// 	a->max = ps_ismaxmin(a, 1);
-// 	a->min = ps_ismaxmin(a, 0);
-// }
 
 // returns 0 on error, else 1.
 int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)

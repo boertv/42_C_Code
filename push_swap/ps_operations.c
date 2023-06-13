@@ -6,12 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/09 13:56:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:38:01 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// ignores chunks
 void	ps_swap(t_stack *a, char c)
 {
 	if (c != '0')
@@ -29,6 +30,7 @@ void	ps_swap(t_stack *a, char c)
 		a->end = a->start->next;
 }
 
+// increments chunk sizes if at least dst->chunks exists.
 void	ps_push(t_stack *src, t_stack *dst, char c)
 {
 	t_dlilist	*temp;
@@ -36,10 +38,17 @@ void	ps_push(t_stack *src, t_stack *dst, char c)
 	if (c != '0')
 		ft_printf("p%c\n", c);
 	temp = src->start;
+	if (src->size && dst->chunks)
+	{
+		if (src->chunks && src->chunks->size)
+			src->chunks->size--;
+		dst->chunks->size++;
+	}
 	ps_del_front(src, 0);
 	ps_add_front(dst, temp);
 }
 
+// ignores chunks
 void	ps_rotate(t_stack *a, char c)
 {
 	t_dlilist	*temp;
@@ -51,6 +60,7 @@ void	ps_rotate(t_stack *a, char c)
 	ps_add_back(a, temp);
 }
 
+// ignores chunks
 void	ps_rrotate(t_stack *a, char c)
 {
 	t_dlilist	*temp;

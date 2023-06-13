@@ -6,13 +6,14 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/09 14:00:54 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:53:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // pushes 'nb' from 'src' to 'dst' with the least amount of (r)rotates
+// ignores chunks entirely
 void	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 {
 	t_dlilist	*list;

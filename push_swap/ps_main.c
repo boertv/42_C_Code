@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/12 14:31:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:02:36 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	test_print(t_stack *a, char c)
 
 int	main(int ac, char *av[])
 {
+// return "Error\n" on std_error after malloc fail?
 	t_stack	a;
 	t_stack	b;
 
@@ -42,8 +43,9 @@ int	main(int ac, char *av[])
 		return (ps_error(&a, &b));
 	if (ac <= 6)
 		ps_small_sorts(&a, &b);
-	else if (ac > 6)
-		ps_big_sort(&a, &b);
+	else
+		if (!ps_big_sort(&a, &b))
+			return (ps_error(&a, &b));
 
 /* THIS IS THE START OF MY LITTLE TEST AREA */
 

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/12 17:01:48 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:09:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			ps_closesttoavg(t_stack *a);
 void		ps_isnewattribute(t_stack *a, int nb);
 void		ps_isoldattribute(t_stack *a, int nb);
 void		ps_addnewattribute(t_stack *a, int nb);
-int			ps_add_chunk(t_chunk *chunks, void *content);
+int			ps_add_emptychunk(t_chunk *chunks);
 
 void		ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_big_sort(t_stack *a, t_stack *b);
