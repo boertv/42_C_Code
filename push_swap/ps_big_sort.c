@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/13 15:03:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:16:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ static int	ps_ischunkbelowavg(t_stack *a, size_t r)
 
 static void	ps_calculate_new_avgs(t_stack *src, t_stack *dst)
 {
-// update isavg ft first to work with chunks.
+// update ischunkavg ft so it's less,,, fucked.
+	src->chunks->avg = ps_ischunkavg(src);
+	dst->chunks->avg = ps_ischunkavg(dst);
 }
 
-// rotates values back in place if there's more than one chunk
+// at the end rotates values back in place if there's more than one chunk
 static int	ps_push_aboveavg(t_stack *src, t_stack *dst, char csrc)
 {
 	size_t	r;
 
-	if (!ps_add_emptychunk(dst->chunks))
+	if (!ps_add_emptychunk(dst))
 		return (0);
 	r = 0;
 	while (src->chunks->size && src->start->nb > src->avg)
@@ -61,8 +63,13 @@ static int	ps_push_aboveavg(t_stack *src, t_stack *dst, char csrc)
 
 int	ps_big_sort(t_stack *a, t_stack *b)
 {
-	if (!ps_add_emptychunk(a->chunks))
+// push smaller than avg from a, push larger than avg from b.
+// if chunk is sorted: change chunk->sorted to 1 and just push?
+	if (!ps_add_emptychunk(a))
 		return (0);
 	a->chunks->size = a->size;
-	a->avg = ps_isavg(a);
+	a->avg = ps_ischunkavg(a);
+	ps_push_aboveavg(a, b, 'a');
+// temp return
+return (1);
 }

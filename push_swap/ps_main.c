@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/13 14:02:36 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:16:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ static void	test_print(t_stack *a, char c)
 int	main(int ac, char *av[])
 {
 // return "Error\n" on std_error after malloc fail?
+// optimise by storing operations in a linked list and checking for doubles (ra, rb) or superfluous ones (ra, rra)
 	t_stack	a;
 	t_stack	b;
 
 	if (!ps_initialise_stack(ac, av, &a, &b))
 		return (ps_error(&a, &b));
+//
+test_print(&a, 'a');
+//
 	if (ac <= 6)
 		ps_small_sorts(&a, &b);
 	else
