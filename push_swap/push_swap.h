@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/13 17:15:30 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:38:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct s_chunk
 {
 	size_t			size;
 	int				avg;
-	int				sorted;
+	int				max;
+	int				min;
 	struct s_chunk	*next;
 }				t_chunk;
 
@@ -40,7 +41,6 @@ typedef struct s_stack
 	int			max;
 	int			min;
 	int			avg;
-	int			cta;
 }				t_stack;
 
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
