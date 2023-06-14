@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 14:35:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:12:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	ps_swap(t_stack *a, char c)
 		a->end = a->start->next;
 }
 
-void	ps_push(t_stack *src, t_stack *dst, char c)
+void	ps_push(t_stack *src, t_stack *dst, char cdst)
 {
 	t_dlilist	*temp;
 
-	if (c != '0')
-		ft_printf("p%c\n", c);
+	if (cdst != '0')
+		ft_printf("p%c\n", cdst);
 	temp = src->start;
 	ps_del_front(src, 0);
 	ps_add_front(dst, temp);

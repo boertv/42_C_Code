@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 15:24:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:49:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk)
 		a->min = ps_ismaxmin(a, 0, 0);
 	if (chunk->max == nb)
 		chunk->max = ps_ismaxmin(a, 1,
-			(chunk == a->chunks) + ((chunk != a->chunks) * 2));
+				(chunk == a->chunks) + ((chunk != a->chunks) * 2));
 	if (chunk->min == nb)
 		chunk->min = ps_ismaxmin(a, 0,
-			(chunk == a->chunks) + ((chunk != a->chunks) * 2));
+				(chunk == a->chunks) + ((chunk != a->chunks) * 2));
 }
 
 void	ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk)

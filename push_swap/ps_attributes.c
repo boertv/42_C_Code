@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:53:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 15:51:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:50:01 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ps_ismaxmin(t_stack *a, short x, short c)
 	while (list)
 	{
 		if (c && i++ >= a->chunks->size)
-			break;
+			break ;
 		if ((x && list->nb > res) || (!x && list->nb < res))
 			res = list->nb;
 		list = list->next;
@@ -91,7 +91,7 @@ static int	ps_best_middle(t_stack *a, int mida, int midb)
 		list = list->next;
 	}
 	if (counta == 0 && countb == 0)
-		return (a->chunks->max - 4);
+		return (a->chunks->max - 1);
 	if (counta == countb)
 		return (mida);
 	counta = ps_recalculate_count(counta, a->chunks->size / 2);

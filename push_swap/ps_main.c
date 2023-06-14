@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 15:53:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:48:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	test_print(t_stack *a, char c)
 	t_dlilist	*list;
 
 	list = a->start;
-	ft_printf("%c[%i] {", c, a->size);
+	ft_printf("%c:\na[%i]c[%i] {", c, a->size, a->chunks->size);
 	while (list && list->next)
 	{
 		ft_printf("%i, ", list->nb);
@@ -26,7 +26,7 @@ static void	test_print(t_stack *a, char c)
 	}
 	if (list)
 		ft_printf("%i", list->nb);
-	ft_printf("}  (%i, %i)\n", a->min, a->max);
+	ft_printf("}  a(%i, %i)c(%i, %i)\n", a->min, a->max, a->chunks->min, a->chunks->max);
 	if (a->size && (a->end->nb != list->nb))
 	{
 		ft_printf("!!!LIST END IS NOT CORRECT!!! end = %i\n", a->end->nb);
@@ -84,5 +84,7 @@ if (!ps_issorted(&a, 1, 0))
 /* THIS IS THE END OF MY LITTLE TEST AREA */
 
 	while (ps_del_back(&a, 1) || ps_del_back(&b, 1))
+		(void)a;
+	while (ps_del_chunk(&a) || ps_del_chunk(&b))
 		(void)a;
 }
