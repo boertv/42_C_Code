@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 17:49:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:57:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ps_sort_push_del(t_stack *src, t_stack *dst, char csrc)
 			ps_swap(src, csrc);
 	}
 	while (src->chunks->size)
-		ps_push(src, dst, csrc);
+		ps_push(src, dst, ((csrc == 'a') * 'b') + ((csrc == 'b') * 'a'));
 	ps_del_chunk(src);
 	return (1);
 }
