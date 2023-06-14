@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 13:38:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:54:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_dlilist
 typedef struct s_chunk
 {
 	size_t			size;
-	int				avg;
 	int				max;
 	int				min;
 	struct s_chunk	*next;
@@ -40,7 +39,6 @@ typedef struct s_stack
 	t_chunk		*chunks;
 	int			max;
 	int			min;
-	int			avg;
 }				t_stack;
 
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
@@ -58,13 +56,12 @@ int			ps_del_back(t_stack *a, short f);
 int			ps_del_front(t_stack *a, short f);
 int			ps_add_back(t_stack *a, t_dlilist *el);
 int			ps_add_front(t_stack *a, t_dlilist *el);
-int			ps_issorted(t_stack *a, short as);
-int			ps_ismaxmin(t_stack *a, short x);
+int			ps_issorted(t_stack *a, short as, short c);
+int			ps_ismaxmin(t_stack *a, short x, short c);
 int			ps_ischunkavg(t_stack *a);
-int			ps_closesttoavg(t_stack *a);
-void		ps_isnewattribute(t_stack *a, int nb);
-void		ps_isoldattribute(t_stack *a, int nb);
-void		ps_addnewattribute(t_stack *a, int nb);
+void		ps_isnewattribute(t_stack *a, int nb, t_chunk *chunk);
+void		ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk);
+void		ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk);
 int			ps_add_emptychunk(t_stack *a);
 
 void		ps_small_sorts(t_stack *a, t_stack *b);

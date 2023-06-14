@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/13 14:15:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:29:50 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
 	b->start = NULL;
 	b->end = NULL;
 	b->chunks = NULL;
+	if (!ps_add_emptychunk(a))
+		return (0);
 	while (ac-- > 1)
 	{
 		if (!ps_isvalid(av[ac]))

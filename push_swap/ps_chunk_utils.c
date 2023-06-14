@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:36:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/13 17:15:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:26:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	ps_add_emptychunk(t_stack *a)
 	if (!new)
 		return (0);
 	new->size = 0;
-	new->avg = 0;
-	new->sorted = 0;
 	new->next = a->chunks;
 	a->chunks = new;
 	return (1);

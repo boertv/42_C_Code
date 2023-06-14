@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:07:02 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/12 14:19:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:35:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ps_sort_three(t_stack *a)
 {
 	if (a->size != 3)
 		return ;
-	if (ps_issorted(a, 1))
+	if (ps_issorted(a, 1, 0))
 		return ;
 	if (a->start->nb < a->start->next->nb)
 	{
@@ -43,7 +43,7 @@ static void	ps_sort_three(t_stack *a)
 
 static void	ps_sort_four(t_stack *a, t_stack *b)
 {
-	if (ps_issorted(a, 1))
+	if (ps_issorted(a, 1, 0))
 		return ;
 	ps_fastest_push(a, b, a->min, 'a');
 	ps_sort_three(a);
@@ -54,7 +54,7 @@ static void	ps_sort_five(t_stack *a, t_stack *b)
 {
 	if (a->size != 5 || b->size)
 		return ;
-	if (!b->size && ps_issorted(a, 1))
+	if (!b->size && ps_issorted(a, 1, 0))
 		return ;
 	ps_fastest_push(a, b, a->min, 'a');
 	ps_fastest_push(a, b, a->min, 'a');

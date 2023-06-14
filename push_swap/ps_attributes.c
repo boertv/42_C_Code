@@ -6,26 +6,55 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:53:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 14:07:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:51:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static int	ps_ismaxminlastchunk(t_stack *a, short x)
+{
+	t_dlilist	*list;
+	t_chunk		*chunk;
+	int			res;
+	size_t		i;
+
+	res = a->end->nb;
+	list = a->end;
+	i = 0;
+	chunk = a->chunks;
+	while (chunk->next)
+		chunk = chunk->next;
+	while (list && i++ < chunk->size)
+	{
+		if ((x && list->nb > res) || (!x && list->nb < res))
+			res = list->nb;
+		list = list->prev;
+	}
+	return (res);
+}
+
 // if (x) then max is calculated, else min.
+// c = 0: look at all/ c = 1: look at first chunk/ c = 2: look at last chunk.
 // don't call with an empty list!! it will just return 0.
-int	ps_ismaxmin(t_stack *a, short x)
+int	ps_ismaxmin(t_stack *a, short x, short c)
 {
 	t_dlilist	*list;
 	int			res;
+	size_t		i;
 
-	if (a->size)
-		res = a->start->nb;
-	else
+	if (!a->start || (c && !a->chunks))
 		return (0);
+	else
+		res = a->start->nb;
+	if (c == 2)
+		return (ps_ismaxminlastchunk(a, x));
 	list = a->start;
+	i = 0;
 	while (list)
 	{
+		if (c && i++ >= a->chunks->size)
+			break;
 		if ((x && list->nb > res) || (!x && list->nb < res))
 			res = list->nb;
 		list = list->next;
@@ -42,7 +71,7 @@ static size_t	ps_recalculate_count(size_t count, size_t halfsize)
 	return (count);
 }
 
-static int	ps_bestmiddle(t_stack *a, int mida, int midb)
+static int	ps_best_middle(t_stack *a, int mida, int midb)
 {
 	t_dlilist	*list;
 	size_t		i;
@@ -71,7 +100,7 @@ static int	ps_bestmiddle(t_stack *a, int mida, int midb)
 }
 
 // returns an estimate of the median, good enough to decide on a pivot.
-// don't call with an empty list/chunk!! it will just return 0.
+// don't call with an empty list/chunk!! will just return 0.
 int	ps_ischunkavg(t_stack *a)
 {
 	t_dlilist	*list;
