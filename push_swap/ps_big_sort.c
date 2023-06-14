@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 17:57:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:59:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ps_ispushdone(t_stack *a, size_t r, int avg, char b)
 
 static int	ps_sort_push_del(t_stack *src, t_stack *dst, char csrc)
 {
-// make this work with chunks of 5.
+// make this work with chunks of 5. (and change the cut-off in mother ft)
 	if (src->chunks->size == 2)
 	{
 		if ((csrc == 'a' && src->start->nb != src->chunks->min)
