@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 17:47:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:45:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ typedef struct s_dlilist
 	struct s_dlilist	*prev;
 }				t_dlilist;
 
+// s = 1 if all previous chunk are also sorted.
 typedef struct s_chunk
 {
 	size_t			size;
 	int				max;
 	int				min;
+	char			s;
 	struct s_chunk	*next;
 }				t_chunk;
 
@@ -64,6 +66,7 @@ void		ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk);
 void		ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk);
 int			ps_add_emptychunk(t_stack *a);
 int			ps_del_chunk(t_stack *a);
+void		ps_merge_chunks(t_stack *a);
 
 void		ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_big_sort(t_stack *a, t_stack *b);

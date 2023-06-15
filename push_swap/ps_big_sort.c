@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 17:59:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:45:00 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ps_ispushdone(t_stack *a, size_t r, int avg, char b)
 
 static int	ps_sort_push_del(t_stack *src, t_stack *dst, char csrc)
 {
-// make this work with chunks of 5. (and change the cut-off in mother ft)
+// make this work with chunks of 5 (for both a and b). (and change the cut-off in mother ft)
 	if (src->chunks->size == 2)
 	{
 		if ((csrc == 'a' && src->start->nb != src->chunks->min)
@@ -43,6 +43,10 @@ static int	ps_sort_push_del(t_stack *src, t_stack *dst, char csrc)
 	while (src->chunks->size)
 		ps_push(src, dst, ((csrc == 'a') * 'b') + ((csrc == 'b') * 'a'));
 	ps_del_chunk(src);
+	if (!dst->chunks->next)
+		dst->chunks->s = 1;
+	else if (dst->chunks->next->s)
+		ps_merge_chunks(dst);
 	return (1);
 }
 
@@ -80,7 +84,7 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst, char csrc)
 
 int	ps_big_sort(t_stack *a, t_stack *b)
 {
-	while (!ps_issorted(a, 1, 0))
+	while (!a->chunks->s && b->size)
 	{
 		while (a->size)
 		{
