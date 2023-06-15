@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/12 15:38:40 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/15 17:19:48 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ SRCS			=	$(SOURCES_WD)ps_initialise_stack.c \
 					$(SOURCES_WD)ps_small_sorts.c \
 					$(SOURCES_WD)ps_big_sort.c \
 					$(SOURCES_WD)ps_stack_manoeuvres.c \
-					$(SOURCES_WD)ps_attributes.c
+					$(SOURCES_WD)ps_attributes.c \
+					$(SOURCES_WD)ps_sort_operations.c
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
 

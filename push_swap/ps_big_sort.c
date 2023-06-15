@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/15 15:45:00 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:57:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	ps_sort_push_del(t_stack *src, t_stack *dst, char csrc)
 // at the end rotates values back in place if there's more than one chunk
 static int	ps_push_relative_toavg(t_stack *src, t_stack *dst, char csrc)
 {
+// add a swap if in a: nb is bigger than next or in b: nb is smaller?
 	size_t	r;
 	int		avg;
 
@@ -88,14 +89,18 @@ int	ps_big_sort(t_stack *a, t_stack *b)
 	{
 		while (a->size)
 		{
-			if (ps_issorted(a, 1, 0))
+			if (a->chunks->s)
 				break ;
 			if (!ps_push_relative_toavg(a, b, 'a'))
 				return (0);
 		}
 		while (b->size)
+		{
+			if (b->chunks->s && !a->chunks->s)
+				break ;
 			if (!ps_push_relative_toavg(b, a, 'b'))
 				return (0);
+		}
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/15 15:45:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:08:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void		ps_rotate(t_stack *a, char c);
 void		ps_rr(t_stack *a, t_stack *b);
 void		ps_rrotate(t_stack *a, char c);
 void		ps_rrr(t_stack *a, t_stack *b);
-void		ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
+int			ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
+size_t		ps_find_nbindex(t_stack *a, int nb);
 int			ps_error(t_stack *a, t_stack *b);
 int			ps_del_back(t_stack *a, short f);
 int			ps_del_front(t_stack *a, short f);
@@ -66,7 +67,7 @@ void		ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk);
 void		ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk);
 int			ps_add_emptychunk(t_stack *a);
 int			ps_del_chunk(t_stack *a);
-void		ps_merge_chunks(t_stack *a);
+int			ps_merge_chunks(t_stack *a);
 
 void		ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_big_sort(t_stack *a, t_stack *b);

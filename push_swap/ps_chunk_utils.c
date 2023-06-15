@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:36:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/15 15:56:36 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:24:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ int	ps_add_emptychunk(t_stack *a)
 }
 
 // merges the top two chunks and then frees the second one if possible.
-void	ps_merge_chunks(t_stack *a)
+// returns 0 if there are less than two chunks, else 1.
+int	ps_merge_chunks(t_stack *a)
 {
 	t_chunk	*bin;
 
 	if (!a->chunks || !a->chunks->next)
-		return ;
+		return (0);
 	bin = a->chunks->next;
 	a->chunks->size += bin->size;
 	if (bin->max > a->chunks->max)
@@ -44,6 +45,7 @@ void	ps_merge_chunks(t_stack *a)
 		a->chunks->s = 1;
 	a->chunks->next = bin->next;
 	free(bin);
+	return (1);
 }
 
 // returns 0 if there are no chunks.
