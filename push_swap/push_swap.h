@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 17:51:32 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:42:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			ps_ss(t_stack *a, t_stack *b);
 int			ps_rr(t_stack *a, t_stack *b);
 int			ps_rrr(t_stack *a, t_stack *b);
 int			ps_print_add_back(t_stack *a, t_dlilist *el);
+void		ps_print_ops(t_stack *a);
 int			ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
 size_t		ps_find_nbindex(t_stack *a, int nb);
 int			ps_error(t_stack *a, t_stack *b);
