@@ -6,15 +6,15 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/15 17:18:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:13:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // pushes 'nb' from 'src' to 'dst' with the least amount of (r)rotates
-// returns the amount of rotates performed (+) or rrotates (-), else 0.
-// if 'nb' isn't found then also returns 0.
+// returns the amount of rotates performed.
+// returns -1 if an operation failed, or nb wasn't found.
 // ignores chunks entirely
 int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 {
@@ -23,20 +23,20 @@ int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 
 	i = ps_find_nbindex(src, nb);
 	if (i == -1)
-		return (0);
+		return (-1);
 	if (i < (src->size / 2 + 1))
 	{
 		r = (int) i;
 		while (i--)
-			ps_rotate(src, csrc);
+			if (!ps_rotate(src, csrc))
+				return (-1);
 	}
 	else
-	{
-		r = (int) src->size - i;
 		while (i++ < src->size)
-			ps_rrotate(src, csrc);
-	}
-	ps_push(src, dst, ((csrc == 'a') * 'b') + ((csrc == 'b') * 'a'));
+			if (!ps_rrotate(src, csrc))
+				return (-1);
+	if (!ps_push(src, dst, ((csrc == 'a') * 'b') + ((csrc == 'b') * 'a')))
+		return (-1);
 	return (r);
 }
 

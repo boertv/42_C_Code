@@ -6,71 +6,84 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:07:02 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 15:35:54 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:28:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ps_sort_two(t_stack *a)
+// returns 0 if ps_swap failed, else 1.
+static int	ps_sort_two(t_stack *a)
 {
 	if (a->start->nb != a->min)
-		ps_swap(a, 'a');
+		if (!ps_swap(a, 'a'))
+			return (0);
+	return (1);
 }
 
-static void	ps_sort_three(t_stack *a)
+// returns 0 if ps_swap failed, else 1.
+static int	ps_sort_three(t_stack *a)
 {
-	if (a->size != 3)
-		return ;
 	if (ps_issorted(a, 1, 0))
-		return ;
+		return (1);
 	if (a->start->nb < a->start->next->nb)
-	{
-		ps_rrotate(a, 'a');
-		ps_sort_three(a);
-	}
+		if (!ps_rrotate(a, 'a') || !ps_sort_three(a))
+			return (0);
 	else if (a->start->nb > a->end->nb)
-	{
-		ps_rotate(a, 'a');
-		ps_sort_three(a);
-	}
+		if (!ps_rotate(a, 'a') || !ps_sort_three(a))
+			return (0);
 	else
 	{
-		ps_swap(a, 'a');
-		return ;
+		if (!ps_swap(a, 'a'))
+			return (0);
+		return (1);
 	}
 }
 
-static void	ps_sort_four(t_stack *a, t_stack *b)
+// returns 0 if an operation failed, else 1.
+static int	ps_sort_four(t_stack *a, t_stack *b)
 {
 	if (ps_issorted(a, 1, 0))
-		return ;
-	ps_fastest_push(a, b, a->min, 'a');
-	ps_sort_three(a);
-	ps_push(b, a, 'a');
+		return (1);
+	if (ps_fastest_push(a, b, a->min, 'a') == -1)
+		return (0);
+	if (!ps_sort_three(a))
+		return (0);
+	if (!ps_push(b, a, 'a'))
+		return (0);
+	return (1);
 }
 
-static void	ps_sort_five(t_stack *a, t_stack *b)
+// returns 0 if an operation failed, else 1.
+static int	ps_sort_five(t_stack *a, t_stack *b)
 {
-	if (a->size != 5 || b->size)
-		return ;
 	if (!b->size && ps_issorted(a, 1, 0))
-		return ;
-	ps_fastest_push(a, b, a->min, 'a');
-	ps_fastest_push(a, b, a->min, 'a');
-	ps_sort_three(a);
-	ps_push(b, a, 'a');
-	ps_push(b, a, 'a');
+		return (1);
+	if (ps_fastest_push(a, b, a->min, 'a') == -1)
+		return (0);
+	if (ps_fastest_push(a, b, a->min, 'a') == -1)
+		return (0);
+	if (!ps_sort_three(a))
+		return (0);
+	if (!ps_push(b, a, 'a') || !ps_push(b, a, 'a'))
+		return (0);
+	return (1);
 }
 
-void	ps_small_sorts(t_stack *a, t_stack *b)
+// returns 0 if an operation failed, else 1.
+int	ps_small_sorts(t_stack *a, t_stack *b)
 {
 	if (a->size == 2)
-		ps_sort_two(a);
+		if (!ps_sort_two(a))
+			return (0);
 	else if (a->size == 3)
-		ps_sort_three(a);
+		if (!ps_sort_three(a))
+			return (0);
 	else if (a->size == 4)
-		ps_sort_four(a, b);
+		if (!ps_sort_four(a, b))
+			return (0);
 	else if (a->size == 5)
-		ps_sort_five(a, b);
+		if (!ps_sort_five(a, b))
+			return (0);
+	return (1);
 }

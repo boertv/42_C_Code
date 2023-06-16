@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 15:29:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:30:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,8 @@ static int	ps_isunique(int nb, t_stack *a)
 	return (1);
 }
 
-// returns 0 on error, else 1.
-int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
+static void	ps_set_null(t_stack *a, t_stack *b)
 {
-	int	temp;
-
 	a->size = 0;
 	b->size = 0;
 	a->start = NULL;
@@ -78,7 +75,15 @@ int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
 	b->start = NULL;
 	b->end = NULL;
 	b->chunks = NULL;
-	if (!ps_add_emptychunk(a))
+}
+
+// returns 0 on error, else 1.
+int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
+{
+	int	temp;
+
+	ps_set_null(a, b);
+	if (!ps_initialise_print(a, b) || !ps_add_emptychunk(a))
 		return (0);
 	while (ac-- > 1)
 	{

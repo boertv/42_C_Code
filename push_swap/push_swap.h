@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 15:53:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:51:32 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_dlilist
 	struct s_dlilist	*prev;
 }				t_dlilist;
 
-// s = 1 if all previous chunk are also sorted.
+// s = 1 only if all previous chunks are also sorted.
 typedef struct s_chunk
 {
 	size_t			size;
@@ -33,6 +33,7 @@ typedef struct s_chunk
 	struct s_chunk	*next;
 }				t_chunk;
 
+// print_front always contains 0.
 typedef struct s_stack
 {
 	t_dlilist	*start;
@@ -41,17 +42,33 @@ typedef struct s_stack
 	t_chunk		*chunks;
 	int			max;
 	int			min;
+	t_dlilist	**print_front;
+	t_dlilist	**print_back;
 }				t_stack;
 
+# define OP_SA 1
+# define OP_SB 2
+# define OP_PA 3
+# define OP_PB 4
+# define OP_RA 5
+# define OP_RB 6
+# define OP_RRA 7
+# define OP_RRB 8
+# define OP_SS 11
+# define OP_RR 12
+# define OP_RRR 13
+
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
+int			ps_initialise_print(t_stack *a, t_stack *b);
 t_dlilist	*ps_create_element(int nb);
-void		ps_swap(t_stack *a, char cdst);
-void		ps_ss(t_stack *a, t_stack *b);
-void		ps_push(t_stack *src, t_stack *dst, char c);
+int			ps_swap(t_stack *a, char cdst);
+int			ps_push(t_stack *src, t_stack *dst, char c);
 int			ps_rotate(t_stack *a, char c);
-void		ps_rr(t_stack *a, t_stack *b);
-void		ps_rrotate(t_stack *a, char c);
-void		ps_rrr(t_stack *a, t_stack *b);
+int			ps_rrotate(t_stack *a, char c);
+int			ps_ss(t_stack *a, t_stack *b);
+int			ps_rr(t_stack *a, t_stack *b);
+int			ps_rrr(t_stack *a, t_stack *b);
+int			ps_print_add_back(t_stack *a, t_dlilist *el);
 int			ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
 size_t		ps_find_nbindex(t_stack *a, int nb);
 int			ps_error(t_stack *a, t_stack *b);
@@ -69,7 +86,7 @@ int			ps_add_emptychunk(t_stack *a);
 int			ps_del_chunk(t_stack *a);
 int			ps_merge_chunks(t_stack *a);
 
-void		ps_small_sorts(t_stack *a, t_stack *b);
+int			ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_big_sort(t_stack *a, t_stack *b);
 
 #endif

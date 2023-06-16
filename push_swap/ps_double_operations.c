@@ -6,29 +6,38 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:58:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/07 16:09:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:21:58 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ps_ss(t_stack *a, t_stack *b)
+// returns 0 if a create_element failed, else 1.
+int	ps_ss(t_stack *a, t_stack *b)
 {
-	ft_printf("ss\n");
-	ps_swap(a, '0');
-	ps_swap(b, '0');
+	if (!ps_print_add_back(a, ps_create_element(OP_SS)))
+		return (0);
+	if (!ps_swap(a, '0') || !ps_swap(b, '0'))
+		return (0);
+	return (1);
 }
 
-void	ps_rr(t_stack *a, t_stack *b)
+// returns 0 if a create_element failed, else 1.
+int	ps_rr(t_stack *a, t_stack *b)
 {
-	ft_printf("rr\n");
-	ps_rotate(a, '0');
-	ps_rotate(b, '0');
+	if (!ps_print_add_back(a, ps_create_element(OP_RR)))
+		return (0);
+	if (!ps_rotate(a, '0') || !ps_rotate(b, '0'))
+		return (0);
+	return (1);
 }
 
-void	ps_rrr(t_stack *a, t_stack *b)
+// returns 0 if a create_element failed, else 1.
+int	ps_rrr(t_stack *a, t_stack *b)
 {
-	ft_printf("rrr\n");
-	ps_rrotate(a, '0');
-	ps_rrotate(b, '0');
+	if (!ps_print_add_back(a, ps_create_element(OP_RRR)))
+		return (0);
+	if (!ps_rrotate(a, '0') || !ps_rrotate(b, '0'))
+		return (0);
+	return (1);
 }
