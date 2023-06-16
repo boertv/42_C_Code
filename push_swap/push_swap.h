@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/15 17:08:37 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:53:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_dlilist	*ps_create_element(int nb);
 void		ps_swap(t_stack *a, char cdst);
 void		ps_ss(t_stack *a, t_stack *b);
 void		ps_push(t_stack *src, t_stack *dst, char c);
-void		ps_rotate(t_stack *a, char c);
+int			ps_rotate(t_stack *a, char c);
 void		ps_rr(t_stack *a, t_stack *b);
 void		ps_rrotate(t_stack *a, char c);
 void		ps_rrr(t_stack *a, t_stack *b);

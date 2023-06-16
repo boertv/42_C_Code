@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 17:12:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:52:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ps_push(t_stack *src, t_stack *dst, char cdst)
 	ps_add_front(dst, temp);
 }
 
-void	ps_rotate(t_stack *a, char c)
+// returns 1.
+int	ps_rotate(t_stack *a, char c)
 {
 	t_dlilist	*temp;
 
@@ -49,6 +50,7 @@ void	ps_rotate(t_stack *a, char c)
 	temp = a->start;
 	ps_del_front(a, 0);
 	ps_add_back(a, temp);
+	return (1);
 }
 
 void	ps_rrotate(t_stack *a, char c)
