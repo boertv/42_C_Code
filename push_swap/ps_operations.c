@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 18:25:34 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:48:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ps_swap(t_stack *a, char c)
 		if (!ps_print_add_back(a, ps_create_element(OP_SB)))
 			return (0);
 	if (a->size < 2)
-		return ;
+		return (1);
 	if (a->start->next->next)
 		a->start->next->next->prev = a->start;
 	a->start->prev = a->start->next;
@@ -89,4 +89,5 @@ int	ps_rrotate(t_stack *a, char c)
 	temp = a->end;
 	ps_del_back(a, 0);
 	ps_add_front(a, temp);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 18:13:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:55:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 // ignores chunks entirely
 int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 {
-	size_t		i;
+	ssize_t		i;
 	int			r;
 
 	i = ps_find_nbindex(src, nb);
 	if (i == -1)
 		return (-1);
-	if (i < (src->size / 2 + 1))
+	if (i < ((ssize_t) src->size / 2 + 1))
 	{
 		r = (int) i;
 		while (i--)
@@ -32,7 +32,7 @@ int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 				return (-1);
 	}
 	else
-		while (i++ < src->size)
+		while (i++ < (ssize_t) src->size)
 			if (!ps_rrotate(src, csrc))
 				return (-1);
 	if (!ps_push(src, dst, ((csrc == 'a') * 'b') + ((csrc == 'b') * 'a')))
@@ -41,10 +41,10 @@ int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 }
 
 // returns -1 if nb isn't in the list.
-size_t	ps_find_nbindex(t_stack *a, int nb)
+ssize_t	ps_find_nbindex(t_stack *a, int nb)
 {
 	t_dlilist	*list;
-	size_t		i;
+	ssize_t		i;
 
 	list = a->start;
 	i = 0;

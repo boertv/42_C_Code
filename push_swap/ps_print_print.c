@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 19:26:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 20:07:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:10:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	ps_print_ops(t_stack *a)
 	while (list)
 	{
 		if (!ps_print_hub(list))
-			{
-				write(2, "Error\n", 6);
-				return ;
-			}
+		{
+			write(2, "Error\n", 6);
+			return ;
+		}
 		list = list->next;
 	}
 }

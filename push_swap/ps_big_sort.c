@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 18:19:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:00:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst, char cs)
 	{
 		if ((cs == 'a' && src->start->nb <= avg)
 			|| (cs == 'b' && src->start->nb > avg))
+		{
 			if (!ps_push(src, dst, ((cs == 'a') * 'b') + ((cs == 'b') * 'a')))
 				return (0);
+		}
 		else
 		{
 			if (!ps_rotate(src, cs))

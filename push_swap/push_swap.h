@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 20:14:02 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:53:48 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		ps_print_ops(t_stack *a);
 void		ps_print_clear(t_stack *a);
 int			ps_print_del(t_dlilist *el);
 int			ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
-size_t		ps_find_nbindex(t_stack *a, int nb);
+ssize_t		ps_find_nbindex(t_stack *a, int nb);
 int			ps_error(t_stack *a, t_stack *b);
 int			ps_del_back(t_stack *a, short f);
 int			ps_del_front(t_stack *a, short f);
