@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/19 17:11:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:33:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int ac, char *av[])
 			return (ps_error(&a, &b));
 //	ps_print_trim(&a);
 	ps_print_ops(&a);
-	ps_print_clear(&a);
+	ps_print_clear(&a, &b);
 
 /* THIS IS THE START OF MY LITTLE TEST AREA */
 

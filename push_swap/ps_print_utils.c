@@ -19,6 +19,12 @@ int	ps_initialise_print(t_stack *a, t_stack *b)
 	runner = ps_create_element(0);
 	if (!runner)
 		return (0);
+	a->print_front = malloc(sizeof(t_dlilist **));
+	a->print_back = malloc(sizeof(t_dlilist **));
+	b->print_front = malloc(sizeof(t_dlilist **));
+	b->print_back = malloc(sizeof(t_dlilist **));
+	if ((!a->print_front || !a->print_back || !b->print_front || !b->print_back))
+		return (0);
 	a->print_front = &runner;
 	a->print_back = &runner;
 	b->print_front = a->print_front;
@@ -38,16 +44,24 @@ int	ps_print_add_back(t_stack *a, t_dlilist *el)
 }
 
 // clears the full list.
-void	ps_print_clear(t_stack *a)
+void	ps_print_clear(t_stack *a, t_stack *b)
 {
 	t_dlilist	*bin;
 
-	while ((*a->print_front))
+	while (a->print_front && (*(a->print_front)))
 	{
 		bin = (*a->print_front);
-		a->print_front = &((*a->print_front)->next);
+		a->print_front = &((*(a->print_front))->next);
 		free(bin);
 	}
+	if (a->print_front)
+		free (a->print_front);
+	if (a->print_back)
+		free (a->print_back);
+	if (b->print_front)
+		free (b->print_front);
+	if (b->print_back)
+		free (b->print_back);
 }
 
 // returns 0 if el = NULL, else 1.
