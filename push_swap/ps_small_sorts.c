@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:07:02 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/19 17:00:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:32:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,12 @@ static int	ps_sort_five(t_stack *a, t_stack *b)
 int	ps_small_sorts(t_stack *a, t_stack *b)
 {
 	if (a->size == 2)
-	{
-		if (!ps_sort_two(a))
-			return (0);
-	}
+		return (ps_sort_two(a));
 	else if (a->size == 3)
-	{
-		if (!ps_sort_three(a))
-			return (0);
-	}
+		return (ps_sort_three(a));
 	else if (a->size == 4)
-	{
-		if (!ps_sort_four(a, b))
-			return (0);
-	}
+		return (ps_sort_four(a, b));
 	else if (a->size == 5)
-		if (!ps_sort_five(a, b))
-			return (0);
-	return (1);
+		return (ps_sort_five(a, b));
+	return (0);
 }

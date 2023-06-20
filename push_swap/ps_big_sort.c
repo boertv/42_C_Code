@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/19 17:00:34 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:09:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst, char cs)
 
 	if (!ps_add_emptychunk(dst))
 		return (0);
-	if (src->chunks->size < 3)
+	if (src->chunks->size < 3 || src->chunks->s)
 		return (ps_sort_push_del(src, dst, cs));
 	avg = ps_ischunkavg(src);
 	r = 0;
@@ -88,12 +88,24 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst, char cs)
 		while (r--)
 			if (!ps_rrotate(src, cs))
 				return (0);
+	if (dst->chunks->next && dst->chunks->next->s)
+	{
+		if (ps_issorted(dst, (cs == 'b'), 1))
+			ps_merge_chunks(dst);
+		else if (dst->chunks->size == 2)
+		{
+			ps_swap(dst, (cs == 'a') + 'a');
+			ps_merge_chunks(dst);
+		}
+	}
 	return (1);
 }
 
 int	ps_big_sort(t_stack *a, t_stack *b)
 {
-	while (!a->chunks->s && b->size)
+	if (ps_issorted(a, 1, 0))
+		return (1);
+	while (!a->chunks->s || b->size)
 	{
 		while (a->size)
 		{
@@ -110,5 +122,25 @@ int	ps_big_sort(t_stack *a, t_stack *b)
 				return (0);
 		}
 	}
+
+//
+// ft_printf("calling a -> b with:\n");
+// if (a->chunks)
+// ft_printf("a->s = %i  //  ", a->chunks->s);
+// else
+// ft_printf("a->s = N/A  //  ");
+// if (b->chunks)
+// ft_printf("b->s = %i\n", b->chunks->s);
+// else
+// ft_printf("b->s = N/A\n");
+// test_print(a, 'a');
+// test_print(b, 'b');
+//
+
+//
+// ft_printf("ended with:\n");
+// test_print(a, 'a');
+// test_print(b, 'b');
+//
 	return (1);
 }
