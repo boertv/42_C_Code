@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 17:37:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:09:51 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,4 @@ int			ps_merge_chunks(t_stack *a);
 int			ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_big_sort(t_stack *a, t_stack *b);
 
-
-//
-// REMOVE THIS LATER OKTHXBYECYALATER
-//
-void	test_print(t_stack *a, char c);
-int		ps_print_hub(t_dlilist *list);
-//
-// REMOVE THIS LATER OKTHXBYECYALATER
-//
 #endif

@@ -6,16 +6,15 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 19:26:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 17:52:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:09:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // returns 0 if command was unrecognized, else 1.
-int	ps_print_hub(t_dlilist *list)
+static int	ps_print_hub(t_dlilist *list)
 {
-// MAKE STATIC AGAIN
 	if (list->nb == OP_SA)
 		ft_printf("sa");
 	else if (list->nb == OP_SB)

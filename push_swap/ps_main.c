@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 18:03:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:16:08 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@
 int	main(int ac, char *av[])
 {
 // return "Error\n" on std_error after malloc fail?
-// optimise by storing operations in a linked list and checking for doubles (ra - rb) or superfluous ones (ra - rra or pb - pa)
 // outliers fuck my avg up real good but what can you do? (short of sorting it before sorting it)
-// add a print for the operations list
 	t_stack	a;
 	t_stack	b;
 
@@ -53,6 +51,7 @@ int	main(int ac, char *av[])
 
 // test_print(&a, 'a');
 
+// SMALL SORTS SEGFAULTS
 	if (ac <= 6)
 	{
 		if (!ps_small_sorts(&a, &b))
