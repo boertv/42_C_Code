@@ -87,5 +87,3 @@ int	ps_print_del(t_stack *a, t_dlilist *el)
 	free(el);
 	return (1);
 }
-
-// add function to trim the list.

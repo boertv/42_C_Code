@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 16:09:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:41:03 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,40 +107,12 @@ int	ps_big_sort(t_stack *a, t_stack *b)
 		return (1);
 	while (!a->chunks->s || b->size)
 	{
-		while (a->size)
-		{
-			if (a->chunks->s)
-				break ;
+		while (a->size && !a->chunks->s)
 			if (!ps_push_relative_toavg(a, b, 'a'))
 				return (0);
-		}
-		while (b->size)
-		{
-			if (b->chunks->s && !a->chunks->s)
-				break ;
+		while (b->size && (!a->size || a->chunks->s))
 			if (!ps_push_relative_toavg(b, a, 'b'))
 				return (0);
-		}
 	}
-
-//
-// ft_printf("calling a -> b with:\n");
-// if (a->chunks)
-// ft_printf("a->s = %i  //  ", a->chunks->s);
-// else
-// ft_printf("a->s = N/A  //  ");
-// if (b->chunks)
-// ft_printf("b->s = %i\n", b->chunks->s);
-// else
-// ft_printf("b->s = N/A\n");
-// test_print(a, 'a');
-// test_print(b, 'b');
-//
-
-//
-// ft_printf("ended with:\n");
-// test_print(a, 'a');
-// test_print(b, 'b');
-//
 	return (1);
 }
