@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 18:15:08 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:22:13 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // pushes 'nb' from 'src' to 'dst' with the least amount of (r)rotates
 // returns the amount of rotates performed.
 // returns -1 if an operation failed, or nb wasn't found.
-// ignores chunks entirely
+// ignores chunks entirely and always prints all operations.
 int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 {
 	ssize_t		i;
@@ -35,14 +35,8 @@ int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 		while (i++ < (ssize_t) src->size)
 			if (!ps_rrotate(src, csrc))
 				return (-1);
-//
-ft_printf("segfault in fastest_push\nconcerning this next line here...\n");
-//
-	if (!ps_push(src, dst, ((csrc == 'a') * 'b') + ((csrc == 'b') * 'a')))
+	if (!ps_push(src, dst, (csrc == 'a') + 'a'))
 		return (-1);
-//
-ft_printf("we exiting fastest_push...\n");
-//
 	return (r);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 18:09:51 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:00:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
 int			ps_initialise_print(t_stack *a, t_stack *b);
 t_dlilist	*ps_create_element(int nb);
 int			ps_swap(t_stack *a, char cdst);
-int			ps_push(t_stack *src, t_stack *dst, char c);
+int			ps_push(t_stack *src, t_stack *dst, char cdst);
 int			ps_rotate(t_stack *a, char c);
 int			ps_rrotate(t_stack *a, char c);
 int			ps_ss(t_stack *a, t_stack *b);

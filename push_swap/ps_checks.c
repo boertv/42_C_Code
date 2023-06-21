@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 17:49:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:20:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,22 @@ int	ps_issorted(t_stack *a, short as, short c)
 	return (1);
 }
 
+// can handle chunk = NULL
 void	ps_isnewattribute(t_stack *a, int nb, t_chunk *chunk)
 {
 	if (a->max < nb)
 		a->max = nb;
 	if (a->min > nb)
 		a->min = nb;
+	if (!chunk)
+		return ;
 	if (chunk->max < nb)
 		chunk->max = nb;
 	if (chunk->min > nb)
 		chunk->min = nb;
 }
 
+// can handle chunk = NULL
 void	ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk)
 {
 	if (!a->size)
@@ -54,6 +58,8 @@ void	ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk)
 		a->max = ps_ismaxmin(a, 1, 0);
 	if (a->min == nb)
 		a->min = ps_ismaxmin(a, 0, 0);
+	if (!chunk)
+		return ;
 	if (chunk->max == nb)
 		chunk->max = ps_ismaxmin(a, 1,
 				(chunk == a->chunks) + ((chunk != a->chunks) * 2));
@@ -62,6 +68,7 @@ void	ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk)
 				(chunk == a->chunks) + ((chunk != a->chunks) * 2));
 }
 
+// if chunk = NULL it handles the full stack instead.
 void	ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk)
 {
 	if (!chunk)

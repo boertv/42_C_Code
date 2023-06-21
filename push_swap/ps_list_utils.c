@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 13:09:33 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/14 15:25:37 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:21:50 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ int	ps_add_front(t_stack *a, t_dlilist *el)
 	el->prev = NULL;
 	el->next = a->start;
 	a->size++;
-	if (!a->chunks->size)
+	if (a->chunks && !a->chunks->size)
 		ps_addnewattribute(a, el->nb, a->chunks);
-	a->chunks->size++;
+	if (a->chunks)
+		a->chunks->size++;
 	if (!a->start)
 	{
 		a->end = el;
@@ -62,11 +63,12 @@ int	ps_add_back(t_stack *a, t_dlilist *el)
 	el->prev = a->end;
 	a->size++;
 	chunk = a->chunks;
-	while (chunk->next)
+	while (chunk && chunk->next)
 		chunk = chunk->next;
-	if (!chunk->size)
+	if (chunk && !chunk->size)
 		ps_addnewattribute(a, el->nb, chunk);
-	chunk->size++;
+	if (chunk)
+		chunk->size++;
 	if (!a->end)
 	{
 		a->start = el;
@@ -96,7 +98,8 @@ int	ps_del_front(t_stack *a, short f)
 	else
 		a->start->prev = NULL;
 	a->size--;
-	a->chunks->size--;
+	if (a->chunks)
+		a->chunks->size--;
 	ps_isoldattribute(a, bin->nb, a->chunks);
 	if (f == 1)
 		free(bin);
@@ -120,9 +123,10 @@ int	ps_del_back(t_stack *a, short f)
 		a->end->next = NULL;
 	a->size--;
 	chunk = a->chunks;
-	while (chunk->next)
+	while (chunk && chunk->next)
 		chunk = chunk->next;
-	chunk->size--;
+	if (chunk)
+		chunk->size--;
 	ps_isoldattribute(a, bin->nb, chunk);
 	if (f == 1)
 		free(bin);
