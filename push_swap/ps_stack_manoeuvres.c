@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 14:22:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:26:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 	i = ps_find_nbindex(src, nb);
 	if (i == -1)
 		return (-1);
-	if (i < ((ssize_t) (src->size / 2 + 1)))
+	if (i < ((ssize_t)(src->size / 2 + 1)))
 	{
 		r = (int) i;
 		while (i--)
