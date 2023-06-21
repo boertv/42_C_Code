@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_list_utils.c                                    :+:      :+:    :+:   */
+/*   ps_list_new_add_del.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 13:09:33 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 14:21:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:26:09 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ int	ps_add_back(t_stack *a, t_dlilist *el)
 	el->next = NULL;
 	el->prev = a->end;
 	a->size++;
-	chunk = a->chunks;
-	while (chunk && chunk->next)
-		chunk = chunk->next;
+	chunk = ps_get_last_chunk(a->chunks);
 	if (chunk && !chunk->size)
 		ps_addnewattribute(a, el->nb, chunk);
 	if (chunk)
@@ -122,9 +120,7 @@ int	ps_del_back(t_stack *a, short f)
 	else
 		a->end->next = NULL;
 	a->size--;
-	chunk = a->chunks;
-	while (chunk && chunk->next)
-		chunk = chunk->next;
+	chunk = ps_get_last_chunk(a->chunks);
 	if (chunk)
 		chunk->size--;
 	ps_isoldattribute(a, bin->nb, chunk);

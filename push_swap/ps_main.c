@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 13:54:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:31:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,11 @@ void	test_print(t_stack *a, char c)
 
 int	main(int ac, char *av[])
 {
-// return "Error\n" on std_error after malloc fail?
-// outliers fuck my avg up real good but what can you do? (short of sorting it before sorting it)
 	t_stack	a;
 	t_stack	b;
 
 	if (!ps_initialise_stack(ac, av, &a, &b))
 		return (ps_error(&a, &b));
-
-// test_print(&a, 'a');
-
-// SMALL SORTS SEGFAULTS
 	if (ac <= 6)
 	{
 		if (!ps_small_sorts(&a, &b))

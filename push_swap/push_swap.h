@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 14:00:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:26:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_stack
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
 int			ps_initialise_print(t_stack *a, t_stack *b);
 t_dlilist	*ps_create_element(int nb);
+t_chunk		*ps_get_last_chunk(t_chunk *start);
 int			ps_swap(t_stack *a, char cdst);
 int			ps_push(t_stack *src, t_stack *dst, char cdst);
 int			ps_rotate(t_stack *a, char c);
@@ -92,5 +93,7 @@ int			ps_merge_chunks(t_stack *a);
 
 int			ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_big_sort(t_stack *a, t_stack *b);
+int			ps_ispushdone(t_stack *a, size_t r, int avg, char b);
+int			ps_push_or_rotate(t_stack *src, t_stack *dst, char cs);
 
 #endif

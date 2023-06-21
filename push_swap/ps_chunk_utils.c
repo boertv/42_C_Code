@@ -6,11 +6,24 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:36:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/15 16:24:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:25:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// returns NULL if start = NULL.
+t_chunk	*ps_get_last_chunk(t_chunk *start)
+{
+	t_chunk	*last;
+
+	if (!start)
+		return (NULL);
+	last = start;
+	while (last->next)
+		last = last->next;
+	return (last);
+}
 
 // returns 0 if malloc failed, else 1
 int	ps_add_emptychunk(t_stack *a)

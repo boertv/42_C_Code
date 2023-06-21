@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:47:20 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 18:03:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:22:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,34 +67,25 @@ void	ps_print_trim(t_stack *a)
 	t_dlilist	*list;
 	t_dlilist	*rear;
 
-	if (!a->print_front || !*(a->print_front))
+	if (!a->print_front || !*(a->print_front) || !(*(a->print_front))->next)
 		return ;
 	list = (*(a->print_front))->next;
-	while (list && list->next && list->next->next)
+	while (list->next)
 	{
-		while (1)
+		rear = list->prev;
+		while (ps_trim_superfluous(a, list))
 		{
+			list = rear;
+			if (!rear->nb)
+				list = rear->next;
 			rear = list->prev;
-			if (ps_trim_superfluous(a, list))
-			{
-				list = rear;
-				if (!rear->nb)
-					list = rear->next;
-			}
-			else
-				break ;
 		}
-		while (1)
+		while (ps_trim_doubles(a, list))
 		{
+			list = rear;
+			if (!rear->nb)
+				list = rear->next;
 			rear = list->prev;
-			if (ps_trim_doubles(a, list))
-			{
-				list = rear;
-				if (!rear->nb)
-					list = rear->next;
-			}
-			else
-				break ;
 		}
 		list = list->next;
 	}
