@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:07:02 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 18:07:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:58:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ps_sort_two(t_stack *a)
 	return (1);
 }
 
-// returns 0 if ps_swap failed, else 1.
+// returns 0 if an operation failed, else 1.
 static int	ps_sort_three(t_stack *a)
 {
 	if (ps_issorted(a, 1, 0))
@@ -36,7 +36,7 @@ static int	ps_sort_three(t_stack *a)
 		if (!ps_rotate(a, 'a') || !ps_sort_three(a))
 			return (0);
 	}
-	if (!ps_swap(a, 'a'))
+	else if (!ps_swap(a, 'a'))
 		return (0);
 	return (1);
 }
