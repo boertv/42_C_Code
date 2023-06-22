@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 15:31:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:58:25 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char *av[])
 	else
 		if (!ps_big_sort(&a, &b))
 			return (ps_error(&a, &b));
-	ps_print_trim(&a);
+	ps_print_compression(&a);
 	ps_print_ops(&a);
 	ps_print_clear(&a);
 

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:47:20 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 15:22:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:51:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,11 @@ void	ps_print_trim(t_stack *a)
 		}
 		list = list->next;
 	}
+}
+
+void	ps_print_compression(t_stack *a)
+{
+	ps_print_trim(a);
+	ps_print_optimising(a);
+	ps_print_trim(a);
 }

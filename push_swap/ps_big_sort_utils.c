@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 15:29:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:40:51 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ int	ps_ispushdone(t_stack *a, size_t r, int avg, char b)
 	return (0);
 }
 
+static int	ps_rrotate_chunk_values(t_stack *src, char cs, size_t r)
+{
+	if (src->chunks->next)
+		while (r--)
+			if (!ps_rrotate(src, cs))
+				return (0);
+	return (1);
+}
+
 int	ps_push_or_rotate(t_stack *src, t_stack *dst, char cs)
 {
 	size_t	r;
@@ -53,9 +62,5 @@ int	ps_push_or_rotate(t_stack *src, t_stack *dst, char cs)
 		else
 			r++;
 	}
-	if (src->chunks->next)
-		while (r--)
-			if (!ps_rrotate(src, cs))
-				return (0);
-	return (1);
+	return (ps_rrotate_chunk_values(src, cs, r));
 }

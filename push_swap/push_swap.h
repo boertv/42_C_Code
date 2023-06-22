@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 15:42:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:45:58 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_stack
 	t_dlilist	**print_back;
 }				t_stack;
 
+// changing these nbs might ruin some print optimisations.
 # define OP_SA 1
 # define OP_SB 2
 # define OP_PA 3
@@ -80,11 +81,13 @@ int			ps_ss(t_stack *a, t_stack *b);
 int			ps_rr(t_stack *a, t_stack *b);
 int			ps_rrr(t_stack *a, t_stack *b);
 
+void		ps_print_compression(t_stack *a);
+void		ps_print_trim(t_stack *a);
+void		ps_print_optimising(t_stack *a);
 int			ps_print_add_back(t_stack *a, t_dlilist *el);
 void		ps_print_ops(t_stack *a);
 void		ps_print_clear(t_stack *a);
 int			ps_print_del(t_stack *a, t_dlilist *el);
-void		ps_print_trim(t_stack *a);
 
 int			ps_issorted(t_stack *a, short as, short c);
 int			ps_ismaxmin(t_stack *a, short x, short c);
