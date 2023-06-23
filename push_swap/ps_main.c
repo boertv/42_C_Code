@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/22 14:58:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:12:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	test_print(t_stack *a, char c)
 
 int	main(int ac, char *av[])
 {
+// THE optimisation would be to push stuff in between reverse rotating an entire chunk.
+// BUT i don't have that chunk (only it's size with 'size_t r').. And definitly not it's avg....
 	t_stack	a;
 	t_stack	b;
 

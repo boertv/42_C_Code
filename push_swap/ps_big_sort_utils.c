@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:52:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:55:00 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,34 @@ static int	ps_rrotate_chunk_values(t_stack *src, size_t r)
 	return (1);
 }
 
-// static int	ps_rotate_or_swap(t_stack *src, t_stack *dst)
-// {}
+static int	ps_rotate_or_swap(t_stack *src, t_stack *dst, size_t *r, int avg)
+{
+	t_dlilist	*list;
+	size_t		i;
+
+	list = src->start->next;
+	if ((src->a && list->nb <= avg) || (!src->a && list->nb > avg))
+	{
+		i = 0 + ((!src->chunks->next) * (*r));
+		list = list->next;
+		while (list && src->chunks->size > i
+			&& ((src->a && list->nb > avg) || (dst->a && list->nb <= avg)))
+		{
+			list = list->next;
+			i++;
+		}
+		if (!list || src->chunks->size == i)
+		{
+			if (!ps_swap(src, dst, 1))
+				return (0);
+			return (1);
+		}
+	}
+	if (!ps_rotate(src, 1))
+		return (0);
+	(*r)++;
+	return (1);
+}
 
 int	ps_push_or_rotate(t_stack *src, t_stack *dst)
 {
@@ -60,16 +86,9 @@ int	ps_push_or_rotate(t_stack *src, t_stack *dst)
 			if (!ps_push(src, dst))
 				return (0);
 		}
-		else if (src->chunks->size == 2)
-		{
-			if ((!src->a && src->start->next->nb > avg) || (src->a && src->start->next->nb <= avg))
-				if (!ps_swap(src, dst, 1))
-					return (0);
-		}
-		else if (!ps_rotate(src, 1))
-			return (0);
 		else
-			r++;
+			if (!ps_rotate_or_swap(src, dst, &r, avg))
+				return (0);
 	}
 	return (ps_rrotate_chunk_values(src, r));
 }
