@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 14:57:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:13:27 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // returns 0 if an operation failed, else 1.
 static int	ps_sort_push_del(t_stack *src, t_stack *dst, char csrc)
 {
-// make this work with chunks of 5 (for both a and b). (and change the cut-off in mother ft)
 	if (src->chunks->size == 2)
 	{
 		if ((csrc == 'a' && src->start->nb != src->chunks->min)
@@ -34,6 +33,27 @@ static int	ps_sort_push_del(t_stack *src, t_stack *dst, char csrc)
 	return (1);
 }
 
+// returns 0 if an operation failed, else 1.
+static int	ps_pbsapbsbpb_del(t_stack *src, t_stack *dst, char cs)
+{
+	if (!ps_push(src, dst, (cs == 'a') + 'a'))
+		return (0);
+	if (!ps_swap(src, cs))
+		return (0);
+	if (!ps_push(src, dst, (cs == 'a') + 'a'))
+		return (0);
+	if (!ps_swap(dst, (cs == 'a') + 'a'))
+		return (0);
+	if (!ps_push(src, dst, (cs == 'a') + 'a'))
+		return (0);
+	ps_del_chunk(src);
+	if (!dst->chunks->next)
+		dst->chunks->s = 1;
+	else if (dst->chunks->next->s)
+		ps_merge_chunks(dst);
+	return (1);
+}
+
 // returns 0 if ps_add_emptychunk or an operation failed, else 1
 // pushes based on what 'crsc' is (either 'a' or 'b')
 // at the end rotates values back in place if there's more than one chunk
@@ -43,6 +63,11 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst, char cs)
 		return (0);
 	if (src->chunks->size < 3 || src->chunks->s)
 		return (ps_sort_push_del(src, dst, cs));
+	if (src->chunks->size == 3 && ((cs == 'a'
+				&& src->chunks->max == src->start->next->nb && src->chunks->min
+				!= src->start->nb) || (cs == 'b' && src->chunks->min
+				== src->start->next->nb && src->chunks->max != src->start->nb)))
+		return (ps_pbsapbsbpb_del(src, dst, cs));
 	if (!ps_push_or_rotate(src, dst, cs))
 		return (0);
 	if (dst->chunks->next && dst->chunks->next->s)
@@ -51,7 +76,8 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst, char cs)
 			ps_merge_chunks(dst);
 		else if (dst->chunks->size == 2)
 		{
-			ps_swap(dst, (cs == 'a') + 'a');
+			if (!ps_swap(dst, (cs == 'a') + 'a'))
+				return (0);
 			ps_merge_chunks(dst);
 		}
 	}
