@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 16:09:22 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 16:26:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:31:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,26 @@ int	ps_initialise_print(t_stack *a, t_stack *b)
 }
 
 // returns 0 if el = NULL, else 1.
-int	ps_print_add_back(t_stack *a, t_dlilist *el)
+int	ps_print_add_back(t_stack *s, t_dlilist *el)
 {
 	if (!el)
 		return (0);
-	(*(a->print_back))->next = el;
-	el->prev = (*(a->print_back));
-	(*(a->print_back)) = el;
+	(*(s->print_back))->next = el;
+	el->prev = (*(s->print_back));
+	(*(s->print_back)) = el;
 	return (1);
 }
 
 // clears the full list.
-void	ps_print_clear(t_stack *a)
+void	ps_print_clear(t_stack *s)
 {
 	t_dlilist	*bin;
 	t_dlilist	*list;
 
-	if (!a->print_front && !a->print_back)
+	if (!s->print_front && !s->print_back)
 		return ;
-	if (a->print_front)
-		list = *(a->print_front);
+	if (s->print_front)
+		list = *(s->print_front);
 	else
 		list = NULL;
 	while (list)
@@ -63,27 +63,27 @@ void	ps_print_clear(t_stack *a)
 		list = list->next;
 		free(bin);
 	}
-	if (a->print_front)
-		free (a->print_front);
-	if (a->print_back)
-		free (a->print_back);
-	a->print_front = NULL;
-	a->print_back = NULL;
+	if (s->print_front)
+		free (s->print_front);
+	if (s->print_back)
+		free (s->print_back);
+	s->print_front = NULL;
+	s->print_back = NULL;
 }
 
 // returns 0 if el = NULL, else 1.
-int	ps_print_del(t_stack *a, t_dlilist *el)
+int	ps_print_del(t_stack *s, t_dlilist *el)
 {
 	if (!el)
 		return (0);
 	if (el->prev)
 		el->prev->next = el->next;
 	else
-		*(a->print_front) = el->next;
+		*(s->print_front) = el->next;
 	if (el->next)
 		el->next->prev = el->prev;
 	else
-		*(a->print_back) = el->prev;
+		*(s->print_back) = el->prev;
 	free(el);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 13:09:33 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 15:26:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:28:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,78 +27,78 @@ t_dlilist	*ps_create_element(int nb)
 }
 
 // returns 0 if el == NULL, else 1
-int	ps_add_front(t_stack *a, t_dlilist *el)
+int	ps_add_front(t_stack *s, t_dlilist *el)
 {
 	if (!el)
 		return (0);
 	el->prev = NULL;
-	el->next = a->start;
-	a->size++;
-	if (a->chunks && !a->chunks->size)
-		ps_addnewattribute(a, el->nb, a->chunks);
-	if (a->chunks)
-		a->chunks->size++;
-	if (!a->start)
+	el->next = s->start;
+	s->size++;
+	if (s->chunks && !s->chunks->size)
+		ps_addnewattribute(s, el->nb, s->chunks);
+	if (s->chunks)
+		s->chunks->size++;
+	if (!s->start)
 	{
-		a->end = el;
-		ps_addnewattribute(a, el->nb, NULL);
+		s->end = el;
+		ps_addnewattribute(s, el->nb, NULL);
 	}
 	else
 	{
-		a->start->prev = el;
-		ps_isnewattribute(a, el->nb, a->chunks);
+		s->start->prev = el;
+		ps_isnewattribute(s, el->nb, s->chunks);
 	}
-	a->start = el;
+	s->start = el;
 	return (1);
 }
 
 // returns 0 if el == NULL, else 1
-int	ps_add_back(t_stack *a, t_dlilist *el)
+int	ps_add_back(t_stack *s, t_dlilist *el)
 {
 	t_chunk	*chunk;
 
 	if (!el)
 		return (0);
 	el->next = NULL;
-	el->prev = a->end;
-	a->size++;
-	chunk = ps_get_last_chunk(a->chunks);
+	el->prev = s->end;
+	s->size++;
+	chunk = ps_get_last_chunk(s->chunks);
 	if (chunk && !chunk->size)
-		ps_addnewattribute(a, el->nb, chunk);
+		ps_addnewattribute(s, el->nb, chunk);
 	if (chunk)
 		chunk->size++;
-	if (!a->end)
+	if (!s->end)
 	{
-		a->start = el;
-		ps_addnewattribute(a, el->nb, NULL);
+		s->start = el;
+		ps_addnewattribute(s, el->nb, NULL);
 	}
 	else
 	{
-		a->end->next = el;
-		ps_isnewattribute(a, el->nb, chunk);
+		s->end->next = el;
+		ps_isnewattribute(s, el->nb, chunk);
 	}
-	a->end = el;
+	s->end = el;
 	return (1);
 }
 
 // returns 0 if list is empty, else 1
 // if f == 1 the data is freed
-int	ps_del_front(t_stack *a, short f)
+int	ps_del_front(t_stack *s, short f)
 {
 	t_dlilist	*bin;
 
-	if (!a->size)
+	if (!s->size)
 		return (0);
-	bin = a->start;
-	a->start = a->start->next;
-	if (!a->start)
-		a->end = NULL;
+	bin = s->start;
+	s->start = s->start->next;
+	if (!s->start)
+		s->end = NULL;
 	else
-		a->start->prev = NULL;
-	a->size--;
-	if (a->chunks)
-		a->chunks->size--;
-	ps_isoldattribute(a, bin->nb, a->chunks);
+		s->start->prev = NULL;
+	s->size--;
+	if (s->chunks)
+		s->chunks->size--;
+	ps_isoldattribute(s, bin->nb, s->chunks);
 	if (f == 1)
 		free(bin);
 	return (1);
@@ -106,24 +106,24 @@ int	ps_del_front(t_stack *a, short f)
 
 // returns 0 if list is empty, else 1
 // if f == 1 the data is freed
-int	ps_del_back(t_stack *a, short f)
+int	ps_del_back(t_stack *s, short f)
 {
 	t_dlilist	*bin;
 	t_chunk		*chunk;
 
-	if (!a->size)
+	if (!s->size)
 		return (0);
-	bin = a->end;
-	a->end = a->end->prev;
-	if (!a->end)
-		a->start = NULL;
+	bin = s->end;
+	s->end = s->end->prev;
+	if (!s->end)
+		s->start = NULL;
 	else
-		a->end->next = NULL;
-	a->size--;
-	chunk = ps_get_last_chunk(a->chunks);
+		s->end->next = NULL;
+	s->size--;
+	chunk = ps_get_last_chunk(s->chunks);
 	if (chunk)
 		chunk->size--;
-	ps_isoldattribute(a, bin->nb, chunk);
+	ps_isoldattribute(s, bin->nb, chunk);
 	if (f == 1)
 		free(bin);
 	return (1);

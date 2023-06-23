@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 15:10:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:26:57 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_chunk
 // print_front always contains 0.
 typedef struct s_stack
 {
+	char		a;
 	t_dlilist	*start;
 	t_dlilist	*end;
 	size_t		size;
@@ -73,10 +74,10 @@ int			ps_del_chunk(t_stack *a);
 int			ps_merge_chunks(t_stack *a);
 t_chunk		*ps_get_last_chunk(t_chunk *start);
 
-int			ps_swap(t_stack *a, t_stack *o, char cdst);
-int			ps_push(t_stack *src, t_stack *dst, char cdst);
-int			ps_rotate(t_stack *a, char c);
-int			ps_rrotate(t_stack *a, char c);
+int			ps_swap(t_stack *a, t_stack *o, short p);
+int			ps_push(t_stack *src, t_stack *dst);
+int			ps_rotate(t_stack *a, short p);
+int			ps_rrotate(t_stack *a, short p);
 int			ps_ss(t_stack *a, t_stack *b);
 int			ps_rr(t_stack *a, t_stack *b);
 int			ps_rrr(t_stack *a, t_stack *b);
@@ -96,11 +97,11 @@ void		ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk);
 void		ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk);
 
 int			ps_small_sorts(t_stack *a, t_stack *b);
-int			ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc);
+int			ps_fastest_push(t_stack *src, t_stack *dst, int nb);
 ssize_t		ps_find_nbindex(t_stack *a, int nb);
 int			ps_big_sort(t_stack *a, t_stack *b);
 int			ps_ischunkavg(t_stack *a);
 int			ps_ispushdone(t_stack *a, size_t r, int avg, char b);
-int			ps_push_or_rotate(t_stack *src, t_stack *dst, char cs);
+int			ps_push_or_rotate(t_stack *src, t_stack *dst);
 
 #endif

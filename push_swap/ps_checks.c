@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 14:20:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:24:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 // returns 1 if stack is sorted, else 0.
 // if (as) then checks in ascending order, else in descending.
 // if (c) then only looks at the first chunk.
-int	ps_issorted(t_stack *a, short as, short c)
+int	ps_issorted(t_stack *s, short as, short c)
 {
 	t_dlilist	*list;
 	size_t		i;
 
-	list = a->start;
+	list = s->start;
 	i = 0;
 	while (list && list->next)
 	{
-		if (c && i++ >= a->chunks->size)
+		if (c && i++ >= s->chunks->size)
 			break ;
 		if ((as && list->nb > list->next->nb)
 			|| (!as && list->nb < list->next->nb))
@@ -35,12 +35,12 @@ int	ps_issorted(t_stack *a, short as, short c)
 }
 
 // can handle chunk = NULL
-void	ps_isnewattribute(t_stack *a, int nb, t_chunk *chunk)
+void	ps_isnewattribute(t_stack *s, int nb, t_chunk *chunk)
 {
-	if (a->max < nb)
-		a->max = nb;
-	if (a->min > nb)
-		a->min = nb;
+	if (s->max < nb)
+		s->max = nb;
+	if (s->min > nb)
+		s->min = nb;
 	if (!chunk)
 		return ;
 	if (chunk->max < nb)
@@ -50,31 +50,31 @@ void	ps_isnewattribute(t_stack *a, int nb, t_chunk *chunk)
 }
 
 // can handle chunk = NULL
-void	ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk)
+void	ps_isoldattribute(t_stack *s, int nb, t_chunk *chunk)
 {
-	if (!a->size)
+	if (!s->size)
 		return ;
-	if (a->max == nb)
-		a->max = ps_ismaxmin(a, 1, 0);
-	if (a->min == nb)
-		a->min = ps_ismaxmin(a, 0, 0);
+	if (s->max == nb)
+		s->max = ps_ismaxmin(s, 1, 0);
+	if (s->min == nb)
+		s->min = ps_ismaxmin(s, 0, 0);
 	if (!chunk)
 		return ;
 	if (chunk->max == nb)
-		chunk->max = ps_ismaxmin(a, 1,
-				(chunk == a->chunks) + ((chunk != a->chunks) * 2));
+		chunk->max = ps_ismaxmin(s, 1,
+				(chunk == s->chunks) + ((chunk != s->chunks) * 2));
 	if (chunk->min == nb)
-		chunk->min = ps_ismaxmin(a, 0,
-				(chunk == a->chunks) + ((chunk != a->chunks) * 2));
+		chunk->min = ps_ismaxmin(s, 0,
+				(chunk == s->chunks) + ((chunk != s->chunks) * 2));
 }
 
 // if chunk = NULL it handles the full stack instead.
-void	ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk)
+void	ps_addnewattribute(t_stack *s, int nb, t_chunk *chunk)
 {
 	if (!chunk)
 	{
-		a->max = nb;
-		a->min = nb;
+		s->max = nb;
+		s->min = nb;
 	}
 	else
 	{

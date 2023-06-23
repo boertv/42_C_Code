@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:36:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 15:25:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:25:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_chunk	*ps_get_last_chunk(t_chunk *start)
 }
 
 // returns 0 if malloc failed, else 1
-int	ps_add_emptychunk(t_stack *a)
+int	ps_add_emptychunk(t_stack *s)
 {
 	t_chunk	*new;
 
@@ -35,41 +35,41 @@ int	ps_add_emptychunk(t_stack *a)
 		return (0);
 	new->size = 0;
 	new->s = 0;
-	new->next = a->chunks;
-	a->chunks = new;
+	new->next = s->chunks;
+	s->chunks = new;
 	return (1);
 }
 
 // merges the top two chunks and then frees the second one if possible.
 // returns 0 if there are less than two chunks, else 1.
-int	ps_merge_chunks(t_stack *a)
+int	ps_merge_chunks(t_stack *s)
 {
 	t_chunk	*bin;
 
-	if (!a->chunks || !a->chunks->next)
+	if (!s->chunks || !s->chunks->next)
 		return (0);
-	bin = a->chunks->next;
-	a->chunks->size += bin->size;
-	if (bin->max > a->chunks->max)
-		a->chunks->max = bin->max;
-	if (bin->min < a->chunks->min)
-		a->chunks->min = bin->min;
+	bin = s->chunks->next;
+	s->chunks->size += bin->size;
+	if (bin->max > s->chunks->max)
+		s->chunks->max = bin->max;
+	if (bin->min < s->chunks->min)
+		s->chunks->min = bin->min;
 	if (bin->s)
-		a->chunks->s = 1;
-	a->chunks->next = bin->next;
+		s->chunks->s = 1;
+	s->chunks->next = bin->next;
 	free(bin);
 	return (1);
 }
 
 // returns 0 if there are no chunks.
-int	ps_del_chunk(t_stack *a)
+int	ps_del_chunk(t_stack *s)
 {
 	t_chunk	*bin;
 
-	if (!a->chunks)
+	if (!s->chunks)
 		return (0);
-	bin = a->chunks;
-	a->chunks = a->chunks->next;
+	bin = s->chunks;
+	s->chunks = s->chunks->next;
 	free(bin);
 	return (1);
 }

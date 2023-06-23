@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 12:27:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:04:48 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static int	ps_isunique(int nb, t_stack *a)
 
 static void	ps_set_null(t_stack *a, t_stack *b)
 {
+	a->a = 1;
+	b->a = 0;
 	a->size = 0;
 	b->size = 0;
 	a->start = NULL;

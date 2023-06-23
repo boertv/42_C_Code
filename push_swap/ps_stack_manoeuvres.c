@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 16:26:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:32:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // returns the amount of rotates performed.
 // returns -1 if an operation failed, or nb wasn't found.
 // ignores chunks entirely and always prints all operations.
-int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
+int	ps_fastest_push(t_stack *src, t_stack *dst, int nb)
 {
 	ssize_t		i;
 	int			r;
@@ -28,25 +28,25 @@ int	ps_fastest_push(t_stack *src, t_stack *dst, int nb, char csrc)
 	{
 		r = (int) i;
 		while (i--)
-			if (!ps_rotate(src, csrc))
+			if (!ps_rotate(src, 1))
 				return (-1);
 	}
 	else
 		while (i++ < (ssize_t) src->size)
-			if (!ps_rrotate(src, csrc))
+			if (!ps_rrotate(src, 1))
 				return (-1);
-	if (!ps_push(src, dst, (csrc == 'a') + 'a'))
+	if (!ps_push(src, dst))
 		return (-1);
 	return (r);
 }
 
 // returns -1 if nb isn't in the list.
-ssize_t	ps_find_nbindex(t_stack *a, int nb)
+ssize_t	ps_find_nbindex(t_stack *s, int nb)
 {
 	t_dlilist	*list;
 	ssize_t		i;
 
-	list = a->start;
+	list = s->start;
 	i = 0;
 	while (list && list->nb != nb)
 	{

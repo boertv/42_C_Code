@@ -6,49 +6,50 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 15:44:51 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:53:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // returns 0 if create_element failed, else 1.
-int	ps_swap(t_stack *a, t_stack *o, char c)
+// if p = 0 it doesn't print OP_SA or OP_SB.
+int	ps_swap(t_stack *s, t_stack *o, short p)
 {
-	if (o && ((c == 'a' && o->size > 1 && o->start->nb < o->start->next->nb)
-		|| (c == 'b' && o->size > 1 && o->start->nb > o->start->next->nb)))
-		return (ps_ss(a, o));
-	if (c == 'a')
-		if (!ps_print_add_back(a, ps_create_element(OP_SA)))
+	if (p && o && ((s->a && o->size > 1 && o->start->nb < o->start->next->nb)
+		|| (!s->a && o->size > 1 && o->start->nb > o->start->next->nb)))
+		return (ps_ss(s, o));
+	if (p && s->a)
+		if (!ps_print_add_back(s, ps_create_element(OP_SA)))
 			return (0);
-	if (c == 'b')
-		if (!ps_print_add_back(a, ps_create_element(OP_SB)))
+	if (p && !s->a)
+		if (!ps_print_add_back(s, ps_create_element(OP_SB)))
 			return (0);
-	if (a->size < 2)
+	if (s->size < 2)
 		return (1);
-	if (a->start->next->next)
-		a->start->next->next->prev = a->start;
-	a->start->prev = a->start->next;
-	a->start->next = a->start->next->next;
-	a->start->prev->next = a->start;
-	a->start = a->start->prev;
-	a->start->prev = NULL;
-	if (a->size == 2)
-		a->end = a->start->next;
+	if (s->start->next->next)
+		s->start->next->next->prev = s->start;
+	s->start->prev = s->start->next;
+	s->start->next = s->start->next->next;
+	s->start->prev->next = s->start;
+	s->start = s->start->prev;
+	s->start->prev = NULL;
+	if (s->size == 2)
+		s->end = s->start->next;
 	return (1);
 }
 
 // returns 0 if create_element failed, else 1.
-int	ps_push(t_stack *src, t_stack *dst, char cdst)
+int	ps_push(t_stack *src, t_stack *dst)
 {
 	t_dlilist	*temp;
 
 	if (!src->start)
 		return (1);
-	if (cdst == 'a')
+	if (dst->a)
 		if (!ps_print_add_back(src, ps_create_element(OP_PA)))
 			return (0);
-	if (cdst == 'b')
+	if (!dst->a)
 		if (!ps_print_add_back(src, ps_create_element(OP_PB)))
 			return (0);
 	temp = src->start;
@@ -58,39 +59,41 @@ int	ps_push(t_stack *src, t_stack *dst, char cdst)
 }
 
 // returns 0 if create_element failed, else 1.
-int	ps_rotate(t_stack *a, char c)
+// if p = 0 it doesn't print OP_RA or OP_RB.
+int	ps_rotate(t_stack *s, short p)
 {
 	t_dlilist	*temp;
 
-	if (!a->start)
+	if (!s->start)
 		return (1);
-	if (c == 'a')
-		if (!ps_print_add_back(a, ps_create_element(OP_RA)))
+	if (p && s->a)
+		if (!ps_print_add_back(s, ps_create_element(OP_RA)))
 			return (0);
-	if (c == 'b')
-		if (!ps_print_add_back(a, ps_create_element(OP_RB)))
+	if (p && !s->a)
+		if (!ps_print_add_back(s, ps_create_element(OP_RB)))
 			return (0);
-	temp = a->start;
-	ps_del_front(a, 0);
-	ps_add_back(a, temp);
+	temp = s->start;
+	ps_del_front(s, 0);
+	ps_add_back(s, temp);
 	return (1);
 }
 
 // returns 0 if create_element failed, else 1.
-int	ps_rrotate(t_stack *a, char c)
+// if p = 0 it doesn't print OP_RRA or OP_RRB.
+int	ps_rrotate(t_stack *s, short p)
 {
 	t_dlilist	*temp;
 
-	if (!a->end)
+	if (!s->end)
 		return (1);
-	if (c == 'a')
-		if (!ps_print_add_back(a, ps_create_element(OP_RRA)))
+	if (p && s->a)
+		if (!ps_print_add_back(s, ps_create_element(OP_RRA)))
 			return (0);
-	if (c == 'b')
-		if (!ps_print_add_back(a, ps_create_element(OP_RRB)))
+	if (p && !s->a)
+		if (!ps_print_add_back(s, ps_create_element(OP_RRB)))
 			return (0);
-	temp = a->end;
-	ps_del_back(a, 0);
-	ps_add_front(a, temp);
+	temp = s->end;
+	ps_del_back(s, 0);
+	ps_add_front(s, temp);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:07:02 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 15:07:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:33:53 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int	ps_sort_four(t_stack *a, t_stack *b)
 {
 	if (ps_issorted(a, 1, 0))
 		return (1);
-	if (ps_fastest_push(a, b, a->min, 'a') == -1)
+	if (ps_fastest_push(a, b, a->min) == -1)
 		return (0);
 	if (!ps_sort_three(a))
 		return (0);
-	if (!ps_push(b, a, 'a'))
+	if (!ps_push(b, a))
 		return (0);
 	return (1);
 }
@@ -60,13 +60,13 @@ static int	ps_sort_five(t_stack *a, t_stack *b)
 {
 	if (!b->size && ps_issorted(a, 1, 0))
 		return (1);
-	if (ps_fastest_push(a, b, a->min, 'a') == -1)
+	if (ps_fastest_push(a, b, a->min) == -1)
 		return (0);
-	if (ps_fastest_push(a, b, a->min, 'a') == -1)
+	if (ps_fastest_push(a, b, a->min) == -1)
 		return (0);
 	if (!ps_sort_three(a))
 		return (0);
-	if (!ps_push(b, a, 'a') || !ps_push(b, a, 'a'))
+	if (!ps_push(b, a) || !ps_push(b, a))
 		return (0);
 	return (1);
 }

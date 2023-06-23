@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 19:26:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/20 18:09:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:29:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static int	ps_print_hub(t_dlilist *list)
 	return (1);
 }
 
-void	ps_print_ops(t_stack *a)
+void	ps_print_ops(t_stack *s)
 {
 	t_dlilist	*list;
 
-	if (!a->print_front || !*(a->print_front))
+	if (!s->print_front || !*(s->print_front))
 		return ;
-	list = (*(a->print_front))->next;
+	list = (*(s->print_front))->next;
 	while (list)
 	{
 		if (!ps_print_hub(list))

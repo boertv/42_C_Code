@@ -6,14 +6,14 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:29:53 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/22 18:13:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:29:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // returns 1 if something was replaced, else 0.
-static int	ps_replace_rapbrra_sapb(t_stack *a, t_dlilist *el)
+static int	ps_replace_rapbrra_sapb(t_stack *s, t_dlilist *el)
 {
 	t_dlilist	*bin;
 
@@ -34,7 +34,7 @@ static int	ps_replace_rapbrra_sapb(t_stack *a, t_dlilist *el)
 	}
 	if (bin && bin->nb == el->nb + 2)
 	{
-		ps_print_del(a, bin);
+		ps_print_del(s, bin);
 		el->nb -= 4;
 		return (1);
 	}
@@ -42,7 +42,7 @@ static int	ps_replace_rapbrra_sapb(t_stack *a, t_dlilist *el)
 }
 
 // returns 1 if something was replaced, else 0.
-static int	ps_replace_rrasapb_pbrra(t_stack *a, t_dlilist *el)
+static int	ps_replace_rrasapb_pbrra(t_stack *s, t_dlilist *el)
 {
 	t_dlilist	*bin;
 
@@ -57,30 +57,30 @@ static int	ps_replace_rrasapb_pbrra(t_stack *a, t_dlilist *el)
 	if (el->nb == OP_RRB)
 		if (bin && bin->nb != OP_PA)
 			return (0);
-	ps_print_del(a, bin);
+	ps_print_del(s, bin);
 	el->next->nb += 6;
 	el->nb = ((el->nb == OP_RRA) * OP_PB) + ((el->nb == OP_RRB) * OP_PA);
 	return (1);
 }
 
-void	ps_print_optimising(t_stack *a)
+void	ps_print_optimising(t_stack *s)
 {
 	t_dlilist	*el;
 
-	if (!a->print_front)
+	if (!s->print_front)
 		return ;
-	el = (*(a->print_front));
+	el = (*(s->print_front));
 	while (el)
 	{
 		if (el->nb == OP_RA || el->nb == OP_RB)
-			if (ps_replace_rapbrra_sapb(a, el))
+			if (ps_replace_rapbrra_sapb(s, el))
 				el = el->prev->prev;
 		if (el->nb == OP_RRA || el->nb == OP_RRB)
-			if (ps_replace_rrasapb_pbrra(a, el))
+			if (ps_replace_rrasapb_pbrra(s, el))
 				el = el->prev->prev;
 		if (el)
 			el = el->next;
 		else
-			el = (*(a->print_front));
+			el = (*(s->print_front));
 	}
 }
