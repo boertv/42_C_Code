@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/22 14:45:58 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:10:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ps_del_chunk(t_stack *a);
 int			ps_merge_chunks(t_stack *a);
 t_chunk		*ps_get_last_chunk(t_chunk *start);
 
-int			ps_swap(t_stack *a, char cdst);
+int			ps_swap(t_stack *a, t_stack *o, char cdst);
 int			ps_push(t_stack *src, t_stack *dst, char cdst);
 int			ps_rotate(t_stack *a, char c);
 int			ps_rrotate(t_stack *a, char c);

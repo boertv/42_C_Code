@@ -6,15 +6,18 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/21 14:11:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:44:51 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // returns 0 if create_element failed, else 1.
-int	ps_swap(t_stack *a, char c)
+int	ps_swap(t_stack *a, t_stack *o, char c)
 {
+	if (o && ((c == 'a' && o->size > 1 && o->start->nb < o->start->next->nb)
+		|| (c == 'b' && o->size > 1 && o->start->nb > o->start->next->nb)))
+		return (ps_ss(a, o));
 	if (c == 'a')
 		if (!ps_print_add_back(a, ps_create_element(OP_SA)))
 			return (0);

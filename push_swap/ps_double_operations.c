@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:58:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/16 18:21:58 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:07:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ps_ss(t_stack *a, t_stack *b)
 {
 	if (!ps_print_add_back(a, ps_create_element(OP_SS)))
 		return (0);
-	if (!ps_swap(a, '0') || !ps_swap(b, '0'))
+	if (!ps_swap(a, NULL, '0') || !ps_swap(b, NULL, '0'))
 		return (0);
 	return (1);
 }

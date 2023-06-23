@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/22 15:40:51 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:48:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static int	ps_rrotate_chunk_values(t_stack *src, char cs, size_t r)
 	return (1);
 }
 
+static int	ps_rotate_or_swap(t_stack *src, t_stack *dst, char cs)
+{}
+
 int	ps_push_or_rotate(t_stack *src, t_stack *dst, char cs)
 {
 	size_t	r;
@@ -56,6 +59,12 @@ int	ps_push_or_rotate(t_stack *src, t_stack *dst, char cs)
 		{
 			if (!ps_push(src, dst, ((cs == 'a') * 'b') + ((cs == 'b') * 'a')))
 				return (0);
+		}
+		else if (src->chunks->size == 2)
+		{
+			if ((cs == 'b' && src->start->next->nb > avg) || (cs == 'a' && src->start->next->nb <= avg))
+				if (!ps_swap(src, dst, cs))
+					return (0);
 		}
 		else if (!ps_rotate(src, cs))
 			return (0);
