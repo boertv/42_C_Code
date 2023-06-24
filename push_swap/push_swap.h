@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/24 18:44:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:43:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,44 +65,45 @@ int			ps_initialise_print(t_stack *a, t_stack *b);
 int			ps_error(t_stack *a, t_stack *b);
 
 t_dlilist	*ps_create_element(int nb);
-int			ps_del_back(t_stack *a, short f);
-int			ps_del_front(t_stack *a, short f);
-int			ps_add_back(t_stack *a, t_dlilist *el);
-int			ps_add_front(t_stack *a, t_dlilist *el);
-int			ps_add_emptychunk(t_stack *a);
-int			ps_del_chunk(t_stack *a);
-int			ps_merge_chunks(t_stack *a);
+int			ps_del_back(t_stack *s, short f);
+int			ps_del_front(t_stack *s, short f);
+int			ps_add_back(t_stack *s, t_dlilist *el);
+int			ps_add_front(t_stack *s, t_dlilist *el);
+int			ps_add_emptychunk(t_stack *s);
+int			ps_del_chunk(t_stack *s);
+int			ps_merge_chunks(t_stack *s);
 t_chunk		*ps_get_last_chunk(t_chunk *start);
 
-int			ps_swap(t_stack *a, t_stack *o, short p);
+int			ps_swap(t_stack *s, t_stack *o, short p);
 int			ps_push(t_stack *src, t_stack *dst);
-int			ps_rotate(t_stack *a, short p);
-int			ps_rrotate(t_stack *a, short p);
+int			ps_rotate(t_stack *s, short p);
+int			ps_rrotate(t_stack *s, short p);
 int			ps_ss(t_stack *a, t_stack *b);
 int			ps_rr(t_stack *a, t_stack *b);
 int			ps_rrr(t_stack *a, t_stack *b);
 
-void		ps_print_compression(t_stack *a);
-void		ps_print_trim(t_stack *a);
-void		ps_print_optimising(t_stack *a);
-int			ps_print_add_back(t_stack *a, t_dlilist *el);
-void		ps_print_ops(t_stack *a);
-void		ps_print_clear(t_stack *a);
-int			ps_print_del(t_stack *a, t_dlilist *el);
+void		ps_print_compression(t_stack *s);
+void		ps_print_trim(t_stack *s);
+void		ps_print_optimising(t_stack *s);
+int			ps_print_add_back(t_stack *s, t_dlilist *el);
+void		ps_print_ops(t_stack *s);
+void		ps_print_clear(t_stack *s);
+int			ps_print_del(t_stack *s, t_dlilist *el);
 
-int			ps_issorted(t_stack *a, short as, short c);
-int			ps_ismaxmin(t_stack *a, short x, short c);
-void		ps_isnewattribute(t_stack *a, int nb, t_chunk *chunk);
-void		ps_isoldattribute(t_stack *a, int nb, t_chunk *chunk);
-void		ps_addnewattribute(t_stack *a, int nb, t_chunk *chunk);
+int			ps_issorted(t_stack *s, short as, short c);
+int			ps_ismaxmin(t_stack *s, short x, short c);
+void		ps_isnewattribute(t_stack *s, int nb, t_chunk *chunk);
+void		ps_isoldattribute(t_stack *s, int nb, t_chunk *chunk);
+void		ps_addnewattribute(t_stack *s, int nb, t_chunk *chunk);
 
 int			ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_fastest_push(t_stack *src, t_stack *dst, int nb);
-ssize_t		ps_find_nbindex(t_stack *a, int nb);
+ssize_t		ps_find_nbindex(t_stack *s, int nb);
 int			ps_big_sort(t_stack *a, t_stack *b);
-int			ps_ischunkavg(t_stack *a);
-int			ps_ispushdone(t_stack *a, size_t r, int avg, char b);
+int			ps_ischunkavg(t_stack *s);
+int			ps_ispushdone(t_stack *s, size_t r, int avg, char b);
 int			ps_push_or_rotate(t_stack *src, t_stack *dst);
+int			ps_rrotate_with_push(t_stack *src, t_stack *dst);
 int			ps_check_push_result(t_stack *src, t_stack *dst);
 
 #endif
