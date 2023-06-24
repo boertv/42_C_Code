@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/24 20:42:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:06:58 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	ps_rrotate_chunk_values(t_stack *src, t_stack *dst, size_t r)
 	if (src->a && r > 1)
 		if (!ps_check_push_result(src, dst))
 			return (0);
-	if (r == 1)
-		if (!ps_rrotate(src, r--))
+	if (r == 1 && r--)
+		if (!ps_rrotate(src, 1))
 			return (0);
 	while (r--)
 		if (!ps_rrotate(src, dst->a))
