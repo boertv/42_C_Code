@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:26:57 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:44:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int			ps_big_sort(t_stack *a, t_stack *b);
 int			ps_ischunkavg(t_stack *a);
 int			ps_ispushdone(t_stack *a, size_t r, int avg, char b);
 int			ps_push_or_rotate(t_stack *src, t_stack *dst);
+int			ps_check_push_result(t_stack *src, t_stack *dst);
 
 #endif

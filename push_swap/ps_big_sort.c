@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:23:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:43:25 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,8 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst)
 		return (ps_pbsapbsbpb_del(src, dst));
 	if (!ps_push_or_rotate(src, dst))
 		return (0);
-	if (dst->chunks->next && dst->chunks->next->s)
-	{
-		if (ps_issorted(dst, dst->a, 1))
-			ps_merge_chunks(dst);
-		else if (dst->chunks->size == 2)
-		{
-			if (!ps_swap(dst, src, 1))
-				return (0);
-			ps_merge_chunks(dst);
-		}
-	}
+	if (!ps_check_push_result(src, dst))
+		return (0);
 	return (1);
 }
 

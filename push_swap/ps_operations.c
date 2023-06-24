@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:53:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:55:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	ps_swap(t_stack *s, t_stack *o, short p)
 {
 	if (p && o && ((s->a && o->size > 1 && o->start->nb < o->start->next->nb)
-		|| (!s->a && o->size > 1 && o->start->nb > o->start->next->nb)))
+			|| (!s->a && o->size > 1 && o->start->nb > o->start->next->nb)))
 		return (ps_ss(s, o));
 	if (p && s->a)
 		if (!ps_print_add_back(s, ps_create_element(OP_SA)))
