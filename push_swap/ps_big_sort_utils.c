@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/24 18:51:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:42:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,22 @@ int	ps_ispushdone(t_stack *s, size_t r, int avg, char b)
 	return (0);
 }
 
-static int	ps_rrotate_chunk_values(t_stack *src, size_t r)
+// if src = a and has more than one chunk, we rra and pb in one go.
+static int	ps_rrotate_chunk_values(t_stack *src, t_stack *dst, size_t r)
 {
-	if (src->chunks->next)
-		while (r--)
-			if (!ps_rrotate(src, 1))
-				return (0);
+	if (!src->chunks->next)
+		return (1);
+	if (src->a && r > 1)
+		if (!ps_check_push_result(src, dst))
+			return (0);
+	if (r == 1)
+		if (!ps_rrotate(src, r--))
+			return (0);
+	while (r--)
+		if (!ps_rrotate(src, dst->a))
+			return (0);
+	if (src->a && src->chunks->size > 1)
+		return (ps_rrotate_with_push(src, dst));
 	return (1);
 }
 
@@ -90,7 +100,7 @@ int	ps_push_or_rotate(t_stack *src, t_stack *dst)
 			if (!ps_rotate_or_swap(src, dst, &r, avg))
 				return (0);
 	}
-	return (ps_rrotate_chunk_values(src, r));
+	return (ps_rrotate_chunk_values(src, dst, r));
 }
 
 // returns 0 if operation failed, else 1.

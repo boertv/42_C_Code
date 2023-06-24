@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/24 18:43:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:01:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,35 @@ int	ps_big_sort(t_stack *a, t_stack *b)
 		while (b->size && (!a->size || a->chunks->s))
 			if (!ps_push_relative_toavg(b, a))
 				return (0);
+	}
+	return (1);
+}
+
+int	ps_rrotate_with_push(t_stack *src, t_stack *dst)
+{
+	size_t	r;
+	int		avg;
+	int		stop;
+
+	avg = ps_ischunkavg(src);
+	r = 0;
+	while (src->chunks->size && ++r)
+		if (!ps_rotate(src, 0))
+			return (0);
+	while (r--)
+	{
+		if (!ps_rrotate(src, 1))
+			return (0);
+		if (src->start->nb <= avg)
+		{
+			stop = src->start->nb;
+			while (src->end->nb < src->start->nb)
+				if (!ps_rrotate(src, 1))
+					return (0);
+			while (dst->start->nb != stop)
+				if (!ps_push(src, dst))
+					return (0);
+		}
 	}
 	return (1);
 }
