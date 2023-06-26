@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/24 21:01:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:37:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	ps_pbsapbsbpb_del(t_stack *src, t_stack *dst)
 }
 
 // returns 0 if ps_add_emptychunk or an operation failed, else 1
-// pushes based on what 'crsc' is (either 'a' or 'b')
+// pushes based on what 'src' is (either 'a' or 'b')
 // at the end rotates values back in place if there's more than one chunk
 static int	ps_push_relative_toavg(t_stack *src, t_stack *dst)
 {
@@ -68,7 +68,10 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst)
 				!= src->start->nb) || (!src->a && src->chunks->min
 				== src->start->next->nb && src->chunks->max != src->start->nb)))
 		return (ps_pbsapbsbpb_del(src, dst));
-	if (!ps_push_or_rotate(src, dst))
+	src->chunks->avg = ps_ischunkavg(src);
+	if (!ps_push_or_rotate(src, dst, 0))
+		return (0);
+	if (!ps_rrotate_chunk_values(src, dst))
 		return (0);
 	if (!ps_check_push_result(src, dst))
 		return (0);
@@ -93,23 +96,27 @@ int	ps_big_sort(t_stack *a, t_stack *b)
 
 int	ps_rrotate_with_push(t_stack *src, t_stack *dst)
 {
-	size_t	r;
-	int		avg;
+	size_t	rr;
 	int		stop;
 
-	avg = ps_ischunkavg(src);
-	r = 0;
-	while (src->chunks->size && ++r)
+//
+ft_printf("i'm infinite looping somewhere...\n");
+ft_printf("but not here...?\n");
+//
+	rr = src->chunks->r;
+	while (rr--)
 		if (!ps_rotate(src, 0))
 			return (0);
-	while (r--)
+	if (!ps_push_or_rotate(src, dst, 1))
+		return (0);
+	while (src->chunks->r--)
 	{
 		if (!ps_rrotate(src, 1))
 			return (0);
-		if (src->start->nb <= avg)
+		if (src->start->nb <= src->chunks->avg)
 		{
 			stop = src->start->nb;
-			while (src->end->nb < src->start->nb)
+			while (src->end->nb < src->start->nb && src->chunks->r--)
 				if (!ps_rrotate(src, 1))
 					return (0);
 			while (dst->start->nb != stop)
