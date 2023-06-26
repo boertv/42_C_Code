@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/26 19:36:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:39:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	ps_check_push_result(t_stack *src, t_stack *dst)
 			dst->chunks->s = 1;
 		}
 	}
-	if (dst->chunks->next && dst->chunks->next->s)
+	else if (dst->chunks->next && dst->chunks->next->s)
 	{
 		if (ps_issorted(dst, dst->a, 1))
 			ps_merge_chunks(dst);
