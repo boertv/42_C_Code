@@ -6,11 +6,36 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:36:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:25:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:30:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// don't call with an empty list/chunk!! will just return 0.
+int	ps_ischunkavg(t_stack *s)
+{
+	t_dlilist	*list;
+	size_t		i;
+	size_t		size;
+
+	list = s->start;
+	i = 0;
+	size = s->chunks->size;
+	while (list && size-- && list->nb != s->chunks->min)
+		list = list->next;
+	if (!list || list->nb != s->chunks->min)
+		return (0);
+	i = list->index;
+	i = i + (s->chunks->size / 2);
+	list = s->start;
+	size = s->chunks->size;
+	while (list && size-- && list->index != i)
+		list = list->next;
+	if (!list || list->index != i)
+		return (0);
+	return (list->nb);
+}
 
 // returns NULL if start = NULL.
 t_chunk	*ps_get_last_chunk(t_chunk *start)

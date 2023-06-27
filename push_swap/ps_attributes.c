@@ -6,12 +6,14 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:53:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:05:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:31:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// if (x) then max is calculated, else min.
+// don't call with an empty list!! it will just return 0.
 static int	ps_ismaxminlastchunk(t_stack *s, short x)
 {
 	t_dlilist	*list;
@@ -19,12 +21,12 @@ static int	ps_ismaxminlastchunk(t_stack *s, short x)
 	int			res;
 	size_t		i;
 
+	if (!s->end)
+		return (0);
 	res = s->end->nb;
 	list = s->end;
 	i = 0;
-	chunk = s->chunks;
-	while (chunk->next)
-		chunk = chunk->next;
+	chunk = ps_get_last_chunk(s->chunks);
 	while (list && i++ < chunk->size)
 	{
 		if ((x && list->nb > res) || (!x && list->nb < res))
@@ -45,8 +47,7 @@ int	ps_ismaxmin(t_stack *s, short x, short c)
 
 	if (!s->start || (c && !s->chunks))
 		return (0);
-	else
-		res = s->start->nb;
+	res = s->start->nb;
 	if (c == 2)
 		return (ps_ismaxminlastchunk(s, x));
 	list = s->start;
@@ -62,65 +63,78 @@ int	ps_ismaxmin(t_stack *s, short x, short c)
 	return (res);
 }
 
-static size_t	ps_recalculate_count(size_t count, size_t halfsize)
-{
-	if (count >= halfsize)
-		count = count - halfsize;
-	else
-		count = halfsize - count;
-	return (count);
-}
-
-static int	ps_best_middle(t_stack *s, int mida, int midb)
+static int	*ps_list_to_array(t_stack *s)
 {
 	t_dlilist	*list;
-	size_t		i;
-	size_t		counta;
-	size_t		countb;
+	int			*new;
+	int			*array;
 
+	if (!s || !s->size || !s->start)
+		return (NULL);
 	list = s->start;
-	i = 0;
-	counta = 0;
-	countb = 0;
-	while (list && i++ < s->chunks->size)
+	new = malloc(sizeof(int) * s->size);
+	if (!new)
+		return (NULL);
+	array = new;
+	while (list)
 	{
-		if (list->nb > mida)
-			counta++;
-		if (list->nb > midb)
-			countb++;
+		*array = list->nb;
+		array++;
 		list = list->next;
 	}
-	if (counta == 0 && countb == 0)
-		return (s->chunks->max - 1);
-	if (counta == countb)
-		return (mida);
-	counta = ps_recalculate_count(counta, s->chunks->size / 2);
-	countb = ps_recalculate_count(countb, s->chunks->size / 2);
-	return (((counta <= countb) * mida) + ((counta > countb) * midb));
+	return (new);
 }
 
-// returns an estimate of the median, good enough to decide on s pivot.
+static int	*ps_bubble_sort(int *a, size_t n)
+{
+	size_t	i;
+	int		temp;
+
+	while (a && n--)
+	{
+		i = 0;
+		while (i < n)
+		{
+			temp = 0;
+			if (a[i] > a[i + 1])
+			{
+				temp = a[i];
+				a[i] = a[i + 1];
+				a[i + 1] = temp;
+				if (!temp)
+					temp = 1;
+			}
+			if (!temp)
+				break ;
+			i++;
+		}
+	}
+	return (a);
+}
+
 // don't call with an empty list/chunk!! will just return 0.
-int	ps_ischunkavg(t_stack *s)
+// sets indexes for all elements, doesn't calculate a median just yet.
+int	ps_set_indexes(t_stack *s)
 {
+	int			*a;
 	t_dlilist	*list;
-	int			avga;
-	int			avgm;
-	int			rem;
 	size_t		i;
 
-	list = s->start;
-	avga = 0;
-	rem = 0;
+	a = ps_bubble_sort(ps_list_to_array(s), s->size);
 	i = 0;
-	while (list && i++ < s->chunks->size)
+	while (a && i < s->size)
 	{
-		avga += (list->nb / s->chunks->size);
-		if (!(list->nb / s->chunks->size))
-			rem += (((list->nb < 0) * -1) + ((list->nb > 0) * 1));
-		list = list->next;
+		list = s->start;
+		while (list && list->nb != a[i])
+			list = list->next;
+		if (!list)
+			break ;
+		list->index = i;
+		i++;
 	}
-	avga = avga + (rem / 2);
-	avgm = (s->chunks->max + s->chunks->min) / 2;
-	return (ps_best_middle(s, avga, avgm));
+	if (a)
+		free(a);
+	if (!a || !list)
+		return (0);
+	return (1);
 }

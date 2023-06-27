@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:04:48 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:08:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
 		if (!ps_add_front(a, ps_create_element(temp)))
 			return (0);
 	}
+	if (!ps_set_indexes(a))
+		return (0);
 	return (1);
 }

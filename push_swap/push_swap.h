@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/26 14:51:20 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:08:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_dlilist
 {
 	int					nb;
+	size_t				index;
 	struct s_dlilist	*next;
 	struct s_dlilist	*prev;
 }				t_dlilist;
@@ -102,6 +103,7 @@ int			ps_small_sorts(t_stack *a, t_stack *b);
 int			ps_fastest_push(t_stack *src, t_stack *dst, int nb);
 ssize_t		ps_find_nbindex(t_stack *s, int nb);
 int			ps_big_sort(t_stack *a, t_stack *b);
+int			ps_set_indexes(t_stack *s);
 int			ps_ischunkavg(t_stack *s);
 int			ps_ispushdone(t_stack *src, char b);
 int			ps_push_or_rotate(t_stack *src, t_stack *dst, short rr);
