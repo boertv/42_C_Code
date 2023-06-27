@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/27 14:11:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:20:58 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,6 @@ static int	ps_push_relative_toavg(t_stack *src, t_stack *dst)
 	return (1);
 }
 
-int	ps_big_sort(t_stack *a, t_stack *b)
-{
-	if (ps_issorted(a, 1, 0))
-		return (1);
-	while (!a->chunks->s || b->size)
-	{
-		while (a->size && !a->chunks->s)
-			if (!ps_push_relative_toavg(a, b))
-				return (0);
-		while (b->size && (!a->size || a->chunks->s))
-			if (!ps_push_relative_toavg(b, a))
-				return (0);
-	}
-	return (1);
-}
-
 int	ps_rrotate_with_push(t_stack *src, t_stack *dst)
 {
 	size_t	rr;
@@ -119,6 +103,22 @@ int	ps_rrotate_with_push(t_stack *src, t_stack *dst)
 				if (!ps_push(src, dst))
 					return (0);
 		}
+	}
+	return (1);
+}
+
+int	ps_big_sort(t_stack *a, t_stack *b)
+{
+	if (ps_issorted(a, 1, 0))
+		return (1);
+	while (!a->chunks->s || b->size)
+	{
+		while (a->size && !a->chunks->s)
+			if (!ps_push_relative_toavg(a, b))
+				return (0);
+		while (b->size && (!a->size || a->chunks->s))
+			if (!ps_push_relative_toavg(b, a))
+				return (0);
 	}
 	return (1);
 }
