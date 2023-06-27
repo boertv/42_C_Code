@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/26 19:39:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:41:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ps_ispushdone(t_stack *src, char b)
 	list = src->start;
 	i = 0 + ((!src->chunks->next) * src->chunks->r);
 	while (list && src->chunks->size > i
-		&& ((!b && list->nb > src->chunks->avg) || (b && list->nb <= src->chunks->avg)))
+		&& ((!b && list->nb > src->chunks->avg)
+			|| (b && list->nb <= src->chunks->avg)))
 	{
 		list = list->next;
 		i++;
@@ -36,6 +37,7 @@ int	ps_ispushdone(t_stack *src, char b)
 int	ps_rrotate_chunk_values(t_stack *src, t_stack *dst)
 {
 	size_t	rr;
+
 	rr = src->chunks->r;
 	if (!src->chunks->next)
 		return (1);
@@ -66,16 +68,15 @@ static int	ps_rotate_or_swap(t_stack *src, t_stack *dst)
 	size_t		i;
 
 	list = src->start->next;
-	if ((src->a && list->nb <= src->chunks->avg) || (!src->a && list->nb > src->chunks->avg))
+	if ((src->a && list->nb <= src->chunks->avg)
+		|| (dst->a && list->nb > src->chunks->avg))
 	{
 		i = 0 + ((!src->chunks->next) * src->chunks->r);
 		list = list->next;
-		while (list && src->chunks->size > i
-			&& ((src->a && list->nb > src->chunks->avg) || (dst->a && list->nb <= src->chunks->avg)))
-		{
+		while (list && src->chunks->size > i++
+			&& ((src->a && list->nb > src->chunks->avg)
+				|| (dst->a && list->nb <= src->chunks->avg)))
 			list = list->next;
-			i++;
-		}
 		if (!list || src->chunks->size == i)
 		{
 			if (!ps_swap(src, dst, 1))

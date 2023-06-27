@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/26 19:37:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:11:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,6 @@ int	ps_rrotate_with_push(t_stack *src, t_stack *dst)
 	size_t	rr;
 	int		stop;
 
-//
-ft_printf("i'm infinite looping somewhere...\n");
-ft_printf("but not here...?\n");
-//
 	rr = src->chunks->r;
 	while (rr--)
 		if (!ps_rotate(src, 0))
