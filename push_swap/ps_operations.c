@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/24 17:55:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:29:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,15 @@ int	ps_push(t_stack *src, t_stack *dst)
 
 	if (!src->start)
 		return (1);
-	if (dst->a)
+	if ((dst->a && (*(src->print_back))->nb == OP_PB)
+		|| (!dst->a && (*(src->print_back))->nb == OP_PA))
+		ps_print_del(src, (*(src->print_back)));
+	else if (dst->a)
+	{
 		if (!ps_print_add_back(src, ps_create_element(OP_PA)))
 			return (0);
-	if (!dst->a)
+	}
+	else if (!dst->a)
 		if (!ps_print_add_back(src, ps_create_element(OP_PB)))
 			return (0);
 	temp = src->start;
@@ -66,6 +71,12 @@ int	ps_rotate(t_stack *s, short p)
 
 	if (!s->start)
 		return (1);
+	if (p && ((s->a && (*(s->print_back))->nb == OP_RRA)
+			|| (!s->a && (*(s->print_back))->nb == OP_RRB)))
+	{
+		ps_print_del(s, (*(s->print_back)));
+		p = 0;
+	}
 	if (p && s->a)
 		if (!ps_print_add_back(s, ps_create_element(OP_RA)))
 			return (0);
@@ -86,6 +97,12 @@ int	ps_rrotate(t_stack *s, short p)
 
 	if (!s->end)
 		return (1);
+	if (p && ((s->a && (*(s->print_back))->nb == OP_RA)
+			|| (!s->a && (*(s->print_back))->nb == OP_RB)))
+	{
+		ps_print_del(s, (*(s->print_back)));
+		p = 0;
+	}
 	if (p && s->a)
 		if (!ps_print_add_back(s, ps_create_element(OP_RRA)))
 			return (0);

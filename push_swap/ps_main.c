@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/27 17:32:57 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:39:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@
 // 	}
 // }
 
-// maybe add conditions in operation fts:
-//	that check the last element of the print list for a more efficient list
-//	(instead of doing it afterwards with just the list).
+// double rotate values that i somehow already know are too big for the next push? (might be easy enough with indexes)
+//	(and ofc accordingly update the variable 'r',,, that doesn't exist yet)
 int	main(int ac, char *av[])
 {
 	t_stack	a;
