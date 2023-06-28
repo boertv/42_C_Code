@@ -13,5 +13,6 @@
 		"utility": "c",
 		"vector": "c",
 		"random": "c"
-	}
+	},
+	"cmake.configureOnOpen": false
 }

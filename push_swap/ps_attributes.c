@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:53:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/27 17:31:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/28 14:43:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ static int	*ps_bubble_sort(int *a, size_t n)
 	while (a && n--)
 	{
 		i = 0;
+		temp = 0;
 		while (i < n)
 		{
-			temp = 0;
 			if (a[i] > a[i + 1])
 			{
 				temp = a[i];
@@ -104,10 +104,10 @@ static int	*ps_bubble_sort(int *a, size_t n)
 				if (!temp)
 					temp = 1;
 			}
-			if (!temp)
-				break ;
 			i++;
 		}
+		if (!temp)
+			break ;
 	}
 	return (a);
 }
