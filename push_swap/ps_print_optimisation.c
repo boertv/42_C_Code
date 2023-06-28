@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:29:53 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:29:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:10:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,32 @@ static int	ps_replace_rrasapb_pbrra(t_stack *s, t_dlilist *el)
 	return (1);
 }
 
+// returns 1 if something was replaced, else 0.
+// this doesn't seem to ever come into play... ever
+static int	ps_replace_sarbrbsb_rbrbss(t_stack *s, t_dlilist *el)
+{
+	t_dlilist	*list;
+
+	list = el->next;
+	if (!list)
+		return (0);
+	while ((el->nb == OP_SA && (list->nb == OP_RB || list->nb == OP_RRB))
+		|| (el->nb == OP_SB && (list->nb == OP_RA || list->nb == OP_RRA)))
+	{
+		list = list->next;
+		if (!list)
+			break ;
+	}
+	if (list && ((el->nb == OP_SA && list->nb == OP_SB)
+			|| (el->nb == OP_SB && list->nb == OP_SA)))
+	{
+		ps_print_del(s, el);
+		list->nb = OP_SS;
+		return (1);
+	}
+	return (0);
+}
+
 void	ps_print_optimising(t_stack *s)
 {
 	t_dlilist	*el;
@@ -75,9 +101,12 @@ void	ps_print_optimising(t_stack *s)
 		if (el->nb == OP_RA || el->nb == OP_RB)
 			if (ps_replace_rapbrra_sapb(s, el))
 				el = el->prev->prev;
-		if (el->nb == OP_RRA || el->nb == OP_RRB)
+		if (el && (el->nb == OP_RRA || el->nb == OP_RRB))
 			if (ps_replace_rrasapb_pbrra(s, el))
 				el = el->prev->prev;
+		if (el && el->next && (el->next->nb == OP_SA || el->next->nb == OP_SB))
+			if (ps_replace_sarbrbsb_rbrbss(s, el->next))
+				el = el->prev;
 		if (el)
 			el = el->next;
 		else
