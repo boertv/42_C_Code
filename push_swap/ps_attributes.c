@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:53:09 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/28 14:43:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/29 16:09:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int	ps_set_indexes(t_stack *s)
 	t_dlilist	*list;
 	size_t		i;
 
+	if (s->size < 2)
+		return (1);
 	a = ps_bubble_sort(ps_list_to_array(s), s->size);
 	i = 0;
 	while (a && i < s->size)
