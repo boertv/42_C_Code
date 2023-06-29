@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 17:24:39 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/06 14:22:24 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/29 18:52:19 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ FLAGS			=	-Wall -Werror -Wextra
 
 #-------------------SOURCES FILES----------------------
 
-HEADERS			=	$(HEADER_WD)get_next_line_bonus.h
+HEADERS			=	$(HEADER_WD)get_next_line.h
 
-SRCS			=	$(SOURCES)get_next_line_bonus.c \
-					$(SOURCES)get_next_line_utils_bonus.c \
+SRCS			=	$(SOURCES)get_next_line.c \
+					$(SOURCES)get_next_line_utils.c \
 
 #-------------------OBJECTS----------------------
 
