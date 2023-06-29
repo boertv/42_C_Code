@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/27 17:08:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/29 16:31:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // returns 0 on error, else 1.
 static int	ps_isvalid(char *str)
 {
-	if (*str == '-')
+	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)
 	{
@@ -35,10 +35,11 @@ static int	ps_iszerone(char *str)
 	nb = 0;
 	sign = 1;
 	if (*str == '-')
-	{
 		sign = -1;
+	if (*str == '-' || *str == '+')
 		str++;
-	}
+	if (!*str)
+		return (1);
 	while (*str)
 	{
 		if (((*str >= '2' && '9' >= *str)) || nb)
