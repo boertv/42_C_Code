@@ -6,23 +6,23 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/22 14:31:42 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/29 18:48:43 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= push_swap
 
-BONUS_NAME		=
+BONUS_NAME		= checker
 
 #-------------------PATH-----------------------------
 
 SOURCES_WD		= ./
 
-BONUS_WD		=
+BONUS_WD		= ./
 
 HEADER_WD		= ./
 
-BONUS_HEADER_WD	=
+BONUS_HEADER_WD	= ./
 
 #-------------------COMPILATION----------------------
 
@@ -33,12 +33,15 @@ FLAGS			=	-Wall -Werror -Wextra
 #-------------------SOURCES FILES----------------------
 
 HEADERS			=	$(HEADER_WD)push_swap.h \
-					./libft/legacy/libft.h \
-					./libft/ft_printf/ft_printf.h
+					$(HEADER_WD)libft/legacy/libft.h \
+					$(HEADER_WD)libft/ft_printf/ft_printf.h
 
-BONUS_HEADERS 	=
+BONUS_HEADERS 	=	$(BONUS_HEADER_WD)push_swap_bonus.h \
+					$(BONUS_HEADER_WD)libft/get_next_line/get_next_line.h
 
 MAIN			=	$(SOURCES_WD)ps_main.c
+
+BONUS_MAIN		=	$(BONUS_WD)ps_main_bonus.c
 
 SRCS			=	$(SOURCES_WD)ps_initialise_stack.c \
 					$(SOURCES_WD)ps_error.c \
@@ -57,7 +60,7 @@ SRCS			=	$(SOURCES_WD)ps_initialise_stack.c \
 					$(SOURCES_WD)ps_print_trim.c \
 					$(SOURCES_WD)ps_print_optimisation.c
 
-BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
+BONUS_SRC		=	$(BONUS_WD)ps_parser_bonus.c
 
 #-------------------OBJECTS----------------------
 
