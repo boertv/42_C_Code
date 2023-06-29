@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 15:07:02 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:33:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/29 15:57:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ int	ps_small_sorts(t_stack *a, t_stack *b)
 		return (ps_sort_four(a, b));
 	else if (a->size == 5)
 		return (ps_sort_five(a, b));
-	return (0);
+	return (1);
 }
