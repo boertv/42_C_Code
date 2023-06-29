@@ -6,11 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:33:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/17 12:07:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/29 18:57:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 // returns -1 if no \n found, else returns index of \n
 ssize_t	ft_seek_nl(char *str)
