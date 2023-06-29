@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/29 16:31:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/29 16:52:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,28 @@
 // returns 0 on error, else 1.
 static int	ps_isvalid(char *str)
 {
+	int		len;
+	char	*max;
+
+	if (*str == '-')
+		max = "2147483648";
+	else
+		max = "2147483647";
 	if (*str == '-' || *str == '+')
 		str++;
-	while (*str)
+	len = 0;
+	while (str[len] && len < 11)
 	{
-		if (*str < '0' || '9' < *str)
+		if (str[len] < '0' || '9' < str[len])
 			return (0);
-		str++;
+		len++;
 	}
+	if (len > 10)
+		return (0);
+	if (len == 10)
+		while (len--)
+			if (str[len] > max[len])
+				return (0);
 	return (1);
 }
 
