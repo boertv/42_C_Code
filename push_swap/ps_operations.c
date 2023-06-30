@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/28 17:29:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:36:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ps_swap(t_stack *s, t_stack *o, short p)
 {
 	if (p && o && ((s->a && o->size > 1 && o->start->nb < o->start->next->nb)
 			|| (!s->a && o->size > 1 && o->start->nb > o->start->next->nb)))
-		return (ps_ss(s, o));
+		return (ps_ss(s, o, 1));
 	if (p && s->a)
 		if (!ps_print_add_back(s, ps_create_element(OP_SA)))
 			return (0);
@@ -40,21 +40,21 @@ int	ps_swap(t_stack *s, t_stack *o, short p)
 }
 
 // returns 0 if create_element failed, else 1.
-int	ps_push(t_stack *src, t_stack *dst)
+int	ps_push(t_stack *src, t_stack *dst, short p)
 {
 	t_dlilist	*temp;
 
 	if (!src->start)
 		return (1);
-	if ((dst->a && (*(src->print_back))->nb == OP_PB)
-		|| (!dst->a && (*(src->print_back))->nb == OP_PA))
+	if (p && ((dst->a && (*(src->print_back))->nb == OP_PB)
+		|| (!dst->a && (*(src->print_back))->nb == OP_PA)))
 		ps_print_del(src, (*(src->print_back)));
-	else if (dst->a)
+	else if (p && dst->a)
 	{
 		if (!ps_print_add_back(src, ps_create_element(OP_PA)))
 			return (0);
 	}
-	else if (!dst->a)
+	else if (p && !dst->a)
 		if (!ps_print_add_back(src, ps_create_element(OP_PB)))
 			return (0);
 	temp = src->start;

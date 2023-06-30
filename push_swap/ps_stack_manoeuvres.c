@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 18:56:31 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/23 16:32:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:36:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ps_fastest_push(t_stack *src, t_stack *dst, int nb)
 		while (i++ < (ssize_t) src->size)
 			if (!ps_rrotate(src, 1))
 				return (-1);
-	if (!ps_push(src, dst))
+	if (!ps_push(src, dst, 1))
 		return (-1);
 	return (r);
 }

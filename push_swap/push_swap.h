@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/27 17:08:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:31:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ int			ps_merge_chunks(t_stack *s);
 t_chunk		*ps_get_last_chunk(t_chunk *start);
 
 int			ps_swap(t_stack *s, t_stack *o, short p);
-int			ps_push(t_stack *src, t_stack *dst);
+int			ps_push(t_stack *src, t_stack *dst, short p);
 int			ps_rotate(t_stack *s, short p);
 int			ps_rrotate(t_stack *s, short p);
-int			ps_ss(t_stack *a, t_stack *b);
-int			ps_rr(t_stack *a, t_stack *b);
-int			ps_rrr(t_stack *a, t_stack *b);
+int			ps_ss(t_stack *a, t_stack *b, short p);
+int			ps_rr(t_stack *a, t_stack *b, short p);
+int			ps_rrr(t_stack *a, t_stack *b, short p);
 
 void		ps_print_compression(t_stack *s);
 void		ps_print_trim(t_stack *s);

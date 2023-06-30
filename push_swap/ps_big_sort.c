@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:14:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/27 15:20:58 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:34:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ps_sort_push_del(t_stack *src, t_stack *dst)
 				return (0);
 	}
 	while (src->chunks->size)
-		if (!ps_push(src, dst))
+		if (!ps_push(src, dst, 1))
 			return (0);
 	ps_del_chunk(src);
 	if (!dst->chunks->next)
@@ -36,15 +36,15 @@ static int	ps_sort_push_del(t_stack *src, t_stack *dst)
 // returns 0 if an operation failed, else 1.
 static int	ps_pbsapbsbpb_del(t_stack *src, t_stack *dst)
 {
-	if (!ps_push(src, dst))
+	if (!ps_push(src, dst, 1))
 		return (0);
 	if (!ps_swap(src, dst, 1))
 		return (0);
-	if (!ps_push(src, dst))
+	if (!ps_push(src, dst, 1))
 		return (0);
 	if (!ps_swap(dst, src, 1))
 		return (0);
-	if (!ps_push(src, dst))
+	if (!ps_push(src, dst, 1))
 		return (0);
 	ps_del_chunk(src);
 	if (!dst->chunks->next)
@@ -100,7 +100,7 @@ int	ps_rrotate_with_push(t_stack *src, t_stack *dst)
 				if (!ps_rrotate(src, 1))
 					return (0);
 			while (dst->start->nb != stop)
-				if (!ps_push(src, dst))
+				if (!ps_push(src, dst, 1))
 					return (0);
 		}
 	}

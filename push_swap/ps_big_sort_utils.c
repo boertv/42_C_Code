@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/27 14:41:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:34:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ps_push_or_rotate(t_stack *src, t_stack *dst, short rr)
 		if ((src->a && src->start->nb <= src->chunks->avg)
 			|| (!src->a && src->start->nb > src->chunks->avg))
 		{
-			if (!ps_push(src, dst))
+			if (!ps_push(src, dst, 1))
 				return (0);
 		}
 		else
