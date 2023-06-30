@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 17:55:34 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/29 18:32:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:02:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	ps_parser(t_stack *a, t_stack *b)
 {
 	char	*stdout;
 
-	stdout = get_next_line(1);
+	stdout = get_next_line(0);
 	while (stdout)
 	{
 		if (!ps_cmp_hub(a, b, stdout))
 			return (0);
-		stdout = get_next_line(1);
+		stdout = get_next_line(0);
 	}
 	return (1);
 }

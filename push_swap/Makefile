@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/29 18:48:43 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/30 12:48:44 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,8 @@ BONUS_OBJ		=	$(BONUS_SRC:.c=.o)
 
 MAIN_OBJ		=	$(MAIN:.c=.o)
 
+BONUS_MAIN_OBJ	=	$(BONUS_MAIN:.c=.o)
+
 #-------------------HEADERS----------------------
 
 I_HEADER		=	$(addprefix( -include, $(HEADERS)))
@@ -104,11 +106,10 @@ $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
-
-bonus: $(OBJS) $(BONUS_OBJ)
+bonus: $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@make -C libft/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) libft/libft.a -o $(BONUS_NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:

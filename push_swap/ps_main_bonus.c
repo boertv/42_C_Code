@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 17:47:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/29 18:46:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:07:51 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static int	ps_bonus_out(t_stack *a, t_stack *b, const char *out, int rtrn)
 {
-	while (ps_del_back(&a, 1) || ps_del_back(&b, 1))
+	while (ps_del_back(a, 1) || ps_del_back(b, 1))
 		(void)a;
-	while (ps_del_chunk(&a) || ps_del_chunk(&b))
+	while (ps_del_chunk(a) || ps_del_chunk(b))
 		(void)a;
+	ps_print_clear(a);
 	if (out)
 		ft_printf("%s\n", out);
 	return (rtrn);
