@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/30 15:02:17 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:41:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ps_free_split(char **els)
 static int	ps_add_elements(char *els[], t_stack *a)
 {
 	int	temp;
-	int	count;
+	size_t	count;
 
 	count = 0;
 	while (els && els[count])
