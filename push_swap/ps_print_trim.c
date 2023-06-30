@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:47:20 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/28 17:29:11 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:28:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,20 @@ void	ps_print_trim(t_stack *s)
 	if (!s->print_front || !*(s->print_front) || !(*(s->print_front))->next)
 		return ;
 	list = (*(s->print_front))->next;
-	while (list->next)
+	while (list && list->next)
 	{
 		rear = list->prev;
 		while (ps_trim_superfluous(s, list))
 		{
 			list = rear;
-			if (!rear->nb)
+			if (!rear->nb && rear->next)
 				list = rear->next;
 			rear = list->prev;
 		}
 		while (ps_trim_doubles(s, list))
 		{
 			list = rear;
-			if (!rear->nb)
+			if (!rear->nb && rear->next)
 				list = rear->next;
 			rear = list->prev;
 		}
