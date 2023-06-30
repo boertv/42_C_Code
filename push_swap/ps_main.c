@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/29 17:10:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:16:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // 		ft_printf("%i", list->nb);
 // 	if (a->chunks)
 // 		ft_printf("}  s(%i, %i)c(%i, %i)\n"
-//		, a->min, a->max, a->chunks->min, a->chunks->max);
+// 		, a->min, a->max, a->chunks->min, a->chunks->max);
 // 	else
 // 		ft_printf("}  s(%i, %i)c(N/A, N/A)\n", a->min, a->max);
 // 	if (a->size && (a->end->nb != list->nb))
@@ -50,7 +50,7 @@ int	main(int ac, char *av[])
 
 	if (!ps_initialise_stack(ac, av, &a, &b))
 		return (ps_error(&a, &b));
-	if (ac <= 6)
+	if (a.size <= 5)
 	{
 		if (!ps_small_sorts(&a, &b))
 			return (ps_error(&a, &b));

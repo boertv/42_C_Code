@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/30 12:48:44 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/30 15:15:23 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ SRCS			=	$(SOURCES_WD)ps_initialise_stack.c \
 					$(SOURCES_WD)ps_print_utils.c \
 					$(SOURCES_WD)ps_print_print.c \
 					$(SOURCES_WD)ps_print_trim.c \
-					$(SOURCES_WD)ps_print_optimisation.c
+					$(SOURCES_WD)ps_print_optimisation.c \
+					$(SOURCES_WD)ps_initialise_utils.c
 
 BONUS_SRC		=	$(BONUS_WD)ps_parser_bonus.c
 

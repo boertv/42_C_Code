@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:49:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/30 12:31:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:53:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_stack
 
 int			ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b);
 int			ps_initialise_print(t_stack *a, t_stack *b);
+void		ps_set_null(t_stack *a, t_stack *b);
+int			ps_isvalid(char *str);
 int			ps_error(t_stack *a, t_stack *b);
 
 t_dlilist	*ps_create_element(int nb);

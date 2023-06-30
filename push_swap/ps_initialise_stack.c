@@ -6,39 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:17:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/29 16:52:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 15:02:17 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// returns 0 on error, else 1.
-static int	ps_isvalid(char *str)
-{
-	int		len;
-	char	*max;
-
-	if (*str == '-')
-		max = "2147483648";
-	else
-		max = "2147483647";
-	if (*str == '-' || *str == '+')
-		str++;
-	len = 0;
-	while (str[len] && len < 11)
-	{
-		if (str[len] < '0' || '9' < str[len])
-			return (0);
-		len++;
-	}
-	if (len > 10)
-		return (0);
-	if (len == 10)
-		while (len--)
-			if (str[len] > max[len])
-				return (0);
-	return (1);
-}
 
 // returns 0 or -1 if that is represented by str, else 1.
 static int	ps_iszerone(char *str)
@@ -80,39 +52,61 @@ static int	ps_isunique(int nb, t_stack *a)
 	return (1);
 }
 
-static void	ps_set_null(t_stack *a, t_stack *b)
+// always returns 0.
+static int	ps_free_split(char **els)
 {
-	a->a = 1;
-	b->a = 0;
-	a->size = 0;
-	b->size = 0;
-	a->start = NULL;
-	a->end = NULL;
-	a->chunks = NULL;
-	b->start = NULL;
-	b->end = NULL;
-	b->chunks = NULL;
+	int	i;
+
+	i = 0;
+	while (els && els[i])
+	{
+		free(els[i]);
+		i++;
+	}
+	if (els)
+		free(els);
+	return (0);
+}
+
+static int	ps_add_elements(char *els[], t_stack *a)
+{
+	int	temp;
+	int	count;
+
+	count = 0;
+	while (els && els[count])
+		count++;
+	if (!els || !count)
+		return (0);
+	while (count-- > 0)
+	{
+		if (!ps_isvalid(els[count]))
+			return (0);
+		temp = ft_atoi(els[count]);
+		if ((temp == 0 || temp == -1) && temp != ps_iszerone(els[count]))
+			return (0);
+		if (!ps_isunique(temp, a))
+			return (0);
+		if (!ps_add_front(a, ps_create_element(temp)))
+			return (0);
+	}
+	return (1);
 }
 
 // returns 0 on error, else 1.
 int	ps_initialise_stack(int ac, char *av[], t_stack *a, t_stack *b)
 {
-	int	temp;
+	char	**els;
 
 	ps_set_null(a, b);
 	if (!ps_initialise_print(a, b) || !ps_add_emptychunk(a))
 		return (0);
 	while (ac-- > 1)
 	{
-		if (!ps_isvalid(av[ac]))
-			return (0);
-		temp = ft_atoi(av[ac]);
-		if ((temp == 0 || temp == -1) && temp != ps_iszerone(av[ac]))
-			return (0);
-		if (!ps_isunique(temp, a))
-			return (0);
-		if (!ps_add_front(a, ps_create_element(temp)))
-			return (0);
+		els = ft_split(av[ac], ' ');
+		if (!ps_add_elements(els, a))
+			return (ps_free_split(els));
+		ps_free_split(els);
 	}
 	if (!ps_set_indexes(a))
 		return (0);
