@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/30 15:57:37 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/30 16:01:47 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ BONUS_HEADER_WD	= ./
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-FLAGS			=	-Wall -Werror -Wextra
-# FLAGS			=	-Wall -Werror -Wextra -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror
+# FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
 #-------------------SOURCES FILES----------------------
 

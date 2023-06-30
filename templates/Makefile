@@ -16,9 +16,9 @@ BONUS_HEADER_WD	=
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-FLAGS			=	-Wall -Werror -Wextra
-# FLAGS			=	-Wall -Werror -Wextra -g
-# FLAGS			=	-Wall -Werror -Wextra -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror
+# FLAGS			=	-Wall -Wextra -Werror -g
+# FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
 #-------------------SOURCES FILES----------------------
 
@@ -30,6 +30,8 @@ H_LIB 			= 	$(___ _WD)___.h \
 					$(___ _WD)___.h
 
 MAIN			=	$(SOURCES_WD)main.c
+
+BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
 
 SRCS			=	$(SOURCES_WD)___.c \
 					$(SOURCES_WD)___.c \
@@ -44,6 +46,8 @@ OBJS			=	$(SRCS:.c=.o)
 BONUS_OBJ		=	$(BONUS_SRC:.c=.o)
 
 MAIN_OBJ		=	$(MAIN:.c=.o)
+
+BONUS_MAIN_OBJ	=	$(BONUS_MAIN:.c=.o)
 
 #-------------------HEADERS----------------------
 
@@ -70,6 +74,8 @@ BOLD_OFF		=	\x1b[21m
 
 all:	$(NAME)
 
+bonus:	$(BONUS_NAME)
+
 %.o: %.c
 	@printf "$(YELLOW)Generating $(NAME) objects... %-45.45s\r$(NO_COLOR)" $@
 	@$(CC) $(FLAGS) $(I_HEADER) $(I_BONUS_HEADER) -c $< -o $@
@@ -81,10 +87,10 @@ $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 
-bonus: $(OBJS) $(BONUS_OBJ)
+$(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@make bonus -C libft/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) libft/libft.a -o $(BONUS_NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:
