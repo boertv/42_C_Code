@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/30 16:01:47 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/30 17:39:10 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,11 +118,11 @@ $(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 clean:
 	@echo "$(RED)Deleting objects...$(NO_COLOR)"
 	@make clean -C libft/
-	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ)
+	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 
 fclean:
 	@echo "$(RED)Deleting objects...$(NO_COLOR)"
-	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ)
+	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 	@echo "$(RED)Deleting executables...$(NO_COLOR)"
 	@make fclean -C libft/
 	@rm -f $(NAME) $(BONUS_NAME)

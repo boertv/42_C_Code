@@ -96,7 +96,7 @@ $(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 clean:
 	@echo "$(RED)Deleting objects...$(NO_COLOR)"
 	@make clean -C libft/
-	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ)
+	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 
 fclean:	clean
 	@echo "$(RED)Deleting executables...$(NO_COLOR)"
