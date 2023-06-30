@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 17:48:56 by bvercaem          #+#    #+#              #
-#    Updated: 2023/06/30 15:15:23 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/06/30 15:57:37 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,8 @@ BOLD_OFF		=	\x1b[21m
 
 all:	$(NAME)
 
+bonus:	$(BONUS_NAME)
+
 %.o: %.c
 	@printf "$(YELLOW)Generating $(NAME) objects... %-45.45s\r$(NO_COLOR)" $@
 	@$(CC) $(FLAGS) $(I_HEADER) $(I_BONUS_HEADER) -c $< -o $@
@@ -107,7 +109,7 @@ $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
-bonus: $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
+$(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@make -C libft/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)
@@ -127,6 +129,6 @@ fclean:
 
 re: fclean all
 
-rebonus : fclean bonus
+rebonus: fclean bonus
 
 .PHONY: all clean fclean bonus re rebonus
