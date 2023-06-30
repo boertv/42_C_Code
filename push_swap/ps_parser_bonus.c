@@ -6,11 +6,23 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 17:55:34 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/30 13:02:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:35:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
+
+int	ps_bonus_out(t_stack *a, t_stack *b, const char *out, int rtrn)
+{
+	while (ps_del_back(a, 1) || ps_del_back(b, 1))
+		(void)a;
+	while (ps_del_chunk(a) || ps_del_chunk(b))
+		(void)a;
+	ps_print_clear(a);
+	if (out)
+		ft_printf("%s\n", out);
+	return (rtrn);
+}
 
 static int	ps_freeturn(char *s, int r)
 {
@@ -30,7 +42,7 @@ static int	ps_cmp_hub(t_stack *a, t_stack *b, char *stdout)
 	else if (!ft_strncmp(stdout, "sb\n", 4))
 		ps_swap(b, NULL, 0);
 	else if (!ft_strncmp(stdout, "ss\n", 4))
-		ps_swap(a, b, 0);
+		ps_ss(a, b, 0);
 	else if (!ft_strncmp(stdout, "ra\n", 4))
 		ps_rotate(a, 0);
 	else if (!ft_strncmp(stdout, "rb\n", 4))
@@ -48,11 +60,8 @@ static int	ps_cmp_hub(t_stack *a, t_stack *b, char *stdout)
 	return (ps_freeturn(stdout, 1));
 }
 
-int	ps_parser(t_stack *a, t_stack *b)
+int	ps_parser(t_stack *a, t_stack *b, char *stdout)
 {
-	char	*stdout;
-
-	stdout = get_next_line(0);
 	while (stdout)
 	{
 		if (!ps_cmp_hub(a, b, stdout))
