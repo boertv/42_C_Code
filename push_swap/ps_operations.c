@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:50:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/30 12:36:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:44:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ps_push(t_stack *src, t_stack *dst, short p)
 	if (!src->start)
 		return (1);
 	if (p && ((dst->a && (*(src->print_back))->nb == OP_PB)
-		|| (!dst->a && (*(src->print_back))->nb == OP_PA)))
+			|| (!dst->a && (*(src->print_back))->nb == OP_PA)))
 		ps_print_del(src, (*(src->print_back)));
 	else if (p && dst->a)
 	{
