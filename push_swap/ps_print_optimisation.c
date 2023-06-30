@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:29:53 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/28 17:10:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:45:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	ps_replace_rrasapb_pbrra(t_stack *s, t_dlilist *el)
 	t_dlilist	*bin;
 
 	bin = el->next;
-	if (bin && bin->nb == el->nb - 6)
+	if (bin && bin->next && bin->nb == el->nb - 6)
 		bin = bin->next;
 	else
 		return (0);
