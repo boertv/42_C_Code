@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 17:55:34 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/30 13:35:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/04 14:55:45 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,34 @@ static int	ps_freeturn(char *s, int r)
 	if (s)
 		free(s);
 	return (r);
+}
+
+// always frees stdout
+int	ps_isvalidop(char *stdout)
+{
+	if (!ft_strncmp(stdout, "pa\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "pb\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "sa\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "sb\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "ss\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "ra\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "rb\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "rr\n", 4))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "rra\n", 5))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "rrb\n", 5))
+		return (ps_freeturn(stdout, 1));
+	if (!ft_strncmp(stdout, "rrr\n", 5))
+		return (ps_freeturn(stdout, 1));
+	return (ps_freeturn(stdout, 0));
 }
 
 static int	ps_cmp_hub(t_stack *a, t_stack *b, char *stdout)
@@ -60,6 +88,7 @@ static int	ps_cmp_hub(t_stack *a, t_stack *b, char *stdout)
 	return (ps_freeturn(stdout, 1));
 }
 
+// always frees stdout
 int	ps_parser(t_stack *a, t_stack *b, char *stdout)
 {
 	while (stdout)

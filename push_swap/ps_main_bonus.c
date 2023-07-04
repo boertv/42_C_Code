@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 17:47:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/30 15:17:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/04 14:55:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	main(int ac, char *av[])
 		return (ps_bonus_out(&a, &b, "OK", 1));
 	if (stdout && ps_issorted(&a, 1, 0))
 	{
-		free (stdout);
+		if (!ps_isvalidop(stdout))
+			return (ps_error(&a, &b));
 		return (ps_bonus_out(&a, &b, "KO", 0));
 	}
 	if (!ps_parser(&a, &b, stdout))
