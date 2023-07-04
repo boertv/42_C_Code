@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:06:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/30 15:16:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:02:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@
 // 		ft_printf("!!!LIST END IS NOT CORRECT!!! end = %i\n", a->end->nb);
 // 	}
 // }
+
+// GOOD IDEA:
+// add an empty final chunck for rra all the ra without keeping count of 'r'.
+// provides new difficulties tho,
+// when grabbing the last chunck (ez fix in just one ft)
+// and when checking if there is only one real chunck.
 
 // rr values that i somehow already know are too big for the next push?
 //	(might be easy enough with indexes)
