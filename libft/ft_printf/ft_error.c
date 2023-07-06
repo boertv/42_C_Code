@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 14:13:40 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/24 16:35:57 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:31:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	*ft_error_null(const char *error, const char *func, va_list *pva)
 		va_end(*pva);
 	if (func)
 	{
-		write(1, "\nAn error occured in '", 22);
-		write(1, func, ft_strlen(func));
+		write(STDERR_FILENO, "\nAn error occured in '", 22);
+		write(STDERR_FILENO, func, ft_strlen(func));
 	}
 	if (error)
 	{
-		write(1, "'\nError concerning '", 20);
-		write(1, error, ft_strlen(error));
+		write(STDERR_FILENO, "'\nError concerning '", 20);
+		write(STDERR_FILENO, error, ft_strlen(error));
 	}
 	if (func || error)
-		write(1, "'\n", 2);
+		write(STDERR_FILENO, "'\n", 2);
 	return (NULL);
 }
 
@@ -39,15 +39,15 @@ short	ft_error_minone(const char *error, const char *func, va_list *pva)
 		va_end(*pva);
 	if (func)
 	{
-		write(1, "\nAn error occured in '", 22);
-		write(1, func, ft_strlen(func));
+		write(STDERR_FILENO, "\nAn error occured in '", 22);
+		write(STDERR_FILENO, func, ft_strlen(func));
 	}
 	if (error)
 	{
-		write(1, "'\nError concerning '", 20);
-		write(1, error, ft_strlen(error));
+		write(STDERR_FILENO, "'\nError concerning '", 20);
+		write(STDERR_FILENO, error, ft_strlen(error));
 	}
 	if (func || error)
-		write(1, "'\n", 2);
+		write(STDERR_FILENO, "'\n", 2);
 	return (-1);
 }
