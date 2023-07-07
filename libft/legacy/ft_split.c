@@ -6,18 +6,26 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:11:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/14 13:48:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:38:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// maybe change names of variables..?
-// now with a more efficient counting ft!
-static char	**ft_abort(char **a, size_t al)
+// frees all a[n] and a, then returns NULL.
+// a has to be NULL terminated.
+char	**ft_clear_da(char **a)
 {
-	while (al-- > 0)
-		free(*(a + al));
+	size_t	i;
+
+	if (!a)
+		return (NULL);
+	i = 0;
+	while (a[i])
+	{
+		free(a[i]);
+		i++;
+	}
 	free(a);
 	return (NULL);
 }
@@ -50,7 +58,7 @@ static char	**ft_fill(char **a, size_t al, char const *s, char c)
 				sl++;
 			*(a + al) = (char *) malloc((sl + 1) * sizeof(char));
 			if (!*(a + al))
-				return (ft_abort(a, al));
+				return (ft_clear_da(a));
 			*(*(a + al) + sl) = 0;
 			while (sl-- > 0)
 				*(*(a + al) + sl) = *(s + sl);
