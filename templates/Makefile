@@ -81,14 +81,13 @@ bonus:	$(BONUS_NAME)
 	@$(CC) $(FLAGS) $(I_HEADER) $(I_BONUS_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS) $(MAIN_OBJ)
-	@make bonus -C libft/
+	@make -C libft/
 	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
-
 $(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
-	@make bonus -C libft/
+	@make -C libft/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
