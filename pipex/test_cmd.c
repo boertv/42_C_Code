@@ -1,28 +1,48 @@
 #include "pipex.h"
 
-// int	main(int ac, char *av[])
-// {
-// 	char	**arr;
-
-// 	if (ac < 2)
-// 		return (1);
-// 	arr = ft_split(av[1], ' ');
-// 	if (!arr)
-// 		return (1);
-// 	if (!execve("/bin/ls", arr, NULL))
-// 		perror("execve failed");
-// }
-
-int	main()
+static int	temp_return(char *s, char **a, int r)
 {
-	char	**c;
-	void	*v;
-	char	**n;
+	int	i;
 
-	c = NULL;
-	v = c;
-	n = v;
-	printf("c = %p, v = %p, n = %p\n", c, v, n);
-	printf("c: %s | n: %s\n", c[0], n[0]);
-	free(c);
+	if (s)
+		free(s);
+	//ft_clear_da()
+	if (a)
+	{
+		i = 0;
+		while (a[i])
+		{
+			free(a[i]);
+			i++;
+		}
+		free(a);
+	}
+	return (r);
+}
+
+int	main(int ac, char *av[])
+{
+	char	*cmd;
+	char	**arg;
+
+	if (ac < 2)
+		return (1);
+	arg = ft_split(av[1], ' ');
+	if (!arg)
+		return (1);
+	cmd = ft_strjoin("/bin/", arg[0]);
+	if (!cmd)
+		return (1);
+	if (access(cmd, X_OK) == -1)
+	{
+		perror("access failed");
+		return (temp_return(cmd, arg, 127));
+	}
+	if (!execve(cmd, arg, NULL))
+	{
+		perror("execve failed");
+		return (temp_return(cmd, arg, 126));
+	}
+	printf("I Can See You (tv)\n");
+	temp_return(cmd, arg, 0);
 }
