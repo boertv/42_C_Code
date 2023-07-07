@@ -12,7 +12,6 @@ HEADER_WD		=
 
 BONUS_HEADER_WD	=
 
-
 #-------------------COMPILATION----------------------
 
 CC				=	cc
