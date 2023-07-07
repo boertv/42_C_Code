@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/05/24 16:33:32 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:48:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdio.h>
 # include "../legacy/libft.h"
 
 # define SPECIFIERS "cspdiuxX%"
@@ -41,6 +42,12 @@ typedef struct s_nb_attr
 	int				baselen;
 	char			sign;
 }					t_nb_attr;
+
+typedef struct s_to_print
+{
+	char	*str;
+	int		fd;
+}			t_to_print;
 
 int		ft_printf(const char *format, ...);
 short	ft_error_minone(const char *error, const char *func, va_list *p_va);
