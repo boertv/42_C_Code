@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:17:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/07 13:03:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:15:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static int	ft_conv_fd(const char **pform, va_list *pva)
 {
 	int	fd;
 
-	if (*pform[0] != '%')
+	if ((*pform)[0] != '%')
 		return (STDOUT_FILENO);
-	if (*pform[1] != 'f')
+	if ((*pform)[1] != 'f')
 		return (STDOUT_FILENO);
-	if (*pform[2] != 'd')
+	if ((*pform)[2] != 'd')
 		return (STDOUT_FILENO);
 	fd = va_arg(*pva, int);
 	*pform += 3;
@@ -91,12 +91,12 @@ int	ft_printf(const char *format, ...)
 	int			mlen;
 
 	if (!format)
-		return (ft_error_minone("a NULL format", "ft_printf", NULL));
+		return (ft_error_minone("NULL format", "ft_printf", NULL));
 	rlen = 0;
 	va_start(va, format);
 	to_print.fd = ft_conv_fd(&format, &va);
 	if (to_print.fd < 1 || to_print.fd > FOPEN_MAX)
-		return (ft_error_minone("the fd", "ft_printf", &va));
+		return (ft_error_minone("fd", "ft_printf", &va));
 	while (*format)
 	{
 		sform = ft_cut_format(&format);
