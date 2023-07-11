@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:41:13 by bvercaem          #+#    #+#              #
-#    Updated: 2023/07/07 13:11:30 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/07/11 17:27:32 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ MAIN			=	$(SOURCES_WD)main.c
 
 BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
 
-SRCS			=	$(SOURCES_WD)___.c \
-					$(SOURCES_WD)___.c \
+SRCS			=	$(SOURCES_WD)px_input.c \
+					$(SOURCES_WD)px_end.c \
 					$(SOURCES_WD)___.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c

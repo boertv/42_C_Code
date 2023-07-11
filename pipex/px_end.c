@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   px_end.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 16:51:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/11 17:42:10 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/07/11 17:19:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# include "libft/legacy/libft.h"
-
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-
-typedef struct s_fds
+void	px_close_free(t_fds *fds)
 {
-	int	inf;
-	int	outf;
-	int	pair[2];
-}		t_fds;
-
-int	px_set_files(t_fds *fds, char *infile, char *outfile);
-
-#endif
+	if (fds)
+	{
+		close(fds->inf);
+		close(fds->outf);
+	}
+}

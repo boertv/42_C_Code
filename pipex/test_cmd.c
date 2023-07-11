@@ -44,5 +44,5 @@ int	main(int ac, char *av[])
 		return (temp_return(cmd, arg, 126));
 	}
 	printf("I Can See You (tv)\n");
-	temp_return(cmd, arg, 0);
+	return (temp_return(cmd, arg, 0));
 }
