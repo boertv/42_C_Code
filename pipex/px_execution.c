@@ -1,27 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   px_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 16:51:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/12 17:17:38 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/07/12 17:29:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-
-# include "libft/legacy/libft.h"
-
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-
-void	px_open_pipe(int fd[2]);
-
-void	px_abort(const char *msg, int fd[2], int r);
-int		px_close(int fd[2]);
-
-#endif
+#include "pipex.h"

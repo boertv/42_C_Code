@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_end.c                                           :+:      :+:    :+:   */
+/*   px_pipes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/12 17:16:19 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/07/12 15:29:28 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/07/12 17:17:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-//returns -1 if a 'close' fails
-int	px_close(int fd[2])
+//puts read (dup2 old fd[1]) in fd[0] and new write in fd[1], closes old fd[0] if needed.
+void	px_open_pipe(int fd[2])
 {
-	int	err;
+	int	fd_new[2];
+	int	bin;
 
-	err = 0;
-	if (fd)
+	if (pipe(fd_new) == -1)
+		px_abort(NULL, fd, 1);
+	if (dup2(fd_new[0], fd[1]) == -1)
 	{
-		if (fd[0] > 2)
-		{
-			if (close(fd[0]) == -1)
-				err = -1;
-			fd[0] == -1;
-		}
-		if (fd[1] > 2)
-		{
-			if (close(fd[1]) == -1)
-				err = -1;
-			fd[1] == -1;
-		}
+		if (px_close(fd_new) == -1)
+			perror(NULL);
+		px_abort(NULL, fd, 1);
 	}
-	return (err);
-}
-
-//perror(msg), closes fd, exit(r);
-void	px_abort(const char *msg, int fd[2], int r)
-{
-	perror(msg);
-	if (px_close(fd) == -1)
-		perror(NULL);
-	exit(r);
+	bin = fd[0];
+	fd[0] = fd[1];
+	fd[1] = fd_new[1];
+	fd_new[1] = bin;
+	if (px_close(fd_new) == -1)
+		px_abort(NULL, fd, 1);
 }
