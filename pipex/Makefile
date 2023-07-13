@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:41:13 by bvercaem          #+#    #+#              #
-#    Updated: 2023/07/12 17:29:16 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/07/13 16:47:57 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ BONUS_HEADER_WD	=
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -Werror
-# FLAGS			=	-Wall -Wextra -Werror -g
+#FLAGS			=	-Wall -Wextra -Werror
+ FLAGS			=	-Wall -Wextra -Werror -g
 # FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
 #-------------------SOURCES FILES----------------------
@@ -38,7 +38,7 @@ HEADERS			=	$(HEADER_WD)pipex.h \
 
 BONUS_HEADERS 	=
 
-MAIN			=	$(SOURCES_WD)main.c
+MAIN			=	$(SOURCES_WD)pipex.c
 
 BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
 
