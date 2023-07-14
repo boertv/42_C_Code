@@ -6,27 +6,31 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 15:29:28 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/13 16:56:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:01:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	px_open_pipe(int fd_read, int fd_pipe[2])
+void	px_open_pipe(t_fds *fds)
 {
-	if (pipe(fd_pipe) == -1)
-		px_abort("pipe", fd_read, fd_pipe, 1);
+	if (pipe(fds->pipe) == -1)
+		px_abort("pipe", fds, 1);
 }
 
-// closes fd_read and fd_pipe[0] (sets to -1)
-// moves fd_pipe[1] to fd_read
-void	px_reset_fds(int *fd_read, int fd_pipe[2])
+// closes read and pipe[1] (sets to -1)
+// moves pipe[0] to read
+void	px_reset_fds(t_fds *fds)
 {
 	int	temp;
 
-	temp = fd_pipe[1];
-	fd_pipe[1] = *fd_read;
-	if (px_close(fd_pipe) == -1)
-		px_abort("close", temp, NULL, 1);
-	*fd_read = temp;
+	temp = fds->pipe[0];
+	fds->pipe[0] = fds->read;
+	if (px_close(fds->pipe) == -1)
+	{
+		fds->pipe[0] = -1;
+		fds->pipe[1] = -1;
+		px_abort("close", fds, 1);
+	}
+	fds->read = temp;
 }

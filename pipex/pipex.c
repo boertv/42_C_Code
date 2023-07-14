@@ -6,52 +6,52 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:14 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/13 18:46:54 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:08:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+// static int	px_final_step()
+// {
+// }
 
 int	main(int ac, char *av[])
 {
-	int	fd_read;
-	int	fd_pipe[2];
-	int	i;
+	t_fds	fds;
+	int		i;
+	pid_t	pid;
+	int		stat;
 	//temp char pointers
 	char	*cmd = ft_strdup("/bin/cat");
 	char	**args = NULL;
 
 	i = 2;
-	fd_read = open(av[1], O_RDONLY);
-	if (fd_read == -1)
-		px_abort(av[1], 0, NULL, 1);
+	fds.read = open(av[1], O_RDONLY);
+	if (fds.read == -1)
+		px_abort(av[1], NULL, 1);
 	while (i < ac - 2)
 	{
-		px_open_pipe(fd_read, fd_pipe);
-		px_cmd(&fd_read, fd_pipe, cmd, args);
+		px_open_pipe(&fds);
+		px_cmd(&fds, cmd, args);
 		cmd = ft_strdup("/bin/cat");
-		px_reset_fds(&fd_read, fd_pipe);
+		px_reset_fds(&fds);
 		i++;
 	}
-	//do the last cmd with in = out of last pipe and out = outfile
-	fd_pipe[0] = open(av[ac - 1], O_WRONLY);
-	if (fd_pipe[0] == -1)
+	fds.pipe[1] = open(av[ac - 1], O_WRONLY);
+	if (fds.pipe[1] == -1)
 	{
+		//free neccessary?
 		px_free_all(cmd, args);
-		px_abort(av[ac - 1], fd_read, NULL, 1);
+		fds.pipe[0] = -1;
+		fds.pipe[1] = -1;
+		px_abort(av[ac - 1], &fds, 1);
 	}
-	px_cmd(&fd_read, fd_pipe, cmd, args);
-	//close fd_read and outfile?
-	fd_pipe[1] = fd_read;
-	if (px_close(fd_pipe) == -1)
-		px_abort("close", 0, NULL, 1);
+	pid = px_cmd(&fds, cmd, args);
+	pid = waitpid(pid, &stat, 0);
+	// check for bad wait value with pid and stat
+	fds.pipe[0] = fds.read;
+	if (px_close(fds.pipe) == -1)
+		px_abort("close", NULL, 1);
 }
 
-/*
-WHILE LOOP:
-	+- open pipe with fd_pipe
-	-- run (parsed) cmd (fork) with in = fd_read, out = fd_pipe[0]
-	+- wait for child process
-	+- close fd_read and fd_pipe[0] (set to -1)
-	+- move fd_pipe[1] to fd_read
-*/
+//check if cmd is available

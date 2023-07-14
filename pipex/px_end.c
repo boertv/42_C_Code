@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/13 17:04:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:02:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,13 @@ void	px_free_all(char *str, char **arr)
 }
 
 //perror(msg), closes fds, exit(r);
-void	px_abort(const char *msg, int fdr, int fdp[2], int r)
+void	px_abort(const char *msg, t_fds *fds, int r)
 {
 	perror(msg);
-	if (fdr > 2)
-		if (close(fdr) == -1)
+	if (fds->read > 2)
+		if (close(fds->read) == -1)
 			perror("close");
-	if (px_close(fdp) == -1)
+	if (px_close(fds->pipe) == -1)
 		perror("close");
-printf("we exiting\n");
 	exit(r);
 }
