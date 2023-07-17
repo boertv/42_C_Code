@@ -38,11 +38,7 @@ int	main(int ac, char *av[])
 		perror("access failed");
 		return (temp_return(cmd, arg, 127));
 	}
-	if (!execve(cmd, arg, NULL))
-	{
-		perror("execve failed");
-		return (temp_return(cmd, arg, 126));
-	}
+	execve(cmd, arg, NULL)
 	printf("I Can See You (tv)\n");
-	return (temp_return(cmd, arg, 0));
+	return (temp_return(cmd, arg, 126));
 }
