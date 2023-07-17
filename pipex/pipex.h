@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/17 15:00:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:46:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_fds
 }		t_fds;
 
 void	px_open_pipe(t_fds *fds);
-pid_t	px_cmd(t_fds *fds, char *cmd, char **args);
+pid_t	px_cmd(t_fds *fds, char *argv);
 void	px_reset_fds(t_fds *fds);
 
 void	px_abort(const char *msg, t_fds *fds, int r);
