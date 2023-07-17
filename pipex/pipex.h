@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/14 18:01:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:00:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_fds
 {
