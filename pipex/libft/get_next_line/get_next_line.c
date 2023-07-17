@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/06/29 18:57:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:01:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*get_next_line(int fd)
 	ssize_t			check;
 	ssize_t			i;
 
-	if (fd < 0 || fd > OPEN_MAX)
+	if (fd < 0 || fd > FOPEN_MAX)
 		return (NULL);
 	check = ft_initialise(&line, &element, &list, fd);
 	if (!check)
