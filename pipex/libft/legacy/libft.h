@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:01:17 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/18 17:16:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:42:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-char	*ft_strstr(const char *s, const char *chars);
+char	*ft_strchrs(const char *s, const char *chars);
 void	ft_strshift(char *s);
 
 typedef struct s_list
