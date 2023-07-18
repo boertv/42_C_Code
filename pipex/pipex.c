@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:14 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/14 18:08:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:41:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int	main(int ac, char *av[])
 	int		i;
 	pid_t	pid;
 	int		stat;
-	//temp char pointers
-	char	*cmd = ft_strdup("/bin/cat");
-	char	**args = NULL;
 
+	// seperate mandotory main that checks if ac == 4.
 	i = 2;
 	fds.read = open(av[1], O_RDONLY);
 	if (fds.read == -1)
@@ -32,8 +30,7 @@ int	main(int ac, char *av[])
 	while (i < ac - 2)
 	{
 		px_open_pipe(&fds);
-		px_cmd(&fds, cmd, args);
-		cmd = ft_strdup("/bin/cat");
+		px_cmd(&fds, av[i]);
 		px_reset_fds(&fds);
 		i++;
 	}
@@ -46,7 +43,7 @@ int	main(int ac, char *av[])
 		fds.pipe[1] = -1;
 		px_abort(av[ac - 1], &fds, 1);
 	}
-	pid = px_cmd(&fds, cmd, args);
+	pid = px_cmd(&fds, av[ac - 2]);
 	pid = waitpid(pid, &stat, 0);
 	// check for bad wait value with pid and stat
 	fds.pipe[0] = fds.read;

@@ -6,27 +6,54 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/17 18:46:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/18 18:36:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// parse arguments and shit innit
+static void	px_delete_qts(char **args, size_t i, char *cursor)
+{
+	char	qt;
+	size_t	l;
+
+	qt = *cursor;
+	ft_strshift(cursor);
+	l = cursor - args[i];
+	while (!cursor && args[i + 1])
+	{
+		cursor = ft_strchr(args[i] + l, qt);
+		if (!cursor)
+		{
+			l += ft_strlen(args[i] + l);
+			px_da_join(args, i, " ");
+		}
+	}
+	// possible cases:
+	//	- i found a quote
+	//	- i joined the last string (still need to search it)
+	// that's it i think
+}
+
 static void	px_parser(char **args)
 {
-	// |"h'i"1"2"3| is REALLY annoying
-	// it's all one string but both the "" should be removed.
 	size_t	i;
-	char	*qte;
-	size_t	j;
+	char	*cursor;
 
 	i = 0;
-	while (args[i])
+	while (!i || cursor) // euh i dunno yet
 	{
-		qte = ft_strchr(args[i], '"');
-		if (qte)
+		while (!cursor && args[i])
+		{
+			cursor = ft_strchrs(args[i], "\'\"");
+			if (!cursor)
+				i++;
+		}
+		if (!cursor)
+			break ;
+		px_delete_qts(args, i, cursor);
 	}
+	//when done maybe resize args to a smaller malloc?
 }
 
 static pid_t	px_child_proc(t_fds *fds, char *cmd, char **args)
@@ -83,19 +110,20 @@ pid_t	px_cmd(t_fds *fds, char *argv)
 	args = ft_split(argv, ' ');
 	if (!args)
 		px_abort("split", fds, 1);
-	// check cmd (args[0]) for quotes?
+	px_parser(args);
+	// check cmd (args[0]) for quotes? and if path is already provided
+	// check all of PATH (with char **env in main)?
 	cmd = ft_strjoin("/bin/", args[0]);
 	if (!cmd)
 	{
 		px_free_all(NULL, args);
 		px_abort("strjoin", fds, 1);
 	}
-	// correct access check? (e.g. will just "/bin/" get through?)
+	// correct access check? (e.g. will just "/bin/" get through? (it will))
 	if (access(cmd, X_OK) == -1)
 	{
 		px_free_all(cmd, args);
 		px_abort("access failed", fds, 127);
 	}
-	px_parser(args);
 	return (px_forking(fds, cmd, args));
 }
