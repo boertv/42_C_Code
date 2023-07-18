@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:25:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/17 15:02:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:31:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 # include <stdio.h>
 
 typedef struct s_fdlist

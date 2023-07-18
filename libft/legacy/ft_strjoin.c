@@ -6,12 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:38:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/04/17 10:26:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:20:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// DOESN'T FREE
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*r;

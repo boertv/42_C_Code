@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/10 14:06:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/07/18 15:49:57 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/07/18 17:16:33 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ SRCS			=	$(SOURCES)ft_isalpha.c \
 					$(SOURCES)ft_lstclear.c \
 					$(SOURCES)ft_lstiter.c \
 					$(SOURCES)ft_lstmap.c \
-					$(SOURCES)ft_strstr.c
+					$(SOURCES)ft_strstr.c \
+					$(SOURCES)ft_strshift.c
 
 #-------------------OBJECTS----------------------
 
