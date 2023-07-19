@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/18 18:36:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:19:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	px_delete_qts(char **args, size_t i, char *cursor)
+static char	*px_delete_qts(char **args, size_t i, char *cursor)
 {
 	char	qt;
 	size_t	l;
@@ -20,29 +20,27 @@ static void	px_delete_qts(char **args, size_t i, char *cursor)
 	qt = *cursor;
 	ft_strshift(cursor);
 	l = cursor - args[i];
+	cursor = ft_strchr(args[i] + l, qt);
 	while (!cursor && args[i + 1])
 	{
+		l += ft_strlen(args[i] + l);
+		px_da_join(args, i, " ");
 		cursor = ft_strchr(args[i] + l, qt);
-		if (!cursor)
-		{
-			l += ft_strlen(args[i] + l);
-			px_da_join(args, i, " ");
-		}
 	}
-	// possible cases:
-	//	- i found a quote
-	//	- i joined the last string (still need to search it)
-	// that's it i think
+	if (cursor)
+		ft_strshift(cursor);
+	return (cursor);
 }
 
-static void	px_parser(char **args)
+static int	px_parser(char **args)
 {
 	size_t	i;
 	char	*cursor;
 
 	i = 0;
-	while (!i || cursor) // euh i dunno yet
+	while (args[i])
 	{
+		cursor = ft_strchrs(args[i], "\'\"");
 		while (!cursor && args[i])
 		{
 			cursor = ft_strchrs(args[i], "\'\"");
@@ -51,8 +49,16 @@ static void	px_parser(char **args)
 		}
 		if (!cursor)
 			break ;
-		px_delete_qts(args, i, cursor);
+		while (cursor)
+		{
+			cursor = px_delete_qts(args, i, cursor);
+			if (!cursor)
+				return (1);
+			cursor = ft_strchrs(cursor, "\'\"");
+		}
+		i++;
 	}
+	return (0);
 	//when done maybe resize args to a smaller malloc?
 }
 
@@ -103,15 +109,18 @@ static pid_t	px_forking(t_fds *fds, char *cmd, char **args)
 // returns the pid of the child process
 pid_t	px_cmd(t_fds *fds, char *argv)
 {
-	pid_t	pid;
 	char	*cmd;
 	char	**args;
 
 	args = ft_split(argv, ' ');
 	if (!args)
 		px_abort("split", fds, 1);
-	px_parser(args);
-	// check cmd (args[0]) for quotes? and if path is already provided
+	if (px_parser(args))
+	{
+		px_free_all(NULL, args);
+		px_abort("parser", fds, 1);
+	}
+	// check if cmd path is already provided
 	// check all of PATH (with char **env in main)?
 	cmd = ft_strjoin("/bin/", args[0]);
 	if (!cmd)

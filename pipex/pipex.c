@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:14 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/18 15:41:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:40:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,3 @@ int	main(int ac, char *av[])
 	if (px_close(fds.pipe) == -1)
 		px_abort("close", NULL, 1);
 }
-
-//check if cmd is available

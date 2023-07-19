@@ -6,23 +6,23 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:41:13 by bvercaem          #+#    #+#              #
-#    Updated: 2023/07/18 16:24:42 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/07/19 18:19:37 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	pipex
 
-BONUS_NAME		=
+BONUS_NAME		=	
 
 #-------------------PATH-----------------------------
 
 SOURCES_WD		=	./
 
-BONUS_WD		=
+BONUS_WD		=	./
 
 HEADER_WD		=	./
 
-BONUS_HEADER_WD	=
+BONUS_HEADER_WD	=	./
 
 #-------------------COMPILATION----------------------
 
@@ -40,14 +40,14 @@ BONUS_HEADERS 	=
 
 MAIN			=	$(SOURCES_WD)pipex.c
 
-BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
+BONUS_MAIN		=	$(BONUS_WD)
 
 SRCS			=	$(SOURCES_WD)px_pipes.c \
 					$(SOURCES_WD)px_execution.c \
 					$(SOURCES_WD)px_execution_utils.c \
 					$(SOURCES_WD)px_end.c
 
-BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
+BONUS_SRC		=	#$(BONUS_WD)___ _bonus.c
 
 #-------------------OBJECTS----------------------
 
