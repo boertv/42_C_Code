@@ -6,11 +6,12 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:14 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/19 16:40:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:56:27 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
 // static int	px_final_step()
 // {
 // }
@@ -23,6 +24,7 @@ int	main(int ac, char *av[])
 	int		stat;
 
 	// seperate mandotory main that checks if ac == 4.
+	// check all of PATH (with char **env in main)?
 	i = 2;
 	fds.read = open(av[1], O_RDONLY);
 	if (fds.read == -1)
@@ -36,13 +38,7 @@ int	main(int ac, char *av[])
 	}
 	fds.pipe[1] = open(av[ac - 1], O_WRONLY);
 	if (fds.pipe[1] == -1)
-	{
-		//free neccessary?
-		px_free_all(cmd, args);
-		fds.pipe[0] = -1;
-		fds.pipe[1] = -1;
 		px_abort(av[ac - 1], &fds, 1);
-	}
 	pid = px_cmd(&fds, av[ac - 2]);
 	pid = waitpid(pid, &stat, 0);
 	// check for bad wait value with pid and stat

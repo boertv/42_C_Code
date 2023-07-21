@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/19 18:19:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:37:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	px_open_pipe(t_fds *fds);
 pid_t	px_cmd(t_fds *fds, char *argv);
 void	px_reset_fds(t_fds *fds);
 int		px_da_join(char **da, size_t i, const char *c);
+char	**px_resize_malloc(char	**da);
 
 void	px_abort(const char *msg, t_fds *fds, int r);
 int		px_close(int fd[2]);

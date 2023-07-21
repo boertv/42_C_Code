@@ -2,10 +2,15 @@
 
 int	main(void)
 {
-	char	*cmd = "a";
+	char	*cmd = NULL;
+	int		check;
 
-	if (access(cmd, X_OK) == -1)
+	check = access(cmd, X_OK);
+	printf("output for %s = %i\n", cmd, check);
+	if (check == -1)
 	{
+		if (!cmd)
+			cmd = "(null)";
 		perror(cmd);
 		return (127);
 	}

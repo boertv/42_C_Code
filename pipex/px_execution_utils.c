@@ -6,11 +6,30 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:13:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/18 17:23:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:35:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+// returns the new ptr, or NULL if malloc failed
+char	**px_resize_malloc(char	**da)
+{
+	size_t	i;
+	char	**new;
+
+	i = 0;
+	while (da[i])
+		i++;
+	new = malloc(sizeof(char *) * (i + 1));
+	if (!new)
+		return (NULL);
+	new[i] = NULL;
+	while (i-- > 0)
+		new[i] = da[i];
+	free(da);
+	return (new);
+}
 
 static int	px_da_join_const(char **da, size_t i, const char *c)
 {

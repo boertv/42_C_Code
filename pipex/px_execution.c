@@ -6,12 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/19 18:19:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:42:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+// returns 1 if a quote is not closed
 static char	*px_delete_qts(char **args, size_t i, char *cursor)
 {
 	char	qt;
@@ -32,18 +33,19 @@ static char	*px_delete_qts(char **args, size_t i, char *cursor)
 	return (cursor);
 }
 
-static int	px_parser(char **args)
+// returns 1 if a quote is not closed or resize malloc failed
+static int	px_parser(char ***args)
 {
 	size_t	i;
 	char	*cursor;
 
 	i = 0;
-	while (args[i])
+	while ((*args)[i])
 	{
-		cursor = ft_strchrs(args[i], "\'\"");
-		while (!cursor && args[i])
+		cursor = ft_strchrs((*args)[i], "\'\"");
+		while (!cursor && (*args)[i])
 		{
-			cursor = ft_strchrs(args[i], "\'\"");
+			cursor = ft_strchrs((*args)[i], "\'\"");
 			if (!cursor)
 				i++;
 		}
@@ -51,15 +53,17 @@ static int	px_parser(char **args)
 			break ;
 		while (cursor)
 		{
-			cursor = px_delete_qts(args, i, cursor);
+			cursor = px_delete_qts(*args, i, cursor);
 			if (!cursor)
 				return (1);
 			cursor = ft_strchrs(cursor, "\'\"");
 		}
 		i++;
 	}
+	*args = px_resize_malloc(*args);
+	if (!*args)
+		return (1);
 	return (0);
-	//when done maybe resize args to a smaller malloc?
 }
 
 static pid_t	px_child_proc(t_fds *fds, char *cmd, char **args)
@@ -115,20 +119,22 @@ pid_t	px_cmd(t_fds *fds, char *argv)
 	args = ft_split(argv, ' ');
 	if (!args)
 		px_abort("split", fds, 1);
-	if (px_parser(args))
+	if (px_parser(&args))
 	{
 		px_free_all(NULL, args);
 		px_abort("parser", fds, 1);
 	}
-	// check if cmd path is already provided
-	// check all of PATH (with char **env in main)?
-	cmd = ft_strjoin("/bin/", args[0]);
+	// correct access check? (e.g. will just "/bin/" get through? (it will))
+	if (access(args[0], X_OK) == -1)
+		cmd = ft_strjoin("/bin/", args[0]);
+	else
+		cmd = ft_strdup(args[0]);
 	if (!cmd)
 	{
 		px_free_all(NULL, args);
 		px_abort("strjoin", fds, 1);
 	}
-	// correct access check? (e.g. will just "/bin/" get through? (it will))
+	// correct access check still?
 	if (access(cmd, X_OK) == -1)
 	{
 		px_free_all(cmd, args);
