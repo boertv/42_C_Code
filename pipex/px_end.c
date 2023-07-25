@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/25 19:12:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:33:17 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	px_free_all(char *str, char **arr)
 		free(str);
 	if (arr)
 		ft_clear_da(arr);
+}
+
+void	px_free_and_abort(const char *msg, t_fds *fds, t_args *args, int r)
+{
+	px_free_all(args->cmd, args->arg);
+	px_abort(msg, fds, r);
 }
 
 //perror(msg), close fds, wait out all children, exit(r);

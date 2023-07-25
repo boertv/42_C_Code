@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/25 19:22:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:44:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@ static char	*px_delete_qts(char **args, size_t i, char *cursor)
 }
 
 // returns 1 if a quote is not closed or resize malloc failed
-static int	px_parser(char ***args)
+static int	px_parser(t_args *args)
 {
 	size_t	i;
 	char	*cursor;
 
+//look at this mess again with fresh eyes and simplify it pls
 	i = 0;
-	while ((*args)[i])
+	while (args->arg[i])
 	{
-		cursor = ft_strchrs((*args)[i], "\'\"");
-		while (!cursor && (*args)[i])
+		cursor = ft_strchrs(args->arg[i], "\'\"");
+		while (!cursor && args->arg[i])
 		{
-			cursor = ft_strchrs((*args)[i], "\'\"");
+			cursor = ft_strchrs(args->arg[i], "\'\"");
 			if (!cursor)
 				i++;
 		}
@@ -53,58 +54,47 @@ static int	px_parser(char ***args)
 			break ;
 		while (cursor)
 		{
-			cursor = px_delete_qts(*args, i, cursor);
+			cursor = px_delete_qts(args->arg, i, cursor);
 			if (!cursor)
 				return (1);
 			cursor = ft_strchrs(cursor, "\'\"");
 		}
 		i++;
 	}
-	*args = px_resize_malloc(*args);
-	if (!*args)
+	args->arg = px_resize_malloc(args->arg);
+	if (!args->arg)
 		return (1);
 	return (0);
 }
 
-static pid_t	px_child_proc(t_fds *fds, char *cmd, char **args)
+static pid_t	px_child_proc(t_fds *fds, t_args *args)
 {
 	if (dup2(fds->read, 0) == -1 || dup2(fds->pipe[1], 1) == -1)
-	{
-		px_free_all(cmd, args);
-		px_abort("dup2", fds, 1);
-	}
+		px_free_and_abort("dup2", fds, args, 1);
 	if (close(fds->read) == -1)
 	{
-		px_free_all(cmd, args);
 		fds->read = -1;
-		px_abort("close", fds, 1);
+		px_free_and_abort("close", fds, args, 1);
 	}
 	if (px_close(fds->pipe) == -1)
-	{
-		px_free_all(cmd, args);
-		px_abort("close", NULL, 1);
-	}
-	execve(cmd, args, NULL);
-	px_free_all(cmd, args);
-	px_abort("execve", fds, 1);
+		px_free_and_abort("close", NULL, args, 1);
+	execve(args->cmd, args->arg, NULL);
+	px_free_and_abort("execve", fds, args, 1);
 	return (1);
 }
 
-static pid_t	px_forking(t_fds *fds, char *cmd, char **args)
+static pid_t	px_forking(t_fds *fds, t_args *args)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-	{
-		px_free_all(cmd, args);
-		px_abort("fork", fds, 1);
-	}
+		px_free_and_abort("fork", fds, args, 1);
 	if (pid == 0)
-		return (px_child_proc(fds, cmd, args));
+		return (px_child_proc(fds, args));
 	else
 	{
-		px_free_all(cmd, args);
+		px_free_all(args->cmd, args->arg);
 		return (pid);
 	}
 }
@@ -113,32 +103,23 @@ static pid_t	px_forking(t_fds *fds, char *cmd, char **args)
 // returns the pid of the child process
 pid_t	px_cmd(t_fds *fds, char *argv)
 {
-	char	*cmd;
-	char	**args;
+	t_args	args;
 
-	args = ft_split(argv, ' ');
-	if (!args)
+	args.arg = ft_split(argv, ' ');
+	if (!args.arg)
 		px_abort("split", fds, 1);
+	args.cmd = NULL;
 	if (px_parser(&args))
-	{
-		px_free_all(NULL, args);
-		px_abort("parsing", fds, 1);
-	}
+		px_free_and_abort("parsing", fds, &args, 1);
 	// correct access check? (e.g. will just "/bin/" get through? (it will))
-	if (access(args[0], X_OK) == -1)
-		cmd = ft_strjoin("/bin/", args[0]);
+	if (access(args.arg[0], X_OK) == -1)
+		args.cmd = ft_strjoin("/bin/", args.arg[0]);
 	else
-		cmd = ft_strdup(args[0]);
-	if (!cmd)
-	{
-		px_free_all(NULL, args);
-		px_abort("strjoin", fds, 1);
-	}
+		args.cmd = ft_strdup(args.arg[0]);
+	if (!args.cmd)
+		px_free_and_abort("strjoin", fds, &args, 1);
 	// correct access check still?
-	if (access(cmd, X_OK) == -1)
-	{
-		px_free_all(cmd, args);
-		px_abort("access failed", fds, 127);
-	}
-	return (px_forking(fds, cmd, args));
+	if (access(args.cmd, X_OK) == -1)
+		px_free_and_abort("cmd not found", fds, &args, 127);
+	return (px_forking(fds, &args));
 }
