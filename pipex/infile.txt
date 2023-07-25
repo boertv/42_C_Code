@@ -3,7 +3,5 @@ def
 ghi
 jkl
 mno
-pqr
-stu
-vw
-xyz
+12345
+67890

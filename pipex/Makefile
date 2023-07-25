@@ -6,13 +6,13 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:41:13 by bvercaem          #+#    #+#              #
-#    Updated: 2023/07/19 18:19:37 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/07/25 16:57:15 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	pipex
 
-BONUS_NAME		=	
+BONUS_NAME		=	pipex_bonus
 
 #-------------------PATH-----------------------------
 
@@ -27,20 +27,21 @@ BONUS_HEADER_WD	=	./
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-#FLAGS			=	-Wall -Wextra -Werror
- FLAGS			=	-Wall -Wextra -Werror -g
-# FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror
+#FLAGS			=	-Wall -Wextra -Werror -g
+#FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
 #-------------------SOURCES FILES----------------------
 
 HEADERS			=	$(HEADER_WD)pipex.h \
 					$(HEADER_WD)libft/legacy/libft.h
 
-BONUS_HEADERS 	=
+BONUS_HEADERS 	=	$(BONUS_HEADER_WD)pipex_bonus.h \
+					$(BONUS_HEADER_WD)libft/get_next_line/get_next_line.h
 
 MAIN			=	$(SOURCES_WD)pipex.c
 
-BONUS_MAIN		=	$(BONUS_WD)
+BONUS_MAIN		=	$(BONUS_WD)pipex_bonus.c
 
 SRCS			=	$(SOURCES_WD)px_pipes.c \
 					$(SOURCES_WD)px_execution.c \
@@ -96,8 +97,7 @@ $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
-
-$(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
+$(BONUS_NAME):	$(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@make -C libft/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)

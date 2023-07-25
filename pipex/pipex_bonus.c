@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 16:51:14 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/25 16:58:58 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/07/25 15:58:53 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/07/25 16:23:53 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	main(int ac, char *av[])
 {
@@ -20,8 +20,7 @@ int	main(int ac, char *av[])
 	int		stat;
 
 	// check all of PATH (with char **env in main)?
-	if (ac != 5)
-		return (1);
+	// open file for HERE_DOC bonus in append mode
 	i = 2;
 	fds.read = open(av[1], O_RDONLY);
 	if (fds.read == -1)
