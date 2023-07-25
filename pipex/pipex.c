@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:14 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/25 18:30:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:43:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	px_final_process(char *cmd, char *out, t_fds *fds)
 	pid = px_cmd(fds, cmd);
 	pid = waitpid(pid, &stat, 0);
 	// check for bad wait value with pid and stat
+	// return according to pid
 }
 
 int	main(int ac, char *av[])
@@ -44,9 +45,11 @@ int	main(int ac, char *av[])
 		px_reset_fds(&fds);
 		i++;
 	}
-	px_final_process(av[ac - 2], av[ac - 1], &fds);
-	// wait for all processes with a wait loop (if no more PID's it returns -1)
+	i = px_final_process(av[ac - 2], av[ac - 1], &fds);
+	while (wait(NULL) != -1)
+		continue ;
 	fds.pipe[0] = fds.read;
 	if (px_close(fds.pipe) == -1)
 		px_abort("close", NULL, 1);
+	return (i);
 }
