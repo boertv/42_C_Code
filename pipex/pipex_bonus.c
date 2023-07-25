@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:58:53 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/25 18:46:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/25 18:49:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	px_final_process(char *cmd, char *out, t_fds *fds)
 	pid = waitpid(pid, &stat, 0);
 	// check for bad wait value with pid and stat
 	// return according to pid
+	return (0);
 }
 
 int	main(int ac, char *av[])

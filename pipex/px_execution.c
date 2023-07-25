@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/21 17:42:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:22:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ pid_t	px_cmd(t_fds *fds, char *argv)
 	if (px_parser(&args))
 	{
 		px_free_all(NULL, args);
-		px_abort("parser", fds, 1);
+		px_abort("parsing", fds, 1);
 	}
 	// correct access check? (e.g. will just "/bin/" get through? (it will))
 	if (access(args[0], X_OK) == -1)
