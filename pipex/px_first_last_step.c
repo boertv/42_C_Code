@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:23:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/02 18:03:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/02 18:09:25 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	**px_open_in_extract_path(t_fds *fds, char *file, char **env)
 	fds->read = open(file, O_RDONLY);
 	if (fds->read == -1)
 		px_abort(file, NULL, NULL, 1);
+	fds->pipe[0] = -1;
+	fds->pipe[1] = -1;
 	i = 0;
 	path = NULL;
 	while (env[i] && ft_strncmp(env[i], "PATH", 4))
@@ -54,18 +56,12 @@ char	**px_open_in_extract_path(t_fds *fds, char *file, char **env)
 	if (env[i])
 		path = ft_split(env[i], ':');
 	if (!path)
-	{
-		close (fds->read);
-		px_abort("environment parsing", NULL, NULL, 1);
-	}
+		px_abort("environment parsing", fds, NULL, 1);
 	i = 0;
 	while (path[i])
 	{
 		if (px_da_join_const(path, i, "/"))
-		{
-			close (fds->read);
-			px_abort("px_da_join_const", NULL, path, 1);
-		}
+			px_abort("px_da_join_const", fds, path, 1);
 		i++;
 	}
 	return (path);
