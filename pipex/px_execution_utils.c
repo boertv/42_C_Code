@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:13:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/21 17:35:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:31:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ char	**px_resize_malloc(char	**da)
 	return (new);
 }
 
-static int	px_da_join_const(char **da, size_t i, const char *c)
+// join da[i] and c, free da[i], replace it with new join
+// returns 1 if join failed, else 0
+int	px_da_join_const(char **da, size_t i, const char *c)
 {
 	char 	*new;
 
@@ -69,4 +71,26 @@ int	px_da_join(char **da, size_t i, const char *c)
 		da[i] = da[i + 1];
 	da[i] = NULL;
 	return (0);
+}
+
+// returns cmd with path if available, else an empty malloced string.
+char	*px_path_parser(char *cmd, char **path)
+{
+	size_t	i;
+	char	*joined;
+
+printf("cmd = |%s|, path:\n", cmd);
+	if (!path || !cmd || !*cmd)
+		return (ft_strdup(""));
+	i = 0;
+	while (path[i])
+	{
+printf("%s\n", path[i]);
+		joined = ft_strjoin(path[i], cmd);
+		if (!access(joined, X_OK))
+			return (joined);
+		free(joined);
+		i++;
+	}
+	return (ft_strdup(""));
 }

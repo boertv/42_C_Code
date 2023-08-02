@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/25 19:44:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:56:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// returns 1 if a quote is not closed
+// returns NULL if a quote is not closed
 static char	*px_delete_qts(char **args, size_t i, char *cursor)
 {
 	char	qt;
@@ -101,24 +101,23 @@ static pid_t	px_forking(t_fds *fds, t_args *args)
 
 // runs cmd in fork, then calls free_all
 // returns the pid of the child process
-pid_t	px_cmd(t_fds *fds, char *argv)
+pid_t	px_cmd(t_fds *fds, char *argv, char **path)
 {
 	t_args	args;
 
+	args.path = path;
 	args.arg = ft_split(argv, ' ');
 	if (!args.arg)
-		px_abort("split", fds, 1);
+		px_abort("split", fds, args.path, 1);
 	args.cmd = NULL;
 	if (px_parser(&args))
 		px_free_and_abort("parsing", fds, &args, 1);
-	// correct access check? (e.g. will just "/bin/" get through? (it will))
 	if (access(args.arg[0], X_OK) == -1)
-		args.cmd = ft_strjoin("/bin/", args.arg[0]);
+		args.cmd = px_path_parser(args.arg[0], path);
 	else
 		args.cmd = ft_strdup(args.arg[0]);
 	if (!args.cmd)
 		px_free_and_abort("strjoin", fds, &args, 1);
-	// correct access check still?
 	if (access(args.cmd, X_OK) == -1)
 		px_free_and_abort("cmd not found", fds, &args, 127);
 	return (px_forking(fds, &args));

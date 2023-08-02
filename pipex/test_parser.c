@@ -1,5 +1,5 @@
 #include "pipex.h"
-#include <stdio.h>
+#include <strings.h>
 
 void	print_ma_shit(char **da)
 {
@@ -19,7 +19,7 @@ void	print_ma_shit(char **da)
 	printf("}\n");
 }
 
-int	main(void)
+int	main()
 {
 	char	*s;
 	char	**da;
