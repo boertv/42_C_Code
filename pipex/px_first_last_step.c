@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:23:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/04 13:33:42 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:56:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	px_final_process(char *cmd, char *out, t_fds *fds, char **path)
 	pid_t	pid;
 	int		stat;
 
-	fds->pipe[1] = open(out, O_WRONLY | O_TRUNC | O_CREAT, 00755);
+	if (!fds->pipe[1])
+		fds->pipe[1] = open(out, O_WRONLY | O_APPEND | O_CREAT, 00755);
+	else
+		fds->pipe[1] = open(out, O_WRONLY | O_TRUNC | O_CREAT, 00755);
 	if (fds->pipe[1] == -1)
 		px_abort(out, fds, path, 1);
 	pid = px_cmd(fds, cmd, path);
@@ -38,13 +41,28 @@ int	px_final_process(char *cmd, char *out, t_fds *fds, char **path)
 	return (0);
 }
 
+static int	px_append_da(char **da, char *app)
+{
+	size_t	i;
+
+	i = 0;
+	while (da[i])
+	{
+		if (px_da_join_const(da, i, app))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 // opens infile, finds PATH variable in env and returns the split path.
 char	**px_open_in_extract_path(t_fds *fds, char *file, char **env)
 {
 	size_t	i;
 	char	**path;
 
-	fds->read = open(file, O_RDONLY);
+	if (fds->read != 0)
+		fds->read = open(file, O_RDONLY);
 	if (fds->read == -1)
 		px_abort(file, NULL, NULL, 1);
 	fds->pipe[0] = -1;
@@ -57,12 +75,7 @@ char	**px_open_in_extract_path(t_fds *fds, char *file, char **env)
 		path = ft_split(env[i], ':');
 	if (!path)
 		px_abort("environment parsing", fds, NULL, 1);
-	i = 0;
-	while (path[i])
-	{
-		if (px_da_join_const(path, i, "/"))
-			px_abort("px_da_join_const", fds, path, 1);
-		i++;
-	}
+	if (px_append_da(path, "/"))
+		px_abort("px_da_join_const", fds, path, 1);
 	return (path);
 }

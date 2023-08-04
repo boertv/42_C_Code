@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:14 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/02 18:04:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:53:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	main(int ac, char *av[], char **env)
 {
+	// check error handling, compare with bash cmd
 	t_fds	fds;
 	int		i;
 	char	**path;
 
 	if (ac != 5)
 		return (1);
+	fds.read = -1;
 	path = px_open_in_extract_path(&fds, av[1], env);
 	i = 2;
 	while (i < ac - 2)
