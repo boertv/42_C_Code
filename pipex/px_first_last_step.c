@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:23:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/02 18:09:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:33:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	px_final_process(char *cmd, char *out, t_fds *fds, char **path)
 	pid_t	pid;
 	int		stat;
 
-	fds->pipe[1] = open(out, O_WRONLY);
+	fds->pipe[1] = open(out, O_WRONLY | O_TRUNC | O_CREAT, 00755);
 	if (fds->pipe[1] == -1)
 		px_abort(out, fds, path, 1);
 	pid = px_cmd(fds, cmd, path);
