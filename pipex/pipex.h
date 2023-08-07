@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 16:51:42 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 15:25:27 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:23:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_args
 	char	**path;
 }			t_args;
 
-char	**px_open_in_extract_path(t_fds *fds, char *file, char **env, int herebool);
+char	**px_infd_extract_path(t_fds *fds, char *file, char **env, int hdbool);
 int		px_final_process(char *cmd, char *out, t_fds *fds, char **path);
 
 void	px_open_pipe(t_fds *fds, char **path);

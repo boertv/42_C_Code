@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:58:53 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 16:06:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:24:48 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main(int ac, char *av[], char **env)
 {
-	t_fds	fds;
-	int		i;
-	char	**path;
+	t_fds		fds;
+	int			i;
+	char		**path;
 	t_heredoc	heredoc;
 
 	px_heredoc_check(av[1], &i, &fds, &heredoc);
 	px_heredoc_pipe(&fds, av[2], NULL, &heredoc);
-	path = px_open_in_extract_path(&fds, av[1], env, heredoc.is);
+	path = px_infd_extract_path(&fds, av[1], env, heredoc.is);
 	while (i < ac - 2)
 	{
 		px_open_pipe(&fds, path);

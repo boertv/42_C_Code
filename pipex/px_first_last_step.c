@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:23:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 16:17:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:23:32 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ static int	px_append_da(char **da, char *app)
 }
 
 // opens infile, finds PATH variable in env and returns the split path.
-char	**px_open_in_extract_path(t_fds *fds, char *file, char **env, int herebool)
+char	**px_infd_extract_path(t_fds *fds, char *file, char **env, int hdbool)
 {
 	size_t	i;
 	char	**path;
 
-	if (!herebool)
+	if (!hdbool)
 		fds->read = open(file, O_RDONLY);
 	if (fds->read == -1)
 		px_abort(file, NULL, NULL, 1);

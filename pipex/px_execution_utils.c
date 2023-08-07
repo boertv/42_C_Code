@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:13:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/02 18:14:42 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:25:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**px_resize_malloc(char	**da)
 // returns 1 if join failed, else 0
 int	px_da_join_const(char **da, size_t i, const char *c)
 {
-	char 	*new;
+	char	*new;
 
 	new = ft_strjoin(da[i], c);
 	if (!new)
