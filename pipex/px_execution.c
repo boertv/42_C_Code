@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 15:33:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:37:57 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,14 @@ static int	px_parser(t_args *args)
 	size_t	i;
 	char	*cursor;
 
-//look at this mess again with fresh eyes and simplify it pls
 	i = 0;
 	while (args->arg[i])
 	{
 		cursor = ft_strchrs(args->arg[i], "\'\"");
 		while (!cursor && args->arg[i])
 		{
+			i++;
 			cursor = ft_strchrs(args->arg[i], "\'\"");
-			if (!cursor)
-				i++;
 		}
 		if (!cursor)
 			break ;
@@ -62,9 +60,7 @@ static int	px_parser(t_args *args)
 		i++;
 	}
 	args->arg = px_resize_malloc(args->arg);
-	if (!args->arg)
-		return (1);
-	return (0);
+	return (!args->arg);
 }
 
 static pid_t	px_child_proc(t_fds *fds, t_args *args)
@@ -105,6 +101,13 @@ pid_t	px_cmd(t_fds *fds, char *argv, char **path)
 {
 	t_args	args;
 
+	if (fds->read == -1)
+	{
+		if (close(fds->pipe[1]))
+			px_abort("close", fds, path, 1);
+		fds->pipe[1] = -1;
+		return (-1);
+	}
 	args.path = path;
 	args.arg = ft_split(argv, ' ');
 	if (!args.arg)

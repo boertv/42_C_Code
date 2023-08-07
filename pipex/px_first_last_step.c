@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:23:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 16:23:32 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:58:21 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	px_final_process(char *cmd, char *out, t_fds *fds, char **path)
 		px_abort(out, fds, path, 1);
 	pid = px_cmd(fds, cmd, path);
 	pid = waitpid(pid, &stat, 0);
-	// check for bad wait value with pid and stat
-	// return according to pid
-	return (0);
+	if (pid == -1 || !WIFEXITED(stat))
+		perror (cmd);
+	return (WEXITSTATUS(stat));
 }
 
 static int	px_append_da(char **da, char *app)
@@ -65,7 +65,7 @@ char	**px_infd_extract_path(t_fds *fds, char *file, char **env, int hdbool)
 	if (!hdbool)
 		fds->read = open(file, O_RDONLY);
 	if (fds->read == -1)
-		px_abort(file, NULL, NULL, 1);
+		perror(file);
 	i = 0;
 	path = NULL;
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 15:31:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:43:32 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ void	px_abort(const char *msg, t_fds *fds, char **path, int r)
 {
 	perror(msg);
 	ft_clear_da(path);
-	if (fds->read > 2)
-		if (close(fds->read) == -1)
+	if (fds)
+	{
+		if (fds->read > 2)
+			if (close(fds->read) == -1)
+				perror("close");
+		if (px_close(fds->pipe) == -1)
 			perror("close");
-	if (px_close(fds->pipe) == -1)
-		perror("close");
+	}
 	while (wait(NULL) != -1)
 		continue ;
 	exit(r);
