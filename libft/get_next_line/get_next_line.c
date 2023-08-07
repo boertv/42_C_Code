@@ -64,6 +64,7 @@ static char	*ft_exit(char *line, t_fdl **list, ssize_t check, int fd)
 	return (line);
 }
 
+// return is either a malloced string or NULL.
 char	*get_next_line(int fd)
 {
 	static t_fdl	*list = NULL;
