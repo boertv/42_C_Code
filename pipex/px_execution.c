@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/02 17:56:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:33:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static pid_t	px_forking(t_fds *fds, t_args *args)
 		return (px_child_proc(fds, args));
 	else
 	{
-		px_free_all(args->cmd, args->arg);
+		px_free_all(args->cmd, args->arg, 0);
 		return (pid);
 	}
 }

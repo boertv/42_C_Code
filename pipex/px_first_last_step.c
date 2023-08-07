@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:23:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/04 14:56:54 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:17:13 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	px_flush(t_fds *fds, char **path)
 	ft_clear_da(path);
 }
 
+// if fds->pipe[1] == 0 we append instead of tuncating.
 int	px_final_process(char *cmd, char *out, t_fds *fds, char **path)
 {
 	pid_t	pid;
@@ -56,23 +57,21 @@ static int	px_append_da(char **da, char *app)
 }
 
 // opens infile, finds PATH variable in env and returns the split path.
-char	**px_open_in_extract_path(t_fds *fds, char *file, char **env)
+char	**px_open_in_extract_path(t_fds *fds, char *file, char **env, int herebool)
 {
 	size_t	i;
 	char	**path;
 
-	if (fds->read != 0)
+	if (!herebool)
 		fds->read = open(file, O_RDONLY);
 	if (fds->read == -1)
 		px_abort(file, NULL, NULL, 1);
-	fds->pipe[0] = -1;
-	fds->pipe[1] = -1;
 	i = 0;
 	path = NULL;
-	while (env[i] && ft_strncmp(env[i], "PATH", 4))
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
 		i++;
 	if (env[i])
-		path = ft_split(env[i], ':');
+		path = ft_split(env[i] + 5, ':');
 	if (!path)
 		px_abort("environment parsing", fds, NULL, 1);
 	if (px_append_da(path, "/"))

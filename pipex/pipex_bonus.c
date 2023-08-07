@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:58:53 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/04 15:05:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:06:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	main(int ac, char *av[], char **env)
 	t_fds	fds;
 	int		i;
 	char	**path;
-	int		herebool;
+	t_heredoc	heredoc;
 
-	// read stdin for here_doc with limiter (with temp file flag for 'open'?)
-	px_heredoc_check(av[1], &i, &fds, &herebool);
-	path = px_open_in_extract_path(&fds, av[1], env);
+	px_heredoc_check(av[1], &i, &fds, &heredoc);
+	px_heredoc_pipe(&fds, av[2], NULL, &heredoc);
+	path = px_open_in_extract_path(&fds, av[1], env, heredoc.is);
 	while (i < ac - 2)
 	{
 		px_open_pipe(&fds, path);
@@ -29,7 +29,7 @@ int	main(int ac, char *av[], char **env)
 		px_reset_fds(&fds, path);
 		i++;
 	}
-	if (herebool)
+	if (heredoc.is)
 		fds.pipe[1] = 0;
 	i = px_final_process(av[ac - 2], av[ac - 1], &fds, path);
 	px_flush(&fds, path);

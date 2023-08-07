@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/04 13:53:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:31:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,19 @@ int	px_close(int fd[2])
 	return (err);
 }
 
-void	px_free_all(char *str, char **arr)
+// frees if not NULL, returns r.
+int	px_free_all(char *str, char **arr, int r)
 {
 	if (str)
 		free(str);
 	if (arr)
 		ft_clear_da(arr);
+	return (r);
 }
 
 void	px_free_and_abort(const char *msg, t_fds *fds, t_args *args, int r)
 {
-	px_free_all(args->cmd, args->arg);
+	px_free_all(args->cmd, args->arg, 0);
 	px_abort(msg, fds, args->path, r);
 }
 
