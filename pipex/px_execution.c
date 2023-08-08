@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 17:29:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 17:37:57 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:56:50 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ static int	px_parser(t_args *args)
 
 static pid_t	px_child_proc(t_fds *fds, t_args *args)
 {
+	if (access(args->cmd, X_OK) == -1)
+		px_free_and_abort("DNP", fds, args, 127);
 	if (dup2(fds->read, 0) == -1 || dup2(fds->pipe[1], 1) == -1)
-		px_free_and_abort("dup2", fds, args, 1);
+		return (px_free_perror("dup2", args, 1));
 	if (close(fds->read) == -1)
 	{
 		fds->read = -1;
@@ -75,8 +77,8 @@ static pid_t	px_child_proc(t_fds *fds, t_args *args)
 	if (px_close(fds->pipe) == -1)
 		px_free_and_abort("close", NULL, args, 1);
 	execve(args->cmd, args->arg, NULL);
-	px_free_and_abort("execve", fds, args, 1);
-	return (1);
+	px_free_and_abort("execve", fds, args, 126);
+	exit(126);
 }
 
 static pid_t	px_forking(t_fds *fds, t_args *args)
@@ -85,7 +87,7 @@ static pid_t	px_forking(t_fds *fds, t_args *args)
 
 	pid = fork();
 	if (pid == -1)
-		px_free_and_abort("fork", fds, args, 1);
+		return (px_free_perror("fork", args, -1));
 	if (pid == 0)
 		return (px_child_proc(fds, args));
 	else
@@ -111,17 +113,15 @@ pid_t	px_cmd(t_fds *fds, char *argv, char **path)
 	args.path = path;
 	args.arg = ft_split(argv, ' ');
 	if (!args.arg)
-		px_abort("split", fds, args.path, 1);
+		return (px_free_perror("split", NULL, 1));
 	args.cmd = NULL;
 	if (px_parser(&args))
-		px_free_and_abort("parsing", fds, &args, 1);
+		return (px_free_perror("parsing", &args, 1));
 	if (access(args.arg[0], X_OK) == -1)
 		args.cmd = px_path_parser(args.arg[0], path);
 	else
 		args.cmd = ft_strdup(args.arg[0]);
 	if (!args.cmd)
-		px_free_and_abort("strjoin", fds, &args, 1);
-	if (access(args.cmd, X_OK) == -1)
-		px_free_and_abort("cmd not found", fds, &args, 127);
+		return (px_free_perror("strjoin", &args, 1));
 	return (px_forking(fds, &args));
 }

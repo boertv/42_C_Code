@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:58:53 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 16:24:48 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:20:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char *av[], char **env)
 	{
 		px_open_pipe(&fds, path);
 		px_cmd(&fds, av[i], path);
-		px_reset_fds(&fds, path);
+		px_reset_fds(&fds);
 		i++;
 	}
 	if (heredoc.is)

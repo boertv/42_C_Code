@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:13:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 16:25:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:26:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ char	*px_path_parser(char *cmd, char **path)
 		free(joined);
 		i++;
 	}
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": command not found\n", 20);
 	return (ft_strdup(""));
 }

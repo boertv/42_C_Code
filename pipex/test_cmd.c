@@ -1,12 +1,9 @@
 #include "pipex.h"
 
-static int	temp_return(char *s, char **a, int r)
+static int	temp_return(char **a, int r)
 {
 	int	i;
 
-	if (s)
-		free(s);
-	//ft_clear_da()
 	if (a)
 	{
 		i = 0;
@@ -31,14 +28,16 @@ int	main(int ac, char *av[])
 	if (!arg)
 		return (1);
 	cmd = ft_strjoin("/bin/", arg[0]);
-	if (!cmd)
+	free (arg[0]);
+	arg[0] = cmd;
+	if (!arg[0])
 		return (1);
-	if (access(cmd, X_OK) == -1)
+	if (access(arg[0], X_OK) == -1)
 	{
 		perror("access failed");
-		return (temp_return(cmd, arg, 127));
+		return (temp_return(arg, 127));
 	}
-	execve(cmd, arg, NULL)
-	printf("I Can See You (tv)\n");
-	return (temp_return(cmd, arg, 126));
+	execve(arg[0], arg, NULL);
+	perror(arg[0]);
+	return (temp_return(arg, 126));
 }
