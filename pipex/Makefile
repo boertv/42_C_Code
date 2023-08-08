@@ -6,13 +6,13 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:41:13 by bvercaem          #+#    #+#              #
-#    Updated: 2023/08/07 13:42:46 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/08/08 14:21:49 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	pipex
 
-BONUS_NAME		=	pipex_bonus
+BONUS_NAME		=
 
 #-------------------PATH-----------------------------
 
@@ -27,8 +27,8 @@ BONUS_HEADER_WD	=	./
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-#FLAGS			=	-Wall -Wextra -Werror
-FLAGS			=	-Wall -Wextra -Werror -g
+FLAGS			=	-Wall -Wextra -Werror
+#FLAGS			=	-Wall -Wextra -Werror -g
 #FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
 #-------------------SOURCES FILES----------------------
@@ -86,8 +86,6 @@ BOLD_OFF		=	\x1b[21m
 
 all:	$(NAME)
 
-bonus:	$(BONUS_NAME)
-
 %.o: %.c
 	@printf "$(YELLOW)Generating $(NAME) objects... %-45.45s\r$(NO_COLOR)" $@
 	@$(CC) $(FLAGS) $(I_HEADER) $(I_BONUS_HEADER) -c $< -o $@
@@ -98,10 +96,11 @@ $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
-$(BONUS_NAME):	$(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
+bonus:	$(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
+	@rm -rf $(NAME)
 	@make -C libft/
-	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)
+	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
+	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:
@@ -118,4 +117,9 @@ re: fclean all
 
 rebonus : fclean bonus
 
-.PHONY: all clean fclean bonus re rebonus
+eclean:
+	@rm -rf $(NAME)
+
+remake: eclean all
+
+.PHONY: all clean fclean bonus re rebonus eclean remake
