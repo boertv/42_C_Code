@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:13:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/08 18:26:54 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:11:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ char	*px_path_parser(char *cmd, char **path)
 	size_t	i;
 	char	*joined;
 
-	if (!path || !cmd || !*cmd)
+	if (!path)
 		return (ft_strdup(""));
 	i = 0;
-	while (path[i])
+	while (cmd && *cmd && path[i])
 	{
 		joined = ft_strjoin(path[i], cmd);
 		if (!access(joined, X_OK))

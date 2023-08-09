@@ -6,5 +6,7 @@
 *.a
 *.tmp
 *.vscode*
+o_read.txt
+o_write.txt
 push_swap_visualizer
 push_swap_tester

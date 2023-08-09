@@ -2,7 +2,7 @@
 
 int	main(void)
 {
-	char	*cmd = NULL;
+	char	*cmd = "";
 	int		check;
 
 	check = access(cmd, X_OK);

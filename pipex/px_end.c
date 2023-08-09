@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/08 18:56:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:02:13 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	px_free_and_abort(const char *msg, t_fds *fds, t_args *args, int r)
 {
 	if (ft_strncmp(msg, "DNP", 4))
 		perror(msg);
-	px_free_all(args->cmd, args->arg, 0);
+	if (args)
+		px_free_all(args->cmd, args->arg, 0);
 	px_abort("DNP", fds, args->path, r);
 }
 
@@ -79,6 +80,7 @@ int	px_free_perror(const char *msg, t_args *args, int r)
 {
 	if (ft_strncmp(msg, "DNP", 4))
 		perror(msg);
-	px_free_all(args->cmd, args->arg, 0);
+	if (args)
+		px_free_all(args->cmd, args->arg, 0);
 	return (r);
 }
