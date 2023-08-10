@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:19:16 by bvercaem          #+#    #+#              #
-#    Updated: 2023/08/10 15:28:57 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/08/10 15:42:05 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,20 +49,19 @@ $(NAME): $(STATIC_WD)
 	@echo "$(GREEN)$(BOLD)Enjoy!\n$(BOLD_OFF)$(NO_COLOR)"
 
 $(STATIC_WD):
-	make -C $@
+	@make -C $@
 
 $(CLEAN_LIBS): %.clean:
-	make clean -C $*
+	@make clean -C $*
 
 clean: $(CLEAN_LIBS)
 
-fclean:	clean
-	@echo "$(RED)Deleting static library...\n$(NO_COLOR)"
+eclean:
+	@echo "$(RED)Deleting $(NAME)...$(NO_COLOR)"
 	@rm -f $(NAME)
 
-eclean:
-	@echo "$(RED)Deleting static library...\n$(NO_COLOR)"
-	@rm -f $(NAME)
+fclean:	clean eclean
+	@echo "$(RED)$(BOLD)All clean!\n$(BOLD_OFF)$(NO_COLOR)"
 
 re: fclean all
 
