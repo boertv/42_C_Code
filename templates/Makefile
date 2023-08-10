@@ -68,7 +68,6 @@ BOLD			= 	\x1b[1m
 
 BOLD_OFF		=	\x1b[21m
 
-
 #-------------------RULES-----------------------
 
 all:	$(NAME)
@@ -92,13 +91,13 @@ $(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:
-	@echo "$(RED)Deleting objects...$(NO_COLOR)"
 	@make clean -C libft/
+	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
 	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 
 fclean:	clean
-	@echo "$(RED)Deleting executables...$(NO_COLOR)"
-	@make fclean -C libft/
+	@make eclean -C libft/
+	@echo "$(RED)Deleting executable...$(NO_COLOR)"
 	@rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all

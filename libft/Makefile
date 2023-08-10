@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:19:16 by bvercaem          #+#    #+#              #
-#    Updated: 2023/05/25 16:04:47 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/08/10 15:42:05 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,17 +49,20 @@ $(NAME): $(STATIC_WD)
 	@echo "$(GREEN)$(BOLD)Enjoy!\n$(BOLD_OFF)$(NO_COLOR)"
 
 $(STATIC_WD):
-	make -C $@
+	@make -C $@
 
 $(CLEAN_LIBS): %.clean:
-	make clean -C $*
+	@make clean -C $*
 
 clean: $(CLEAN_LIBS)
 
-fclean:	clean
-	@echo "$(RED)Deleting executable...\n$(NO_COLOR)"
+eclean:
+	@echo "$(RED)Deleting $(NAME)...$(NO_COLOR)"
 	@rm -f $(NAME)
+
+fclean:	clean eclean
+	@echo "$(RED)$(BOLD)All clean!\n$(BOLD_OFF)$(NO_COLOR)"
 
 re: fclean all
 
-.PHONY: all clean fclean re $(STATIC_WD) $(CLEAN_LIBS)
+.PHONY: all clean fclean eclean re $(STATIC_WD) $(CLEAN_LIBS)
