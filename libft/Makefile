@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 15:19:16 by bvercaem          #+#    #+#              #
-#    Updated: 2023/08/10 15:42:05 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/08/16 14:42:21 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ BOLD_OFF		=	\x1b[21m
 all:	$(NAME)
 
 $(NAME): $(STATIC_WD)
-	@echo "$(GREEN)$(BOLD)Enjoy!\n$(BOLD_OFF)$(NO_COLOR)"
+	@echo "$(GREEN)$(BOLD)Finished libft!\n$(BOLD_OFF)$(NO_COLOR)"
 
 $(STATIC_WD):
 	@make -C $@
