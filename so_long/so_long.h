@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/16 15:26:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/16 17:02:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ typedef struct s_mlx_data
 # define KEY_TAB 48
 # define KEY_SPC 49
 # define KEY_ENTR 36
+# define KEY_RTRN 51
 
 #endif
