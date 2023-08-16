@@ -19,6 +19,7 @@ FLAGS			=	-Wall -Wextra -Werror
 # FLAGS			=	-Wall -Wextra -Werror -g
 # FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 OPENGL_APPKIT	=	-framework OpenGL -framework AppKit
+LIBS			=	libft/libft.a -lmlx
 
 #-------------------SOURCES FILES----------------------
 
@@ -80,14 +81,14 @@ $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@make -C libft/
 	@make -C mlx/
 	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a mlx/libmlx.a $(OPENGL_APPKIT) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) $(LIBS) $(OPENGL_APPKIT) -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 $(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@make -C libft/
 	@make -C mlx/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a mlx/libmlx.a $(OPENGL_APPKIT) -o $(BONUS_NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) $(LIBS) $(OPENGL_APPKIT) -o $(BONUS_NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:
