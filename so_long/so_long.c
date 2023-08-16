@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/16 14:13:48 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:26:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,6 @@ int	main(void)
 	t_mlx_data	data;
 
 	data.mlx = mlx_init();
+	if (!data.mlx)
+		return (1);
 }
