@@ -6,14 +6,14 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/16 17:02:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:32:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include <stdlib.h>
 
 typedef struct s_mlx_data
