@@ -5,16 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/24 17:24:39 by bvercaem          #+#    #+#              #
-#    Updated: 2023/08/10 15:49:34 by bvercaem         ###   ########.fr        #
+#    Created: 2023/05/24 17:20:59 by bvercaem          #+#    #+#              #
+#    Updated: 2023/06/30 16:25:34 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= get_next_line.tmp
+NAME			= ft_printf.tmp
 
 STATIC_NAME		= ../libft.a
-
-DISPLAY_NAME	= libft/get_next_line
 
 #-------------------PATH-----------------------------
 
@@ -31,10 +29,19 @@ FLAGS			=	-Wall -Wextra -Werror
 
 #-------------------SOURCES FILES----------------------
 
-HEADERS			=	$(HEADER_WD)get_next_line.h
+HEADERS			=	$(HEADER_WD)ft_printf.h \
+					$(HEADER_WD)../legacy/libft.h \
 
-SRCS			=	$(SOURCES)get_next_line.c \
-					$(SOURCES)get_next_line_utils.c \
+SRCS			=	$(SOURCES)ft_printf.c \
+					$(SOURCES)ft_conv_hub.c \
+					$(SOURCES)ft_conv_char.c \
+					$(SOURCES)ft_conv_str.c \
+					$(SOURCES)ft_conv_nb.c \
+					$(SOURCES)ft_check_flags.c \
+					$(SOURCES)ft_flags.c \
+					$(SOURCES)ft_flags_2.c \
+					$(SOURCES)ft_fill_nb.c \
+					$(SOURCES)ft_error.c \
 
 #-------------------OBJECTS----------------------
 
@@ -58,25 +65,26 @@ BOLD			= 	\x1b[1m
 
 BOLD_OFF		=	\x1b[21m
 
+
 #-------------------RULES-----------------------
 
 all:	$(NAME)
 
 %.o: %.c
-	@printf "$(YELLOW)Generating $(DISPLAY_NAME) objects... %-45.45s\r$(NO_COLOR)" $@
+	@printf "$(YELLOW)Generating $(NAME) objects... %-45.45s\r$(NO_COLOR)" $@
 	@$(CC) $(FLAGS) $(I_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS)
-	@printf "$(GREEN)Linking $(DISPLAY_NAME)... %45c\n$(NO_COLOR)" ' '
+	@printf "$(GREEN)Linking $(NAME)... %45c\n$(NO_COLOR)" ' '
 	@ar -rcs $(STATIC_NAME) $(OBJS)
 	@touch $(NAME)
 
 clean:
-	@echo "$(RED)Deleting $(DISPLAY_NAME) objects...$(NO_COLOR)"
+	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
 	@rm -rf $(OBJS) $(NAME)
 
 fclean:	clean
-	@echo "$(RED)Deleting executable...$(NO_COLOR)"
+	@echo "$(RED)Deleting executables...$(NO_COLOR)"
 	@rm -f $(STATIC_NAME)
 
 re: fclean all

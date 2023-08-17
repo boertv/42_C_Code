@@ -1,14 +1,14 @@
-NAME			=
+NAME			=	so_long
 
 BONUS_NAME		=
 
 #-------------------PATH-----------------------------
 
-SOURCES_WD		=
+SOURCES_WD		=	./
 
 BONUS_WD		=
 
-HEADER_WD		=
+HEADER_WD		=	./
 
 BONUS_HEADER_WD	=
 
@@ -18,23 +18,22 @@ CC				=	cc
 FLAGS			=	-Wall -Wextra -Werror
 # FLAGS			=	-Wall -Wextra -Werror -g
 # FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+OPENGL_APPKIT	=	-framework OpenGL -framework AppKit
+LIBS			=	libft/libft.a -lmlx
 
 #-------------------SOURCES FILES----------------------
 
-HEADERS			=	$(HEADER_WD)___.h
+HEADERS			=	$(HEADER_WD)so_long.h \
+					mlx/mlx.h \
+					libft/legacy/libft.h
 
 BONUS_HEADERS 	=
 
-H_LIB 			= 	$(___ _WD)___.h \
-					$(___ _WD)___.h
-
-MAIN			=	$(SOURCES_WD)main.c
+MAIN			=	$(SOURCES_WD)test.c
 
 BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
 
-SRCS			=	$(SOURCES_WD)___.c \
-					$(SOURCES_WD)___.c \
-					$(SOURCES_WD)___.c \
+SRCS			=
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
 
@@ -80,19 +79,22 @@ bonus:	$(BONUS_NAME)
 
 $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@make -C libft/
+	@make -C mlx/
 	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) $(LIBS) $(OPENGL_APPKIT) -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 $(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@make -C libft/
+	@make -C mlx/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) $(LIBS) $(OPENGL_APPKIT) -o $(BONUS_NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:
+	@echo "$(RED)Deleting objects...$(NO_COLOR)"
 	@make clean -C libft/
-	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
+	@make clean -C mlx/
 	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 
 fclean:	clean
