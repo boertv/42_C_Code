@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:41:13 by bvercaem          #+#    #+#              #
-#    Updated: 2023/08/09 20:08:26 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/08/18 13:11:45 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ CC				=	cc
 FLAGS			=	-Wall -Wextra -Werror
 #FLAGS			=	-Wall -Wextra -Werror -g
 #FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+
+MAKE			=	make --no-print-directory
 
 #-------------------SOURCES FILES----------------------
 
@@ -69,18 +71,25 @@ I_BONUS_HEADER	=	$(addprefix( -include, $(BONUS_HEADERS)))
 
 #-------------------COLORS-----------------------
 
+UNAME_S			=	$(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)	# colors for linux
+RED				=	\033[0;31m
+YELLOW			=	\033[1;33m
+GREEN			=	\033[0;32m
+NO_COLOR		=	\033[0m
+BOLD			=	\033[1m
+BOLD_OFF		=	\033[0m
+
+else					# colors for mac
 RED				=	\x1b[31m
-
 YELLOW			=	\x1b[33m
-
 GREEN			=	\x1b[32m
-
 NO_COLOR		=	\x1b[0m
-
 BOLD			= 	\x1b[1m
-
 BOLD_OFF		=	\x1b[21m
 
+endif
 
 #-------------------RULES-----------------------
 
@@ -91,26 +100,26 @@ all:	$(NAME)
 	@$(CC) $(FLAGS) $(I_HEADER) $(I_BONUS_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS) $(MAIN_OBJ)
-	@make -C libft/
+	@$(MAKE) -C libft/
 	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 bonus:	$(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
 	@rm -rf $(NAME)
-	@make -C libft/
+	@$(MAKE) -C libft/
 	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:
 	@echo "$(RED)Deleting objects...$(NO_COLOR)"
-	@make clean -C libft/
+	@$(MAKE) clean -C libft/
 	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 
 fclean:	clean
 	@echo "$(RED)Deleting executables...$(NO_COLOR)"
-	@make fclean -C libft/
+	@$(MAKE) fclean -C libft/
 	@rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all

@@ -19,6 +19,8 @@ FLAGS			=	-Wall -Wextra -Werror
 # FLAGS			=	-Wall -Wextra -Werror -g
 # FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
+MAKE			=	make --no-print-directory
+
 #-------------------SOURCES FILES----------------------
 
 HEADERS			=	$(HEADER_WD)___.h
@@ -56,17 +58,25 @@ I_BONUS_HEADER	=	$(addprefix( -include, $(BONUS_HEADERS)))
 
 #-------------------COLORS-----------------------
 
+UNAME_S			=	$(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)	# colors for linux
+RED				=	\033[0;31m
+YELLOW			=	\033[1;33m
+GREEN			=	\033[0;32m
+NO_COLOR		=	\033[0m
+BOLD			=	\033[1m
+BOLD_OFF		=	\033[0m
+
+else					# colors for mac
 RED				=	\x1b[31m
-
 YELLOW			=	\x1b[33m
-
 GREEN			=	\x1b[32m
-
 NO_COLOR		=	\x1b[0m
-
 BOLD			= 	\x1b[1m
-
 BOLD_OFF		=	\x1b[21m
+
+endif
 
 #-------------------RULES-----------------------
 
@@ -79,24 +89,24 @@ bonus:	$(BONUS_NAME)
 	@$(CC) $(FLAGS) $(I_HEADER) $(I_BONUS_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS) $(MAIN_OBJ)
-	@make -C libft/
+	@$(MAKE) -C libft/
 	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 $(BONUS_NAME): $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ)
-	@make -C libft/
+	@$(MAKE) -C libft/
 	@printf "$(GREEN)Linking $(BONUS_NAME)... %45s\r$(NO_COLOR)" " "
 	@$(CC) $(FLAGS) $(OBJS) $(BONUS_OBJ) $(BONUS_MAIN_OBJ) libft/libft.a -o $(BONUS_NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:
-	@make clean -C libft/
+	@$(MAKE) clean -C libft/
 	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
 	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 
 fclean:	clean
-	@make eclean -C libft/
+	@$(MAKE) eclean -C libft/
 	@echo "$(RED)Deleting executable...$(NO_COLOR)"
 	@rm -f $(NAME) $(BONUS_NAME)
 
