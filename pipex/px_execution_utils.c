@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:13:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/09 20:11:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:01:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ char	*px_path_parser(char *cmd, char **path)
 		free(joined);
 		i++;
 	}
-	write(2, cmd, ft_strlen(cmd));
-	write(2, ": command not found\n", 20);
+	write(STDERR_FILENO, "pipex: ", 7);
+	write(STDERR_FILENO, cmd, ft_strlen(cmd));
+	write(STDERR_FILENO, ": command not found\n", 20);
 	return (ft_strdup(""));
 }

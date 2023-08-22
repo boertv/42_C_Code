@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 17:18:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/09 20:02:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:00:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int	px_free_all(char *str, char **arr, int r)
 void	px_free_and_abort(const char *msg, t_fds *fds, t_args *args, int r)
 {
 	if (ft_strncmp(msg, "DNP", 4))
+	{
+		write (STDERR_FILENO, "pipex: ", 7);
 		perror(msg);
+	}
 	if (args)
 		px_free_all(args->cmd, args->arg, 0);
 	px_abort("DNP", fds, args->path, r);
@@ -59,7 +62,10 @@ void	px_free_and_abort(const char *msg, t_fds *fds, t_args *args, int r)
 void	px_abort(const char *msg, t_fds *fds, char **path, int r)
 {
 	if (ft_strncmp(msg, "DNP", 4))
+	{
+		write (STDERR_FILENO, "pipex: ", 7);
 		perror(msg);
+	}
 	ft_clear_da(path);
 	if (fds)
 	{
@@ -79,7 +85,10 @@ void	px_abort(const char *msg, t_fds *fds, char **path, int r)
 int	px_free_perror(const char *msg, t_args *args, int r)
 {
 	if (ft_strncmp(msg, "DNP", 4))
+	{
+		write(STDERR_FILENO, "pipex: ", 7);
 		perror(msg);
+	}
 	if (args)
 		px_free_all(args->cmd, args->arg, 0);
 	return (r);

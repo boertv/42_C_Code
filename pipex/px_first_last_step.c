@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:23:26 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/08 18:57:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:06:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	px_final_process(char *cmd, char *out, t_fds *fds, char **path)
 	pid = px_cmd(fds, cmd, path);
 	pid = waitpid(pid, &stat, 0);
 	if (pid == -1 || !WIFEXITED(stat))
-		perror (cmd);
+	{
+		write(STDERR_FILENO, "pipex: ", 7);
+		perror(cmd);
+	}
 	return (WEXITSTATUS(stat));
 }
 
@@ -65,7 +68,10 @@ char	**px_infd_extract_path(t_fds *fds, char *file, char **env, int hdbool)
 	if (!hdbool)
 		fds->read = open(file, O_RDONLY);
 	if (fds->read == -1)
+	{
+		write(STDERR_FILENO, "pipex: ", 7);
 		perror(file);
+	}
 	i = 0;
 	path = NULL;
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
