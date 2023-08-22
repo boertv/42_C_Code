@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 13:44:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/22 15:39:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:06:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	px_heredoc_pipe(t_fds *fds, char *lim, char **path, t_heredoc *heredoc)
 	fds->pipe[0] = -1;
 	check = px_heredoc_read(fds->pipe[1], heredoc);
 	get_next_line(-1);
-	if(check)
+	if (check)
 		px_abort("write", fds, path, 1);
 	close(fds->pipe[1]);
 	fds->pipe[1] = -1;
