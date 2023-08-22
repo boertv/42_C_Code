@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 13:44:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/07 16:10:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:39:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static int	px_heredoc_read(int fd, t_heredoc *heredoc)
 
 void	px_heredoc_pipe(t_fds *fds, char *lim, char **path, t_heredoc *heredoc)
 {
+	int	check;
+
 	if (!heredoc->is)
 		return ;
 	heredoc->lim = lim;
@@ -60,7 +62,9 @@ void	px_heredoc_pipe(t_fds *fds, char *lim, char **path, t_heredoc *heredoc)
 	px_open_pipe(fds, path);
 	fds->read = fds->pipe[0];
 	fds->pipe[0] = -1;
-	if (px_heredoc_read(fds->pipe[1], heredoc))
+	check = px_heredoc_read(fds->pipe[1], heredoc);
+	get_next_line(-1);
+	if(check)
 		px_abort("write", fds, path, 1);
 	close(fds->pipe[1]);
 	fds->pipe[1] = -1;
