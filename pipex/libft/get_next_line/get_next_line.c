@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:16:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/07/17 15:01:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:56:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ static char	*ft_exit(char *line, t_fdl **list, ssize_t check, int fd)
 	return (line);
 }
 
+// THE STATIC IS ONLY FREED IF AN EOF OR ERROR IS ENCOUNTERED
+// return is either a malloced string or NULL.
+// if fd is a bad fd (< 0 || > max) then the !full! static is cleared.
 char	*get_next_line(int fd)
 {
 	static t_fdl	*list = NULL;
@@ -73,7 +76,7 @@ char	*get_next_line(int fd)
 	ssize_t			i;
 
 	if (fd < 0 || fd > FOPEN_MAX)
-		return (NULL);
+		return (ft_null(NULL, &list, -1));
 	check = ft_initialise(&line, &element, &list, fd);
 	if (!check)
 		return (ft_null(line, &list, fd));
