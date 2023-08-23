@@ -6,13 +6,15 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/10 14:06:55 by bvercaem          #+#    #+#              #
-#    Updated: 2023/07/18 17:43:19 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/08/18 12:52:15 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= legacy.tmp
 
 STATIC_NAME		= ../libft.a
+
+DISPLAY_NAME	= libft/legacy
 
 #-------------------PATH-----------------------------
 
@@ -87,38 +89,45 @@ I_HEADER		=	$(addprefix( -include, $(HEADERS)))
 
 #-------------------COLORS-----------------------
 
+UNAME_S			=	$(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)	# colors for linux
+RED				=	\033[0;31m
+YELLOW			=	\033[1;33m
+GREEN			=	\033[0;32m
+NO_COLOR		=	\033[0m
+BOLD			=	\033[1m
+BOLD_OFF		=	\033[0m
+
+else					# colors for mac
 RED				=	\x1b[31m
-
 YELLOW			=	\x1b[33m
-
 GREEN			=	\x1b[32m
-
 NO_COLOR		=	\x1b[0m
-
 BOLD			= 	\x1b[1m
-
 BOLD_OFF		=	\x1b[21m
 
+endif
 
 #-------------------RULES-----------------------
 
 all:	$(NAME)
 
 %.o: %.c
-	@printf "$(YELLOW)Generating $(NAME) objects... %-45.45s\r$(NO_COLOR)" $@
+	@printf "$(YELLOW)Generating $(DISPLAY_NAME) objects... %-45.45s\r$(NO_COLOR)" $@
 	@$(CC) $(FLAGS) $(I_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS)
 	@touch $(NAME)
-	@printf "$(GREEN)Linking $(NAME)... %45c\n$(NO_COLOR)" ' '
+	@printf "$(GREEN)Linking $(DISPLAY_NAME)... %45c\n$(NO_COLOR)" ' '
 	@ar -rcs $(STATIC_NAME) $(OBJS)
 
 clean:
-	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
+	@echo "$(RED)Deleting $(DISPLAY_NAME) objects...$(NO_COLOR)"
 	@rm -rf $(OBJS) $(NAME)
 
 fclean:	clean
-	@echo "$(RED)Deleting executables...$(NO_COLOR)"
+	@echo "$(RED)Deleting executable...$(NO_COLOR)"
 	@rm -f $(STATIC_NAME)
 
 re: fclean all
