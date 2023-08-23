@@ -25,15 +25,18 @@ LIBS			=	libft/libft.a -lmlx
 
 HEADERS			=	$(HEADER_WD)so_long.h \
 					mlx/mlx.h \
-					libft/legacy/libft.h
+					libft/legacy/libft.h \
+					libft/get_next_line/get_next_line.h \
+					libft/ft_printf/ft_printf.h
 
 BONUS_HEADERS 	=
 
-MAIN			=	$(SOURCES_WD)test.c
+MAIN			=	$(SOURCES_WD)so_long.c
 
 BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
 
-SRCS			=
+SRCS			=	$(SOURCES_WD)sl_error.c \
+					$(SOURCES_WD)sl_map_gen.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
 

@@ -6,21 +6,43 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/17 17:32:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:59:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx/mlx.h"
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
-typedef struct s_mlx_data
+# include "mlx/mlx.h"
+# include "libft/legacy/libft.h"
+# include "libft/get_next_line/get_next_line.h"
+# include "libft/ft_printf/ft_printf.h"
+
+typedef struct s_game_data
 {
 	void	*mlx;
 	void	*win;
-}			t_mlx_data;
+	char	**map;
+	int		collbs;
+}			t_game_data;
+
+typedef struct s_map
+{
+	size_t	width;
+	int		exit;
+	int		player;
+	int		err;
+}			t_map;
+
+char	**sl_create_map(char *file);
+int		sl_map_check(t_game_data *data);
+
+int		sl_print_errno(char *msg, int rtrn);
+int		sl_print_msg(char *msg, int rtrn);
 
 # define KEY_ESC 53
 # define KEY_W 13
