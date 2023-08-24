@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/23 16:59:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:27:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_map
 	int		err;
 }			t_map;
 
+int		sl_file_check(char *file);
 char	**sl_create_map(char *file);
 int		sl_map_check(t_game_data *data);
 

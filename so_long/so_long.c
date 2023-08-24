@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/23 16:58:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:29:17 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ int	main(int ac, char *av[])
 {
 	t_game_data	data;
 
-	if (ac != 2)
-	{
-		write (STDERR_FILENO, "Please provide a map ,.ber, file\n", 33);
-		return (1);
-	}
+	if (ac != 2 || sl_file_check(av[1]))
+		return (sl_print_msg("please provide one '.ber' map-file", 1));
 	data.map = sl_create_map(av[1]);
 	if (!data.map)
 		return (sl_print_errno(av[1], 1));

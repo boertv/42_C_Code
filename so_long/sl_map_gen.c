@@ -6,11 +6,23 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:13:01 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/24 14:16:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:33:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	sl_file_check(char *file)
+{
+	size_t	i;
+
+	i = ft_strlen(file);
+	if (i < 5)
+		return (1);
+	if (ft_strncmp(file + (i - 4), ".ber", 4))
+		return (1);
+	return (0);
+}
 
 // returns NULL if open fails.
 char	**sl_create_map(char *file)
@@ -99,6 +111,8 @@ int	sl_map_check(t_game_data *data)
 		checks.err += sl_print_msg("map: not exactly one exit", 1);
 	if (checks.player != 1)
 		checks.err += sl_print_msg("map: not exactly one player", 1);
+	if (data->collbs < 1)
+		checks.err += sl_print_msg("map: no collectibles", 1);
 	if (checks.err)
 	{
 		ft_printf("%fdso_long: printed %i errors\n", 2, checks.err);
