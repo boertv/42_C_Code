@@ -37,6 +37,7 @@ BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
 
 SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_map_gen.c \
+					$(SOURCES_WD)sl_map_solvable.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
 

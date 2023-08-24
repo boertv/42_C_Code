@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/24 14:27:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:18:17 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,43 @@
 # include "libft/get_next_line/get_next_line.h"
 # include "libft/ft_printf/ft_printf.h"
 
-typedef struct s_game_data
+
+typedef struct s_sl_data
 {
 	void	*mlx;
 	void	*win;
 	char	**map;
-	int		collbs;
-}			t_game_data;
+	int		clbls;
+}			t_sl_data;
 
-typedef struct s_map
+typedef struct s_sl_map
 {
 	size_t	width;
 	int		exit;
 	int		player;
 	int		err;
-}			t_map;
+}			t_sl_map;
+
+typedef struct s_sl_tile
+{
+	int	tile[2];
+}		t_sl_tile;
+
+typedef struct s_sl_list
+{
+	t_sl_tile		*tilp;
+	struct s_list	*next;
+	struct s_list	*prev;
+}					t_sl_list;
+
 
 int		sl_file_check(char *file);
 char	**sl_create_map(char *file);
-int		sl_map_check(t_game_data *data);
+int		sl_map_check(t_sl_data *data);
 
 int		sl_print_errno(char *msg, int rtrn);
 int		sl_print_msg(char *msg, int rtrn);
+int		sl_perr_map(int err, void *p, t_sl_map *checks);
 
 # define KEY_ESC 53
 # define KEY_W 13
@@ -56,5 +71,13 @@ int		sl_print_msg(char *msg, int rtrn);
 # define KEY_SPC 49
 # define KEY_ENTR 36
 # define KEY_RTRN 51
+
+# define MAP_CHARS "01PCE"
+
+# define MAP_ERR_HOLE 1
+# define MAP_ERR_CHAR 2
+# define MAP_ERR_EXIT 3
+# define MAP_ERR_PLAYER 4
+# define MAP_ERR_CLBLS 5
 
 #endif

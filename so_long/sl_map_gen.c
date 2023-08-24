@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:13:01 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/24 14:33:54 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:27:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	**sl_create_map(char *file)
 	int		fd;
 	char	**map;
 	int		i;
+	char	*nl;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
@@ -49,13 +50,16 @@ char	**sl_create_map(char *file)
 	}
 	close(fd);
 	while (i--)
-		if (ft_strrchr(map[i], '\n'))
-			*ft_strrchr(map[i], '\n') = 0;
+	{
+		nl = ft_strrchr(map[i], '\n');
+		if (nl)
+			*nl = 0;
+	}
 	return (map);
 }
 
 // returns -1 for a valid row, else returns the bad index.
-int	sl_map_row_check(char *row, int wall, t_map *checks, t_game_data *data)
+int	sl_map_row_check(char *row, int wall, t_sl_map *checks, t_sl_data *data)
 {
 	int	j;
 	int	err;
@@ -70,10 +74,12 @@ int	sl_map_row_check(char *row, int wall, t_map *checks, t_game_data *data)
 			err = j;
 		if (row[j] == 'P')
 			checks->player++;
-		if (row[j] == 'E')
+		else if (row[j] == 'E')
 			checks->exit++;
-		if (row[j] == 'C')
-			data->collbs++;
+		else if (row[j] == 'C')
+			data->clbls++;
+		else if (!ft_strchr(MAP_CHARS, row[j]))
+			sl_perr_map(MAP_ERR_CHAR, (row + j), checks);
 		j++;
 	}
 	if (row[j - 1] != '1')
@@ -81,16 +87,38 @@ int	sl_map_row_check(char *row, int wall, t_map *checks, t_game_data *data)
 	return (err);
 }
 
-// returns 1 for error, prints errors.
-int	sl_map_check(t_game_data *data)
+static int	sl_map_final_checks(t_sl_data *data, t_sl_map *checks)
 {
-	t_map	checks;
-	int		i;
+	if (checks->exit != 1)
+		sl_perr_map(MAP_ERR_EXIT, NULL, checks);
+	if (checks->player != 1)
+		sl_perr_map(MAP_ERR_PLAYER, NULL, checks);
+	if (data->clbls < 1)
+		sl_perr_map(MAP_ERR_CLBLS, NULL, checks);
+	if (checks->err)
+	{
+		if (checks->err > 10)
+		{
+			ft_printf("%fd...\n", 2);
+			ft_printf("%fdso_long printed 10/%i errors\n", 2, checks->err);
+		}
+		else if (checks->err > 1)
+			ft_printf("%fdso_long printed %i errors\n", 2, checks->err);
+		return (1);
+	}
+	return (0);
+}
+
+// returns 1 for error, prints errors.
+int	sl_map_check(t_sl_data *data)
+{
+	t_sl_map	checks;
+	int			i;
 
 	checks.err = 0;
 	checks.exit = 0;
 	checks.player = 0;
-	data->collbs = 0;
+	data->clbls = 0;
 	checks.width = ft_strlen(data->map[0]);
 	if (checks.width < 3)
 		return (sl_print_msg("map: not wide enough", 1));
@@ -101,22 +129,11 @@ int	sl_map_check(t_game_data *data)
 			return (sl_print_msg("map: not a rectangle", 1));
 		if (sl_map_row_check(data->map[i], i == 0 || !data->map[i + 1],
 				&checks, data) != -1)
-		{
-			ft_printf("%fdso_long: map: hole in the wall (row %i)\n", 2, i + 1);
-			checks.err++;
-		}
+			sl_perr_map(MAP_ERR_HOLE, &i, &checks);
 		i++;
 	}
-	if (checks.exit != 1)
-		checks.err += sl_print_msg("map: not exactly one exit", 1);
-	if (checks.player != 1)
-		checks.err += sl_print_msg("map: not exactly one player", 1);
-	if (data->collbs < 1)
-		checks.err += sl_print_msg("map: no collectibles", 1);
-	if (checks.err)
-	{
-		ft_printf("%fdso_long: printed %i errors\n", 2, checks.err);
+	if (sl_map_final_checks(data, &checks))
 		return (1);
-	}
+// add solvable check in here!
 	return (0);
 }
