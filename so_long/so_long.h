@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/24 18:18:17 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:36:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_sl_map
 
 typedef struct s_sl_tile
 {
-	int	tile[2];
+	int	x;
+	int	y;
 }		t_sl_tile;
 
 typedef struct s_sl_list
