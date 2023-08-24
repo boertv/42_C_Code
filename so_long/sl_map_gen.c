@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:13:01 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/23 17:01:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:16:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ char	**sl_create_map(char *file)
 	char	**map;
 	int		i;
 
-// get the amount of lines in the map first...
+	i = 0;
+	fd = open(file, O_RDONLY);
+	while (get_next_line(fd))
+		i++;
+	map = malloc((i + 1) * sizeof(char *));
+	close(fd);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
@@ -31,6 +36,9 @@ char	**sl_create_map(char *file)
 		map[i] = get_next_line(fd);
 	}
 	close(fd);
+	while (i--)
+		if (ft_strrchr(map[i], '\n'))
+			*ft_strrchr(map[i], '\n') = 0;
 	return (map);
 }
 
@@ -40,10 +48,10 @@ int	sl_map_row_check(char *row, int wall, t_map *checks, t_game_data *data)
 	int	j;
 	int	err;
 
-	if (row[0] != '1')
-		return (0);
-	j = 1;
 	err = -1;
+	if (row[0] != '1')
+		err = 0;
+	j = 1;
 	while (row[j])
 	{
 		if (wall && row[j] != '1')
@@ -58,9 +66,7 @@ int	sl_map_row_check(char *row, int wall, t_map *checks, t_game_data *data)
 	}
 	if (row[j - 1] != '1')
 		err = j - 1;
-	if (err != -1)
-		return (err);
-	return (0);
+	return (err);
 }
 
 // returns 1 for error, prints errors.
@@ -82,13 +88,17 @@ int	sl_map_check(t_game_data *data)
 		if (ft_strlen(data->map[i]) != checks.width)
 			return (sl_print_msg("map: not a rectangle", 1));
 		if (sl_map_row_check(data->map[i], i == 0 || !data->map[i + 1],
-			&checks, data) != -1)
+				&checks, data) != -1)
 		{
-			ft_printf("%fdso_long: map: hole in the wall, at row %i\n", 2, i);
+			ft_printf("%fdso_long: map: hole in the wall (row %i)\n", 2, i + 1);
 			checks.err++;
 		}
 		i++;
 	}
+	if (checks.exit != 1)
+		checks.err += sl_print_msg("map: not exactly one exit", 1);
+	if (checks.player != 1)
+		checks.err += sl_print_msg("map: not exactly one player", 1);
 	if (checks.err)
 	{
 		ft_printf("%fdso_long: printed %i errors\n", 2, checks.err);
