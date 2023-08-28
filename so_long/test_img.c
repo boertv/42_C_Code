@@ -14,16 +14,13 @@ typedef struct s_param
 #define SL_TEST_IMG1 "./textures/empty.xpm"
 #define SL_TEST_IMG2 "./textures/wall.xpm"
 
-int	stop_win(t_param *param)
+int	stop_win(int key, t_param *param)
 {
-printf("destroying win...\n");
-// ok segfault here for some reason...
-	mlx_destroy_window(param->mlx, param->win);
-printf("destroying img1...\n");
+	(void)key;
 	mlx_destroy_image(param->mlx, param->img1);
-printf("destroyed img1...\n");
 	mlx_destroy_image(param->mlx, param->img2);
-	return (0);
+	mlx_destroy_window(param->mlx, param->win);
+	exit (0);
 }
 
 int	main(void)
@@ -32,9 +29,12 @@ int	main(void)
 
 	param.mlx = mlx_init();
 	param.win = mlx_new_window(param.mlx, 320, 320, "img_test_window");
-	param.width = 32;
-	param.height = 32;
+	param.width = 40;
+	param.height = 25;
 	param.img1 = mlx_xpm_file_to_image(param.mlx, SL_TEST_IMG1, &param.width, &param.height);
+// mlx changes width and height to the actual img values.
+printf("width: old = %i, new = %i\n", 40, param.width);
+printf("height: old = %i, new = %i\n", 25, param.width);
 	param.img2 = mlx_xpm_file_to_image(param.mlx, SL_TEST_IMG2, &param.width, &param.height);
 
 	int	j = 32;
