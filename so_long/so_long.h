@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/24 19:36:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:28:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "libft/get_next_line/get_next_line.h"
 # include "libft/ft_printf/ft_printf.h"
 
+# include "sl_textures.h"
 
 typedef struct s_sl_data
 {
@@ -29,6 +30,7 @@ typedef struct s_sl_data
 	void	*win;
 	char	**map;
 	int		clbls;
+	t_tex	*tex;
 }			t_sl_data;
 
 typedef struct s_sl_map

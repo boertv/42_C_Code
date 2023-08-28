@@ -16,14 +16,15 @@ BONUS_HEADER_WD	=
 
 CC				=	cc
 FLAGS			=	-Wall -Wextra -Werror
-# FLAGS			=	-Wall -Wextra -Werror -g
-# FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+#FLAGS			=	-Wall -Wextra -Werror -g
+#FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 OPENGL_APPKIT	=	-framework OpenGL -framework AppKit
 LIBS			=	libft/libft.a -lmlx
 
 #-------------------SOURCES FILES----------------------
 
 HEADERS			=	$(HEADER_WD)so_long.h \
+					$(HEADER_WD)sl_textures.h \
 					mlx/mlx.h \
 					libft/legacy/libft.h \
 					libft/get_next_line/get_next_line.h \
@@ -38,6 +39,7 @@ BONUS_MAIN		=	$(BONUS_WD)main_bonus.c
 SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_map_gen.c \
 					$(SOURCES_WD)sl_map_solvable.c \
+					$(SOURCES_WD)sl_load_sprites.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
 

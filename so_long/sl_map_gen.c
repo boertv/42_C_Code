@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:13:01 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/24 19:27:20 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:53:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,17 @@ char	**sl_create_map(char *file)
 	int		fd;
 	char	**map;
 	int		i;
-	char	*nl;
+	char	*string;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
-	while (get_next_line(fd))
+	string = get_next_line(fd);
+	while (string)
+	{
 		i++;
+		free(string);
+		string = get_next_line(fd);
+	}
 	map = malloc((i + 1) * sizeof(char *));
 	close(fd);
 	fd = open(file, O_RDONLY);
@@ -51,9 +56,9 @@ char	**sl_create_map(char *file)
 	close(fd);
 	while (i--)
 	{
-		nl = ft_strrchr(map[i], '\n');
-		if (nl)
-			*nl = 0;
+		string = ft_strrchr(map[i], '\n');
+		if (string)
+			*string = 0;
 	}
 	return (map);
 }
