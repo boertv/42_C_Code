@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/28 17:59:17 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:02:51 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	sl_init_sprs(t_sl_data *data)
+static void	sl_init_sprs(t_sl_data *data)
 {
 	data->tex->empty = NULL;
 	data->tex->wall = NULL;
@@ -24,10 +24,11 @@ void	sl_init_sprs(t_sl_data *data)
 	data->tex->plr_back = NULL;
 	data->tex->plr_left = NULL;
 	data->tex->plr_right = NULL;
-	data->tex->width = SL_WIDTH;
-	data->tex->heigth = SL_HEIGTH;
+	data->tex->width = SL_TILE_WIDTH;
+	data->tex->height = SL_TILE_HEIGHT;
 }
 
+// destroys img if not NULL
 void	sl_clear_sprs(t_sl_data *data)
 {
 	if (data->tex->empty)
@@ -52,20 +53,47 @@ void	sl_clear_sprs(t_sl_data *data)
 		mlx_destroy_image(data->mlx, data->tex->plr_right);
 }
 
-// returns 1 if malloc or mlx failed
-int	sl_load_sprs(t_sl_data *data)
+static void	*sl_load_sprite(t_sl_data *data, char *file, char **err)
 {
+	void	*ret;
+
+ft_printf("load_sprite: file = '%s', err = '%s'\n", file, *err);
+	if (*err)
+		return (NULL);
+ft_printf("entering xpm_file_to_image...\n");
+// problem is right here for some reason......
+	ret = mlx_xpm_file_to_image(data->mlx, file,
+			&data->tex->width, &data->tex->height);
+ft_printf("new img ptr = %p\n", ret);
+	if (!ret)
+	{
+		*err = file;
+		sl_clear_sprs(data);
+	}
+	return (ret);
+}
+
+// returns 1 if malloc or mlx failed, clears first
+int	sl_load_texs(t_sl_data *data)
+{
+	char	*err;
+
+	err = NULL;
 	data->tex = malloc(sizeof(t_tex));
 	if (!data->tex)
-		return (1);
+		return (sl_print_errno("t_tex malloc: ", 1));
 	sl_init_sprs(data);
-	data->tex->empty = mlx_xpm_file_to_image(data->mlx, "./textures/empty.xpm", &data->tex->width, &data->tex->heigth);
-	data->tex->wall = mlx_xpm_file_to_image(data->mlx, "./textures/wall.xpm", &data->tex->width, &data->tex->heigth);
-	data->tex->clbl_new = mlx_xpm_file_to_image(data->mlx, "./textures/clbl_new.xpm", &data->tex->width, &data->tex->heigth);
-	data->tex->clbl_old = mlx_xpm_file_to_image(data->mlx, "./textures/clbl_old.xpm", &data->tex->width, &data->tex->heigth);
-	if (!data->tex->clbl_old)
-		data->tex->clbl_old = data->tex->clbl_new;
-	if (!data->tex->empty)
-		return (1);
-	return (0);
+	data->tex->empty = sl_load_sprite(data, SL_TEX_EMPTY, &err);
+	data->tex->wall = sl_load_sprite(data, SL_TEX_WALL, &err);
+	data->tex->clbl_new = sl_load_sprite(data, SL_TEX_CLBL_NEW, &err);
+	data->tex->clbl_old = sl_load_sprite(data, SL_TEX_CLBL_OLD, &err);
+	data->tex->exit_clsd = sl_load_sprite(data, SL_TEX_EXIT_CLSD, &err);
+	data->tex->exit_open = sl_load_sprite(data, SL_TEX_EXIT_OPEN, &err);
+	data->tex->plr_front = sl_load_sprite(data, SL_TEX_PLR_FRONT, &err);
+	data->tex->plr_back = sl_load_sprite(data, SL_TEX_PLR_BACK, &err);
+	data->tex->plr_left = sl_load_sprite(data, SL_TEX_PLR_LEFT, &err);
+	data->tex->plr_right = sl_load_sprite(data, SL_TEX_PLR_RIGHT, &err);
+	if (err)
+		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
+	return (1 - (!err));
 }

@@ -9,6 +9,8 @@ typedef struct s_param
 	void	*img2;
 	int		width;
 	int		height;
+
+	int		stop;
 }			t_param;
 
 #define SL_TEST_IMG1 "./textures/empty.xpm"
@@ -20,7 +22,8 @@ int	stop_win(int key, t_param *param)
 	mlx_destroy_image(param->mlx, param->img1);
 	mlx_destroy_image(param->mlx, param->img2);
 	mlx_destroy_window(param->mlx, param->win);
-	exit (0);
+	param->stop = 1;
+	return (0);
 }
 
 int	main(void)
@@ -72,6 +75,11 @@ printf("height: old = %i, new = %i\n", 25, param.width);
 		}
 		j += 32;
 	}
+	param.stop = 0;
 	mlx_key_hook(param.win, stop_win, (void *) &param);
-	mlx_loop(param.mlx);
+// this doesn't work...
+	if (!param.stop)
+		mlx_loop(param.mlx);
+	printf("ait it aint possible\n");
+	return (13);
 }

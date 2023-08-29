@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/28 16:28:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:38:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_sl_data
 {
 	void	*mlx;
 	void	*win;
+	int		win_width;
+	int		win_height;
 	char	**map;
 	int		clbls;
 	t_tex	*tex;
@@ -36,6 +38,7 @@ typedef struct s_sl_data
 typedef struct s_sl_map
 {
 	size_t	width;
+	int		height;
 	int		exit;
 	int		player;
 	int		err;
@@ -58,6 +61,12 @@ typedef struct s_sl_list
 int		sl_file_check(char *file);
 char	**sl_create_map(char *file);
 int		sl_map_check(t_sl_data *data);
+
+int		sl_mlx_init(t_sl_data *data);
+int		sl_render_map(t_sl_data *data);
+
+int		sl_load_texs(t_sl_data *data);
+void	sl_clear_sprs(t_sl_data *data);
 
 int		sl_print_errno(char *msg, int rtrn);
 int		sl_print_msg(char *msg, int rtrn);
