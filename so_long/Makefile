@@ -125,4 +125,8 @@ re: fclean all
 
 rebonus : fclean bonus
 
-.PHONY: all clean fclean bonus re rebonus
+nameclean:
+	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
+	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
+
+.PHONY: all clean fclean bonus re rebonus nameclean

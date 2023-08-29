@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 17:04:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:16:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	main(int ac, char *av[])
 	}
 	if (sl_mlx_init(&data))
 		return (1);
-ft_printf("loading texs...\n");
 	if (sl_load_texs(&data))
 		return (1);
-ft_printf("rendering map...\n");
 	sl_render_map(&data);
+
+// temp loop:
 mlx_key_hook(data.win, sl_key_hook_hub, (void *) &data);
 mlx_loop(data.mlx);
 
@@ -47,3 +47,4 @@ return (0);
 //stuff to free;
 //	- map
 //	- textures
+//	- window
