@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 16:23:13 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:04:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ ft_printf("loading texs...\n");
 		return (1);
 ft_printf("rendering map...\n");
 	sl_render_map(&data);
+mlx_key_hook(data.win, sl_key_hook_hub, (void *) &data);
+mlx_loop(data.mlx);
 
 // temp return:
 sl_clear_sprs(&data);

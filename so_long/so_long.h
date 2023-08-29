@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 16:25:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:05:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int		sl_render_map(t_sl_data *data);
 
 int		sl_load_texs(t_sl_data *data);
 void	sl_clear_sprs(t_sl_data *data);
+
+int		sl_key_hook_hub(int key, t_sl_data *data);
 
 int		sl_flush_all(t_sl_data *data);
 
