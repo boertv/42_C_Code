@@ -40,6 +40,7 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_map_gen.c \
 					$(SOURCES_WD)sl_map_checks.c \
 					$(SOURCES_WD)sl_map_solvable.c \
+					$(SOURCES_WD)sl_list_util.c \
 					$(SOURCES_WD)sl_load_sprites.c \
 					$(SOURCES_WD)sl_mlx_init.c \
 					$(SOURCES_WD)sl_render_map.c \
@@ -126,7 +127,7 @@ re: fclean all
 rebonus : fclean bonus
 
 nameclean:
-	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
-	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
+	@echo "$(RED)Deleting $(NAME) objects and executable...$(NO_COLOR)"
+	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ) $(NAME) $(BONUS_NAME)
 
 .PHONY: all clean fclean bonus re rebonus nameclean

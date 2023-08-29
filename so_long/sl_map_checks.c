@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 14:50:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:01:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	sl_map_check(t_sl_data *data)
 	}
 	if (sl_map_final_checks(data, &checks))
 		return (1);
-// add solvable check in here!
+	if (sl_map_solvable(data))
+		return (1);
 	return (0);
 }

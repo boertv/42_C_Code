@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 17:16:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:47:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	main(int ac, char *av[])
 		return (sl_print_errno(av[1], 1));
 	if (sl_map_check(&data))
 	{
-// check map for solvabillity in sl_map_check
-//		run over the map with two linked lists, one current positions, one previous ones
 		ft_clear_da(data.map);
 		return (1);
 	}

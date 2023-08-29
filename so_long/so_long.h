@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 17:05:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:01:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,37 +44,47 @@ typedef struct s_sl_map
 	int		err;
 }			t_sl_map;
 
-typedef struct s_sl_tile
-{
-	int	x;
-	int	y;
-}		t_sl_tile;
-
 typedef struct s_sl_list
 {
-	t_sl_tile		*tilp;
-	struct s_list	*next;
-	struct s_list	*prev;
+	int					x;
+	int					y;
+	struct s_sl_list	*next;
+	struct s_sl_list	*prev;
 }					t_sl_list;
 
+typedef struct s_sl_slv
+{
+	int			col;
+	int			exi;
+	t_sl_list	*old;
+	t_sl_list	*cur;
+	t_sl_list	*new;
+}				t_sl_slv;
 
-int		sl_file_check(char *file);
-char	**sl_create_map(char *file);
-int		sl_map_check(t_sl_data *data);
+int			sl_file_check(char *file);
+char		**sl_create_map(char *file);
+int			sl_map_check(t_sl_data *data);
+int			sl_map_solvable(t_sl_data *data);
 
-int		sl_mlx_init(t_sl_data *data);
-int		sl_render_map(t_sl_data *data);
+void		sl_solv_init(t_sl_slv *slv, t_sl_data *data);
+t_sl_list	*sl_list_create(int x, int y);
+int			sl_list_addback(t_sl_list **last, t_sl_list *new);
+t_sl_list	*sl_list_clear(t_sl_list *last);
+int			sl_list_search(t_sl_list *last, int x, int y);
 
-int		sl_load_texs(t_sl_data *data);
-void	sl_clear_sprs(t_sl_data *data);
+int			sl_mlx_init(t_sl_data *data);
+int			sl_render_map(t_sl_data *data);
 
-int		sl_key_hook_hub(int key, t_sl_data *data);
+int			sl_load_texs(t_sl_data *data);
+void		sl_clear_sprs(t_sl_data *data);
 
-int		sl_flush_all(t_sl_data *data);
+int			sl_key_hook_hub(int key, t_sl_data *data);
 
-int		sl_print_errno(char *msg, int rtrn);
-int		sl_print_msg(char *msg, int rtrn);
-int		sl_perr_map(int err, void *p, t_sl_map *checks);
+int			sl_flush_all(t_sl_data *data);
+
+int			sl_print_errno(char *msg, int rtrn);
+int			sl_print_msg(char *msg, int rtrn);
+int			sl_perr_map(int err, void *p, t_sl_map *checks);
 
 # define KEY_ESC 53
 # define KEY_W 13
