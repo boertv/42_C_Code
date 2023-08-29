@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 15:49:01 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:39:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ static int	sl_parse_tex(t_sl_data *data, char c, int w, int h)
 
 	mlx = data->mlx;
 	if (c == '1')
+	{
 		mlx_put_image_to_window(mlx, data->win, data->tex->wall, w, h);
-	else if (c == '0')
-		mlx_put_image_to_window(mlx, data->win, data->tex->empty, w, h);
-	else if (c == 'C')
+		return (0);
+	}
+	mlx_put_image_to_window(mlx, data->win, data->tex->empty, w, h);
+	if (c == 'C')
 		mlx_put_image_to_window(mlx, data->win, data->tex->clbl_new, w, h);
 	else if (c == 'E')
 		mlx_put_image_to_window(mlx, data->win, data->tex->exit_clsd, w, h);
