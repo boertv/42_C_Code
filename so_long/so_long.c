@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 15:50:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:23:13 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ int	main(int ac, char *av[])
 		ft_clear_da(data.map);
 		return (1);
 	}
-ft_printf("map checked\n");
-	if (sl_load_texs(&data))
-		return (1);
-ft_printf("loaded textures\n");
 	if (sl_mlx_init(&data))
 		return (1);
-ft_printf("initialized mlx\n");
+ft_printf("loading texs...\n");
+	if (sl_load_texs(&data))
+		return (1);
+ft_printf("rendering map...\n");
 	sl_render_map(&data);
 
 // temp return:

@@ -23,7 +23,7 @@ int	stop_win(int key, t_param *param)
 	mlx_destroy_image(param->mlx, param->img2);
 	mlx_destroy_window(param->mlx, param->win);
 	param->stop = 1;
-	return (0);
+	exit (0);
 }
 
 int	main(void)

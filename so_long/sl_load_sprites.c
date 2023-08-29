@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 16:02:51 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:20:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,10 @@ static void	*sl_load_sprite(t_sl_data *data, char *file, char **err)
 {
 	void	*ret;
 
-ft_printf("load_sprite: file = '%s', err = '%s'\n", file, *err);
 	if (*err)
 		return (NULL);
-ft_printf("entering xpm_file_to_image...\n");
-// problem is right here for some reason......
 	ret = mlx_xpm_file_to_image(data->mlx, file,
-			&data->tex->width, &data->tex->height);
-ft_printf("new img ptr = %p\n", ret);
+			&(data->tex->width), &(data->tex->height));
 	if (!ret)
 	{
 		*err = file;
