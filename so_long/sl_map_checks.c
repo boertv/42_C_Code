@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 19:01:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:13:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ static void	sl_checks_init(t_sl_data *data, t_sl_map *checks)
 	checks->exit = 0;
 	checks->player = 0;
 	data->clbls = 0;
-	checks->width = ft_strlen(data->map[0]);
-	data->win_width = checks->width;
+	data->map_w = ft_strlen(data->map[0]);
 	i = 0;
 	while (data->map[i])
 		i++;
-	checks->height = i;
-	data->win_height = i;
+	data->map_h = i;
 }
 
 // returns -1 for a valid row, else returns the bad index.
@@ -87,14 +85,14 @@ int	sl_map_check(t_sl_data *data)
 	int			i;
 
 	sl_checks_init(data, &checks);
-	if (checks.width < 3)
+	if (data->map_w < 3)
 		return (sl_print_msg("map: not wide enough", 1));
-	if (checks.height < 3)
+	if (data->map_h < 3)
 		return (sl_print_msg("map: not tall enough", 1));
 	i = 0;
 	while (data->map[i])
 	{
-		if (ft_strlen(data->map[i]) != checks.width)
+		if (ft_strlen(data->map[i]) != data->map_w)
 			return (sl_print_msg("map: not a rectangle", 1));
 		if (sl_row_check(data->map[i], i == 0 || !data->map[i + 1],
 				&checks, data) != -1)

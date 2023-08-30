@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 19:01:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:06:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,20 @@ typedef struct s_sl_data
 {
 	void	*mlx;
 	void	*win;
-	int		win_width;
-	int		win_height;
+	int		win_w;
+	int		win_h;
 	char	**map;
+	int		map_w;
+	int		map_h;
+	char	**mask_cr;
+	int		plr[3];
+	int		mvs;
 	int		clbls;
 	t_tex	*tex;
 }			t_sl_data;
 
 typedef struct s_sl_map
 {
-	size_t	width;
-	int		height;
 	int		exit;
 	int		player;
 	int		err;
@@ -73,7 +76,11 @@ t_sl_list	*sl_list_clear(t_sl_list *last);
 int			sl_list_search(t_sl_list *last, int x, int y);
 
 int			sl_mlx_init(t_sl_data *data);
+int			sl_init_map(t_sl_data *data);
 int			sl_render_map(t_sl_data *data);
+int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
+int			sl_print_tile(t_sl_data *data, int x, int y);
+int			sl_print_plr(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);
@@ -97,6 +104,19 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define KEY_SPC 49
 # define KEY_ENTR 36
 # define KEY_RTRN 51
+
+# define WALL '1'
+# define EMPTY '0'
+# define CLBL_NEW 'C'
+# define CLBL_OLD 'D'
+# define EXIT_CLSD 'E'
+# define EXIT_OPEN 'O'
+# define PLAYER 'P'
+
+# define DIR_UP 'u'
+# define DIR_DOWN 'd'
+# define DIR_LEFT 'l'
+# define DIR_RIGHT 'r'
 
 # define MAP_CHARS "01PCE"
 

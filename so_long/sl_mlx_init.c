@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:20:18 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 16:21:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:32 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	sl_create_win(t_sl_data *data)
 {
-	data->win_width = (data->win_width * SL_TILE_WIDTH) + SL_SHOULDER;
-	data->win_height = (data->win_height * SL_TILE_HEIGHT) + SL_HEAD;
-	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "so_long");
+	data->win_w = (data->map_w * TILE_WIDTH) + SHOULDER;
+	data->win_h = (data->map_h * TILE_HEIGHT) + HEAD;
+	data->win = mlx_new_window(data->mlx, data->win_w, data->win_h, "so_long");
 	if (!data->win)
 	{
 		ft_printf("%fdmlx window creation failed\n", 2);

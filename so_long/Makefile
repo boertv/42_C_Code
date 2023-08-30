@@ -43,8 +43,10 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_list_util.c \
 					$(SOURCES_WD)sl_load_sprites.c \
 					$(SOURCES_WD)sl_mlx_init.c \
-					$(SOURCES_WD)sl_render_map.c \
+					$(SOURCES_WD)sl_map.c \
+					$(SOURCES_WD)sl_window_print.c \
 					$(SOURCES_WD)sl_key_hooks.c \
+					$(SOURCES_WD)sl_movement.c \
 					$(SOURCES_WD)sl_flush.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c

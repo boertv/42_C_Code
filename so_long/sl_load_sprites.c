@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 16:20:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:17:32 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	sl_init_sprs(t_sl_data *data)
 	data->tex->plr_back = NULL;
 	data->tex->plr_left = NULL;
 	data->tex->plr_right = NULL;
-	data->tex->width = SL_TILE_WIDTH;
-	data->tex->height = SL_TILE_HEIGHT;
+	data->tex->width = TILE_WIDTH;
+	data->tex->height = TILE_HEIGHT;
 }
 
 // destroys img if not NULL
@@ -79,16 +79,16 @@ int	sl_load_texs(t_sl_data *data)
 	if (!data->tex)
 		return (sl_print_errno("t_tex malloc: ", 1));
 	sl_init_sprs(data);
-	data->tex->empty = sl_load_sprite(data, SL_TEX_EMPTY, &err);
-	data->tex->wall = sl_load_sprite(data, SL_TEX_WALL, &err);
-	data->tex->clbl_new = sl_load_sprite(data, SL_TEX_CLBL_NEW, &err);
-	data->tex->clbl_old = sl_load_sprite(data, SL_TEX_CLBL_OLD, &err);
-	data->tex->exit_clsd = sl_load_sprite(data, SL_TEX_EXIT_CLSD, &err);
-	data->tex->exit_open = sl_load_sprite(data, SL_TEX_EXIT_OPEN, &err);
-	data->tex->plr_front = sl_load_sprite(data, SL_TEX_PLR_FRONT, &err);
-	data->tex->plr_back = sl_load_sprite(data, SL_TEX_PLR_BACK, &err);
-	data->tex->plr_left = sl_load_sprite(data, SL_TEX_PLR_LEFT, &err);
-	data->tex->plr_right = sl_load_sprite(data, SL_TEX_PLR_RIGHT, &err);
+	data->tex->empty = sl_load_sprite(data, TEX_EMPTY, &err);
+	data->tex->wall = sl_load_sprite(data, TEX_WALL, &err);
+	data->tex->clbl_new = sl_load_sprite(data, TEX_CLBL_NEW, &err);
+	data->tex->clbl_old = sl_load_sprite(data, TEX_CLBL_OLD, &err);
+	data->tex->exit_clsd = sl_load_sprite(data, TEX_EXIT_CLSD, &err);
+	data->tex->exit_open = sl_load_sprite(data, TEX_EXIT_OPEN, &err);
+	data->tex->plr_front = sl_load_sprite(data, TEX_PLR_FRONT, &err);
+	data->tex->plr_back = sl_load_sprite(data, TEX_PLR_BACK, &err);
+	data->tex->plr_left = sl_load_sprite(data, TEX_PLR_LEFT, &err);
+	data->tex->plr_right = sl_load_sprite(data, TEX_PLR_RIGHT, &err);
 	if (err)
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
 	return (1 - (!err));
