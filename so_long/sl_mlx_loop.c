@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sl_key_hooks.c                                     :+:      :+:    :+:   */
+/*   sl_mlx_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 17:00:49 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 17:05:37 by bvercaem         ###   ########.fr       */
+/*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
+/*   Updated: 2023/08/31 14:34:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 
 int	sl_key_hook_hub(int key, t_sl_data *data)
 {
-	(void)key;
-	sl_flush_all(data);
-	mlx_destroy_window(data->mlx, data->win);
-	exit (0);
+	if (key == KEY_ESC)
+	{
+		sl_flush_loop(data);
+		exit (0);
+	}
+	ft_printf("key not in use [%i]\n", key);
+	return (1);
+}
+
+void	sl_mlx_loop(t_sl_data *data)
+{
+	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
+	mlx_loop(data->mlx);
 }

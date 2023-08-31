@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/30 16:55:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:20:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,7 @@ int	main(int ac, char *av[])
 	if (sl_init_map(&data))
 		return (1);
 
-// temp loop:
-mlx_key_hook(data.win, sl_key_hook_hub, (void *) &data);
-mlx_loop(data.mlx);
-
-// temp return:
-sl_clear_sprs(&data);
-ft_clear_da(data.map);
-return (0);
+sl_mlx_loop(&data);
 }
 
 //stuff to free;

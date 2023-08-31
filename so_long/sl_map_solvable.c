@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:16:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 19:08:45 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:36:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_sl_list	*sl_solv_start(t_sl_data *data)
 
 	x = 1;
 	y = 1;
-	while (data->map[x][y] != 'P')
+	while (data->map[y][x] != 'P')
 	{
 		x++;
 		if (!data->map[0][x])
@@ -36,15 +36,15 @@ static t_sl_list	*sl_solv_start(t_sl_data *data)
 // updates col and exi
 static int	sl_check_tile(t_sl_data *data, t_sl_slv *slv, int x, int y)
 {
-	if (data->map[x][y] == '1')
+	if (data->map[y][x] == '1')
 		return (1);
 	if (sl_list_search(slv->old, x, y))
 		return (1);
 	if (sl_list_search(slv->new, x, y))
 		return (1);
-	if (data->map[x][y] == 'C')
+	if (data->map[y][x] == 'C')
 		slv->col--;
-	else if (data->map[x][y] == 'E')
+	else if (data->map[y][x] == 'E')
 		slv->exi--;
 	return (0);
 }

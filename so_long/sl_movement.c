@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/30 18:07:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:27:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 // returns 1 and updates dir if cr runs into something; 1: wall, 2: N/A
 static int	sl_move_check(t_sl_data *data, int x, int y, char *dir)
 {
-	y += (dir == DIR_UP);
-	y -= (dir == DIR_DOWN);
-	x += (dir == DIR_RIGHT);
-	x -= (dir == DIR_LEFT);
+	y += (*dir == DIR_UP);
+	y -= (*dir == DIR_DOWN);
+	x += (*dir == DIR_RIGHT);
+	x -= (*dir == DIR_LEFT);
 	if (data->map[y][x] == WALL)
 		*dir = 1;
 	else

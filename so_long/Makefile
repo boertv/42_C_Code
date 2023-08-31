@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/31 14:06:40 by bvercaem          #+#    #+#              #
+#    Updated: 2023/08/31 14:30:13 by bvercaem         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME			=	so_long
 
 BONUS_NAME		=
@@ -15,9 +27,9 @@ BONUS_HEADER_WD	=
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -Werror
+#FLAGS			=	-Wall -Wextra -Werror
 #FLAGS			=	-Wall -Wextra -Werror -g
-#FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 OPENGL_APPKIT	=	-framework OpenGL -framework AppKit
 LIBS			=	libft/libft.a -lmlx
 
@@ -45,7 +57,7 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_mlx_init.c \
 					$(SOURCES_WD)sl_map.c \
 					$(SOURCES_WD)sl_window_print.c \
-					$(SOURCES_WD)sl_key_hooks.c \
+					$(SOURCES_WD)sl_mlx_loop.c \
 					$(SOURCES_WD)sl_movement.c \
 					$(SOURCES_WD)sl_flush.c \
 

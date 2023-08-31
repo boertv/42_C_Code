@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/30 18:06:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:26:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_sl_data
 	int		win_w;
 	int		win_h;
 	char	**map;
-	int		map_w;
-	int		map_h;
+	size_t	map_w;
+	size_t	map_h;
 	char	**mask_cr;
 	int		plr[3];
 	int		mvs;
@@ -85,9 +85,11 @@ int			sl_print_plr(t_sl_data *data);
 int			sl_load_texs(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);
 
+void		sl_mlx_loop(t_sl_data *data);
 int			sl_key_hook_hub(int key, t_sl_data *data);
 
 int			sl_flush_all(t_sl_data *data);
+void		sl_flush_loop(t_sl_data *data);
 
 int			sl_print_errno(char *msg, int rtrn);
 int			sl_print_msg(char *msg, int rtrn);

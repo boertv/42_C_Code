@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/30 18:06:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:37:11 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 // 		mlx_put_image_to_window(mlx, data->win, data->tex->pl, w, h);
 // }
 
-// SHOULDN'T ALL THESE [x][y] BE [y][x] INSTEAD ??? (update, i changed it..)
 // doesn't print the player
 // UPDATE SO IT PRINTS MASK VALUES??
 int	sl_print_tile(t_sl_data *data, int x, int y)
