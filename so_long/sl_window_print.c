@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 19:31:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:34:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	sl_print_rectangle(t_sl_data *data, int w, int h, int color)
 		i = 0;
 		while (i < w)
 		{
-			mlx_pixel_put(data->mlx, data->win, data->cords[0] + i, data->cords[1] + j, color);
+			mlx_pixel_put(data->mlx, data->win,
+				data->cords[0] + i, data->cords[1] + j, color);
 			i++;
 		}
 		j++;
@@ -70,7 +71,8 @@ void	sl_print_mvs(t_sl_data *data)
 		data->cords[0] = 5 + INDENT;
 		data->cords[1] = HEAD - 23;
 		sl_print_rectangle(data, 32, 20, sl_create_color(0, 0, 0, 0));
-		mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1], sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
+		mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1],
+			sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
 		return ;
 	}
 	data->cords[0] = 5 + INDENT;
@@ -78,5 +80,6 @@ void	sl_print_mvs(t_sl_data *data)
 	sl_print_tile(data, 0, 0, 0);
 	sl_print_tile(data, 1, 0, 0);
 //transparency dont work
-	mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1], sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
+	mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1],
+		sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
 }

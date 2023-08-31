@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 14:20:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:35:09 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	main(int ac, char *av[])
 		return (1);
 	if (sl_init_map(&data))
 		return (1);
-
-sl_mlx_loop(&data);
+	sl_mlx_loop(&data);
 }
 
 //stuff to free;
