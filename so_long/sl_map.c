@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 14:26:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:25:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	sl_render_map(t_sl_data *data)
 		}
 		y++;
 	}
-	sl_print_plr(data);
 	return (0);
 }
 
@@ -69,7 +68,7 @@ static char	**sl_create_mask(t_sl_data *data)
 		j = 0;
 		while (j < data->map_w)
 		{
-			new[i][j] = '0';
+			new[i][j] = EMPTY;
 			j++;
 		}
 		new[i][j] = 0;
@@ -93,6 +92,7 @@ int	sl_init_map(t_sl_data *data)
 	data->map[data->plr[1]][data->plr[0]] = EMPTY;
 	data->mask_cr[data->plr[1]][data->plr[0]] = PLAYER;
 	data->plr[2] = FACE_FRONT;
+	data->mvs = 0;
 	sl_render_map(data);
 	return (0);
 }

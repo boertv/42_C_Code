@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:06:40 by bvercaem          #+#    #+#              #
-#    Updated: 2023/08/31 14:30:13 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/08/31 15:52:34 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_window_print.c \
 					$(SOURCES_WD)sl_mlx_loop.c \
 					$(SOURCES_WD)sl_movement.c \
+					$(SOURCES_WD)sl_map_updates.c \
 					$(SOURCES_WD)sl_flush.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c

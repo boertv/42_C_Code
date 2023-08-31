@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 14:26:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:46:27 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,16 @@ int			sl_init_map(t_sl_data *data);
 int			sl_render_map(t_sl_data *data);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
 int			sl_print_tile(t_sl_data *data, int x, int y);
-int			sl_print_plr(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);
 
 void		sl_mlx_loop(t_sl_data *data);
 int			sl_key_hook_hub(int key, t_sl_data *data);
+int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
+int			sl_upd_clbl(t_sl_data *data, int x, int y);
+int			sl_upd_pldir(t_sl_data *data, int x, int y, char dir);
+int			sl_upd_plmv(t_sl_data *data, int x, int y);
 
 int			sl_flush_all(t_sl_data *data);
 void		sl_flush_loop(t_sl_data *data);
