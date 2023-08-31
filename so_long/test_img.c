@@ -9,8 +9,6 @@ typedef struct s_param
 	void	*img2;
 	int		width;
 	int		height;
-
-	int		stop;
 }			t_param;
 
 #define SL_TEST_IMG1 "./textures/empty.xpm"
@@ -22,7 +20,7 @@ int	stop_win(int key, t_param *param)
 	mlx_destroy_image(param->mlx, param->img1);
 	mlx_destroy_image(param->mlx, param->img2);
 	mlx_destroy_window(param->mlx, param->win);
-	param->stop = 1;
+	printf("i stopped haha\n");
 	exit (0);
 }
 
@@ -75,11 +73,15 @@ printf("height: old = %i, new = %i\n", 25, param.width);
 		}
 		j += 32;
 	}
-	param.stop = 0;
+
+//printing img with negative x or y IT JUST WORKS!!
+printf ("return test = %i\n", mlx_put_image_to_window(param.mlx, param.win, param.img1, 0, -10));
+
 	mlx_key_hook(param.win, stop_win, (void *) &param);
-// this doesn't work...
-	if (!param.stop)
-		mlx_loop(param.mlx);
-	printf("ait it aint possible\n");
+	mlx_loop(param.mlx);
+	printf("ait it aint possible to see this\n");
+	mlx_destroy_image(param.mlx, param.img1);
+	mlx_destroy_image(param.mlx, param.img2);
+	mlx_destroy_window(param.mlx, param.win);
 	return (13);
 }

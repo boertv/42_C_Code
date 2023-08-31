@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 15:48:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:37:21 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int	sl_key_hook_hub(int key, t_sl_data *data)
 void	sl_mlx_loop(t_sl_data *data)
 {
 	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
+	mlx_hook(data->win, 17, 0, sl_flush_loop, (void *) data);
 	mlx_loop(data->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 15:25:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:14:11 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	sl_render_map(t_sl_data *data)
 		x = 0;
 		while (data->map[y][x])
 		{
-			sl_print_tile(data, x, y);
+			sl_print_tile(data, x, y, 0);
 			x++;
 		}
 		y++;

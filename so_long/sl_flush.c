@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 15:47:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:27:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ int	sl_flush_all(t_sl_data *data)
 }
 
 // exits
-void	sl_flush_loop(t_sl_data *data)
+int	sl_flush_loop(t_sl_data *data)
 {
+	if (data->map[data->plr[1]][data->plr[0]] != EXIT_OPEN)
+		ft_printf("quitting the game\n");
+	else
+		ft_printf("completed the level in %i moves\n", data->mvs);
 	sl_flush_all(data);
 	mlx_destroy_window(data->mlx, data->win);
 	exit (0);

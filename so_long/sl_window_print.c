@@ -6,48 +6,25 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 15:30:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:31:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	sl_print_mask_cr(t_sl_data *data, int x, int y)
-{
-	void	*img;
-	int		w;
-	int		h;
-
-	w = (x * TILE_WIDTH) + INDENT;
-	h = (y * TILE_HEIGHT) + HEAD;
-	img = NULL;
-	if (data->mask_cr[y][x] == PLAYER)
-	{
-		if (data->plr[2] == FACE_FRONT)
-			img = data->tex->plr_front;
-		else if (data->plr[2] == FACE_BACK)
-			img = data->tex->plr_back;
-		else if (data->plr[2] == FACE_LEFT)
-			img = data->tex->plr_left;
-		else if (data->plr[2] == FACE_RIGHT)
-			img = data->tex->plr_right;
-	}
-	else
-		return (1);
-	mlx_put_image_to_window(data->mlx, data->win, img, w, h);
-	return (0);
-}
-
 //prints map and mask_cr
-int	sl_print_tile(t_sl_data *data, int x, int y)
+// if -1000 < offset < 1000 it is added to width, else the diff is to height
+int	sl_print_tile(t_sl_data *data, int x, int y, int offset)
 {
 	void	*mlx;
 	int		w;
 	int		h;
 
 	mlx = data->mlx;
-	w = (x * TILE_WIDTH) + INDENT;
-	h = (y * TILE_HEIGHT) + HEAD;
+	w = ((x * TILE_WIDTH) + INDENT)
+		+ ((offset <= 1000 && -1000 <= offset) * offset);
+	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
+			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
 	if (data->map[y][x] == WALL)
 	{
 		mlx_put_image_to_window(mlx, data->win, data->tex->wall, w, h);
@@ -64,4 +41,42 @@ int	sl_print_tile(t_sl_data *data, int x, int y)
 		mlx_put_image_to_window(mlx, data->win, data->tex->exit_open, w, h);
 	sl_print_mask_cr(data, x, y);
 	return (0);
+}
+
+// cords provided in data->cords[2]
+int	sl_print_rectangle(t_sl_data *data, int w, int h, int color)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < h)
+	{
+		i = 0;
+		while (i < w)
+		{
+			mlx_pixel_put(data->mlx, data->win, data->cords[0] + i, data->cords[1] + j, color);
+			i++;
+		}
+		j++;
+	}
+	return (0);
+}
+
+void	sl_print_mvs(t_sl_data *data)
+{
+	if (HEAD >= 30)
+	{
+		data->cords[0] = 5 + INDENT;
+		data->cords[1] = HEAD - 23;
+		sl_print_rectangle(data, 32, 20, sl_create_color(0, 0, 0, 0));
+		mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1], sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
+		return ;
+	}
+	data->cords[0] = 5 + INDENT;
+	data->cords [1] = 3 + HEAD;
+	sl_print_tile(data, 0, 0, 0);
+	sl_print_tile(data, 1, 0, 0);
+//transparency dont work
+	mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1], sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
 }

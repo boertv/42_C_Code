@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 15:46:27 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:12:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_sl_data
 	size_t	map_h;
 	char	**mask_cr;
 	int		plr[3];
+	int		cords[2];
 	int		mvs;
 	int		clbls;
 	t_tex	*tex;
@@ -79,7 +80,11 @@ int			sl_mlx_init(t_sl_data *data);
 int			sl_init_map(t_sl_data *data);
 int			sl_render_map(t_sl_data *data);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
-int			sl_print_tile(t_sl_data *data, int x, int y);
+int			sl_create_color(int t, int r, int g, int b);
+void		sl_translate_xy_to_pixel(t_sl_data *data, int x, int y);
+int			sl_print_tile(t_sl_data *data, int x, int y, int offset);
+int			sl_print_mask_cr(t_sl_data *data, int x, int y);
+void		sl_print_mvs(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);
@@ -92,7 +97,7 @@ int			sl_upd_pldir(t_sl_data *data, int x, int y, char dir);
 int			sl_upd_plmv(t_sl_data *data, int x, int y);
 
 int			sl_flush_all(t_sl_data *data);
-void		sl_flush_loop(t_sl_data *data);
+int			sl_flush_loop(t_sl_data *data);
 
 int			sl_print_errno(char *msg, int rtrn);
 int			sl_print_msg(char *msg, int rtrn);

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 15:51:03 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:13:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 	{
 		sl_search_map(data, EXIT_CLSD, &exit_x, &exit_y);
 		data->map[exit_y][exit_x] = EXIT_OPEN;
-		sl_print_tile(data, exit_x, exit_y);
+		sl_print_tile(data, exit_x, exit_y, 0);
 	}
 	data->map[y][x] = CLBL_OLD;
 	return (0);
@@ -32,7 +32,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 int	sl_upd_plmv(t_sl_data *data, int x, int y)
 {
 	(data->mvs)++;
-	//print updated mv counter
+	sl_print_mvs(data);
 	if (data->map[y][x] == EXIT_OPEN)
 		sl_flush_loop(data);
 	return (0);
