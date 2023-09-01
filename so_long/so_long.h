@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 19:12:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:07:19 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ typedef struct s_sl_data
 	int		plr[3];
 	int		cords[2];
 	int		mvs;
+	int		clblt;
 	int		clbls;
 	t_tex	*tex;
+	char	*map_file;
 }			t_sl_data;
 
 typedef struct s_sl_map
@@ -80,11 +82,15 @@ int			sl_mlx_init(t_sl_data *data);
 int			sl_init_map(t_sl_data *data);
 int			sl_render_map(t_sl_data *data);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
-int			sl_create_color(int t, int r, int g, int b);
+int			sl_create_color(int r, int g, int b);
+int			sl_print_rectangle(t_sl_data *data, int w, int h, int color);
+void		sl_print_midtext(t_sl_data *data, char *str, int y, int color);
 void		sl_translate_xy_to_pixel(t_sl_data *data, int x, int y);
 int			sl_print_tile(t_sl_data *data, int x, int y, int offset);
 int			sl_print_mask_cr(t_sl_data *data, int x, int y);
 void		sl_print_mvs(t_sl_data *data);
+void		sl_print_clblt(t_sl_data *data);
+void		sl_print_clbls(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);
@@ -98,16 +104,22 @@ int			sl_upd_plmv(t_sl_data *data, int x, int y);
 
 int			sl_flush_all(t_sl_data *data);
 int			sl_flush_loop(t_sl_data *data);
+int			sl_reset(t_sl_data *data);
 
 int			sl_print_errno(char *msg, int rtrn);
 int			sl_print_msg(char *msg, int rtrn);
 int			sl_perr_map(int err, void *p, t_sl_map *checks);
 
 # define KEY_ESC 53
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_R 15
 # define KEY_CTR 256
 # define KEY_SHFT 257
 # define KEY_TAB 48

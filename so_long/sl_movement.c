@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 19:14:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:46:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ static int	sl_move_check(t_sl_data *data, int x, int y, char dir)
 	return (0);
 }
 
-// ouchie BONK tile-flicker or sumn
 static int	sl_move_blocked(t_sl_data *data, int x, int y)
 {
 	if (data->mask_cr[y][x] == PLAYER)
 		sl_print_tile(data, x, y, 0);
-	ft_printf("you ran into a wall...\n");
+	sl_print_midtext(data, "You ran into a wall...", -1, sl_create_color(255, 255, 255));
 	return (1);
 }
 
@@ -47,6 +46,8 @@ int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 {
 	char	cr;
 
+	if (data->mask_cr[*y][*x] == PLAYER)
+		sl_print_midtext(data, NULL, -1, 0);
 	sl_upd_pldir(data, *x, *y, dir);
 	if (sl_move_check(data, *x, *y, dir))
 		return (sl_move_blocked(data, *x, *y));

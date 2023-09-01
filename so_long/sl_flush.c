@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 19:27:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:16:09 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,13 @@ int	sl_flush_loop(t_sl_data *data)
 	sl_flush_all(data);
 	mlx_destroy_window(data->mlx, data->win);
 	exit (0);
+}
+
+int	sl_reset(t_sl_data *data)
+{
+	ft_clear_da(data->map);
+	ft_clear_da(data->mask_cr);
+	data->map = sl_create_map(data->map_file);
+	sl_init_map(data);
+	return (0);
 }

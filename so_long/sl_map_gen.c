@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:13:01 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 15:48:34 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:13:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ static char	**sl_first_malloc(char *file)
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
-		perror(file);
 		return (NULL);
-	}
 	string = get_next_line(fd);
 	while (string)
 	{

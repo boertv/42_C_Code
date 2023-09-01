@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 19:34:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:12:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,43 +43,74 @@ int	sl_print_tile(t_sl_data *data, int x, int y, int offset)
 	return (0);
 }
 
-// cords provided in data->cords[2]
-int	sl_print_rectangle(t_sl_data *data, int w, int h, int color)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < h)
-	{
-		i = 0;
-		while (i < w)
-		{
-			mlx_pixel_put(data->mlx, data->win,
-				data->cords[0] + i, data->cords[1] + j, color);
-			i++;
-		}
-		j++;
-	}
-	return (0);
-}
-
 void	sl_print_mvs(t_sl_data *data)
 {
-	if (HEAD >= 30)
+	char	*temp;
+
+	temp = ft_itoa(data->mvs);
+	if (HEAD >= 25)
 	{
 		data->cords[0] = 5 + INDENT;
 		data->cords[1] = HEAD - 23;
-		sl_print_rectangle(data, 32, 20, sl_create_color(0, 0, 0, 0));
+		sl_print_rectangle(data, 32, 22, sl_create_color(0, 0, 0));
 		mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1],
-			sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
+			sl_create_color(255, 255, 255), temp);
+		free(temp);
 		return ;
 	}
-	data->cords[0] = 5 + INDENT;
-	data->cords [1] = 3 + HEAD;
 	sl_print_tile(data, 0, 0, 0);
 	sl_print_tile(data, 1, 0, 0);
-//transparency dont work
-	mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1],
-		sl_create_color(0, 250, 250, 250), ft_itoa(data->mvs));
+	mlx_string_put(data->mlx, data->win, INDENT + 5, HEAD + 2,
+		sl_create_color(255, 255, 255), temp);
+	free(temp);
+}
+
+// these need to be done in one ft so i can properly clear the background first (tiles are too large for this)
+void	sl_print_clblt(t_sl_data *data)
+{
+	char	*print;
+
+	if (data->map_w < 5)
+		return ;
+	print = ft_itoa(data->clblt);
+	if (HEAD >= 25)
+	{
+		data->cords[0] = (data->win_w / 2) - 6;
+		data->cords[1] = HEAD - 23;
+		sl_print_rectangle(data, 42, 22, 0);
+		sl_print_midtext(data, "/", HEAD - 23, sl_create_color(255, 255, 255));
+		mlx_string_put(data->mlx, data->win, (data->win_w / 2) + 6, HEAD - 22, sl_create_color(255, 255, 255), print);
+		free(print);
+		return ;
+	}
+	sl_print_tile(data, data->map_w / 2 - 1, 0, 0);
+	sl_print_tile(data, data->map_w / 2, 0, 0);
+	sl_print_tile(data, data->map_w / 2 + 1, 0, 0);
+	sl_print_midtext(data, "/", HEAD + 1, sl_create_color(255, 255, 255));
+	mlx_string_put(data->mlx, data->win, (data->win_w / 2) + 6, HEAD + 2, sl_create_color(255, 255, 255), print);
+	free(print);
+}
+
+void	sl_print_clbls(t_sl_data *data)
+{
+	char	*print;
+
+	if (data->map_w < 5)
+		return ;
+	print = ft_itoa(data->clbls);
+	if (HEAD >= 25)
+	{
+		data->cords[0] = (data->win_w / 2) - 32;
+		data->cords[1] = HEAD - 23;
+		sl_print_rectangle(data, 26, 22, 0);
+		mlx_string_put(data->mlx, data->win, (data->win_w / 2) - 16, HEAD - 22, sl_create_color(255, 255, 255), print);
+		free(print);
+		return ;
+	}
+	// sl_print_tile(data, data->map_w / 2 - 1, 0, 0);
+	// sl_print_tile(data, data->map_w / 2, 0, 0);
+	// sl_print_tile(data, data->map_w / 2 + 1, 0, 0);
+	sl_print_midtext(data, "/", HEAD + 1, sl_create_color(255, 255, 255));
+	mlx_string_put(data->mlx, data->win, (data->win_w / 2) - 16, HEAD + 2, sl_create_color(255, 255, 255), print);
+	free(print);
 }

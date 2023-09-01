@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/30 16:13:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:12:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	sl_checks_init(t_sl_data *data, t_sl_map *checks)
 	checks->err = 0;
 	checks->exit = 0;
 	checks->player = 0;
-	data->clbls = 0;
+	data->clblt = 0;
 	data->map_w = ft_strlen(data->map[0]);
 	i = 0;
 	while (data->map[i])
@@ -46,7 +46,7 @@ static int	sl_row_check(char *row, int wall, t_sl_map *checks, t_sl_data *data)
 		else if (row[j] == 'E')
 			checks->exit++;
 		else if (row[j] == 'C')
-			data->clbls++;
+			data->clblt++;
 		else if (!ft_strchr(MAP_CHARS, row[j]))
 			sl_perr_map(MAP_ERR_CHAR, (row + j), checks);
 		j++;
@@ -62,7 +62,7 @@ static int	sl_map_final_checks(t_sl_data *data, t_sl_map *checks)
 		sl_perr_map(MAP_ERR_EXIT, NULL, checks);
 	if (checks->player != 1)
 		sl_perr_map(MAP_ERR_PLAYER, NULL, checks);
-	if (data->clbls < 1)
+	if (data->clblt < 1)
 		sl_perr_map(MAP_ERR_CLBLS, NULL, checks);
 	if (checks->err)
 	{

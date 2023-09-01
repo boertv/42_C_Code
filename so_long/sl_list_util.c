@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:46:46 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/29 18:58:02 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:12:08 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sl_solv_init(t_sl_slv *slv, t_sl_data *data)
 {
-	slv->col = data->clbls;
+	slv->col = data->clblt;
 	slv->exi = 1;
 	slv->old = NULL;
 	slv->new = NULL;

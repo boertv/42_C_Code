@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 19:35:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:10:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int ac, char *av[])
 	if (ac != 2 || sl_file_check(av[1]))
 		return (sl_print_msg("please provide one '.ber' map-file", 1));
 	data.map = sl_create_map(av[1]);
+	data.map_file = av[1];
 	if (!data.map)
 		return (sl_print_errno(av[1], 1));
 	if (sl_map_check(&data))
@@ -40,3 +41,7 @@ int	main(int ac, char *av[])
 //	- masks
 //	- textures
 //	- window
+
+//size of an mlx char:
+//	- one char  = 10-22
+//	- two chars = 20-22

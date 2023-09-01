@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 19:13:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:07:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 	int	exit_x;
 	int	exit_y;
 
-	data->clbls--;
-	//print updated clbl counter
-	if (!data->clbls)
+	data->clbls++;
+	sl_print_clbls(data);
+	if (data->clbls == data->clblt)
 	{
 		sl_search_map(data, EXIT_CLSD, &exit_x, &exit_y);
 		data->map[exit_y][exit_x] = EXIT_OPEN;
+		sl_print_midtext(data, "The exit opened!", -1, sl_create_color(255, 255, 255));
 		sl_print_tile(data, exit_x, exit_y, 0);
 	}
 	data->map[y][x] = CLBL_OLD;
