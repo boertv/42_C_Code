@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 19:07:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:19:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	sl_init_map(t_sl_data *data)
 	data->clbls = 0;
 	sl_render_map(data);
 	sl_print_mvs(data);
-	sl_print_clblt(data);
-	sl_print_clbls(data);
+	sl_print_clbl(data);
 	return (0);
 }

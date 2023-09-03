@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 19:07:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:19:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ void		sl_translate_xy_to_pixel(t_sl_data *data, int x, int y);
 int			sl_print_tile(t_sl_data *data, int x, int y, int offset);
 int			sl_print_mask_cr(t_sl_data *data, int x, int y);
 void		sl_print_mvs(t_sl_data *data);
-void		sl_print_clblt(t_sl_data *data);
-void		sl_print_clbls(t_sl_data *data);
+void		sl_print_clbl(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 19:07:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:21:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 	int	exit_y;
 
 	data->clbls++;
-	sl_print_clbls(data);
+	sl_print_clbl(data);
 	if (data->clbls == data->clblt)
 	{
 		sl_search_map(data, EXIT_CLSD, &exit_x, &exit_y);
