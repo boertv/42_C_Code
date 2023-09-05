@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 19:11:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:12:23 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct s_tex
 
 # define TILE_WIDTH 32
 # define TILE_HEIGHT 32
-# define HEAD 0
-# define TAIL 0
-# define SHOULDER 0
-# define INDENT 0
+# define HEAD 100
+# define TAIL 100
+# define SHOULDER 100
+# define INDENT 100
 
 # define FACE_FRONT 'f'
 # define FACE_BACK 'b'

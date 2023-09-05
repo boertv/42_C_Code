@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 18:10:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:14:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	main(int ac, char *av[])
 	sl_mlx_loop(&data);
 }
 
+// MAKE SURE CHEATS IS OFF
+
 //stuff to free;
 //	- map
 //	- masks
@@ -44,4 +46,5 @@ int	main(int ac, char *av[])
 
 //size of an mlx char:
 //	- one char  = 10-22
+// (actual height of normal char is 15, but print area (and artefacts) is 22)
 //	- two chars = 20-22

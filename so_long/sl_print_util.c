@@ -6,32 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 18:35:03 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 18:59:32 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:51:57 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// cords provided in data->cords[2]
-int	sl_print_rectangle(t_sl_data *data, int w, int h, int color)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < h)
-	{
-		i = 0;
-		while (i < w)
-		{
-			mlx_pixel_put(data->mlx, data->win,
-				data->cords[0] + i, data->cords[1] + j, color);
-			i++;
-		}
-		j++;
-	}
-	return (0);
-}
 
 // takes values between 0 - 255
 int	sl_create_color(int r, int g, int b)
@@ -88,9 +67,9 @@ void	sl_print_midtext(t_sl_data *data, char *str, int y, int color)
 	{
 		if (TAIL >= 25)
 		{
-			data->cords[0] = 0;
+			data->cords[0] = INDENT;
 			data->cords[1] = data->win_h - TAIL + 1;
-			sl_print_rectangle(data, data->win_w, TAIL - 1, 0);
+			sl_print_rectangle(data, data->win_w - INDENT - HEAD, 23, 0);
 			y = data->win_h - TAIL + 2;
 		}
 		else

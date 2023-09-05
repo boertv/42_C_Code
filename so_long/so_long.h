@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/03 21:19:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:06:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,19 @@ int			sl_list_search(t_sl_list *last, int x, int y);
 int			sl_mlx_init(t_sl_data *data);
 int			sl_init_map(t_sl_data *data);
 int			sl_render_map(t_sl_data *data);
+void		sl_print_game_frame(t_sl_data *data, int color);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
 int			sl_create_color(int r, int g, int b);
 int			sl_print_rectangle(t_sl_data *data, int w, int h, int color);
+void		sl_print_frame(t_sl_data *data, int w, int h, int color);
 void		sl_print_midtext(t_sl_data *data, char *str, int y, int color);
+void		sl_print_fullwin(t_sl_data *data, int bgcol, int txcol, char *msg);
 void		sl_translate_xy_to_pixel(t_sl_data *data, int x, int y);
 int			sl_print_tile(t_sl_data *data, int x, int y, int offset);
 int			sl_print_mask_cr(t_sl_data *data, int x, int y);
 void		sl_print_mvs(t_sl_data *data);
 void		sl_print_clbl(t_sl_data *data);
+void		sl_print_reset(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);
@@ -119,6 +123,7 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_R 15
+# define KEY_C 8
 # define KEY_CTR 256
 # define KEY_SHFT 257
 # define KEY_TAB 48
@@ -140,6 +145,10 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define DIR_RIGHT 'r'
 
 # define MAP_CHARS "01PCE"
+# define COL_WHITE 16777215
+# define COL_BLACK 0
+# define COL_COPPER 12088115
+# define CHEATS 0
 
 # define MAP_ERR_HOLE 1
 # define MAP_ERR_CHAR 2

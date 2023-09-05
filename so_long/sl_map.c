@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/03 21:19:42 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:47:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ int	sl_init_map(t_sl_data *data)
 	data->mvs = 0;
 	data->clbls = 0;
 	sl_render_map(data);
+	sl_print_game_frame(data, COL_WHITE);
+	sl_print_reset(data);
+	sl_print_midtext(data, NULL, -1, 0);
 	sl_print_mvs(data);
 	sl_print_clbl(data);
 	return (0);

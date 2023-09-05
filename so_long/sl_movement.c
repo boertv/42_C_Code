@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 18:46:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:01:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // returns 1 if blocked by wall, if something else updates dir?
 static int	sl_move_check(t_sl_data *data, int x, int y, char dir)
 {
+	if (CHEATS)
+		return (0);
 	y -= (dir == DIR_UP);
 	x -= (dir == DIR_LEFT);
 	y += (dir == DIR_DOWN);
@@ -28,7 +30,7 @@ static int	sl_move_blocked(t_sl_data *data, int x, int y)
 {
 	if (data->mask_cr[y][x] == PLAYER)
 		sl_print_tile(data, x, y, 0);
-	sl_print_midtext(data, "You ran into a wall...", -1, sl_create_color(255, 255, 255));
+	sl_print_midtext(data, "You ran into a wall...", -1, COL_WHITE);
 	return (1);
 }
 

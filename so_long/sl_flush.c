@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 18:16:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:12:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ int	sl_flush_loop(t_sl_data *data)
 	exit (0);
 }
 
+// returns 1 if sl_init_map failed
 int	sl_reset(t_sl_data *data)
 {
 	ft_clear_da(data->map);
 	ft_clear_da(data->mask_cr);
 	data->map = sl_create_map(data->map_file);
-	sl_init_map(data);
+	if (sl_init_map(data))
+		return (1);
 	return (0);
 }
