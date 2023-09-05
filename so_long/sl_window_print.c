@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 18:09:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:21:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ void	sl_print_reset(t_sl_data *data)
 		data->cords[0] = data->win_w - SHOULDER - 2 - (10 * 9);
 		data->cords[1] = HEAD - 22;
 		sl_print_rectangle(data, 2 + (10 * 9), 22, COL_BLACK);
-		mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER - 2 - (10 * 9), HEAD - 22, COL_COPPER, "reset 'r'");
+		mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER
+			- 2 - (10 * 9), HEAD - 22, COL_COPPER, "reset 'r'");
 		return ;
 	}
 	data->cords[0] = data->win_w - SHOULDER - 2 - (10 * 3);
 	data->cords[1] = HEAD - 22;
 	sl_print_rectangle(data, 2 + (10 * 3), 22, COL_BLACK);
-	mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER - 2 - (10 * 3), HEAD - 22, COL_COPPER, "'r'");
+	mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER - 2 - (10 * 3),
+		HEAD - 22, COL_COPPER, "'r'");
 }
 
 void	sl_print_game_frame(t_sl_data *data, int color)
@@ -103,5 +105,6 @@ void	sl_print_game_frame(t_sl_data *data, int color)
 		return ;
 	data->cords[0] = INDENT - 8;
 	data->cords[1] = HEAD - 31;
-	sl_print_frame(data, 50016 + data->win_w - SHOULDER - INDENT, 62 + data->win_h - HEAD - TAIL, color);
+	sl_print_frame(data, 50016 + data->win_w - SHOULDER - INDENT,
+		62 + data->win_h - HEAD - TAIL, color);
 }

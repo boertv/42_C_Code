@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:42:43 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 18:15:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:20:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	sl_print_clbl_nohead(t_sl_data *data)
 		HEAD + 2, COL_BLACK, print);
 	free(print);
 	print = ft_itoa(data->clbls);
-	mlx_string_put(data->mlx, data->win, (data->win_w / 2) -
-		(6 + (ft_strlen(print) * 10)), HEAD + 2, COL_BLACK, print);
+	mlx_string_put(data->mlx, data->win, (data->win_w / 2)
+		- (6 + (ft_strlen(print) * 10)), HEAD + 2, COL_BLACK, print);
 	free(print);
 }
 
