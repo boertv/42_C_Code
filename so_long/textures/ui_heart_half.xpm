@@ -1,0 +1,23 @@
+/* XPM */
+static char *ui_heart_half1694538280[] = {
+/* columns rows colors chars-per-pixel */
+"13 12 5 1 ",
+"  c None",
+". c #2A2A3A",
+"X c #483B3A",
+"o c #DA4E38",
+"O c #FDF7ED",
+/* pixels */
+"  OOO   OOO  ",
+" O...O O...O ",
+"O.ooo.O.XXX.O",
+"O.oooo.XXXX.O",
+"O.oooooXXXX.O",
+"O.ooooXXXXX.O",
+" O.ooooXXX.O ",
+"  O.ooXXX.O  ",
+"   O.ooX.O   ",
+"    O.X.O    ",
+"     O.O     ",
+"      O      "
+};

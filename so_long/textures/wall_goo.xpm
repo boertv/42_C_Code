@@ -1,0 +1,28 @@
+/* XPM */
+static char *wall_goo1694538280[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 6 1 ",
+"  c #222222",
+". c #483B3A",
+"X c #775C55",
+"o c #4BA747",
+"O c #97DA3F",
+"+ c #417089",
+/* pixels */
+"XX XXXXXX XXX XX",
+".. ...... ... ..",
+".. .. ... ..  ..",
+"                ",
+"XXX   ++ +  XXXX",
+".... +oo+o+ ....",
+"...  Oooooo  ...",
+"      Oooo+     ",
+"XX XXXXOooX XX  ",
+"... ...Oo+. .. .",
+"..... .Oo+.... .",
+"       +o       ",
+"XX XXXXXOX  XXXX",
+".. .....O. .....",
+".. .....O+ ... .",
+"      Oooo++    "
+};

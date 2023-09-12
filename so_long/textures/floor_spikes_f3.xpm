@@ -1,0 +1,27 @@
+/* XPM */
+static char *floor_spikes_anim_f31694538280[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 5 1 ",
+"  c #222222",
+". c #483B3A",
+"X c #775C55",
+"o c #3C9F9C",
+"O c #FDF7ED",
+/* pixels */
+"   .    ... .   ",
+" ..............X",
+"....O......O...X",
+"....O......O...X",
+" . ooO .. ooO .X",
+"..XooOX..XooOX.X",
+" ..XXX....XXX...",
+" ..............X",
+" ...O......O....",
+"....O......O...X",
+".. ooO .. ooO .X",
+" .XooOX..XooOX..",
+" ..XXX....XXX...",
+" ..............X",
+" ..............X",
+"XXX..X.XXXX.XXXX"
+};

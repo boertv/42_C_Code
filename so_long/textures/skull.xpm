@@ -1,0 +1,26 @@
+/* XPM */
+static char *skull1694538284[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 4 1 ",
+"  c None",
+". c #222222",
+"X c #AA8D7A",
+"o c #D3BFA9",
+/* pixels */
+"                ",
+"                ",
+"                ",
+"                ",
+"                ",
+"                ",
+"                ",
+"      oXXX      ",
+"     ooooXX     ",
+"     .o..oX     ",
+"     .o..oo     ",
+"     o.ooo.     ",
+"     o o...     ",
+"                ",
+"                ",
+"                "
+};
