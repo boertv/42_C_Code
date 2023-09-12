@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 18:06:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:58:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define COL_WHITE 16777215
 # define COL_BLACK 0
 # define COL_COPPER 12088115
-# define CHEATS 0
+# define SL_CHEATS 0
 
 # define MAP_ERR_HOLE 1
 # define MAP_ERR_CHAR 2

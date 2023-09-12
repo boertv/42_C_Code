@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 18:01:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:41:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // returns 1 if blocked by wall, if something else updates dir?
 static int	sl_move_check(t_sl_data *data, int x, int y, char dir)
 {
-	if (CHEATS)
+	if (SL_CHEATS)
 		return (0);
 	y -= (dir == DIR_UP);
 	x -= (dir == DIR_LEFT);

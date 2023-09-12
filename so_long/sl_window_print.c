@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 18:21:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:45:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	sl_print_mvs(t_sl_data *data)
 	free(temp);
 }
 
+// fills screen with bgcol and prints msg in txcol
 // if msg == NULL only full window in bgcol is printed
 void	sl_print_fullwin(t_sl_data *data, int bgcol, int txcol, char *msg)
 {
