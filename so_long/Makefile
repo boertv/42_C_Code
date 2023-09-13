@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:06:40 by bvercaem          #+#    #+#              #
-#    Updated: 2023/09/05 17:36:05 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/09/13 18:42:49 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_mlx_init.c \
 					$(SOURCES_WD)sl_map.c \
 					$(SOURCES_WD)sl_window_print.c \
+					$(SOURCES_WD)sl_print_tile.c \
 					$(SOURCES_WD)sl_print_shapes.c \
 					$(SOURCES_WD)sl_print_util.c \
 					$(SOURCES_WD)sl_print_clbl.c \
@@ -145,7 +146,7 @@ re: fclean all
 rebonus : fclean bonus
 
 nameclean:
-	@echo "$(RED)Deleting $(NAME) objects and executable...$(NO_COLOR)"
-	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ) $(NAME) $(BONUS_NAME)
+	@echo "$(RED)Deleting $(NAME) objects...$(NO_COLOR)"
+	@rm -rf $(OBJS) $(BONUS_OBJ) $(MAIN_OBJ) $(BONUS_MAIN_OBJ)
 
 .PHONY: all clean fclean bonus re rebonus nameclean

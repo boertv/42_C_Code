@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/12 17:58:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:30:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_sl_data
 	size_t	map_h;
 	char	**mask_cr;
 	int		plr[3];
+	int		plr_size;
 	int		cords[2];
 	int		mvs;
 	int		clblt;
@@ -96,6 +97,8 @@ void		sl_print_clbl(t_sl_data *data);
 void		sl_print_reset(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
+void		*sl_load_sprite(t_sl_data *data, char *file, char **err);
+void		sl_grow_plr(t_sl_data *data);
 void		sl_clear_sprs(t_sl_data *data);
 
 void		sl_mlx_loop(t_sl_data *data);
@@ -124,6 +127,7 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define KEY_D 2
 # define KEY_R 15
 # define KEY_C 8
+# define KEY_G 5
 # define KEY_CTR 256
 # define KEY_SHFT 257
 # define KEY_TAB 48

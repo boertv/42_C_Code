@@ -6,39 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/12 17:45:37 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:42:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//prints map and mask_cr
-// if -1000 < offset < 1000 it is added to width, else the diff is to height
-int	sl_print_tile(t_sl_data *data, int x, int y, int offset)
-{
-	void	*mlx;
-	int		w;
-	int		h;
-
-	mlx = data->mlx;
-	w = ((x * TILE_WIDTH) + INDENT)
-		+ ((offset <= 1000 && -1000 <= offset) * offset);
-	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
-			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
-	mlx_put_image_to_window(mlx, data->win, data->tex->empty, w, h);
-	if (data->map[y][x] == WALL)
-		mlx_put_image_to_window(mlx, data->win, data->tex->wall, w, h);
-	else if (data->map[y][x] == CLBL_NEW)
-		mlx_put_image_to_window(mlx, data->win, data->tex->clbl_new, w, h);
-	else if (data->map[y][x] == CLBL_OLD)
-		mlx_put_image_to_window(mlx, data->win, data->tex->clbl_old, w, h);
-	else if (data->map[y][x] == EXIT_CLSD)
-		mlx_put_image_to_window(mlx, data->win, data->tex->exit_clsd, w, h);
-	else if (data->map[y][x] == EXIT_OPEN)
-		mlx_put_image_to_window(mlx, data->win, data->tex->exit_open, w, h);
-	sl_print_mask_cr(data, x, y);
-	return (0);
-}
 
 void	sl_print_mvs(t_sl_data *data)
 {
