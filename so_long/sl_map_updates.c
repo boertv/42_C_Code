@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 19:28:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:43:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,8 @@ int	sl_upd_pldir(t_sl_data *data, int x, int y, char dir)
 	return (0);
 }
 
-// destroy, load, change size, print tile
-// if error: calls sl_flush_loop
-void	sl_grow_plr(t_sl_data *data)
+void	sl_loading_plr_growth(t_sl_data *data, char *err)
 {
-	char	*err;
-
-	err = NULL;
-	if (data->plr_size == 64)
-		return ;
-	mlx_destroy_image(data->mlx, data->tex->plr_front);
-	mlx_destroy_image(data->mlx, data->tex->plr_back);
-	mlx_destroy_image(data->mlx, data->tex->plr_left);
-	mlx_destroy_image(data->mlx, data->tex->plr_right);
-	data->tex->plr_front = NULL;
-	data->tex->plr_back = NULL;
-	data->tex->plr_left = NULL;
-	data->tex->plr_right = NULL;
 	if (data->plr_size == 16)
 	{
 		data->tex->plr_front = sl_load_sprite(data, TEX_PLR_FRONT_32, &err);
@@ -93,6 +78,26 @@ void	sl_grow_plr(t_sl_data *data)
 		data->tex->plr_right = sl_load_sprite(data, TEX_PLR_RIGHT_64, &err);
 		data->plr_size = 64;
 	}
+}
+
+// destroy, load, change size, print tile
+// if error: calls sl_flush_loop
+void	sl_grow_plr(t_sl_data *data)
+{
+	char	*err;
+
+	err = NULL;
+	if (data->plr_size == 64)
+		return ;
+	mlx_destroy_image(data->mlx, data->tex->plr_front);
+	mlx_destroy_image(data->mlx, data->tex->plr_back);
+	mlx_destroy_image(data->mlx, data->tex->plr_left);
+	mlx_destroy_image(data->mlx, data->tex->plr_right);
+	data->tex->plr_front = NULL;
+	data->tex->plr_back = NULL;
+	data->tex->plr_left = NULL;
+	data->tex->plr_right = NULL;
+	sl_loading_plr_growth(data, err);
 	if (err)
 	{
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);

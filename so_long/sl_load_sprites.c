@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 19:29:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:51:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,6 @@ static void	sl_init_sprs(t_sl_data *data)
 	data->tex->height = TILE_HEIGHT;
 }
 
-// destroys img if not NULL
-void	sl_clear_sprs(t_sl_data *data)
-{
-	if (data->tex->floor1)
-		mlx_destroy_image(data->mlx, data->tex->floor1);
-	if (data->tex->wall)
-		mlx_destroy_image(data->mlx, data->tex->wall);
-	if (data->tex->wall_ban_r)
-		mlx_destroy_image(data->mlx, data->tex->wall_ban_r);
-	if (data->tex->wall_ban_g)
-		mlx_destroy_image(data->mlx, data->tex->wall_ban_g);
-	if (data->tex->wall_ban_b)
-		mlx_destroy_image(data->mlx, data->tex->wall_ban_b);
-	if (data->tex->wall_ban_y)
-		mlx_destroy_image(data->mlx, data->tex->wall_ban_y);
-	if (data->tex->clbl_new)
-		mlx_destroy_image(data->mlx, data->tex->clbl_new);
-	if (data->tex->clbl_old)
-		mlx_destroy_image(data->mlx, data->tex->clbl_old);
-	if (data->tex->exit_clsd)
-		mlx_destroy_image(data->mlx, data->tex->exit_clsd);
-	if (data->tex->exit_open)
-		mlx_destroy_image(data->mlx, data->tex->exit_open);
-	if (data->tex->plr_front)
-		mlx_destroy_image(data->mlx, data->tex->plr_front);
-	if (data->tex->plr_back)
-		mlx_destroy_image(data->mlx, data->tex->plr_back);
-	if (data->tex->plr_left)
-		mlx_destroy_image(data->mlx, data->tex->plr_left);
-	if (data->tex->plr_right)
-		mlx_destroy_image(data->mlx, data->tex->plr_right);
-}
-
 void	*sl_load_sprite(t_sl_data *data, char *file, char **err)
 {
 	void	*ret;
@@ -81,16 +48,8 @@ void	*sl_load_sprite(t_sl_data *data, char *file, char **err)
 	return (ret);
 }
 
-// returns 1 if malloc or mlx failed, clears first
-int	sl_load_texs(t_sl_data *data)
+static void sl_load_all(t_sl_data *data, char *err)
 {
-	char	*err;
-
-	err = NULL;
-	data->tex = malloc(sizeof(t_tex));
-	if (!data->tex)
-		return (sl_print_errno("t_tex malloc: ", 1));
-	sl_init_sprs(data);
 	data->tex->floor1 = sl_load_sprite(data, TEX_FLOOR1, &err);
 	data->tex->wall = sl_load_sprite(data, TEX_WALL, &err);
 	data->tex->wall_ban_r = sl_load_sprite(data, TEX_BAN_R, &err);
@@ -105,6 +64,19 @@ int	sl_load_texs(t_sl_data *data)
 	data->tex->plr_back = sl_load_sprite(data, TEX_PLR_BACK_16, &err);
 	data->tex->plr_left = sl_load_sprite(data, TEX_PLR_LEFT_16, &err);
 	data->tex->plr_right = sl_load_sprite(data, TEX_PLR_RIGHT_16, &err);
+}
+
+// returns 1 if malloc or mlx failed, clears first
+int	sl_load_texs(t_sl_data *data)
+{
+	char	*err;
+
+	err = NULL;
+	data->tex = malloc(sizeof(t_tex));
+	if (!data->tex)
+		return (sl_print_errno("t_tex malloc: ", 1));
+	sl_init_sprs(data);
+	sl_load_all(data, err);
 	data->plr_size = 16;
 	if (err)
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
