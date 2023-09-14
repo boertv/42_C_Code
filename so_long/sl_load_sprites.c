@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 19:51:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:25:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ static void	sl_init_sprs(t_sl_data *data)
 {
 	data->tex->floor1 = NULL;
 	data->tex->wall = NULL;
-	data->tex->wall_ban_r = NULL;
-	data->tex->wall_ban_g = NULL;
-	data->tex->wall_ban_b = NULL;
-	data->tex->wall_ban_y = NULL;
+	data->tex->roof = NULL;
+	data->tex->wall_clbl = NULL;
+	data->tex->wall_old = NULL;
+	data->tex->ban_r = NULL;
+	data->tex->ban_g = NULL;
+	data->tex->ban_b = NULL;
+	data->tex->ban_y = NULL;
 	data->tex->clbl_new = NULL;
 	data->tex->clbl_old = NULL;
+	data->tex->clbl_base = NULL;
 	data->tex->exit_clsd = NULL;
 	data->tex->exit_open = NULL;
 	data->tex->plr_front = NULL;
@@ -52,12 +56,16 @@ static void sl_load_all(t_sl_data *data, char *err)
 {
 	data->tex->floor1 = sl_load_sprite(data, TEX_FLOOR1, &err);
 	data->tex->wall = sl_load_sprite(data, TEX_WALL, &err);
-	data->tex->wall_ban_r = sl_load_sprite(data, TEX_BAN_R, &err);
-	data->tex->wall_ban_g = sl_load_sprite(data, TEX_BAN_G, &err);
-	data->tex->wall_ban_b = sl_load_sprite(data, TEX_BAN_B, &err);
-	data->tex->wall_ban_y = sl_load_sprite(data, TEX_BAN_Y, &err);
+	data->tex->roof = sl_load_sprite(data, TEX_ROOF, &err);
+	data->tex->wall_clbl = sl_load_sprite(data, TEX_CLBLWALL_NEW, &err);
+	data->tex->wall_old = sl_load_sprite(data, TEX_CLBLWALL_OLD, &err);
+	data->tex->ban_r = sl_load_sprite(data, TEX_BAN_R, &err);
+	data->tex->ban_g = sl_load_sprite(data, TEX_BAN_G, &err);
+	data->tex->ban_b = sl_load_sprite(data, TEX_BAN_B, &err);
+	data->tex->ban_y = sl_load_sprite(data, TEX_BAN_Y, &err);
 	data->tex->clbl_new = sl_load_sprite(data, TEX_CLBL_NEW, &err);
 	data->tex->clbl_old = sl_load_sprite(data, TEX_CLBL_OLD, &err);
+	data->tex->clbl_base = sl_load_sprite(data, TEX_CLBLWALL_FLOOR, &err);
 	data->tex->exit_clsd = sl_load_sprite(data, TEX_EXIT_CLSD, &err);
 	data->tex->exit_open = sl_load_sprite(data, TEX_EXIT_OPEN, &err);
 	data->tex->plr_front = sl_load_sprite(data, TEX_PLR_FRONT_16, &err);
@@ -77,7 +85,6 @@ int	sl_load_texs(t_sl_data *data)
 		return (sl_print_errno("t_tex malloc: ", 1));
 	sl_init_sprs(data);
 	sl_load_all(data, err);
-	data->plr_size = 16;
 	if (err)
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
 	return (1 - (!err));

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 19:49:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 19:50:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:25:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ void	sl_clear_sprs(t_sl_data *data)
 {
 	sl_destroy_ifn_null(data, data->tex->floor1);
 	sl_destroy_ifn_null(data, data->tex->wall);
-	sl_destroy_ifn_null(data, data->tex->wall_ban_r);
-	sl_destroy_ifn_null(data, data->tex->wall_ban_g);
-	sl_destroy_ifn_null(data, data->tex->wall_ban_b);
-	sl_destroy_ifn_null(data, data->tex->wall_ban_y);
+	sl_destroy_ifn_null(data, data->tex->roof);
+	sl_destroy_ifn_null(data, data->tex->wall_clbl);
+	sl_destroy_ifn_null(data, data->tex->wall_old);
+	sl_destroy_ifn_null(data, data->tex->ban_r);
+	sl_destroy_ifn_null(data, data->tex->ban_g);
+	sl_destroy_ifn_null(data, data->tex->ban_b);
+	sl_destroy_ifn_null(data, data->tex->ban_y);
 	sl_destroy_ifn_null(data, data->tex->clbl_new);
 	sl_destroy_ifn_null(data, data->tex->clbl_old);
+	sl_destroy_ifn_null(data, data->tex->clbl_base);
 	sl_destroy_ifn_null(data, data->tex->exit_clsd);
 	sl_destroy_ifn_null(data, data->tex->exit_open);
 	sl_destroy_ifn_null(data, data->tex->plr_front);

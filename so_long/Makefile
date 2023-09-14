@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:06:40 by bvercaem          #+#    #+#              #
-#    Updated: 2023/09/13 19:49:50 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/09/14 17:22:12 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,12 +59,15 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_map.c \
 					$(SOURCES_WD)sl_window_print.c \
 					$(SOURCES_WD)sl_print_tile.c \
+					$(SOURCES_WD)sl_print_cr.c \
+					$(SOURCES_WD)sl_print_wall.c \
 					$(SOURCES_WD)sl_print_shapes.c \
 					$(SOURCES_WD)sl_print_util.c \
 					$(SOURCES_WD)sl_print_clbl.c \
 					$(SOURCES_WD)sl_mlx_loop.c \
 					$(SOURCES_WD)sl_movement.c \
 					$(SOURCES_WD)sl_map_updates.c \
+					$(SOURCES_WD)sl_player_size.c \
 					$(SOURCES_WD)sl_flush.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c

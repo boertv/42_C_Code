@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 19:06:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:57:11 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ typedef struct s_tex
 {
 	void	*floor1;
 	void	*wall;
-	void	*wall_ban_r;
-	void	*wall_ban_g;
-	void	*wall_ban_b;
-	void	*wall_ban_y;
+	void	*roof;
+	void	*wall_clbl;
+	void	*wall_old;
+	void	*ban_r;
+	void	*ban_g;
+	void	*ban_b;
+	void	*ban_y;
 	void	*clbl_new;
 	void	*clbl_old;
+	void	*clbl_base;
 	void	*exit_clsd;
 	void	*exit_open;
 	void	*plr_front;
@@ -35,6 +39,7 @@ typedef struct s_tex
 
 # define TILE_WIDTH 64
 # define TILE_HEIGHT 64
+# define TLS 32
 # define HEAD 45
 # define TAIL 45
 # define SHOULDER 25
@@ -48,6 +53,7 @@ typedef struct s_tex
 /* !!MAKE SURE ALL OF THESE EXIST!! */
 # define TEX_FLOOR1 "./textures/floor_1_32.xpm"
 # define TEX_WALL "./textures/wall_mid_32.xpm"
+# define TEX_ROOF "./textures/roof_broken_64.xpm"
 # define TEX_BAN_R "./textures/wall_banner_red_32.xpm"
 # define TEX_BAN_G "./textures/wall_banner_green_32.xpm"
 # define TEX_BAN_B "./textures/wall_banner_blue_32.xpm"

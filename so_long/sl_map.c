@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 17:47:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:39:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	sl_init_map(t_sl_data *data)
 	data->map[data->plr[1]][data->plr[0]] = EMPTY;
 	data->mask_cr[data->plr[1]][data->plr[0]] = PLAYER;
 	data->plr[2] = FACE_FRONT;
+	data->plr_size = 16;
 	data->mvs = 0;
 	data->clbls = 0;
 	sl_render_map(data);

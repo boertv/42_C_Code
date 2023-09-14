@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 19:30:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:51:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void		sl_print_midtext(t_sl_data *data, char *str, int y, int color);
 void		sl_print_fullwin(t_sl_data *data, int bgcol, int txcol, char *msg);
 void		sl_translate_xy_to_pixel(t_sl_data *data, int x, int y);
 int			sl_print_tile(t_sl_data *data, int x, int y, int offset);
+void		sl_print_wall(t_sl_data *data, int x, int y, int offset);
 int			sl_print_mask_cr(t_sl_data *data, int x, int y);
 void		sl_print_mvs(t_sl_data *data);
 void		sl_print_clbl(t_sl_data *data);
@@ -98,7 +99,8 @@ void		sl_print_reset(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		*sl_load_sprite(t_sl_data *data, char *file, char **err);
-void		sl_grow_plr(t_sl_data *data);
+int			sl_grow_plr(t_sl_data *data);
+int			sl_shrink_plr(t_sl_data *data, int min);
 void		sl_clear_sprs(t_sl_data *data);
 
 void		sl_mlx_loop(t_sl_data *data);
