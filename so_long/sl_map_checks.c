@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 18:12:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:57:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	sl_checks_init(t_sl_data *data, t_sl_map *checks)
 	checks->exit = 0;
 	checks->player = 0;
 	data->clblt = 0;
-	data->map_w = ft_strlen(data->map[0]);
+	data->map_w = (int) ft_strlen(data->map[0]);
 	i = 0;
 	while (data->map[i])
 		i++;
@@ -92,7 +92,7 @@ int	sl_map_check(t_sl_data *data)
 	i = 0;
 	while (data->map[i])
 	{
-		if (ft_strlen(data->map[i]) != data->map_w)
+		if ((int) ft_strlen(data->map[i]) != data->map_w)
 			return (sl_print_msg("map: not a rectangle", 1));
 		if (sl_row_check(data->map[i], i == 0 || !data->map[i + 1],
 				&checks, data) != -1)

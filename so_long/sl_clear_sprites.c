@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 19:49:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 18:25:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:53:21 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	sl_clear_sprs(t_sl_data *data)
 {
 	sl_destroy_ifn_null(data, data->tex->floor1);
 	sl_destroy_ifn_null(data, data->tex->wall);
-	sl_destroy_ifn_null(data, data->tex->roof);
+	sl_destroy_ifn_null(data, data->tex->edge_left);
+	sl_destroy_ifn_null(data, data->tex->edge_right);
+	sl_destroy_ifn_null(data, data->tex->edge_top);
 	sl_destroy_ifn_null(data, data->tex->wall_clbl);
 	sl_destroy_ifn_null(data, data->tex->wall_old);
 	sl_destroy_ifn_null(data, data->tex->ban_r);

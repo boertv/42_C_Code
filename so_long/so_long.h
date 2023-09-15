@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 17:51:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:56:08 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_sl_data
 	int		win_w;
 	int		win_h;
 	char	**map;
-	size_t	map_w;
-	size_t	map_h;
+	int		map_w;
+	int		map_h;
 	char	**mask_cr;
 	int		plr[3];
 	int		plr_size;

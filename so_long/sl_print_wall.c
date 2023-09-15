@@ -6,11 +6,56 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:16:35 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 18:29:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/15 18:03:36 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+// img is put at [w][h] and [w + TLS][h + TLS] depending on which is -
+// if both are negative, it prints all four. if none are -, it prints just one
+static void	sl_put_img(t_sl_data *data, int w, int h, void *img)
+{
+	int	ah;
+	int	aw;
+
+	ah = h;
+	if (ah < 0)
+		ah *= -1;
+	aw = w;
+	if (aw < 0)
+		aw *= -1;
+	if (w < 0 && h < 0)
+		mlx_put_image_to_window(data->mlx, data->win, img, aw + TLS, ah + TLS);
+	mlx_put_image_to_window(data->mlx, data->win, img, aw, ah);
+	if (w < 0)
+		mlx_put_image_to_window(data->mlx, data->win, img, aw + TLS, ah);
+	if (h < 0)
+		mlx_put_image_to_window(data->mlx, data->win, img, aw, ah + TLS);
+}
+
+static void	sl_put_wall_hub(t_sl_data *data, int x, int y, int offset)
+{
+	int		w;
+	int		h;
+
+	w = ((x * TILE_WIDTH) + INDENT)
+		+ ((offset <= 1000 && -1000 <= offset) * offset);
+	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
+			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
+	if (y > 0 && data->map[y - 1][x] != WALL)
+	{
+		sl_put_img(data, -w, h + TLS, data->tex->wall);
+		sl_put_img(data, -w, h, data->tex->floor1);
+		sl_put_img(data, -w, h, data->tex->edge_top);
+	}
+	if (data->map_h < y + 1 && data->map[y + 1][x] != WALL)
+	{
+		sl_put_img(data, -w, h + TLS, data->tex->wall);
+		sl_put_img(data, -w, h, data->tex->edge_top);
+	}
+// print sides too?
+}
 
 static void	sl_put_banner(t_sl_data *data, int x, int y, int offset)
 {
@@ -67,12 +112,7 @@ void	sl_print_wall(t_sl_data *data, int x, int y, int offset)
 		+ ((offset <= 1000 && -1000 <= offset) * offset);
 	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
-	if (data->map_h > (size_t) y + 1 && data->map[y + 1][x] == WALL)
-	{
-		mlx_put_image_to_window(mlx, data->win, data->tex->roof, w, h);
-		return ;
-	}
-	if (data->map_h > (size_t) y + 1 && data->map[y + 1][x] == EMPTY)
+	if (data->map_h > y + 1 && data->map[y + 1][x] == EMPTY)
 		sl_put_banner(data, x, y, offset);
 	else
 	{
@@ -81,7 +121,7 @@ void	sl_print_wall(t_sl_data *data, int x, int y, int offset)
 	}
 	mlx_put_image_to_window(mlx, data->win, data->tex->wall, w, h + TLS);
 	mlx_put_image_to_window(mlx, data->win, data->tex->wall, w + TLS, h + TLS);
-	if (data->map_h > (size_t) y + 1
+	if (data->map_h > y + 1
 		&& (data->map[y + 1][x] == CLBL_NEW || data->map[y + 1][x] == CLBL_OLD))
 		sl_put_wallclbl(data, x, y, offset);
 }

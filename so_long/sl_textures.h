@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 18:57:11 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:51:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ typedef struct s_tex
 {
 	void	*floor1;
 	void	*wall;
-	void	*roof;
+	void	*edge_left;
+	void	*edge_right;
+	void	*edge_top;
 	void	*wall_clbl;
 	void	*wall_old;
 	void	*ban_r;
@@ -53,7 +55,9 @@ typedef struct s_tex
 /* !!MAKE SURE ALL OF THESE EXIST!! */
 # define TEX_FLOOR1 "./textures/floor_1_32.xpm"
 # define TEX_WALL "./textures/wall_mid_32.xpm"
-# define TEX_ROOF "./textures/roof_broken_64.xpm"
+# define TEX_EDGE_L "./textures/wall_edge_left_32.xpm"
+# define TEX_EDGE_R "./textures/wall_edge_right_32.xpm"
+# define TEX_EDGE_T "./textures/wall_edge_top_32.xpm"
 # define TEX_BAN_R "./textures/wall_banner_red_32.xpm"
 # define TEX_BAN_G "./textures/wall_banner_green_32.xpm"
 # define TEX_BAN_B "./textures/wall_banner_blue_32.xpm"
