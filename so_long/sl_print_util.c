@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 18:35:03 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 17:21:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/15 19:41:21 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,26 @@ void	sl_print_midtext(t_sl_data *data, char *str, int y, int color)
 	}
 	if (str)
 		mlx_string_put(data->mlx, data->win, x, y, color, str);
+}
+
+// img is put at [w][h] and [w + TLS][h + TLS] depending on which is -
+// if both are negative, it prints all four. if none are -, it prints just one
+void	sl_put_imgs_tile(t_sl_data *data, int w, int h, void *img)
+{
+	int	ah;
+	int	aw;
+
+	ah = h;
+	if (ah < 0)
+		ah *= -1;
+	aw = w;
+	if (aw < 0)
+		aw *= -1;
+	if (w < 0 && h < 0)
+		mlx_put_image_to_window(data->mlx, data->win, img, aw + TLS, ah + TLS);
+	mlx_put_image_to_window(data->mlx, data->win, img, aw, ah);
+	if (w < 0)
+		mlx_put_image_to_window(data->mlx, data->win, img, aw + TLS, ah);
+	if (h < 0)
+		mlx_put_image_to_window(data->mlx, data->win, img, aw, ah + TLS);
 }

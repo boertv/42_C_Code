@@ -6,32 +6,33 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:16:35 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/15 18:03:36 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/15 19:49:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// img is put at [w][h] and [w + TLS][h + TLS] depending on which is -
-// if both are negative, it prints all four. if none are -, it prints just one
-static void	sl_put_img(t_sl_data *data, int w, int h, void *img)
+static void	sl_put_wall_sides(t_sl_data *data, int x, int y, int offset)
 {
-	int	ah;
-	int	aw;
+	int		w;
+	int		h;
 
-	ah = h;
-	if (ah < 0)
-		ah *= -1;
-	aw = w;
-	if (aw < 0)
-		aw *= -1;
-	if (w < 0 && h < 0)
-		mlx_put_image_to_window(data->mlx, data->win, img, aw + TLS, ah + TLS);
-	mlx_put_image_to_window(data->mlx, data->win, img, aw, ah);
-	if (w < 0)
-		mlx_put_image_to_window(data->mlx, data->win, img, aw + TLS, ah);
-	if (h < 0)
-		mlx_put_image_to_window(data->mlx, data->win, img, aw, ah + TLS);
+	w = ((x * TILE_WIDTH) + INDENT)
+		+ ((offset <= 1000 && -1000 <= offset) * offset);
+	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
+			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
+	if (x > 0 && data->map[y][x - 1] != WALL)
+		sl_put_imgs_tile(data, w, h, data->tex->edge_left);
+	if (data->map_w > x + 1 && data->map[y][x + 1] != WALL)
+		sl_put_imgs_tile(data, w + TLS, h, data->tex->edge_right);
+	if (!(y > 0 && data->map[y - 1][x] != WALL)
+		&& !(data->map_h < y + 1 && data->map[y + 1][x] != WALL))
+	{
+		if (x > 0 && data->map[y][x - 1] != WALL)
+			sl_put_imgs_tile(data, w, h + TLS, data->tex->edge_left);
+		if (data->map_w > x + 1 && data->map[y][x + 1] != WALL)
+			sl_put_imgs_tile(data, w + TLS, h + TLS, data->tex->edge_right);
+	}
 }
 
 static void	sl_put_wall_hub(t_sl_data *data, int x, int y, int offset)
@@ -45,16 +46,16 @@ static void	sl_put_wall_hub(t_sl_data *data, int x, int y, int offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
 	if (y > 0 && data->map[y - 1][x] != WALL)
 	{
-		sl_put_img(data, -w, h + TLS, data->tex->wall);
-		sl_put_img(data, -w, h, data->tex->floor1);
-		sl_put_img(data, -w, h, data->tex->edge_top);
+		sl_put_imgs_tile(data, -w, h + TLS, data->tex->wall);
+		sl_put_imgs_tile(data, -w, h, data->tex->floor1);
+		sl_put_imgs_tile(data, -w, h, data->tex->edge_top);
 	}
-	if (data->map_h < y + 1 && data->map[y + 1][x] != WALL)
+	else if (data->map_h < y + 1 && data->map[y + 1][x] != WALL)
 	{
-		sl_put_img(data, -w, h + TLS, data->tex->wall);
-		sl_put_img(data, -w, h, data->tex->edge_top);
+		sl_put_imgs_tile(data, -w, h + TLS, data->tex->wall);
+		sl_put_imgs_tile(data, -w, h, data->tex->edge_top);
 	}
-// print sides too?
+	sl_put_wall_sides(data, x, y, offset);
 }
 
 static void	sl_put_banner(t_sl_data *data, int x, int y, int offset)
