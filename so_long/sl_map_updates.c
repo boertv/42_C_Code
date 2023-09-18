@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 17:20:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:59:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	sl_upd_plmv(t_sl_data *data, int x, int y)
 
 int	sl_upd_pldir(t_sl_data *data, int x, int y, char dir)
 {
-	if (data->mask_cr[y][x] != PLAYER)
+	if (data->plr[0] != x || data->plr[1] != y)
 		return (1);
 	data->plr[2] = ((dir == DIR_UP) * (FACE_BACK))
 		+ ((dir == DIR_DOWN) * (FACE_FRONT))

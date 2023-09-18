@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/12 15:41:28 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:58:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	sl_move_check(t_sl_data *data, int x, int y, char dir)
 
 static int	sl_move_blocked(t_sl_data *data, int x, int y)
 {
-	if (data->mask_cr[y][x] == PLAYER)
+	if (data->plr[0] == x && data->plr[1] == y)
 		sl_print_tile(data, x, y, 0);
 	sl_print_midtext(data, "You ran into a wall...", -1, COL_WHITE);
 	return (1);
@@ -36,9 +36,9 @@ static int	sl_move_blocked(t_sl_data *data, int x, int y)
 
 static int	sl_move_upd(t_sl_data *data, int x, int y)
 {
-	if (data->mask_cr[y][x] == PLAYER)
+	if (data->plr[0] == x && data->plr[1] == y)
 		sl_upd_plmv(data, x, y);
-	if (data->mask_cr[y][x] == PLAYER && data->map[y][x] == CLBL_NEW)
+	if ((data->plr[0] == x && data->plr[1] == y) && data->map[y][x] == CLBL_NEW)
 		sl_upd_clbl(data, x, y);
 	return (0);
 }
@@ -48,7 +48,7 @@ int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 {
 	char	cr;
 
-	if (data->mask_cr[*y][*x] == PLAYER)
+	if (data->plr[0] == *x && data->plr[1] == *y)
 		sl_print_midtext(data, NULL, -1, 0);
 	sl_upd_pldir(data, *x, *y, dir);
 	if (sl_move_check(data, *x, *y, dir))

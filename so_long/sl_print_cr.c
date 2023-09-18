@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:21:41 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 17:40:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:03:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	sl_print_plr(t_sl_data *data, int w, int h)
 	mlx_put_image_to_window(data->mlx, data->win, img, w, h);
 }
 
+// prints the cr and/or player on [x][y]
 int	sl_print_mask_cr(t_sl_data *data, int x, int y)
 {
 	int		w;
@@ -41,7 +42,7 @@ int	sl_print_mask_cr(t_sl_data *data, int x, int y)
 
 	w = (x * TILE_WIDTH) + INDENT;
 	h = (y * TILE_HEIGHT) + HEAD;
-	if (data->mask_cr[y][x] == PLAYER)
+	if (data->plr[0] == x && data->plr[1] == y)
 		sl_print_plr(data, w, h);
 	else
 		return (1);
