@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/18 15:59:42 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:19:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	sl_upd_plmv(t_sl_data *data, int x, int y)
 	(data->mvs)++;
 	sl_print_mvs(data);
 	if (data->map[y][x] == EXIT_OPEN)
-		sl_flush_loop(data);
+		sl_victory_screen(data);
 	return (0);
 }
 
