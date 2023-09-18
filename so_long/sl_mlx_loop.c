@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 19:27:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:51:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	sl_key_hook_hub(int key, t_sl_data *data)
+static int	sl_key_hook_hub(int key, t_sl_data *data)
 {
 	if (key == KEY_ESC)
 		sl_flush_loop(data);
@@ -41,9 +41,31 @@ int	sl_key_hook_hub(int key, t_sl_data *data)
 	return (0);
 }
 
+static void	sl_timed_loop(t_sl_data *data)
+{
+	static int	time = 0;
+	char		*bin;
+
+// testing this thing out..
+	time++;
+	data->cords[0] = 0;
+	data->cords[1] = 0;
+	sl_print_rectangle(data, 50, 22, 0);
+	bin = ft_itoa(time);
+	mlx_string_put(data->mlx, data->win, 0, 0, COL_WHITE, bin);
+	free(bin);
+	if (time == 1000)
+	{
+		time = 0;
+		sl_print_midtext(data, NULL, -1, 0);
+		sl_print_midtext(data, "looped a 1000 times :o", -1, sl_create_color(0, 0, 255));
+	}
+}
+
 void	sl_mlx_loop(t_sl_data *data)
 {
 	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
 	mlx_hook(data->win, 17, 0, sl_flush_loop, (void *) data);
+	mlx_loop_hook(data->mlx, sl_timed_loop, (void *) data);
 	mlx_loop(data->mlx);
 }

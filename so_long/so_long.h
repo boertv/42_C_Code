@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/18 17:18:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:40:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int			sl_shrink_plr(t_sl_data *data, int min);
 void		sl_clear_sprs(t_sl_data *data);
 
 void		sl_mlx_loop(t_sl_data *data);
-int			sl_key_hook_hub(int key, t_sl_data *data);
 int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
 int			sl_upd_clbl(t_sl_data *data, int x, int y);
 int			sl_upd_pldir(t_sl_data *data, int x, int y, char dir);
