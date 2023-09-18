@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:16:35 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/15 19:49:37 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:51:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ static void	sl_put_banner(t_sl_data *data, int x, int y, int offset)
 		mlx_put_image_to_window(m, data->win, data->tex->ban_b, w, h);
 		mlx_put_image_to_window(m, data->win, data->tex->ban_y, w + TLS, h);
 	}
+	if (y > 0 || HEAD >= TLS)
+		sl_put_imgs_tile(data, -w, h - TLS, data->tex->edge_top);
 }
 
 static void	sl_put_wallclbl(t_sl_data *data, int x, int y, int offset)
@@ -104,24 +106,12 @@ static void	sl_put_wallclbl(t_sl_data *data, int x, int y, int offset)
 
 void	sl_print_wall(t_sl_data *data, int x, int y, int offset)
 {
-	void	*mlx;
-	int		w;
-	int		h;
-
-	mlx = data->mlx;
-	w = ((x * TILE_WIDTH) + INDENT)
-		+ ((offset <= 1000 && -1000 <= offset) * offset);
-	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
-			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
-	if (data->map_h > y + 1 && data->map[y + 1][x] == EMPTY)
+	sl_put_wall_hub(data, x, y, offset);
+	if (data->map_h > y + 1 && x > 0 && data->map_w > x + 1
+		&& data->map[y + 1][x] == EMPTY && data->map[y][x + 1] == WALL
+		&& data->map[y + 1][x + 1] != WALL && data->map[y][x - 1] == WALL
+		&& data->map[y + 1][x - 1] != WALL)
 		sl_put_banner(data, x, y, offset);
-	else
-	{
-		mlx_put_image_to_window(mlx, data->win, data->tex->wall, w, h);
-		mlx_put_image_to_window(mlx, data->win, data->tex->wall, w + TLS, h);
-	}
-	mlx_put_image_to_window(mlx, data->win, data->tex->wall, w, h + TLS);
-	mlx_put_image_to_window(mlx, data->win, data->tex->wall, w + TLS, h + TLS);
 	if (data->map_h > y + 1
 		&& (data->map[y + 1][x] == CLBL_NEW || data->map[y + 1][x] == CLBL_OLD))
 		sl_put_wallclbl(data, x, y, offset);
