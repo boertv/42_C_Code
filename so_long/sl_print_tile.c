@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 15:58:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:02:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,17 @@ int	sl_print_tile(t_sl_data *data, int x, int y, int offset)
 		+ ((offset <= 1000 && -1000 <= offset) * offset);
 	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
-	if (data->map[y][x] == EMPTY || data->map[y][x] == CLBL_NEW
-		|| data->map[y][x] == CLBL_OLD)
+	if (data->map[y][x] != WALL)
 		sl_print_floor(data, x, y, offset);
+	if (data->map[y][x] == CLBL_NEW || data->map[y][x] == CLBL_OLD)
+		sl_put_floorclbl(data, x, y, offset);
 	if (data->map[y][x] == WALL)
 		sl_print_wall(data, x, y, offset);
-	else if (data->map[y][x] == CLBL_NEW || data->map[y][x] == CLBL_OLD)
-		sl_put_floorclbl(data, x, y, offset);
-	else if (data->map[y][x] == EXIT_CLSD)
+	else
+		sl_put_wall_sides(data, x, y, offset);
+	if (data->map[y][x] == EXIT_CLSD)
 		mlx_put_image_to_window(mlx, data->win, data->tex->exit_clsd, w, h);
-	else if (data->map[y][x] == EXIT_OPEN)
+	if (data->map[y][x] == EXIT_OPEN)
 		mlx_put_image_to_window(mlx, data->win, data->tex->exit_open, w, h);
 	sl_print_mask_cr(data, x, y);
 	return (0);

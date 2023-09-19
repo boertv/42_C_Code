@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/15 17:53:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:02:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ static void	sl_init_sprs(t_sl_data *data)
 {
 	data->tex->floor1 = NULL;
 	data->tex->wall = NULL;
-	data->tex->edge_left = NULL;
-	data->tex->edge_right = NULL;
-	data->tex->edge_top = NULL;
 	data->tex->wall_clbl = NULL;
 	data->tex->wall_old = NULL;
 	data->tex->ban_r = NULL;
@@ -58,9 +55,6 @@ static void	sl_load_all(t_sl_data *data, char *err)
 {
 	data->tex->floor1 = sl_load_sprite(data, TEX_FLOOR1, &err);
 	data->tex->wall = sl_load_sprite(data, TEX_WALL, &err);
-	data->tex->edge_left = sl_load_sprite(data, TEX_EDGE_L, &err);
-	data->tex->edge_right = sl_load_sprite(data, TEX_EDGE_R, &err);
-	data->tex->edge_top = sl_load_sprite(data, TEX_EDGE_T, &err);
 	data->tex->wall_clbl = sl_load_sprite(data, TEX_CLBLWALL_NEW, &err);
 	data->tex->wall_old = sl_load_sprite(data, TEX_CLBLWALL_OLD, &err);
 	data->tex->ban_r = sl_load_sprite(data, TEX_BAN_R, &err);

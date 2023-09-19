@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/18 15:58:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:40:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,21 @@ static int	sl_move_upd(t_sl_data *data, int x, int y)
 int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 {
 	char	cr;
+	int		oldx;
+	int		oldy;
 
-	if (data->plr[0] == *x && data->plr[1] == *y)
-		sl_print_midtext(data, NULL, -1, 0);
+	oldx = *x;
+	oldy = *y;
 	sl_upd_pldir(data, *x, *y, dir);
 	if (sl_move_check(data, *x, *y, dir))
 		return (sl_move_blocked(data, *x, *y));
 	cr = data->mask_cr[*y][*x];
 	data->mask_cr[*y][*x] = '0';
-	sl_print_tile(data, *x, *y, 0);
 	*y -= (dir == DIR_UP);
 	*x -= (dir == DIR_LEFT);
 	*y += (dir == DIR_DOWN);
 	*x += (dir == DIR_RIGHT);
+	sl_print_tile(data, oldx, oldy, 0);
 	data->mask_cr[*y][*x] = cr;
 	sl_move_upd(data, *x, *y);
 	sl_print_tile(data, *x, *y, 0);

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:18:20 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/18 17:16:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:20:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	sl_put_victory_screen(t_sl_data *data)
 {
-	char	msg;
-	char	bin1;
-	char	bin2;
+	char	*msg;
+	char	*bin1;
+	char	*bin2;
 
 	sl_print_fullwin(data, data->plr[0], 0, NULL);
 	sl_print_midtext(data, "VICTORY!", data->win_h / 2 - 44, COL_COPPER);
@@ -41,9 +41,9 @@ static void	sl_put_victory_screen(t_sl_data *data)
 
 static void	sl_put_death_screen(t_sl_data *data)
 {
-	char	msg;
-	char	bin1;
-	char	bin2;
+	char	*msg;
+	char	*bin1;
+	char	*bin2;
 
 	sl_print_fullwin(data, data->plr[0], 0, NULL);
 	sl_print_midtext(data, "YOU DIED!", data->win_h / 2 - 44, COL_COPPER);
@@ -66,20 +66,20 @@ static void	sl_put_death_screen(t_sl_data *data)
 		data->cords[1], COL_WHITE, "->");
 }
 
-static void	sl_end_hook(int key, t_sl_data *data)
+static int	sl_end_hook(int key, t_sl_data *data)
 {
 	if (key == KEY_ESC)
 		sl_flush_loop(data);
 	else if (key == KEY_W || key == KEY_UP)
 	{
-		data->plr[2] == 1;
+		data->plr[2] = 1;
 		sl_print_rectangle(data, 20, 46, data->plr[0]);
 		mlx_string_put(data->mlx, data->win, data->cords[0],
 			data->cords[1], COL_WHITE, "->");
 	}
 	else if (key == KEY_S || key == KEY_DOWN)
 	{
-		data->plr[2] == 2;
+		data->plr[2] = 2;
 		sl_print_rectangle(data, 20, 46, data->plr[0]);
 		mlx_string_put(data->mlx, data->win, data->cords[0],
 			data->cords[1] + 24, COL_WHITE, "->");
@@ -91,6 +91,7 @@ static void	sl_end_hook(int key, t_sl_data *data)
 		if (data->plr[2] == 2)
 			sl_reset(data);
 	}
+	return (0);
 }
 
 // overwrites data->plr to keep track of bg_col and selected option
