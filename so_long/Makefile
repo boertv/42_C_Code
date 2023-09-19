@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:06:40 by bvercaem          #+#    #+#              #
-#    Updated: 2023/09/18 16:19:51 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/09/19 16:34:02 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_clear_sprites.c \
 					$(SOURCES_WD)sl_mlx_init.c \
 					$(SOURCES_WD)sl_map.c \
+					$(SOURCES_WD)sl_map_util.c \
 					$(SOURCES_WD)sl_window_print.c \
 					$(SOURCES_WD)sl_print_tile.c \
 					$(SOURCES_WD)sl_print_cr.c \

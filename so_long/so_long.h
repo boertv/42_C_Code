@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/18 19:40:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:33:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			sl_init_map(t_sl_data *data);
 int			sl_render_map(t_sl_data *data);
 void		sl_print_game_frame(t_sl_data *data, int color);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
+char		sl_neighbour(t_sl_data *data, int x, int y, int dir);
 int			sl_create_color(int r, int g, int b);
 int			sl_print_rectangle(t_sl_data *data, int w, int h, int color);
 void		sl_print_frame(t_sl_data *data, int w, int h, int color);
