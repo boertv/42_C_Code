@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:16:35 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 16:03:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:57:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	sl_put_banner(t_sl_data *data, int x, int y, int offset)
 	m = data->mlx;
 	w = ((x * TILE_WIDTH) + INDENT)
 		+ ((offset <= 1000 && -1000 <= offset) * offset);
-	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
+	h = TLS + ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
 	if (x % 2 == 0)
 	{
@@ -44,15 +44,22 @@ static void	sl_put_wall_hub(t_sl_data *data, int x, int y, int offset)
 		+ ((offset <= 1000 && -1000 <= offset) * offset);
 	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
-	if (data->map_h > y + 1 && data->map[y + 1][x] != WALL)
-	{
-		sl_put_imgs_tile(data, -w, h + TLS, data->tex->wall);
-		sl_put_banner(data, x, y, offset);
-	}
-	else if (y > 0 && data->map[y - 1][x] != WALL)
-	{
+	if (sl_neighbour(data, x, y, 8) && sl_neighbour(data, x, y, 8) != WALL)
 		sl_put_imgs_tile(data, -w, h, data->tex->wall);
-	}
+	if (sl_neighbour(data, x, y, 9) && sl_neighbour(data, x, y, 9) != WALL)
+		sl_put_imgs_tile(data, w + TLS, h, data->tex->wall);
+	if (sl_neighbour(data, x, y, 6) && sl_neighbour(data, x, y, 6) != WALL)
+		sl_put_imgs_tile(data, w + TLS, -h, data->tex->wall);
+	if (sl_neighbour(data, x, y, 3) && sl_neighbour(data, x, y, 3) != WALL)
+		sl_put_imgs_tile(data, w + TLS, h + TLS, data->tex->wall);
+	if (sl_neighbour(data, x, y, 2) && sl_neighbour(data, x, y, 2) != WALL)
+		sl_put_imgs_tile(data, -w, h + TLS, data->tex->wall);
+	if (sl_neighbour(data, x, y, 1) && sl_neighbour(data, x, y, 1) != WALL)
+		sl_put_imgs_tile(data, w, h + TLS, data->tex->wall);
+	if (sl_neighbour(data, x, y, 4) && sl_neighbour(data, x, y, 4) != WALL)
+		sl_put_imgs_tile(data, w, -h, data->tex->wall);
+	if (sl_neighbour(data, x, y, 7) && sl_neighbour(data, x, y, 7) != WALL)
+		sl_put_imgs_tile(data, w, h, data->tex->wall);
 }
 
 static void	sl_put_wallclbl(t_sl_data *data, int x, int y, int offset)
@@ -79,7 +86,9 @@ static void	sl_put_wallclbl(t_sl_data *data, int x, int y, int offset)
 void	sl_print_wall(t_sl_data *data, int x, int y, int offset)
 {
 	sl_put_wall_hub(data, x, y, offset);
-	if (data->map_h > y + 1
-		&& (data->map[y + 1][x] == CLBL_NEW || data->map[y + 1][x] == CLBL_OLD))
+	if (sl_neighbour(data, x, y, 2) && sl_neighbour(data, x, y, 2) != WALL)
+		sl_put_banner(data, x, y, offset);
+	if (sl_neighbour(data, x, y, 2) == CLBL_NEW
+		|| sl_neighbour(data, x, y, 2) == CLBL_OLD)
 		sl_put_wallclbl(data, x, y, offset);
 }

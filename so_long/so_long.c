@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 18:14:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:59:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int	main(int ac, char *av[])
 	if (sl_init_map(&data))
 		return (1);
 	sl_mlx_loop(&data);
+	// READ COMMENTS BEFORE PUSHING
 }
 
 // MAKE SURE CHEATS IS OFF
+// MAKE SURE MAKEFILE CFLAG IS STANDARD
 
 //stuff to free;
 //	- map
