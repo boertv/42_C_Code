@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 16:33:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:17:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ typedef struct s_sl_data
 	char	**mask_cr;
 	int		plr[3];
 	int		plr_size;
-	int		cords[2];
 	int		mvs;
 	int		clblt;
 	int		clbls;
+	int		cords[2];
+	int		end[2];
 	t_tex	*tex;
 	char	*map_file;
 }			t_sl_data;
@@ -106,6 +107,7 @@ int			sl_shrink_plr(t_sl_data *data, int min);
 void		sl_clear_sprs(t_sl_data *data);
 
 void		sl_mlx_loop(t_sl_data *data);
+int			sl_key_hook_hub(int key, t_sl_data *data);
 int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
 int			sl_upd_clbl(t_sl_data *data, int x, int y);
 int			sl_upd_pldir(t_sl_data *data, int x, int y, char dir);
@@ -154,7 +156,14 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define DIR_RIGHT 'r'
 
 # define MAP_CHARS "01PCE"
+# define BG_COL 3289650
 # define COL_WHITE 16777215
+# define COL_GREY 9868950
+# define COL_DGREY 9868950
+# define COL_GREEN 6597170
+# define COL_DGREEN 3302410
+# define COL_RED 13120030
+# define COL_DRED 9838080
 # define COL_BLACK 0
 # define COL_COPPER 12088115
 # define SL_CHEATS 0

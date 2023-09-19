@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 18:35:03 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/15 19:41:21 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:12:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sl_print_midtext(t_sl_data *data, char *str, int y, int color)
 		{
 			data->cords[0] = INDENT;
 			data->cords[1] = data->win_h - TAIL + 1;
-			sl_print_rectangle(data, data->win_w - INDENT - HEAD, 23, 0);
+			sl_print_rectangle(data, data->win_w - INDENT - HEAD, 23, BG_COL);
 			y = data->win_h - TAIL + 2;
 		}
 		else

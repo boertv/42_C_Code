@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/18 16:00:08 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:17:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ int	sl_render_map(t_sl_data *data)
 	int	x;
 	int	y;
 
+	data->cords[0] = 0;
+	data->cords[1] = 0;
+	sl_print_rectangle(data, data->win_w, data->win_h, BG_COL);
 	y = 0;
 	while (data->map[y])
 	{

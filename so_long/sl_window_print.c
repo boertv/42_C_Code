@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/13 18:42:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:07:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sl_print_mvs(t_sl_data *data)
 	{
 		data->cords[0] = 5 + INDENT;
 		data->cords[1] = HEAD - 23;
-		sl_print_rectangle(data, 32, 22, COL_BLACK);
+		sl_print_rectangle(data, 32, 22, BG_COL);
 		mlx_string_put(data->mlx, data->win, data->cords[0], data->cords[1],
 			COL_COPPER, temp);
 		free(temp);
@@ -60,14 +60,14 @@ void	sl_print_reset(t_sl_data *data)
 	{
 		data->cords[0] = data->win_w - SHOULDER - 2 - (10 * 9);
 		data->cords[1] = HEAD - 22;
-		sl_print_rectangle(data, 2 + (10 * 9), 22, COL_BLACK);
+		sl_print_rectangle(data, 2 + (10 * 9), 22, BG_COL);
 		mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER
 			- 2 - (10 * 9), HEAD - 22, COL_COPPER, "reset 'r'");
 		return ;
 	}
 	data->cords[0] = data->win_w - SHOULDER - 2 - (10 * 3);
 	data->cords[1] = HEAD - 22;
-	sl_print_rectangle(data, 2 + (10 * 3), 22, COL_BLACK);
+	sl_print_rectangle(data, 2 + (10 * 3), 22, BG_COL);
 	mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER - 2 - (10 * 3),
 		HEAD - 22, COL_COPPER, "'r'");
 }

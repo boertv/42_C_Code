@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:42:43 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/12 17:57:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:11:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ static void	sl_print_clbl_head(t_sl_data *data)
 
 	print = ft_itoa(data->clblt);
 	data->cords[0] = (data->win_w / 2) - 38;
-	data->cords[1] = HEAD - 25;
-	sl_print_rectangle(data, 78, 22, COL_BLACK);
-	data->cords[1] += 2;
+	data->cords[1] = HEAD - 23;
+	sl_print_rectangle(data, 78, 21, BG_COL);
 	sl_print_frame(data, 20078, 21, COL_COPPER);
 	data->cords[0] += 2;
 	data->cords[1] += 2;
@@ -40,7 +39,6 @@ static void	sl_print_clbl_head(t_sl_data *data)
 	mlx_string_put(data->mlx, data->win, (data->win_w / 2)
 		- (6 + (ft_strlen(print) * 10)), HEAD - 24, COL_COPPER, print);
 	free(print);
-	return ;
 }
 
 static void	sl_print_clbl_nohead(t_sl_data *data)
