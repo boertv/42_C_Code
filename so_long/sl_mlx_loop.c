@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:11:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:40:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,34 @@ int	sl_key_hook_hub(int key, t_sl_data *data)
 	return (0);
 }
 
-int	sl_limp_loop(t_sl_data *data)
+// doesn't do anything rn, also seems to loop way faster than timed_loop
+int	sl_end_loop(t_sl_data *data)
 {
-	(void)data;
+	data->time++;
+	if (data->time >= 1000000)
+		data->time = 0;
 	return (0);
 }
 
 int	sl_timed_loop(t_sl_data *data)
 {
-	static int	time = 0;
 	char		*bin;
 
-// testing this thing out..
-	time++;
+	data->time++;
 	data->cords[0] = 0;
 	data->cords[1] = 0;
 	sl_print_rectangle(data, 50, 22, 0);
-	bin = ft_itoa(time);
+	bin = ft_itoa(data->time);
 	mlx_string_put(data->mlx, data->win, 0, 0, COL_WHITE, bin);
 	free(bin);
-	if (time == 1000000)
-		time = 0;
+	if (data->time >= 1000000)
+		data->time = 0;
 	return (0);
 }
 
 void	sl_mlx_loop(t_sl_data *data)
 {
+	data->time = 0;
 	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
 	mlx_hook(data->win, 17, 0, sl_flush_loop, (void *) data);
 	mlx_loop_hook(data->mlx, sl_timed_loop, (void *) data);

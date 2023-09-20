@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:17:11 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:35:17 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,20 @@ void	sl_print_reset(t_sl_data *data)
 		HEAD - 22, UI_COL, "'r'");
 }
 
+// returns data->cords to original values
 void	sl_print_game_frame(t_sl_data *data, int color)
 {
+	int	oldx;
+	int	oldy;
+
+	oldx = data->cords[0];
+	oldy = data->cords[1];
 	if (HEAD < 33 || TAIL < 33 || INDENT < 8 || SHOULDER < 8)
 		return ;
 	data->cords[0] = INDENT - 8;
 	data->cords[1] = HEAD - 31;
 	sl_print_frame(data, 50016 + data->win_w - SHOULDER - INDENT,
 		62 + data->win_h - HEAD - TAIL, color);
+	data->cords[0] = oldx;
+	data->cords[1] = oldy;
 }

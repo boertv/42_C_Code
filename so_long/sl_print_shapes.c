@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:35:34 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/05 17:36:32 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:57:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// cords provided in data->cords[2]:[x,y]
+// cords provided in data->cords[2]:[x,y] | resets them after use
 // framewidth specified in -0000, total width in 0----
 void	sl_print_frame(t_sl_data *data, int w, int h, int color)
 {

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:20:46 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:15:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_sl_data
 	int		clblt;
 	int		clbls;
 	int		cords[2];
+	int		time;
 	int		end[2];
 	t_tex	*tex;
 	char	*map_file;
@@ -109,7 +110,8 @@ void		sl_clear_sprs(t_sl_data *data);
 void		sl_mlx_loop(t_sl_data *data);
 int			sl_key_hook_hub(int key, t_sl_data *data);
 int			sl_timed_loop(t_sl_data *data);
-int			sl_limp_loop(t_sl_data *data);
+int			sl_end_hook(int key, t_sl_data *data);
+int			sl_end_loop(t_sl_data *data);
 int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
 int			sl_upd_clbl(t_sl_data *data, int x, int y);
 int			sl_upd_pldir(t_sl_data *data, int x, int y, char dir);

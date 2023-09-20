@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:06:40 by bvercaem          #+#    #+#              #
-#    Updated: 2023/09/19 16:34:02 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/09/20 15:12:13 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS			=	$(SOURCES_WD)sl_error.c \
 					$(SOURCES_WD)sl_map_updates.c \
 					$(SOURCES_WD)sl_player_size.c \
 					$(SOURCES_WD)sl_end_screen.c \
+					$(SOURCES_WD)sl_end_hook.c \
 					$(SOURCES_WD)sl_flush.c \
 
 BONUS_SRC		=	$(BONUS_WD)___ _bonus.c
