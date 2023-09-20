@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:04:48 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:04:13 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 		{
 			data->map[exit_y][exit_x] = EXIT_OPEN;
 			sl_print_midtext(data, "The exit opened!", -1, COL_WHITE);
+			data->msgtimer = 150;
 			sl_print_tile(data, exit_x, exit_y, 0);
 		}
 	}

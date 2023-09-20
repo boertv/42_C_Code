@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 15:39:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:56:36 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct s_sl_data
 	int		clblt;
 	int		clbls;
 	int		cords[2];
-	int		time;
+	int		clock;
+	int		msgtimer;
 	int		end[2];
 	t_tex	*tex;
 	char	*map_file;

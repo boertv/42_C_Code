@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sl_end_hook.c                                      :+:      :+:    :+:   */
+/*   sl_end_loops.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:11:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 15:39:20 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:56:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,14 @@ int	sl_end_hook(int key, t_sl_data *data)
 		data->end[1] = 2;
 	if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN)
 		sl_put_answer_indicator(data, data->end[1]);
+	return (0);
+}
+
+// doesn't do anything rn, also seems to loop way faster than timed_loop
+int	sl_end_loop(t_sl_data *data)
+{
+	data->clock++;
+	if (data->clock >= 1000000)
+		data->clock = 0;
 	return (0);
 }
