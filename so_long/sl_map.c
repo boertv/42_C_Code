@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:12:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:45:49 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	sl_render_map(t_sl_data *data)
 static char	**sl_create_mask(t_sl_data *data)
 {
 	char	**new;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	new = malloc (sizeof(char *) * (data->map_h + 1));
 	if (!new)

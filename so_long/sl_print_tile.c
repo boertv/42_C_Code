@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 17:41:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:44:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	sl_print_floor(t_sl_data *data, int x, int y, int offset)
 	mlx_put_image_to_window(data->mlx, data->win, img, w, h);
 	mlx_put_image_to_window(data->mlx, data->win, img, w, h + TLS);
 	mlx_put_image_to_window(data->mlx, data->win, img, w + TLS, h + TLS);
-	if (sl_getnb(data, x, y, 8) == WALL	&& sl_getnb(data, x, y, 6) == WALL)
+	if (sl_getnb(data, x, y, 8) == WALL && sl_getnb(data, x, y, 6) == WALL)
 		if ((x + y) % 4 != 1)
 			img = data->tex->floor5;
 	mlx_put_image_to_window(data->mlx, data->win, img, w + TLS, h);
@@ -60,7 +60,8 @@ void	sl_print_floor(t_sl_data *data, int x, int y, int offset)
 		mlx_put_image_to_window(data->mlx, data->win, data->tex->floor4,
 			w, h + (((x + y) % 3 == 1) * TLS));
 	if ((x * y) % 5 == 1)
-		mlx_put_image_to_window(data->mlx, data->win, data->tex->floor3, w + TLS, h + TLS);
+		mlx_put_image_to_window(data->mlx, data->win, data->tex->floor3,
+			w + TLS, h + TLS);
 }
 
 //prints map and mask_cr
