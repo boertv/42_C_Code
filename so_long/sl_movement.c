@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 17:22:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:05:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ static int	sl_move_blocked(t_sl_data *data, int x, int y)
 	return (1);
 }
 
+// returns 1 when game ends
 static int	sl_move_upd(t_sl_data *data, int x, int y)
 {
 	if (data->plr[0] == x && data->plr[1] == y)
-		sl_upd_plmv(data, x, y);
+		if (sl_upd_plmv(data, x, y))
+			return (1);
 	if ((data->plr[0] == x && data->plr[1] == y) && data->map[y][x] == CLBL_NEW)
 		sl_upd_clbl(data, x, y);
 	return (0);
@@ -74,7 +76,7 @@ int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 		data->mask_cr[*y][*x] = cr;
 	}
 	sl_print_tile(data, oldx, oldy, 0);
-	sl_print_tile(data, *x, *y, 0);
-	sl_move_upd(data, *x, *y);
+	if (!sl_move_upd(data, *x, *y))
+		sl_print_tile(data, *x, *y, 0);
 	return (0);
 }

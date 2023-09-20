@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 16:41:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:18:45 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static void	sl_put_floorclbl(t_sl_data *data, int x, int y, int offset)
 		+ ((offset <= 1000 && -1000 <= offset) * offset);
 	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
-	if (data->map[y][x] == CLBL_NEW)
-		img = data->tex->clbl_base;
-	else if (data->map[y][x] == CLBL_OLD)
-		img = data->tex->floor1;
+	img = data->tex->clbl_base;
 	if (sl_neighbour(data, x, y, 8) != WALL)
 	{
 		if (data->map[y][x] == CLBL_NEW)

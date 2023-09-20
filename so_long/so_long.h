@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 18:17:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:20:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int			sl_render_map(t_sl_data *data);
 void		sl_print_game_frame(t_sl_data *data, int color);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
 char		sl_neighbour(t_sl_data *data, int x, int y, int dir);
-int			sl_create_color(int r, int g, int b);
+int			sl_create_color(int t, int r, int g, int b);
 int			sl_print_rectangle(t_sl_data *data, int w, int h, int color);
 void		sl_print_frame(t_sl_data *data, int w, int h, int color);
 void		sl_print_midtext(t_sl_data *data, char *str, int y, int color);
@@ -108,6 +108,8 @@ void		sl_clear_sprs(t_sl_data *data);
 
 void		sl_mlx_loop(t_sl_data *data);
 int			sl_key_hook_hub(int key, t_sl_data *data);
+int			sl_timed_loop(t_sl_data *data);
+int			sl_limp_loop(t_sl_data *data);
 int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
 int			sl_upd_clbl(t_sl_data *data, int x, int y);
 int			sl_upd_pldir(t_sl_data *data, int x, int y, char dir);
@@ -156,13 +158,17 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define DIR_RIGHT 'r'
 
 # define MAP_CHARS "01PCE"
-# define BG_COL 3289650
+# define BG_COL 5914940
+# define CLBL_COL 3302410
+# define VICS_COL 1681036820
+# define UI_COL 6597170
 # define COL_WHITE 16777215
-# define COL_GREY 9868950
+# define COL_GREY 5263440
 # define COL_DGREY 9868950
 # define COL_GREEN 6597170
 # define COL_DGREEN 3302410
 # define COL_RED 13120030
+# define COL_LRED 9843250
 # define COL_DRED 9838080
 # define COL_BLACK 0
 # define COL_COPPER 12088115

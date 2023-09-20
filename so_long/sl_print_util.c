@@ -6,19 +6,19 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 18:35:03 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 18:12:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:22:02 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // takes values between 0 - 255
-int	sl_create_color(int r, int g, int b)
+int	sl_create_color(int t, int r, int g, int b)
 {
-	if (r < 0 || r > 255
+	if (t < 0 || t > 255 || r < 0 || r > 255
 		|| g < 0 || g > 255 || b < 0 || b > 255)
 		return (0);
-	return (r << 16 | g << 8 | b);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 // translates and puts values in data->cords[2]

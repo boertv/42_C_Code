@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 17:44:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:11:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,25 @@ int	sl_key_hook_hub(int key, t_sl_data *data)
 	return (0);
 }
 
-static int	sl_timed_loop(t_sl_data *data)
+int	sl_limp_loop(t_sl_data *data)
+{
+	(void)data;
+	return (0);
+}
+
+int	sl_timed_loop(t_sl_data *data)
 {
 	static int	time = 0;
 	char		*bin;
 
-	(void)data;
-	(void)bin;
 // testing this thing out..
 	time++;
-	// data->cords[0] = 0;
-	// data->cords[1] = 0;
-	// sl_print_rectangle(data, 50, 22, 0);
-	// bin = ft_itoa(time);
-	// mlx_string_put(data->mlx, data->win, 0, 0, COL_WHITE, bin);
-	// free(bin);
+	data->cords[0] = 0;
+	data->cords[1] = 0;
+	sl_print_rectangle(data, 50, 22, 0);
+	bin = ft_itoa(time);
+	mlx_string_put(data->mlx, data->win, 0, 0, COL_WHITE, bin);
+	free(bin);
 	if (time == 1000000)
 		time = 0;
 	return (0);

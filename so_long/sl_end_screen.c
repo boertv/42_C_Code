@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:18:20 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 18:03:20 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:40:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,13 @@ static int	sl_end_hook(int key, t_sl_data *data)
 
 void	sl_victory_screen(t_sl_data *data)
 {
-	data->end[0] = COL_DGREEN;
+	data->end[0] = VICS_COL;
 	data->end[1] = 1;
 	data->cords[0] = data->win_w / 2 - 45;
 	data->cords[1] = data->win_h / 2 + 8;
-	sl_put_victory_screen(data);
 	mlx_key_hook(data->win, sl_end_hook, (void *) data);
+	mlx_loop_hook(data->mlx, sl_limp_loop, (void *) data);
+	sl_put_victory_screen(data);
 }
 
 void	sl_death_screen(t_sl_data *data)
@@ -114,6 +115,7 @@ void	sl_death_screen(t_sl_data *data)
 	data->end[1] = 1;
 	data->cords[0] = data->win_w / 2 - 40;
 	data->cords[1] = data->win_h / 2 + 8;
-	sl_put_death_screen(data);
 	mlx_key_hook(data->win, sl_end_hook, (void *) data);
+	mlx_loop_hook(data->mlx, sl_limp_loop, (void *) data);
+	sl_put_death_screen(data);
 }

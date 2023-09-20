@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 16:02:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 13:17:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ typedef struct s_tex
 	void	*wall;
 	void	*wall_clbl;
 	void	*wall_old;
+	void	*clbl_base;
 	void	*ban_r;
 	void	*ban_g;
 	void	*ban_b;
 	void	*ban_y;
 	void	*clbl_new;
 	void	*clbl_old;
-	void	*clbl_base;
 	void	*exit_clsd;
 	void	*exit_open;
 	void	*plr_front;
@@ -59,8 +59,8 @@ typedef struct s_tex
 # define TEX_CLBL_NEW "./textures/floor_slime_32.xpm"
 # define TEX_CLBL_OLD "./textures/floor_leftover_32.xpm"
 # define TEX_CLBLWALL_NEW "./textures/wall_goo_32.xpm"
-# define TEX_CLBLWALL_FLOOR "./textures/wall_goo_base_32.xpm"
 # define TEX_CLBLWALL_OLD "./textures/wall_hole_32.xpm"
+# define TEX_CLBLWALL_FLOOR "./textures/wall_goo_base_32.xpm"
 # define TEX_EXIT_CLSD "./textures/floor_hole_64.xpm"
 # define TEX_EXIT_OPEN "./textures/floor_ladder_64.xpm"
 

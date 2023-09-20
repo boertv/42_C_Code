@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 17:46:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:11:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	sl_reset(t_sl_data *data)
 	if (sl_init_map(data))
 		return (1);
 	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
+	mlx_loop_hook(data->mlx, sl_timed_loop, (void *) data);
 	return (0);
 }

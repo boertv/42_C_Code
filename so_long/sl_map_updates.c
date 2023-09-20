@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/18 17:19:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:04:48 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 	return (0);
 }
 
+// returns 1 when the game ends
 int	sl_upd_plmv(t_sl_data *data, int x, int y)
 {
 	(data->mvs)++;
 	sl_print_mvs(data);
 	if (data->map[y][x] == EXIT_OPEN)
+	{
 		sl_victory_screen(data);
+		return (1);
+	}
 	return (0);
 }
 

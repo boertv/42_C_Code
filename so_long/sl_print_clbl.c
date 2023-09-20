@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:42:43 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 18:11:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:14:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ static void	sl_print_clbl_head(t_sl_data *data)
 	data->cords[0] = (data->win_w / 2) - 38;
 	data->cords[1] = HEAD - 23;
 	sl_print_rectangle(data, 78, 21, BG_COL);
-	sl_print_frame(data, 20078, 21, COL_COPPER);
+	sl_print_frame(data, 20078, 21, UI_COL);
 	data->cords[0] += 2;
 	data->cords[1] += 2;
 	sl_print_rectangle(data, (74 * data->clbls) / data->clblt,
-		17, sl_create_color(150, 50, 50));
+		17, CLBL_COL);
 	if (data->clbls && data->clbls < data->clblt)
 	{
 		if ((74 * data->clbls) / data->clblt > 0)
 			data->cords[0] += ((74 * data->clbls) / data->clblt) - 1;
 		sl_print_rectangle(data, 2, 17, COL_WHITE);
 	}
-	sl_print_midtext(data, "/", HEAD - 25, COL_COPPER);
+	sl_print_midtext(data, "/", HEAD - 25, UI_COL);
 	mlx_string_put(data->mlx, data->win, (data->win_w / 2) + 6,
-		HEAD - 24, COL_COPPER, print);
+		HEAD - 24, UI_COL, print);
 	free(print);
 	print = ft_itoa(data->clbls);
 	mlx_string_put(data->mlx, data->win, (data->win_w / 2)
-		- (6 + (ft_strlen(print) * 10)), HEAD - 24, COL_COPPER, print);
+		- (6 + (ft_strlen(print) * 10)), HEAD - 24, UI_COL, print);
 	free(print);
 }
 
