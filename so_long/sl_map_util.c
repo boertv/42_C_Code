@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:07:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 16:33:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:49:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // eight directions as digits like indicated on the numpad (e.g. up == 8)
 // returns 0 if map edge is exceeded or bad dir, else the map char in dir
-char	sl_neighbour(t_sl_data *data, int x, int y, int dir)
+char	sl_getnb(t_sl_data *data, int x, int y, int dir)
 {
 	if (dir < 1 || dir > 9)
 		return (0);

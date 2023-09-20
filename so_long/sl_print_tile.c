@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 13:18:45 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:41:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,18 @@ static void	sl_put_floorclbl(t_sl_data *data, int x, int y, int offset)
 	int		w;
 	int		h;
 
-	img = NULL;
 	w = ((x % 3 != 1) * TLS) + ((x * TILE_WIDTH) + INDENT)
 		+ ((offset <= 1000 && -1000 <= offset) * offset);
 	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
 	img = data->tex->clbl_base;
-	if (sl_neighbour(data, x, y, 8) != WALL)
+	if (sl_getnb(data, x, y, 8) != WALL)
 	{
 		if (data->map[y][x] == CLBL_NEW)
 			img = data->tex->clbl_new;
 		else if (data->map[y][x] == CLBL_OLD)
 			img = data->tex->clbl_old;
-		if (y % 3 != 1)
+		if ((y + x) % 4 >= 2)
 			h += TLS;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, img, w, h);
@@ -38,19 +37,30 @@ static void	sl_put_floorclbl(t_sl_data *data, int x, int y, int offset)
 
 void	sl_print_floor(t_sl_data *data, int x, int y, int offset)
 {
-	void	*mlx;
+	void	*img;
 	int		w;
 	int		h;
 
-	mlx = data->mlx;
+	img = data->tex->floor1;
 	w = ((x * TILE_WIDTH) + INDENT)
 		+ ((offset <= 1000 && -1000 <= offset) * offset);
 	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
 			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
-	mlx_put_image_to_window(mlx, data->win, data->tex->floor1, w, h);
-	mlx_put_image_to_window(mlx, data->win, data->tex->floor1, w + 32, h);
-	mlx_put_image_to_window(mlx, data->win, data->tex->floor1, w, h + 32);
-	mlx_put_image_to_window(mlx, data->win, data->tex->floor1, w + 32, h + 32);
+	mlx_put_image_to_window(data->mlx, data->win, img, w, h);
+	mlx_put_image_to_window(data->mlx, data->win, img, w, h + TLS);
+	mlx_put_image_to_window(data->mlx, data->win, img, w + TLS, h + TLS);
+	if (sl_getnb(data, x, y, 8) == WALL	&& sl_getnb(data, x, y, 6) == WALL)
+		if ((x + y) % 4 != 1)
+			img = data->tex->floor5;
+	mlx_put_image_to_window(data->mlx, data->win, img, w + TLS, h);
+	if ((x + y / 2) % 4 == 1)
+		mlx_put_image_to_window(data->mlx, data->win, data->tex->floor2,
+			w, h + (((x + y) % 2 == 1) * TLS));
+	if ((x + y) % 3 == 1 && (x / 2 + y) % 4 == 1)
+		mlx_put_image_to_window(data->mlx, data->win, data->tex->floor4,
+			w, h + (((x + y) % 3 == 1) * TLS));
+	if ((x * y) % 5 == 1)
+		mlx_put_image_to_window(data->mlx, data->win, data->tex->floor3, w + TLS, h + TLS);
 }
 
 //prints map and mask_cr
