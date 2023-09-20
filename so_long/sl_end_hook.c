@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:11:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 15:31:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:39:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void sl_put_answer_indicator(t_sl_data *data, int item)
+void	sl_put_answer_indicator(t_sl_data *data, int item)
 {
 	sl_print_rectangle(data, 14, 14, COL_BLACK);
 	data->cords[1] += 24;

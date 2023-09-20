@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:18:20 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 15:35:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:40:00 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,7 @@ void	sl_victory_screen(t_sl_data *data)
 	mlx_loop_hook(data->mlx, sl_end_loop, (void *) data);
 	sl_put_victory_screen(data);
 	data->cords[1] += 4;
-	sl_print_rectangle(data, 14, 14, COL_BLACK);
-	data->cords[1] += 24;
-	sl_print_rectangle(data, 14, 14, COL_BLACK);
-	data->cords[1] -= 22;
-	data->cords[0] += 2;
-	sl_print_rectangle(data, 10, 10, UI_COL);
-	data->cords[0] -= 2;
-	data->cords[1] -= 2;
+	sl_put_answer_indicator(data, data->end[1]);
 }
 
 void	sl_death_screen(t_sl_data *data)
@@ -98,12 +91,5 @@ void	sl_death_screen(t_sl_data *data)
 	mlx_loop_hook(data->mlx, sl_end_loop, (void *) data);
 	sl_put_death_screen(data);
 	data->cords[1] += 4;
-	sl_print_rectangle(data, 14, 14, COL_BLACK);
-	data->cords[1] += 24;
-	sl_print_rectangle(data, 14, 14, COL_BLACK);
-	data->cords[1] -= 22;
-	data->cords[0] += 2;
-	sl_print_rectangle(data, 10, 10, UI_COL);
-	data->cords[0] -= 2;
-	data->cords[1] -= 2;
+	sl_put_answer_indicator(data, data->end[1]);
 }
