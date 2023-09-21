@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 18:16:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:58:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	sl_move_blocked(t_sl_data *data, int x, int y, char cr)
 	if (cr)
 		return (1);
 	sl_print_midtext(data, "You ran into a wall...", -1, COL_WHITE);
-	data->msgtimer = 100;
+	data->msgtimer = 50;
 	return (1);
 }
 
