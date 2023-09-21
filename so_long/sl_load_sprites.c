@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/21 14:28:09 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:25:20 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	sl_init_sprs(t_sl_data *data)
 	data->tex->plr_back = NULL;
 	data->tex->plr_left = NULL;
 	data->tex->plr_right = NULL;
+	data->tex->enemy = NULL;
 	data->tex->width = TILE_WIDTH;
 	data->tex->height = TILE_HEIGHT;
 }
@@ -80,6 +81,7 @@ static void	sl_load_all(t_sl_data *data, char *err)
 	data->tex->plr_back = sl_load_sprite(data, TEX_PLR_BACK_16, &err);
 	data->tex->plr_left = sl_load_sprite(data, TEX_PLR_LEFT_16, &err);
 	data->tex->plr_right = sl_load_sprite(data, TEX_PLR_RIGHT_16, &err);
+	data->tex->enemy = sl_load_sprite(data, TEX_ENEMY, &err);
 }
 
 // returns 1 if malloc or mlx failed, clears first

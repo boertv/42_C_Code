@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/21 15:14:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:44:58 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,15 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define EXIT_CLSD 'E'
 # define EXIT_OPEN 'O'
 # define PLAYER 'P'
+# define KNIGHT 'K'
 
 # define DIR_UP 'u'
 # define DIR_DOWN 'd'
 # define DIR_LEFT 'l'
 # define DIR_RIGHT 'r'
 
-# define MAP_CHARS "01PCE"
-# define BG_COL 5914940
+# define MAP_CHARS "01PCEK"
+# define BG_COL 0
 # define CLBL_COL 3302410
 # define VICS_COL 1681036820
 # define UI_COL 6597170

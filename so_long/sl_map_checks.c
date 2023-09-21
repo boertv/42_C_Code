@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/15 16:57:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/21 16:31:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	sl_map_final_checks(t_sl_data *data, t_sl_map *checks)
 			ft_printf("%fd...\n", 2);
 			ft_printf("%fdso_long printed 10/%i errors\n", 2, checks->err);
 		}
-		else if (checks->err > 1)
+		else if (checks->err > 3)
 			ft_printf("%fdso_long printed %i errors\n", 2, checks->err);
 		return (1);
 	}
