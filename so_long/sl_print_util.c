@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 18:35:03 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 13:22:02 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:25:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ void	sl_print_midtext(t_sl_data *data, char *str, int y, int color)
 	}
 	if (str)
 		mlx_string_put(data->mlx, data->win, x, y, color, str);
+}
+
+// 'xy' indicates what coordinate is being converted
+int	sl_cv_cdpx(int cord, char xy, int offset)
+{
+	if (xy == 'x')
+	{
+		return (((cord * TILE_WIDTH) + INDENT)
+			+ ((offset <= 1000 && -1000 <= offset) * offset));
+	}
+	if (xy == 'y')
+	{
+		return (((cord * TILE_HEIGHT) + HEAD)
+			+ ((offset > 1000 || -1000 > offset)
+				* (offset + (((offset >= 0) * -1000)
+						+ ((offset < 0) * 1000)))));
+	}
+	return (0);
 }
 
 // img is put at [w][h] and [w + TLS][h + TLS] depending on which is -

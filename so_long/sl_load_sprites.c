@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 16:43:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:28:09 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	sl_init_sprs(t_sl_data *data)
 	data->tex->floor3 = NULL;
 	data->tex->floor4 = NULL;
 	data->tex->floor5 = NULL;
+	data->tex->floor_edge = NULL;
 	data->tex->wall = NULL;
 	data->tex->wall_clbl = NULL;
 	data->tex->wall_old = NULL;
@@ -62,6 +63,7 @@ static void	sl_load_all(t_sl_data *data, char *err)
 	data->tex->floor3 = sl_load_sprite(data, TEX_FLOOR3, &err);
 	data->tex->floor4 = sl_load_sprite(data, TEX_FLOOR4, &err);
 	data->tex->floor5 = sl_load_sprite(data, TEX_FLOOR5, &err);
+	data->tex->floor_edge = sl_load_sprite(data, TEX_FLOOR_EDGE, &err);
 	data->tex->wall = sl_load_sprite(data, TEX_WALL, &err);
 	data->tex->wall_clbl = sl_load_sprite(data, TEX_CLBLWALL_NEW, &err);
 	data->tex->wall_old = sl_load_sprite(data, TEX_CLBLWALL_OLD, &err);
