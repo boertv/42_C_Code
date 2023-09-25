@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 16:56:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:04:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,22 @@ static int	sl_move_check(t_sl_data *data, int *px, int *py, char dir)
 	return (0);
 }
 
-static int	sl_move_blocked(t_sl_data *data, int *x, int *y, int check)
+static int	sl_move_blocked(t_sl_data *data, int *px, int *py, int check)
 {
-	sl_print_tile(data, *x, *y, 0);
-	if (x && y)
+	int	x;
+	int	y;
+
+	if (px)
+		x = *px;
+	if (py)
+		y = *py;
+	if (!px || !py)
+	{
+		x = data->plr[0];
+		y = data->plr[1];
+	}
+	sl_print_tile(data, x, y, 0);
+	if (px && py)
 		return (check);
 	sl_print_midtext(data, "You ran into a wall...", -1, COL_WHITE);
 	data->msgtimer = 50;
