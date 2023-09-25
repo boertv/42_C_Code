@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/21 15:58:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:35:52 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	sl_upd_plmv(t_sl_data *data, int x, int y)
 }
 
 // only does the plr for now
-int	sl_upd_crdir(t_sl_data *data, char cr, char dir)
+int	sl_upd_crdir(t_sl_data *data, int *x, int *y, char dir)
 {
-	if (cr)
+	if (x && y)
 		return (1);
 	data->plr[2] = ((dir == DIR_UP) * (FACE_BACK))
 		+ ((dir == DIR_DOWN) * (FACE_FRONT))

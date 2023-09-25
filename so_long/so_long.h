@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 14:29:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:09:25 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_sl_data
 	int		cords[2];
 	int		clock;
 	int		msgtimer;
+	int		immunetimer;
 	int		end[2];
 	t_tex	*tex;
 	char	*map_file;
@@ -117,8 +118,9 @@ int			sl_timed_loop(t_sl_data *data);
 int			sl_end_hook(int key, t_sl_data *data);
 int			sl_end_loop(t_sl_data *data);
 int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
+void		sl_move_knights(t_sl_data *data);
 int			sl_upd_clbl(t_sl_data *data, int x, int y);
-int			sl_upd_crdir(t_sl_data *data, char cr, char dir);
+int			sl_upd_crdir(t_sl_data *data, int *x, int *y, char dir);
 int			sl_upd_plmv(t_sl_data *data, int x, int y);
 
 void		sl_victory_screen(t_sl_data *data);
@@ -158,7 +160,8 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define EXIT_CLSD 'E'
 # define EXIT_OPEN 'O'
 # define PLAYER 'P'
-# define KNIGHT 'K'
+# define KNIGHT_R 'K'
+# define KNIGHT_L 'k'
 
 # define DIR_UP 'u'
 # define DIR_DOWN 'd'
@@ -166,6 +169,7 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define DIR_RIGHT 'r'
 
 # define MAP_CHARS "01PCEK"
+# define CR_CHARS "Kk"
 # define BG_COL 0
 # define CLBL_COL 3302410
 # define VICS_COL 1681036820
@@ -181,6 +185,7 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define COL_PURPLE 13107455
 # define COL_BLACK 0
 # define COL_COPPER 12088115
+
 # define SL_CHEATS 0
 
 # define MAP_ERR_HOLE 1

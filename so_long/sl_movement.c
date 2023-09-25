@@ -6,34 +6,50 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/21 15:58:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:56:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// returns 1 if blocked by wall, if something else updates dir?
-static int	sl_move_check(t_sl_data *data, int x, int y, char dir)
+// returns 1 if blocked by wall, 2 if by cr
+static int	sl_move_check(t_sl_data *data, int *px, int *py, char dir)
 {
-	if (SL_CHEATS)
-		return (0);
+	int	x;
+	int	y;
+
+	if (px)
+		x = *px;
+	if (py)
+		y = *py;
+	if (!px || !py)
+	{
+		x = data->plr[0];
+		y = data->plr[1];
+	}
 	y -= (dir == DIR_UP);
 	x -= (dir == DIR_LEFT);
 	y += (dir == DIR_DOWN);
 	x += (dir == DIR_RIGHT);
+	if (x < 0 || y < 0 || x >= data->map_w || y >= data->map_h)
+		return (1);
+	if ((!px || !py) && SL_CHEATS)
+		return (0);
 	if (data->map[y][x] == WALL)
 		return (1);
+	if ((px && py) && ft_strchr(CR_CHARS, data->mask_cr[y][x]))
+		return (2);
 	return (0);
 }
 
-static int	sl_move_blocked(t_sl_data *data, int x, int y, char cr)
+static int	sl_move_blocked(t_sl_data *data, int *x, int *y, int check)
 {
-	sl_print_tile(data, x, y, 0);
-	if (cr)
-		return (1);
+	sl_print_tile(data, *x, *y, 0);
+	if (x && y)
+		return (check);
 	sl_print_midtext(data, "You ran into a wall...", -1, COL_WHITE);
 	data->msgtimer = 50;
-	return (1);
+	return (check);
 }
 
 // returns 1 when game ends
@@ -77,12 +93,18 @@ static void	sl_move_cr_2(t_sl_data *data, int **x, int **y, char dir)
 
 // updates x-y
 // if x or y is NULL, plr is moved
+// returns 0 if moved, 1 if blocked by wall, 2 if by cr
 int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 {
 	char	cr;
 	int		*ogx;
 	int		*ogy;
+	int		check;
 
+	sl_upd_crdir(data, x, y, dir);
+	check = sl_move_check(data, x, y, dir);
+	if (check)
+		return (sl_move_blocked(data, x, y, check));
 	ogx = x;
 	ogy = y;
 	cr = 1;
@@ -92,9 +114,6 @@ int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 		y = &data->plr[1];
 		cr = 0;
 	}
-	sl_upd_crdir(data, cr, dir);
-	if (sl_move_check(data, *x, *y, dir))
-		return (sl_move_blocked(data, *x, *y, cr));
 	sl_move_cr_2(data, &ogx, &ogy, dir);
 	if (!sl_move_upd(data, *ogx, *ogy, cr))
 		sl_print_tile(data, *ogx, *ogy, 0);

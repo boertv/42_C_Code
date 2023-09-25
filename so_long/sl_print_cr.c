@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:21:41 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 14:43:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:39:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	sl_print_cr(t_sl_data *data, int w, int h, char cr)
 	void	*img;
 
 	img = NULL;
-	if (cr == KNIGHT)
+	if (cr == KNIGHT_R || cr == KNIGHT_L)
 		img = data->tex->enemy;
 	mlx_put_image_to_window(data->mlx, data->win, img, w, h);
 }

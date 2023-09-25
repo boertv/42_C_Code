@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 16:10:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 17:54:53 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,62 @@ int	sl_key_hook_hub(int key, t_sl_data *data)
 	return (0);
 }
 
-int	sl_timed_loop(t_sl_data *data)
+static void	sl_plr_hitreg(t_sl_data *data)
 {
-	char		*bin;
+	if (SL_CHEATS)
+		return ;
+	data->immunetimer = 200;
+	if (sl_shrink_plr(data, 0))
+		sl_death_screen(data);
+}
 
-	data->clock++;
+static void	sl_print_clock(t_sl_data *data)
+{
+	char	*bin;
+	int		ogx;
+	int		ogy;
+
+	if (HEAD < 55)
+		return ;
+	ogx = data->cords[0];
+	ogy = data->cords[1];
 	data->cords[0] = 0;
 	data->cords[1] = 0;
-	sl_print_rectangle(data, 60, 22, 0);
-	bin = ft_itoa(data->clock);
-	mlx_string_put(data->mlx, data->win, 0, 0, COL_WHITE, bin);
+	sl_print_rectangle(data, 70, 22, BG_COL);
+	if (!data->immunetimer)
+	{
+		bin = ft_itoa(data->clock);
+		mlx_string_put(data->mlx, data->win, 0, 0, UI_COL, bin);
+	}
+	else
+	{
+		bin = ft_itoa(data->immunetimer);
+		mlx_string_put(data->mlx, data->win, 0, 0, COL_WHITE, bin);
+	}
 	free(bin);
-	if (data->clock >= 1000000)
+	data->cords[0] = ogx;
+	data->cords[1] = ogy;
+}
+
+int	sl_timed_loop(t_sl_data *data)
+{
+	data->clock++;
+	if (data->clock >= 1000000000)
 		data->clock = 0;
+	sl_print_clock(data);
+	if (data->clock % 50 == 0)
+		sl_move_knights(data);
 	if (data->msgtimer)
 	{
 		data->msgtimer--;
 		if (!data->msgtimer)
 			sl_print_midtext(data, NULL, -1, BG_COL);
 	}
+	if (data->immunetimer)
+		data->immunetimer--;
+	else
+		if (data->mask_cr[data->plr[1]][data->plr[0]] != EMPTY)
+			sl_plr_hitreg(data);
 	return (0);
 }
 
@@ -67,6 +104,7 @@ void	sl_mlx_loop(t_sl_data *data)
 {
 	data->clock = 0;
 	data->msgtimer = 0;
+	data->immunetimer = 0;
 	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
 	mlx_hook(data->win, 17, 0, sl_flush_loop, (void *) data);
 	mlx_loop_hook(data->mlx, sl_timed_loop, (void *) data);

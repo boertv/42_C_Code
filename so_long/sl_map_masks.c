@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:27:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 14:45:58 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:10:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	sl_create_mask_cr(t_sl_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == KNIGHT)
+			if (data->map[i][j] == KNIGHT_R)
 				data->mask_cr[i][j] = 'K';
 			j++;
 		}
