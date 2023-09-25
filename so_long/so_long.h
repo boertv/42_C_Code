@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/21 16:44:58 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:29:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			sl_list_search(t_sl_list *last, int x, int y);
 
 int			sl_mlx_init(t_sl_data *data);
 int			sl_init_map(t_sl_data *data);
+int			sl_create_mask_cr(t_sl_data *data);
 int			sl_render_map(t_sl_data *data);
 void		sl_print_game_frame(t_sl_data *data, int color);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
@@ -177,6 +178,7 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define COL_RED 13120030
 # define COL_LRED 9843250
 # define COL_DRED 9838080
+# define COL_PURPLE 13107455
 # define COL_BLACK 0
 # define COL_COPPER 12088115
 # define SL_CHEATS 0

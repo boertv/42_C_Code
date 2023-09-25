@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:41:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 17:44:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:40:00 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ static void	sl_put_floorclbl(t_sl_data *data, int x, int y, int offset)
 	int		w;
 	int		h;
 
-	w = ((x % 3 != 1) * TLS) + ((x * TILE_WIDTH) + INDENT)
-		+ ((offset <= 1000 && -1000 <= offset) * offset);
-	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
-			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
+	w = ((x % 3 != 1) * TLS) + sl_cv_cdpx(x, 'x', offset);
+	h = sl_cv_cdpx(y, 'y', offset);
 	img = data->tex->clbl_base;
 	if (sl_getnb(data, x, y, 8) != WALL)
 	{
@@ -42,10 +40,8 @@ void	sl_print_floor(t_sl_data *data, int x, int y, int offset)
 	int		h;
 
 	img = data->tex->floor1;
-	w = ((x * TILE_WIDTH) + INDENT)
-		+ ((offset <= 1000 && -1000 <= offset) * offset);
-	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
-			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
+	w = sl_cv_cdpx(x, 'x', offset);
+	h = sl_cv_cdpx(y, 'y', offset);
 	mlx_put_image_to_window(data->mlx, data->win, img, w, h);
 	mlx_put_image_to_window(data->mlx, data->win, img, w, h + TLS);
 	mlx_put_image_to_window(data->mlx, data->win, img, w + TLS, h + TLS);
@@ -73,10 +69,8 @@ int	sl_print_tile(t_sl_data *data, int x, int y, int offset)
 	int		h;
 
 	mlx = data->mlx;
-	w = ((x * TILE_WIDTH) + INDENT)
-		+ ((offset <= 1000 && -1000 <= offset) * offset);
-	h = ((y * TILE_HEIGHT) + HEAD) + ((offset > 1000 || -1000 > offset)
-			* (offset + (((offset >= 0) * -1000) + ((offset < 0) * 1000))));
+	w = sl_cv_cdpx(x, 'x', offset);
+	h = sl_cv_cdpx(y, 'y', offset);
 	if (data->map[y][x] != WALL)
 		sl_print_floor(data, x, y, offset);
 	if (data->map[y][x] == CLBL_NEW || data->map[y][x] == CLBL_OLD)

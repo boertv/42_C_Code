@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 17:45:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:30:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,43 +53,11 @@ int	sl_render_map(t_sl_data *data)
 	return (0);
 }
 
-static char	**sl_create_mask(t_sl_data *data)
-{
-	char	**new;
-	int		i;
-	int		j;
-
-	new = malloc (sizeof(char *) * (data->map_h + 1));
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (i < data->map_h)
-	{
-		new[i] = malloc ((data->map_w + 1) * sizeof(char));
-		if (!new[i])
-			return (ft_clear_da(new));
-		j = 0;
-		while (j < data->map_w)
-		{
-			new[i][j] = EMPTY;
-			j++;
-		}
-		new[i][j] = 0;
-		i++;
-	}
-	new[i] = NULL;
-	return (new);
-}
-
 // returns 1 if malloc (mask) failed ((or 'P' isn't found somehow))
 int	sl_init_map(t_sl_data *data)
 {
-	data->mask_cr = sl_create_mask(data);
-	if (!data->mask_cr)
-	{
-		perror("mask malloc");
+	if (sl_create_mask_cr(data))
 		return (1);
-	}
 	if (sl_search_map(data, PLAYER, &data->plr[0], &data->plr[1]))
 		return (1);
 	data->map[data->plr[1]][data->plr[0]] = EMPTY;
