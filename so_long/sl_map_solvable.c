@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 15:16:23 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/31 14:36:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:28:45 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	sl_solv_return(t_sl_slv *slv)
 	sl_list_clear(slv->new);
 	if (!slv->col && !slv->exi)
 		return (0);
-	ft_printf("%fdmap is not solvable: ", 2);
+	ft_printf("%fdError\nmap is not solvable: ", 2);
 	if (slv->col == 1 && !slv->exi)
 		ft_printf("%fdone collectible is unreachable\n", 2);
 	else if (slv->col && !slv->exi)
@@ -94,7 +94,7 @@ static int	sl_solv_return(t_sl_slv *slv)
 	if (slv->col && slv->exi)
 		ft_printf("%fd and the exit are unreachable\n", 2);
 	else if (slv->exi)
-		ft_printf("%fdexit is unreachable\n", 2);
+		ft_printf("%fdthe exit is unreachable\n", 2);
 	return (1);
 }
 

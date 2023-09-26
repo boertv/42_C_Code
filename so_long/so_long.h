@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 15:52:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:09:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int			sl_flush_loop(t_sl_data *data);
 int			sl_print_errno(char *msg, int rtrn);
 int			sl_print_errmsg(t_sl_map *checks, char *msg, int rtrn);
 int			sl_perr_map(int err, void *p, t_sl_map *checks);
+int			sl_error_credits(t_sl_map *checks);
 
 # define KEY_ESC 53
 # define KEY_UP 126
@@ -194,5 +195,6 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define MAP_ERR_EXIT 3
 # define MAP_ERR_PLAYER 4
 # define MAP_ERR_CLBLS 5
+# define MAP_ERR_RECTLE 6
 
 #endif

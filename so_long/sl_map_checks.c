@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 15:52:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:14:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,7 @@ static int	sl_map_final_checks(t_sl_data *data, t_sl_map *checks)
 		sl_perr_map(MAP_ERR_PLAYER, NULL, checks);
 	if (data->clblt < 1)
 		sl_perr_map(MAP_ERR_CLBLS, NULL, checks);
-	if (checks->err)
-	{
-		if (checks->err > 10)
-		{
-			ft_printf("%fd...\n", 2);
-			ft_printf("%fdso_long printed 10/%i errors\n", 2, checks->err);
-		}
-		else if (checks->err > 3)
-			ft_printf("%fdso_long printed %i errors\n", 2, checks->err);
-		return (1);
-	}
-	return (0);
+	return (sl_error_credits(checks));
 }
 
 // returns 1 for error, prints errors.
@@ -93,7 +82,7 @@ int	sl_map_check(t_sl_data *data)
 	while (data->map[i])
 	{
 		if ((int) ft_strlen(data->map[i]) != data->map_w)
-			return (sl_print_errmsg(&checks, "map: not a rectangle", 1));
+			return (sl_perr_map(MAP_ERR_RECTLE, &i, &checks));
 		if (sl_row_check(data->map[i], i == 0 || !data->map[i + 1],
 				&checks, data) != -1)
 			sl_perr_map(MAP_ERR_HOLE, &i, &checks);

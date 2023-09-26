@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 15:22:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:04:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef struct s_tex
 	void	*plr_back;
 	void	*plr_left;
 	void	*plr_right;
-	void	*enemy;
+	void	*knight_l;
+	void	*knight_r;
 	int		width;
 	int		height;
 }				t_tex;
@@ -75,7 +76,8 @@ typedef struct s_tex
 # define TEX_EXIT_CLSD "./textures/floor_hole_64.xpm"
 # define TEX_EXIT_OPEN "./textures/floor_ladder_64.xpm"
 
-# define TEX_ENEMY "./textures/e_placeholder_64.xpm"
+# define TEX_KNIGHT_L "./textures/knight_left_64.xpm"
+# define TEX_KNIGHT_R "./textures/knight_right_64.xpm"
 
 # define TEX_PLR_FRONT_16 "./textures/slime_front_16.xpm"
 # define TEX_PLR_BACK_16 "./textures/slime_back_16.xpm"
