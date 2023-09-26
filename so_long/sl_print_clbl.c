@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:42:43 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:14:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:54:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ static void	sl_print_clbl_nohead(t_sl_data *data)
 
 void	sl_print_clbl(t_sl_data *data)
 {
-	if (data->map_w < 5)
-		return ;
 	if (HEAD >= 25)
 	{
 		sl_print_clbl_head(data);

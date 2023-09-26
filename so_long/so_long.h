@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 16:09:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:24:50 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ int			sl_error_credits(t_sl_map *checks);
 # define COL_COPPER 12088115
 
 # define SL_CHEATS 0
+# define SL_IMMUNETMR 150
 
 # define MAP_ERR_HOLE 1
 # define MAP_ERR_CHAR 2

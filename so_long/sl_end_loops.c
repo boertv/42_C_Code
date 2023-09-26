@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:11:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 14:00:40 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:15:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sl_put_answer_indicator(t_sl_data *data, int item)
 	data->cords[1] -= 24;
 	data->cords[0] += 2;
 	data->cords[1] += 2 + ((item - 1) * (24));
-	sl_print_rectangle(data, 10, 10, UI_COL);
+	sl_print_rectangle(data, 10, 10, COL_WHITE);
 	data->cords[0] -= 2;
 	data->cords[1] -= 2 + ((item - 1) * (24));
 }

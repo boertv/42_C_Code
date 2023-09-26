@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:18:20 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 16:07:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:40:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	sl_put_victory_screen(t_sl_data *data)
 	sl_print_midtext(data, "VICTORY!", data->win_h / 2 - 44, COL_WHITE);
 	sl_print_midtext(data, "   exit  ", data->cords[1], COL_WHITE);
 	sl_print_midtext(data, "   replay", data->cords[1] + 24, COL_WHITE);
-	if (data->win_w < 600)
+	if (data->map_w < 10)
 		return ;
 	bin1 = ft_itoa(data->mvs);
 	msg = ft_strjoin("You completed the level in ", bin1);
@@ -49,7 +49,7 @@ static void	sl_put_death_screen(t_sl_data *data)
 	sl_print_midtext(data, "YOU DIED!", data->win_h / 2 - 44, COL_WHITE);
 	sl_print_midtext(data, "   exit ", data->cords[1], COL_WHITE);
 	sl_print_midtext(data, "   retry", data->cords[1] + 24, COL_WHITE);
-	if (data->win_w < 600)
+	if (data->map_w < 8)
 		return ;
 	bin1 = ft_itoa(data->mvs);
 	msg = ft_strjoin("You made ", bin1);

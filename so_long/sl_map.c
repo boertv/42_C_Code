@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 14:30:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:23:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int	sl_render_map(t_sl_data *data)
 	data->cords[0] = 0;
 	data->cords[1] = 0;
 	sl_print_rectangle(data, data->win_w, data->win_h, BG_COL);
+	sl_print_game_frame(data, COL_WHITE);
+	sl_print_reset(data);
+	sl_print_mvs(data);
+	sl_print_clbl(data);
 	y = 0;
 	while (data->map[y])
 	{
@@ -66,10 +70,5 @@ int	sl_init_map(t_sl_data *data)
 	data->mvs = 0;
 	data->clbls = 0;
 	sl_render_map(data);
-	sl_print_game_frame(data, COL_WHITE);
-	sl_print_reset(data);
-	sl_print_midtext(data, NULL, -1, 0);
-	sl_print_mvs(data);
-	sl_print_clbl(data);
 	return (0);
 }
