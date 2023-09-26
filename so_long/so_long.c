@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/19 16:59:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:54:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char *av[])
 	t_sl_data	data;
 
 	if (ac != 2 || sl_file_check(av[1]))
-		return (sl_print_msg("please provide one '.ber' map-file", 1));
+		return (sl_print_errmsg(NULL, "please provide one '.ber' map-file", 1));
 	data.map = sl_create_map(av[1]);
 	data.map_file = av[1];
 	if (!data.map)

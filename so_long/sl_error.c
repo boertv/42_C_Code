@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:18:13 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/08/24 19:24:25 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:55:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,16 @@ int	sl_print_errno(char *msg, int rtrn)
 	return (rtrn);
 }
 
-int	sl_print_msg(char *msg, int rtrn)
+int	sl_print_errmsg(t_sl_map *checks, char *msg, int rtrn)
 {
+	if (checks)
+	{
+		checks->err++;
+		if (checks->err == 1)
+			write (STDERR_FILENO, "Error\n", 6);
+	}
+	else
+		write (STDERR_FILENO, "Error\n", 6);
 	write (STDERR_FILENO, msg, ft_strlen(msg));
 	write (STDERR_FILENO, "\n", 1);
 	return (rtrn);
@@ -29,6 +37,8 @@ int	sl_print_msg(char *msg, int rtrn)
 int	sl_perr_map(int err, void *p, t_sl_map *checks)
 {
 	checks->err++;
+	if (checks->err == 1)
+		ft_printf("%fdError\n", 2);
 	if (checks->err > 10)
 		return (1);
 	if (err == MAP_ERR_CHAR)

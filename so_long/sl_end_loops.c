@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:11:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 15:56:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:00:40 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	sl_end_hook(int key, t_sl_data *data)
 		if (data->end[1] == 1)
 			sl_flush_loop(data);
 		if (data->end[1] == 2)
-			sl_reset(data);
+			if (sl_reset(data))
+				sl_flush_loop(data);
 	}
 	if (key == KEY_W || key == KEY_UP)
 		data->end[1] = 1;

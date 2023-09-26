@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/21 16:31:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:52:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ int	sl_map_check(t_sl_data *data)
 
 	sl_checks_init(data, &checks);
 	if (data->map_w < 3)
-		return (sl_print_msg("map: not wide enough", 1));
+		return (sl_print_errmsg(&checks, "map: not wide enough", 1));
 	if (data->map_h < 3)
-		return (sl_print_msg("map: not tall enough", 1));
+		return (sl_print_errmsg(&checks, "map: not tall enough", 1));
 	i = 0;
 	while (data->map[i])
 	{
 		if ((int) ft_strlen(data->map[i]) != data->map_w)
-			return (sl_print_msg("map: not a rectangle", 1));
+			return (sl_print_errmsg(&checks, "map: not a rectangle", 1));
 		if (sl_row_check(data->map[i], i == 0 || !data->map[i + 1],
 				&checks, data) != -1)
 			sl_perr_map(MAP_ERR_HOLE, &i, &checks);

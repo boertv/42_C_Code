@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 17:54:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:53:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ static void	sl_plr_hitreg(t_sl_data *data)
 		return ;
 	data->immunetimer = 200;
 	if (sl_shrink_plr(data, 0))
+	{
 		sl_death_screen(data);
+		return ;
+	}
+	sl_print_midtext(data, "You got hit!", -1, MSG_COL);
+	data->msgtimer = 100;
 }
 
 static void	sl_print_clock(t_sl_data *data)

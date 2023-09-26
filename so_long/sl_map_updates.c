@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 15:35:52 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:52:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 		if (!sl_search_map(data, EXIT_CLSD, &exit_x, &exit_y))
 		{
 			data->map[exit_y][exit_x] = EXIT_OPEN;
-			sl_print_midtext(data, "The exit opened!", -1, COL_WHITE);
+			sl_print_midtext(data, "The exit opened!", -1, MSG_COL);
 			data->msgtimer = 70;
 			sl_print_tile(data, exit_x, exit_y, 0);
 		}

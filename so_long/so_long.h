@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 18:04:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:52:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int			sl_flush_all(t_sl_data *data);
 int			sl_flush_loop(t_sl_data *data);
 
 int			sl_print_errno(char *msg, int rtrn);
-int			sl_print_msg(char *msg, int rtrn);
+int			sl_print_errmsg(t_sl_map *checks, char *msg, int rtrn);
 int			sl_perr_map(int err, void *p, t_sl_map *checks);
 
 # define KEY_ESC 53
@@ -174,6 +174,7 @@ int			sl_perr_map(int err, void *p, t_sl_map *checks);
 # define CLBL_COL 3302410
 # define VICS_COL 1681036820
 # define UI_COL 6597170
+# define MSG_COL 16777215
 # define COL_WHITE 16777215
 # define COL_GREY 5263440
 # define COL_DGREY 9868950
