@@ -6,18 +6,19 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 15:44:37 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:28:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// clears sprites, map, mask_cr
+// clears sprites, map, mask_cr, data->crs
 int	sl_flush_all(t_sl_data *data)
 {
 	sl_clear_sprs(data);
 	ft_clear_da(data->map);
 	ft_clear_da(data->mask_cr);
+	ft_lstclear(data->crs, free);
 	return (0);
 }
 
@@ -50,6 +51,7 @@ int	sl_reset(t_sl_data *data)
 		sl_flush_loop(data);
 	ft_clear_da(data->mask_cr);
 	data->mask_cr = NULL;
+	ft_lstclear(data->crs, free);
 	sl_shrink_plr(data, 1);
 	if (sl_init_map(data))
 		return (1);

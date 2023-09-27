@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 15:54:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:40:53 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int	main(int ac, char *av[])
 	// READ COMMENTS BEFORE PUSHING
 }
 
+// load all imgs (sprites and animations) in one function, clear them in one too
+//		(don't forget free(data->tex) and free(data->lib))
+
 // MAKE SURE CHEATS IS OFF
 // MAKE SURE MAKEFILE CFLAG IS STANDARD
 
@@ -45,6 +48,10 @@ int	main(int ac, char *av[])
 //	- masks
 //	- textures
 //	- window
+//
+//	- t_list crs
+//		- every t_list
+//		- every t_creature
 
 //size of an mlx char:
 //	- one char  = 10-22

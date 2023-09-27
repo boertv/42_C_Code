@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 17:24:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:43:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "libft/ft_printf/ft_printf.h"
 
 # include "sl_textures.h"
+# include "sl_creatures.h"
 
 typedef struct s_sl_data
 {
@@ -45,6 +46,8 @@ typedef struct s_sl_data
 	int		immunetimer;
 	int		end[2];
 	t_tex	*tex;
+	t_amlib	*am;
+	t_list	**crs;
 	char	*map_file;
 }			t_sl_data;
 
@@ -71,6 +74,19 @@ typedef struct s_sl_slv
 	t_sl_list	*cur;
 	t_sl_list	*new;
 }				t_sl_slv;
+
+typedef struct s_animation
+{
+	int		inter;
+	void	**imgs;
+}			t_animation;
+
+typedef struct s_animation_lib
+{
+	t_animation	k_mv_r;
+	t_animation	k_mv_l;
+	t_animation	p_idle;
+}				t_amlib;
 
 int			sl_file_check(char *file);
 char		**sl_create_map(char *file);
@@ -161,16 +177,13 @@ int			sl_error_credits(t_sl_map *checks);
 # define EXIT_CLSD 'E'
 # define EXIT_OPEN 'O'
 # define PLAYER 'P'
-# define KNIGHT_R 'K'
-# define KNIGHT_L 'k'
+# define MAP_CHARS "01PCEK"
 
 # define DIR_UP 'u'
 # define DIR_DOWN 'd'
 # define DIR_LEFT 'l'
 # define DIR_RIGHT 'r'
 
-# define MAP_CHARS "01PCEK"
-# define CR_CHARS "Kk"
 # define BG_COL 0
 # define CLBL_COL 3302410
 # define VICS_COL 1681036820
