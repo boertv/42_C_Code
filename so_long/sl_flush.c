@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 17:10:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:07:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// clears sprites, map, mask_cr, data->crs
+// clears sprites, anims, map, mask_cr, data->crs
 int	sl_flush_all(t_sl_data *data)
 {
 	sl_clear_sprs(data);

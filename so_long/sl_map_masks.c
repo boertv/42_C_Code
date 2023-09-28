@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:27:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 16:10:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:08:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ static char	**sl_create_mask(t_sl_data *data)
 	return (new);
 }
 
+// exits if malloc failed
+static void	sl_process_cr(t_sl_data *data, int x, int y)
+{
+	char	cr;
+
+	cr = data->map[y][x];
+	data->map[y][x] = EMPTY;
+	data->mask_cr[y][x] = cr;
+	if (!sl_add_cr(data, cr, x, y))
+		return ;
+	sl_flush_all(data);
+	exit(1);
+}
+
 int	sl_create_mask_cr(t_sl_data *data)
 {
 	int	i;
@@ -57,8 +71,8 @@ int	sl_create_mask_cr(t_sl_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == KNIGHT_R)
-				data->mask_cr[i][j] = 'K';
+			if (ft_strchr(CR_CHARS, data->map[i][j]))
+				sl_process_cr(data, j, i);
 			j++;
 		}
 		i++;

@@ -6,75 +6,62 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:25:32 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/25 17:51:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:37:27 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	sl_bounce(t_sl_data *data, int x, int y, char dir)
+static void	sl_bounce(t_sl_data *data, t_creature *cr)
 {
-	if (dir == DIR_RIGHT)
-		data->mask_cr[y][x + 1] = KNIGHT_R;
-	if (dir == DIR_LEFT)
-		data->mask_cr[y][x - 1] = KNIGHT_L;
+	if (cr->dir[cr->dir_i] == DIR_RIGHT)
+		sl_cr_dir_next(data, sl_search_cr_xy(data, cr->cd[0] + 1, cr->cd[1]));
+	if (cr->dir[cr->dir_i] == DIR_LEFT)
+		sl_cr_dir_next(data, sl_search_cr_xy(data, cr->cd[0] - 1, cr->cd[1]));
 }
 
-// returns 0 if not moved, 1 if moved in dir, 2 if in opposite dir
-static int	sl_moving_knight(t_sl_data *data, int x, int y, char dir)
+static void	sl_start_anim(t_sl_data *data, t_creature *cr)
+{
+	if (cr->type == KNIGHT)
+	{
+		if (cr->dir[cr->dir_i] == DIR_LEFT)
+		{
+			cr->frame = *data->am->k_mv_l;
+			cr->offset = OFF_K_START;
+		}
+		else
+		{
+			cr->frame = *data->am->k_mv_r;
+			cr->offset = OFF_K_START * -1;
+		}
+	}
+	sl_print_amframe(data, cr);
+}
+
+static int	sl_moving_knight(t_sl_data *data, t_creature *cr)
 {
 	int	check;
 
-	check = sl_move_cr(data, &x, &y, dir);
+	check = sl_move_cr(data, &cr->cd[0], &cr->cd[1], cr->dir[cr->dir_i]);
+	if (!check)
+		sl_start_anim(data, cr);
 	if (check == 2)
-		sl_bounce(data, x, y, dir);
+		sl_bounce(data, cr);
 	if (check)
 	{
-		data->mask_cr[y][x] = (data->mask_cr[y][x] == KNIGHT_R) * KNIGHT_L
-		+ (data->mask_cr[y][x] == KNIGHT_L) * KNIGHT_R;
-		dir = (dir == DIR_LEFT) * DIR_RIGHT + (dir == DIR_RIGHT) * DIR_LEFT;
-		check = sl_move_cr(data, &x, &y, dir);
-		if (check == 2)
-			sl_bounce(data, x, y, dir);
-		if (check)
-			return (0);
-		return (2);
+		sl_cr_dir_next(data, cr);
+		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
 	}
 	return (1);
 }
 
-static void	sl_move_knights_loop(t_sl_data *data, int x, int y)
+void	sl_move_crs(t_sl_data *data)
 {
-	static int	moved_right = 0;
+	t_list	*lst;
 
-	if (!moved_right && data->mask_cr[y][x] == KNIGHT_R)
+	lst = *(data->crs);
+	while (lst)
 	{
-		if (sl_moving_knight(data, x, y, DIR_RIGHT) == 1)
-			moved_right = 2;
-	}
-	else if (data->mask_cr[y][x] == KNIGHT_L)
-	{
-		if (sl_moving_knight(data, x, y, DIR_LEFT) == 2)
-			moved_right = 2;
-	}
-	if (moved_right)
-		moved_right--;
-}
-
-void	sl_move_knights(t_sl_data *data)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (data->mask_cr[y])
-	{
-		x = 0;
-		while (data->mask_cr[y][x])
-		{
-			sl_move_knights_loop(data, x, y);
-			x++;
-		}
-		y++;
+		lst = lst->next;
 	}
 }

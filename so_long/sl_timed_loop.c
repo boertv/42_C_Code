@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:15:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 18:16:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:39:21 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	sl_timed_loop(t_sl_data *data)
 		data->clock = 0;
 	sl_print_clock(data);
 	if (data->clock % 50 == 0)
-		sl_move_knights(data);
+		sl_move_crs(data);
 	if (data->msgtimer)
 	{
 		data->msgtimer--;
