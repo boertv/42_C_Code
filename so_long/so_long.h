@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/27 17:43:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:07:25 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,6 @@ typedef struct s_sl_slv
 	t_sl_list	*new;
 }				t_sl_slv;
 
-typedef struct s_animation
-{
-	int		inter;
-	void	**imgs;
-}			t_animation;
-
-typedef struct s_animation_lib
-{
-	t_animation	k_mv_r;
-	t_animation	k_mv_l;
-	t_animation	p_idle;
-}				t_amlib;
-
 int			sl_file_check(char *file);
 char		**sl_create_map(char *file);
 int			sl_map_check(t_sl_data *data);
@@ -124,9 +111,11 @@ void		sl_print_reset(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
 void		*sl_load_sprite(t_sl_data *data, char *file, char **err);
+int			sl_load_animations(t_sl_data *data);
 int			sl_grow_plr(t_sl_data *data);
 int			sl_shrink_plr(t_sl_data *data, int min);
 void		sl_clear_sprs(t_sl_data *data);
+int			sl_clear_animations(t_sl_data *data);
 
 void		sl_mlx_loop(t_sl_data *data);
 int			sl_key_hook_hub(int key, t_sl_data *data);
@@ -203,6 +192,7 @@ int			sl_error_credits(t_sl_map *checks);
 
 # define SL_CHEATS 0
 # define SL_IMMUNETMR 150
+# define SL_ANIM_BUFF 1
 
 # define MAP_ERR_HOLE 1
 # define MAP_ERR_CHAR 2

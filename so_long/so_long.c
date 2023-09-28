@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/27 17:40:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:45:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ int	main(int ac, char *av[])
 //	- t_list crs
 //		- every t_list
 //		- every t_creature
+//
+//	- animations
+//		- am_lib
+//		- anim t_lists
 
 //size of an mlx char:
 //	- one char  = 10-22

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/27 17:28:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:10:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	sl_flush_all(t_sl_data *data)
 {
 	sl_clear_sprs(data);
+	sl_clear_animations(data);
 	ft_clear_da(data->map);
 	ft_clear_da(data->mask_cr);
 	ft_lstclear(data->crs, free);

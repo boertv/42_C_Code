@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 17:04:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:27:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ typedef struct s_tex
 	int		height;
 }				t_tex;
 
+typedef struct s_animation_lib
+{
+	t_list	**k_mv_r;
+	t_list	**k_mv_l;
+}				t_amlib;
+
 # define TILE_WIDTH 64
 # define TILE_HEIGHT 64
 # define TLS 32
@@ -55,6 +61,13 @@ typedef struct s_tex
 # define FACE_BACK 'b'
 # define FACE_LEFT 'l'
 # define FACE_RIGHT 'r'
+
+# define ERR_FOLDER 1
+# define ERR_EMPTY 2
+# define ERR_LOADING 3
+# define ERR_MALLOC 4
+
+// TEXTURES IN ANIMATION FOLDERS SHOULD BE LABELLED WITH JUST A NUMBER
 
 /* !!MAKE SURE ALL OF THESE EXIST!! */
 # define TEX_FLOOR1 "./textures/floor_1_32.xpm"
@@ -78,6 +91,8 @@ typedef struct s_tex
 
 # define TEX_KNIGHT_L "./textures/knight_left_64.xpm"
 # define TEX_KNIGHT_R "./textures/knight_right_64.xpm"
+# define AM_KNIGHT_MV_L "./textures/k_mv_l/"
+# define AM_KNIGHT_MV_R "./textures/k_mv_r/"
 
 # define TEX_PLR_FRONT_16 "./textures/slime_front_16.xpm"
 # define TEX_PLR_BACK_16 "./textures/slime_back_16.xpm"

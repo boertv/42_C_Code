@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:36:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/27 17:19:17 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:20:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 
 typedef struct s_creature
 {
-	char	type;
-	int		cd[2];
-	char	*dir;
-	int		dir_i;
-	void	*anim;
-}			t_creature;
+	char		type;
+	int			cd[2];
+	char		*dir;
+	int			dir_i;
+	int			anim_i;
+	t_animation	*anim;
+}				t_creature;
 
 # define CR_CHARS "Kk"
 

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 17:02:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:09:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,14 @@ int	sl_load_texs(t_sl_data *data)
 	data->tex->height = TILE_HEIGHT;
 	sl_load_all(data, &err);
 	if (err)
+	{
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
-	return (1 - (!err));
+		return (1);
+	}
+	if (sl_load_animations(data))
+	{
+		sl_clear_sprs(data);
+		return (1);
+	}
+	return (0);
 }
