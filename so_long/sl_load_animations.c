@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:29:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 17:13:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:12:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ static int	sl_amload(t_sl_data *data, const char *folder, t_list **am)
 	while (1)
 // add condition !!!!!!!?
 	{
-		bin = ft_itoa(i);
+		temp = ft_itoa(i);
+		if (!temp)
+			return (sl_perror_am(folder, ERR_MALLOC));
+		bin = ft_strjoin(temp, ".xpm");
+		free(temp);
 		if (!bin)
 			return (sl_perror_am(folder, ERR_MALLOC));
 		temp = ft_strjoin(folder, bin);
