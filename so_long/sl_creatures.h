@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:36:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 19:17:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:24:17 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,12 @@ typedef struct s_creature
 
 # define WIZARD 'W'
 # define DIR_W "ud"
+
+# define MV_TIME_CR 50
+
+# define DIR_UP 'u'
+# define DIR_DOWN 'd'
+# define DIR_LEFT 'l'
+# define DIR_RIGHT 'r'
 
 #endif

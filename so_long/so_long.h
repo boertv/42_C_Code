@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 19:44:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:24:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,31 +174,8 @@ int			sl_error_credits(t_sl_map *checks);
 # define PLAYER 'P'
 # define MAP_CHARS "01PCEK"
 
-# define DIR_UP 'u'
-# define DIR_DOWN 'd'
-# define DIR_LEFT 'l'
-# define DIR_RIGHT 'r'
-
-# define BG_COL 0
-# define CLBL_COL 3302410
-# define VICS_COL 1681036820
-# define UI_COL 6597170
-# define MSG_COL 16777215
-# define COL_WHITE 16777215
-# define COL_GREY 5263440
-# define COL_DGREY 9868950
-# define COL_GREEN 6597170
-# define COL_DGREEN 3302410
-# define COL_RED 13120030
-# define COL_LRED 9843250
-# define COL_DRED 9838080
-# define COL_PURPLE 13107455
-# define COL_BLACK 0
-# define COL_COPPER 12088115
-
 # define SL_CHEATS 0
 # define SL_IMMUNETMR 150
-# define SL_ANIM_BUFF 1
 
 # define MAP_ERR_HOLE 1
 # define MAP_ERR_CHAR 2

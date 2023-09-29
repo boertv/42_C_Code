@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:17:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 19:44:21 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:19:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ void	sl_print_am_frame(t_sl_data *data, t_creature *cr)
 	mlx_put_image_to_window(data->mlx, data->win, cr->frame->content, w, h);
 }
 
+// prints the next frame in the am and increments or ends the am
 void	sl_advance_am(t_sl_data *data, t_creature *cr)
 {
+	if (!cr->frame)
+		return ;
 	cr->frame = cr->frame->next;
 	if (!cr->frame)
 	{

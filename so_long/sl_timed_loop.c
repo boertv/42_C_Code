@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:15:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 18:39:21 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:22:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,27 @@ static void	sl_print_clock(t_sl_data *data)
 	data->cords[1] = ogy;
 }
 
+static void	sl_animate_crs(t_sl_data *data)
+{
+	t_list	*lst;
+
+	lst = *data->crs;
+	while (lst)
+	{
+		sl_advance_am(data, lst->content);
+		lst = lst->next;
+	}
+}
+
 int	sl_timed_loop(t_sl_data *data)
 {
 	data->clock++;
 	if (data->clock >= 1000000000)
 		data->clock = 0;
 	sl_print_clock(data);
-	if (data->clock % 50 == 0)
+	if (data->clock % SL_ANIM_BUFF == 0)
+		sl_animate_crs(data);
+	if (data->clock % MV_TIME_CR == 0)
 		sl_move_crs(data);
 	if (data->msgtimer)
 	{

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 16:27:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:24:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,25 @@ typedef struct s_animation_lib
 # define TAIL 45
 # define SHOULDER 25
 # define INDENT 25
+
+# define SL_ANIM_BUFF 1
+
+# define BG_COL 0
+# define CLBL_COL 3302410
+# define VICS_COL 1681036820
+# define UI_COL 6597170
+# define MSG_COL 16777215
+# define COL_WHITE 16777215
+# define COL_GREY 5263440
+# define COL_DGREY 9868950
+# define COL_GREEN 6597170
+# define COL_DGREEN 3302410
+# define COL_RED 13120030
+# define COL_LRED 9843250
+# define COL_DRED 9838080
+# define COL_PURPLE 13107455
+# define COL_BLACK 0
+# define COL_COPPER 12088115
 
 # define FACE_FRONT 'f'
 # define FACE_BACK 'b'
