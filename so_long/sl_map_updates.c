@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 13:52:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:10:00 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,31 @@ int	sl_upd_plmv(t_sl_data *data, int x, int y)
 	return (0);
 }
 
-// only does the plr for now
-int	sl_upd_crdir(t_sl_data *data, int *x, int *y, char dir)
+// does the plr, and for crs checks if new_dir_next_mv is on
+// if new_dir_next_mv > 1 it returns 1
+int	sl_upd_crdir(t_sl_data *data, int *x, int *y, char *dir)
 {
+	t_creature	*cr;
+
 	if (x && y)
-		return (1);
-	data->plr[2] = ((dir == DIR_UP) * (FACE_BACK))
-		+ ((dir == DIR_DOWN) * (FACE_FRONT))
-		+ ((dir == DIR_LEFT) * (FACE_LEFT))
-		+ ((dir == DIR_RIGHT) * (FACE_RIGHT));
+	{
+		cr = sl_search_cr_xy(data, *x, *y);
+		if (cr->new_dir_next_mv)
+		{
+			sl_cr_dir_next(cr);
+			*dir = cr->dir[cr->dir_i];
+			cr->new_dir_next_mv--;
+		}
+		if (cr->new_dir_next_mv)
+		{
+			cr->new_dir_next_mv = 0;
+			return (1);
+		}
+		return (0);
+	}
+	data->plr[2] = ((*dir == DIR_UP) * (FACE_BACK))
+		+ ((*dir == DIR_DOWN) * (FACE_FRONT))
+		+ ((*dir == DIR_LEFT) * (FACE_LEFT))
+		+ ((*dir == DIR_RIGHT) * (FACE_RIGHT));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 15:45:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:08:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int ac, char *av[])
 	if (sl_load_texs(&data))
 		return (1);
 	if (sl_init_map(&data))
+// hier moeten er zeker nog dingen bevrijd worden.
 		return (1);
 	sl_mlx_loop(&data);
 	// READ COMMENTS BEFORE PUSHING

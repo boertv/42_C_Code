@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:25:32 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 19:37:27 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:10:22 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 
 static void	sl_bounce(t_sl_data *data, t_creature *cr)
 {
+	t_creature	*bounced_cr;
+
 	if (cr->dir[cr->dir_i] == DIR_RIGHT)
-		sl_cr_dir_next(data, sl_search_cr_xy(data, cr->cd[0] + 1, cr->cd[1]));
-	if (cr->dir[cr->dir_i] == DIR_LEFT)
-		sl_cr_dir_next(data, sl_search_cr_xy(data, cr->cd[0] - 1, cr->cd[1]));
+		bounced_cr = sl_search_cr_xy(data, cr->cd[0] + 1, cr->cd[1]);
+	else if (cr->dir[cr->dir_i] == DIR_LEFT)
+		bounced_cr = sl_search_cr_xy(data, cr->cd[0] - 1, cr->cd[1]);
+	else if (cr->dir[cr->dir_i] == DIR_UP)
+		bounced_cr = sl_search_cr_xy(data, cr->cd[0], cr->cd[1] - 1);
+	else if (cr->dir[cr->dir_i] == DIR_DOWN)
+		bounced_cr = sl_search_cr_xy(data, cr->cd[0], cr->cd[1] + 1);
+	else
+		return ;
+	bounced_cr->new_dir_next_mv = 1;
+	if (cr->dir[cr->dir_i] == DIR_RIGHT)
+		bounced_cr->new_dir_next_mv = 2;
 }
 
 static void	sl_start_anim(t_sl_data *data, t_creature *cr)
@@ -35,7 +46,7 @@ static void	sl_start_anim(t_sl_data *data, t_creature *cr)
 			cr->offset = OFF_K_START * -1;
 		}
 	}
-	sl_print_amframe(data, cr);
+	sl_print_am_frame(data, cr);
 }
 
 static int	sl_moving_knight(t_sl_data *data, t_creature *cr)
@@ -49,7 +60,8 @@ static int	sl_moving_knight(t_sl_data *data, t_creature *cr)
 		sl_bounce(data, cr);
 	if (check)
 	{
-		sl_cr_dir_next(data, cr);
+		if (check != 3)
+			sl_cr_dir_next(cr);
 		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
 	}
 	return (1);
@@ -62,6 +74,8 @@ void	sl_move_crs(t_sl_data *data)
 	lst = *(data->crs);
 	while (lst)
 	{
+		if (((t_creature *)(lst->content))->type == KNIGHT)
+			sl_moving_knight(data, lst->content);
 		lst = lst->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:17:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/29 14:19:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:12:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	sl_advance_am(t_sl_data *data, t_creature *cr)
 	{
 		cr->offset = 0;
 		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
+		sl_print_tile(data, cr->cd[0] + (cr->dir[cr->dir_i] == DIR_LEFT)
+			- (cr->dir[cr->dir_i] == DIR_RIGHT), cr->cd[1]
+			+ (cr->dir[cr->dir_i] == DIR_UP) - (cr->dir[cr->dir_i] == DIR_DOWN), 0);
 		return ;
 	}
 	if (cr->type == KNIGHT)
@@ -48,11 +51,13 @@ void	sl_advance_am(t_sl_data *data, t_creature *cr)
 	sl_print_am_frame(data, cr);
 }
 
-void	sl_cr_dir_next(t_sl_data *data, t_creature *cr)
+void	sl_cr_dir_next(t_creature *cr)
 {
+	cr->frame = NULL;
+	cr->offset = 0;
 	cr->dir_i++;
 	if (!cr->dir[cr->dir_i])
-		cr->dir_i == 0;
+		cr->dir_i = 0;
 }
 
 t_creature	*sl_search_cr_xy(t_sl_data *data, int x, int y)
@@ -87,6 +92,7 @@ int	sl_add_cr(t_sl_data *data, char cr, int x, int y)
 	((t_creature *) new->content)->cd[0] = x;
 	((t_creature *) new->content)->cd[1] = y;
 	((t_creature *) new->content)->dir_i = 0;
+	((t_creature *) new->content)->new_dir_next_mv = 0;
 	((t_creature *) new->content)->offset = 0;
 	((t_creature *) new->content)->frame = NULL;
 	if (cr == KNIGHT)

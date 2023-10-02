@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:36:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/29 14:24:17 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:53:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_creature
 	int		cd[2];
 	char	*dir;
 	int		dir_i;
+	int		new_dir_next_mv;
 	int		offset;
 	t_list	*frame;
 }				t_creature;
@@ -30,13 +31,14 @@ typedef struct s_creature
 // knight in an animation cycle == 'k'?
 # define KNIGHT 'K'
 # define DIR_K "rl"
-# define OFF_K_START 60
-# define OFF_K_INC 5
+# define OFF_K_START 55
+# define OFF_K_INC 9
 
 # define WIZARD 'W'
 # define DIR_W "ud"
 
-# define MV_TIME_CR 50
+# define SL_ANIM_BUFF 7
+# define MV_TIME_CR 70
 
 # define DIR_UP 'u'
 # define DIR_DOWN 'd'

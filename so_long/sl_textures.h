@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/29 14:24:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:52:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ typedef struct s_animation_lib
 # define TAIL 45
 # define SHOULDER 25
 # define INDENT 25
-
-# define SL_ANIM_BUFF 1
 
 # define BG_COL 0
 # define CLBL_COL 3302410

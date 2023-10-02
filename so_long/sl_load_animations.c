@@ -6,14 +6,14 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:29:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 23:12:42 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:58:19 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // file = folder, except for ERR_LOADING
-static int	sl_perror_am(char *file, int err)
+static int	sl_perror_am(const char *file, int err)
 {
 	if (err == ERR_FOLDER)
 		ft_printf("%fdno, or bad, folder '%s'\n", 2, file);
@@ -22,7 +22,7 @@ static int	sl_perror_am(char *file, int err)
 	else if (err == ERR_LOADING)
 	{
 		ft_printf("%fdfailed to load %s\n", 2, file);
-		free(file);
+		free((void *) file);
 	}
 	else if (err == ERR_MALLOC)
 		ft_printf("%fdmalloc failed while loading %s\n", 2, file);
@@ -32,7 +32,7 @@ static int	sl_perror_am(char *file, int err)
 // returns 1 if no folder, 2 if no imgs found, 3 if mlx loading error,
 //	4 if malloc error, else 0
 // prints error msgs
-static int	sl_amload(t_sl_data *data, const char *folder, t_list **am)
+static int	sl_amload(t_sl_data *data, const char *folder, t_list **animation)
 {
 	char	*temp;
 	char	*bin;
@@ -42,10 +42,6 @@ static int	sl_amload(t_sl_data *data, const char *folder, t_list **am)
 
 	if (access(folder, R_OK))
 		return (sl_perror_am(folder, ERR_FOLDER));
-	am = malloc(sizeof(t_list *));
-	if (!am)
-		return (sl_perror_am(folder, ERR_MALLOC));
-	*am = NULL;
 	i = 0;
 	while (1)
 // add condition !!!!!!!?
@@ -73,13 +69,35 @@ static int	sl_amload(t_sl_data *data, const char *folder, t_list **am)
 			mlx_destroy_image(data->mlx, img);
 			return (sl_perror_am(folder, ERR_MALLOC));
 		}
-		ft_lstadd_back(am, new);
+		ft_lstadd_back(animation, new);
 		free(temp);
 		i++;
 	}
 	free(temp);
 	if (!i)
 		return (sl_perror_am(folder, ERR_EMPTY));
+	return (0);
+}
+
+static int	sl_ams_mallocs(t_sl_data *data)
+{
+	data->am->k_mv_l = NULL;
+	data->am->k_mv_r = NULL;
+	data->am->k_mv_l = malloc(sizeof(t_list *));
+	if (!data->am->k_mv_l)
+	{
+		ft_printf("%fdmalloc failed while loading animations\n", 2);
+		return (1);
+	}
+	*data->am->k_mv_l = NULL;
+	data->am->k_mv_r = malloc(sizeof(t_list *));
+	if (!data->am->k_mv_r)
+	{
+		free(data->am->k_mv_l);
+		ft_printf("%fdmalloc failed while loading animations\n", 2);
+		return (1);
+	}
+	*data->am->k_mv_r = NULL;
 	return (0);
 }
 
@@ -92,8 +110,8 @@ int	sl_load_animations(t_sl_data *data)
 		ft_printf("%fdmalloc failed while loading animations\n", 2);
 		return (1);
 	}
-	data->am->k_mv_l = NULL;
-	data->am->k_mv_r = NULL;
+	if (sl_ams_mallocs(data))
+		return (1);
 	if (sl_amload(data, AM_KNIGHT_MV_L, data->am->k_mv_l))
 		return (sl_clear_animations(data));
 	if (sl_amload(data, AM_KNIGHT_MV_R, data->am->k_mv_r))

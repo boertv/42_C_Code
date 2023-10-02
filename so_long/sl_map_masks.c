@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:27:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 19:08:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:07:32 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,14 @@ int	sl_create_mask_cr(t_sl_data *data)
 	int	i;
 	int	j;
 
+	data->crs = malloc(sizeof(t_list *));
+	if (!data->crs)
+		return (1);
+	*data->crs = NULL;
 	data->mask_cr = sl_create_mask(data);
 	if (!data->mask_cr)
 	{
+		free(data->crs);
 		perror("mask malloc");
 		return (1);
 	}

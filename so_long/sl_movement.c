@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 13:51:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:58:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	sl_move_cr_2(t_sl_data *data, int **x, int **y, char dir)
 
 // updates x-y
 // if x or y is NULL, plr is moved
-// returns 0 if moved, 1 if blocked by wall, 2 if by cr
+// returns 0 if moved, 1 if blocked by wall, 2 if by cr, 3 if turned
 int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 {
 	char	cr;
@@ -113,7 +113,8 @@ int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 	int		*ogy;
 	int		check;
 
-	sl_upd_crdir(data, x, y, dir);
+	if (sl_upd_crdir(data, x, y, &dir))
+		return (3);
 	check = sl_move_check(data, x, y, dir);
 	if (check)
 		return (sl_move_blocked(data, x, y, check));
