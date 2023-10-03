@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 17:58:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:44:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,8 @@ static void	sl_move_cr_2(t_sl_data *data, int **x, int **y, char dir)
 	**x += (dir == DIR_RIGHT);
 	if (cr)
 	{
-		cr = data->mask_cr[oldy][oldx];
+		data->mask_cr[**y][**x] = data->mask_cr[oldy][oldx];
 		data->mask_cr[oldy][oldx] = '0';
-		data->mask_cr[**y][**x] = cr;
 	}
 	sl_print_tile(data, oldx, oldy, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 18:10:00 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:40:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	sl_upd_plmv(t_sl_data *data, int x, int y)
 	return (0);
 }
 
-// does the plr, and for crs checks if new_dir_next_mv is on
+// does the plr. for crs checks if new_dir_next_mv is on
 // if new_dir_next_mv > 1 it returns 1
 int	sl_upd_crdir(t_sl_data *data, int *x, int *y, char *dir)
 {
