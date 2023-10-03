@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 18:35:03 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 17:50:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:57:02 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sl_print_midtext(t_sl_data *data, char *str, int y, int color)
 		{
 			data->cords[0] = INDENT;
 			data->cords[1] = data->win_h - TAIL + 1;
-			sl_print_rectangle(data, data->win_w - INDENT - SHOULDER, 23, BG_COL);
+			sl_print_rectangle(data, data->win_w - INDENT - SHOLDR, 23, BG_COL);
 			y = data->win_h - TAIL + 2;
 		}
 		else
@@ -53,7 +53,7 @@ void	sl_print_midtext(t_sl_data *data, char *str, int y, int color)
 		}
 	}
 	x = ft_strlen(str);
-	if (!str || (int) (x * 10) >= (data->win_w - INDENT - SHOULDER))
+	if (!str || (int)(x * 10) >= (data->win_w - INDENT - SHOLDR))
 		return ;
 	x = (data->win_w / 2) - ((x * 10) / 2);
 	mlx_string_put(data->mlx, data->win, x, y, color, str);

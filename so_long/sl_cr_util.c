@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:17:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 14:54:53 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:64:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	sl_advance_am(t_sl_data *data, t_creature *cr)
 		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
 		sl_print_tile(data, cr->cd[0] + (cr->dir[cr->dir_i] == DIR_LEFT)
 			- (cr->dir[cr->dir_i] == DIR_RIGHT), cr->cd[1]
-			+ (cr->dir[cr->dir_i] == DIR_UP) - (cr->dir[cr->dir_i] == DIR_DOWN), 0);
+			+ (cr->dir[cr->dir_i] == DIR_UP)
+			- (cr->dir[cr->dir_i] == DIR_DOWN), 0);
 		return ;
 	}
 	if (cr->type == KNIGHT)

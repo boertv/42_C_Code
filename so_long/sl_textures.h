@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 17:52:35 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:56:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_animation_lib
 # define TLS 32
 # define HEAD 70
 # define TAIL 45
-# define SHOULDER 25
+# define SHOLDR 25
 # define INDENT 25
 
 # define BG_COL 0

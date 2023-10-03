@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:18:13 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 16:23:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:47:56 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,25 @@ int	sl_error_credits(t_sl_map *checks)
 	return (0);
 }
 
+static int	sl_perr_map_2(int err, void *p, t_sl_map *checks)
+{
+	if (err == MAP_ERR_PLAYER)
+	{
+		if (!checks->player)
+			ft_printf("%fdmap: no player\n", 2);
+		else
+			ft_printf("%fdmap: more than one player\n", 2);
+	}
+	else if (err == MAP_ERR_CLBLS)
+		ft_printf("%fdmap: no collectibles\n", 2);
+	else if (err == MAP_ERR_RECTLE)
+	{
+		ft_printf("%fdmap: not a rectangle (row %i)\n", 2, *(int *) p + 1);
+		return (sl_error_credits(checks));
+	}
+	return (1);
+}
+
 int	sl_perr_map(int err, void *p, t_sl_map *checks)
 {
 	checks->err++;
@@ -70,19 +89,5 @@ int	sl_perr_map(int err, void *p, t_sl_map *checks)
 		else
 			ft_printf("%fdmap: more than one exit\n", 2);
 	}
-	else if (err == MAP_ERR_PLAYER)
-	{
-		if (!checks->player)
-			ft_printf("%fdmap: no player\n", 2);
-		else
-			ft_printf("%fdmap: more than one player\n", 2);
-	}
-	else if (err == MAP_ERR_CLBLS)
-		ft_printf("%fdmap: no collectibles\n", 2);
-	else if (err == MAP_ERR_RECTLE)
-	{
-		ft_printf("%fdmap: not a rectangle (row %i)\n", 2, *(int *) p + 1);
-		return (sl_error_credits(checks));
-	}
-	return (1);
+	return (sl_perr_map_2(err, p, checks));
 }

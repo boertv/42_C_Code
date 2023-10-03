@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:08:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:35:17 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:57:02 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ void	sl_print_reset(t_sl_data *data)
 		return ;
 	if (data->map_w > 6)
 	{
-		data->cords[0] = data->win_w - SHOULDER - 2 - (10 * 9);
+		data->cords[0] = data->win_w - SHOLDR - 2 - (10 * 9);
 		data->cords[1] = HEAD - 22;
 		sl_print_rectangle(data, 2 + (10 * 9), 22, BG_COL);
-		mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER
+		mlx_string_put(data->mlx, data->win, data->win_w - SHOLDR
 			- 2 - (10 * 9), HEAD - 22, UI_COL, "reset 'r'");
 		return ;
 	}
-	data->cords[0] = data->win_w - SHOULDER - 2 - (10 * 3);
+	data->cords[0] = data->win_w - SHOLDR - 2 - (10 * 3);
 	data->cords[1] = HEAD - 22;
 	sl_print_rectangle(data, 2 + (10 * 3), 22, BG_COL);
-	mlx_string_put(data->mlx, data->win, data->win_w - SHOULDER - 2 - (10 * 3),
+	mlx_string_put(data->mlx, data->win, data->win_w - SHOLDR - 2 - (10 * 3),
 		HEAD - 22, UI_COL, "'r'");
 }
 
@@ -80,11 +80,11 @@ void	sl_print_game_frame(t_sl_data *data, int color)
 
 	oldx = data->cords[0];
 	oldy = data->cords[1];
-	if (HEAD < 33 || TAIL < 33 || INDENT < 8 || SHOULDER < 8)
+	if (HEAD < 33 || TAIL < 33 || INDENT < 8 || SHOLDR < 8)
 		return ;
 	data->cords[0] = INDENT - 8;
 	data->cords[1] = HEAD - 31;
-	sl_print_frame(data, 50016 + data->win_w - SHOULDER - INDENT,
+	sl_print_frame(data, 50016 + data->win_w - SHOLDR - INDENT,
 		62 + data->win_h - HEAD - TAIL, color);
 	data->cords[0] = oldx;
 	data->cords[1] = oldy;
