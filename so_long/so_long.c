@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 17:08:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:03:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	main(int ac, char *av[])
 
 // MAKE SURE CHEATS IS OFF
 // MAKE SURE MAKEFILE CFLAG IS STANDARD
+
+// remove all .DS_Store and .vscode
 
 //stuff to free;
 //	- map

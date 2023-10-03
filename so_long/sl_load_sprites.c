@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 17:09:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:11:01 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	*sl_load_sprite(t_sl_data *data, char *file, char **err)
 
 	if (*err)
 		return (NULL);
-	ret = mlx_xpm_file_to_image(data->mlx, file,
-			&(data->tex->width), &(data->tex->height));
+	ret = mlx_xpm_file_to_image(data->mlx, file, &data->tex->w, &data->tex->h);
 	if (!ret)
 	{
 		*err = file;
@@ -94,8 +93,8 @@ int	sl_load_texs(t_sl_data *data)
 	if (!data->tex)
 		return (sl_print_errno("t_tex malloc: ", 1));
 	sl_init_sprs(data);
-	data->tex->width = TILE_WIDTH;
-	data->tex->height = TILE_HEIGHT;
+	data->tex->w = TILE_WIDTH;
+	data->tex->h = TILE_HEIGHT;
 	sl_load_all(data, &err);
 	if (err)
 	{

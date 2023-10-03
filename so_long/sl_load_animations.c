@@ -6,74 +6,53 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:29:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 15:58:19 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:42:45 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// file = folder, except for ERR_LOADING
-static int	sl_perror_am(const char *file, int err)
+static int	sl_addframe(t_sl_data *da, t_list **anim, char *fm, const char *fld)
 {
-	if (err == ERR_FOLDER)
-		ft_printf("%fdno, or bad, folder '%s'\n", 2, file);
-	else if (err == ERR_EMPTY)
-		ft_printf("%fdno useable images in %s\n", 2, file);
-	else if (err == ERR_LOADING)
+	void	*img;
+	t_list	*new;
+
+	img = mlx_xpm_file_to_image(da->mlx, fm, &da->tex->w, &da->tex->h);
+	if (!img)
+		return (sl_perror_am(fm, ERR_LOADING));
+	free(fm);
+	new = ft_lstnew(img);
+	if (!new)
 	{
-		ft_printf("%fdfailed to load %s\n", 2, file);
-		free((void *) file);
+		mlx_destroy_image(da->mlx, img);
+		return (sl_perror_am(fld, ERR_MALLOC));
 	}
-	else if (err == ERR_MALLOC)
-		ft_printf("%fdmalloc failed while loading %s\n", 2, file);
-	return (err);
+	ft_lstadd_back(anim, new);
+	return (0);
 }
 
-// returns 1 if no folder, 2 if no imgs found, 3 if mlx loading error,
-//	4 if malloc error, else 0
+// returns 1 on error: no folder, no frames, bad mlx load, malloc
 // prints error msgs
 static int	sl_amload(t_sl_data *data, const char *folder, t_list **animation)
 {
-	char	*temp;
-	char	*bin;
-	void	*img;
-	t_list	*new;
+	char	*frame;
 	int		i;
 
 	if (access(folder, R_OK))
 		return (sl_perror_am(folder, ERR_FOLDER));
 	i = 0;
-	while (1)
-// add condition !!!!!!!?
+	while (i <= SL_FRAME_LIM)
 	{
-		temp = ft_itoa(i);
-		if (!temp)
-			return (sl_perror_am(folder, ERR_MALLOC));
-		bin = ft_strjoin(temp, ".xpm");
-		free(temp);
-		if (!bin)
-			return (sl_perror_am(folder, ERR_MALLOC));
-		temp = ft_strjoin(folder, bin);
-		free(bin);
-		if (!temp)
-			return (sl_perror_am(folder, ERR_MALLOC));
-		if (access(temp, R_OK))
+		frame = sl_join_frame_name(folder, i);
+		if (!frame)
+			return (1);
+		if (access(frame, R_OK))
 			break ;
-		img = mlx_xpm_file_to_image(data->mlx, temp, &data->tex->width, &data->tex->height);
-		if (!img)
-			return (sl_perror_am(temp, ERR_LOADING));
-		new = ft_lstnew(img);
-		if (!new)
-		{
-			free(temp);
-			mlx_destroy_image(data->mlx, img);
-			return (sl_perror_am(folder, ERR_MALLOC));
-		}
-		ft_lstadd_back(animation, new);
-		free(temp);
+		if (sl_addframe(data, animation, frame, folder))
+			return (1);
 		i++;
 	}
-	free(temp);
+	free(frame);
 	if (!i)
 		return (sl_perror_am(folder, ERR_EMPTY));
 	return (0);

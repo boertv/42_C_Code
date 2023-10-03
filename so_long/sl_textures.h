@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 16:56:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:10:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct s_tex
 	void	*plr_right;
 	void	*knight_l;
 	void	*knight_r;
-	int		width;
-	int		height;
+	int		w;
+	int		h;
 }				t_tex;
 
 typedef struct s_animation_lib

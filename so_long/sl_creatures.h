@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:36:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 14:52:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:07:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_creature
 # define DIR_W "ud"
 
 # define SL_ANIM_BUFF 7
+# define SL_FRAME_LIM 30
 # define MV_TIME_CR 70
 
 # define DIR_UP 'u'
