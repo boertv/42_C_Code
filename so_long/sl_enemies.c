@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:25:32 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 18:10:22 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:57:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	sl_bounce(t_sl_data *data, t_creature *cr)
 	else if (cr->dir[cr->dir_i] == DIR_DOWN)
 		bounced_cr = sl_search_cr_xy(data, cr->cd[0], cr->cd[1] + 1);
 	else
+		return ;
+	if (!bounced_cr)
 		return ;
 	bounced_cr->new_dir_next_mv = 1;
 	if (cr->dir[cr->dir_i] == DIR_RIGHT)
@@ -49,6 +51,25 @@ static void	sl_start_anim(t_sl_data *data, t_creature *cr)
 	sl_print_am_frame(data, cr);
 }
 
+// checks if cr should be advanced and does that
+void	sl_cr_advance_tile(t_sl_data *data, t_creature *cr)
+{
+	int	oldx;
+	int	oldy;
+
+	if (cr->offset > -30 && 30 > cr->offset)
+	{
+		if (data->mask_cr[cr->cd[1]][cr->cd[0]] == cr->type)
+			return ;
+		data->mask_cr[cr->cd[1]][cr->cd[0]] = cr->type;
+		oldx = cr->cd[0] - (cr->dir[cr->dir_i] == DIR_RIGHT)
+			+ (cr->dir[cr->dir_i] == DIR_LEFT);
+		oldy = cr->cd[1] - (cr->dir[cr->dir_i] == DIR_DOWN)
+			+ (cr->dir[cr->dir_i] == DIR_UP);
+		data->mask_cr[oldy][oldx] = EMPTY;
+	}
+}
+
 static int	sl_moving_knight(t_sl_data *data, t_creature *cr)
 {
 	int	check;
@@ -61,7 +82,7 @@ static int	sl_moving_knight(t_sl_data *data, t_creature *cr)
 	if (check)
 	{
 		if (check != 3)
-			sl_cr_dir_next(cr);
+			sl_cr_dir_next(data, cr);
 		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
 	}
 	return (1);

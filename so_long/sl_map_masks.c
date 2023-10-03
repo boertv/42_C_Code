@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:27:36 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 17:07:32 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:51:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	sl_create_mask_cr(t_sl_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (ft_strchr(CR_CHARS, data->map[i][j]))
+			if (ft_strchr(CR_CHARS_ALL, data->map[i][j]))
 				sl_process_cr(data, j, i);
 			j++;
 		}

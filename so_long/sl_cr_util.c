@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:17:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 16:12:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:54:53 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sl_print_am_frame(t_sl_data *data, t_creature *cr)
 	mlx_put_image_to_window(data->mlx, data->win, cr->frame->content, w, h);
 }
 
-// prints the next frame in the am and increments or ends the am
+// prints the next frame in the anim and increments or ends it
 void	sl_advance_am(t_sl_data *data, t_creature *cr)
 {
 	if (!cr->frame)
@@ -35,6 +35,7 @@ void	sl_advance_am(t_sl_data *data, t_creature *cr)
 	if (!cr->frame)
 	{
 		cr->offset = 0;
+		sl_cr_advance_tile(data, cr);
 		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
 		sl_print_tile(data, cr->cd[0] + (cr->dir[cr->dir_i] == DIR_LEFT)
 			- (cr->dir[cr->dir_i] == DIR_RIGHT), cr->cd[1]
@@ -48,18 +49,21 @@ void	sl_advance_am(t_sl_data *data, t_creature *cr)
 		else
 			cr->offset += OFF_K_INC;
 	}
+	sl_cr_advance_tile(data, cr);
 	sl_print_am_frame(data, cr);
 }
 
-void	sl_cr_dir_next(t_creature *cr)
+void	sl_cr_dir_next(t_sl_data *data, t_creature *cr)
 {
 	cr->frame = NULL;
 	cr->offset = 0;
+	sl_cr_advance_tile(data, cr);
 	cr->dir_i++;
 	if (!cr->dir[cr->dir_i])
 		cr->dir_i = 0;
 }
 
+// returns NULL if no cr found
 t_creature	*sl_search_cr_xy(t_sl_data *data, int x, int y)
 {
 	t_list	*lst;

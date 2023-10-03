@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 13:40:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:03:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ int	sl_upd_crdir(t_sl_data *data, int *x, int *y, char *dir)
 	if (x && y)
 	{
 		cr = sl_search_cr_xy(data, *x, *y);
+		if (!cr)
+			return (2);
 		if (cr->new_dir_next_mv)
 		{
-			sl_cr_dir_next(cr);
+			sl_cr_dir_next(data, cr);
 			*dir = cr->dir[cr->dir_i];
 			cr->new_dir_next_mv--;
 		}

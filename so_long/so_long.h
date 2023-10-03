@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/02 17:12:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:46:28 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int			sl_clear_animations(t_sl_data *data);
 
 int			sl_add_cr(t_sl_data *data, char cr, int x, int y);
 t_creature	*sl_search_cr_xy(t_sl_data *data, int x, int y);
-void		sl_cr_dir_next(t_creature *cr);
+void		sl_cr_dir_next(t_sl_data *data, t_creature *cr);
 void		sl_print_am_frame(t_sl_data *data, t_creature *cr);
 void		sl_advance_am(t_sl_data *data, t_creature *cr);
 
@@ -129,6 +129,7 @@ int			sl_timed_loop(t_sl_data *data);
 int			sl_end_hook(int key, t_sl_data *data);
 int			sl_end_loop(t_sl_data *data);
 int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
+void		sl_cr_advance_tile(t_sl_data *data, t_creature *cr);
 void		sl_move_crs(t_sl_data *data);
 int			sl_upd_clbl(t_sl_data *data, int x, int y);
 int			sl_upd_crdir(t_sl_data *data, int *x, int *y, char *dir);

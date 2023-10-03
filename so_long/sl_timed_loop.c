@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:15:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/29 14:22:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:52:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	sl_hitreg(t_sl_data *data)
 		data->immunetimer--;
 	}
 	else
-		if (data->mask_cr[data->plr[1]][data->plr[0]] != EMPTY)
+		if (ft_strchr(CR_CHARS_UPC, data->mask_cr[data->plr[1]][data->plr[0]]))
 			sl_plr_hit(data);
 }
 

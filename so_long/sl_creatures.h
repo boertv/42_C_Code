@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:36:16 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 13:33:57 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:52:10 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ typedef struct s_creature
 	t_list	*frame;
 }				t_creature;
 
-# define CR_CHARS "Kk"
+# define CR_CHARS_ALL "Kk"
+# define CR_CHARS_UPC "K"
 
 # define KNIGHT 'K'
 # define RES_KNIGHT 'k'
 # define DIR_K "rl"
-# define OFF_K_START 55
-# define OFF_K_INC 9
+# define OFF_K_START 58
+# define OFF_K_INC 7
 
 # define WIZARD 'W'
 # define DIR_W "ud"

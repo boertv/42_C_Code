@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:21:41 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 19:25:42 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:55:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	sl_print_cr(t_sl_data *data, t_creature *cr)
 	int		w;
 	int		h;
 
-	if (cr->frame)
+	if (!cr || cr->frame)
 		return ;
 	img = NULL;
 	w = sl_cv_cdpx(cr->cd[0], 'x', 0);

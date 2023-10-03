@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 13:44:29 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:51:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	sl_move_check(t_sl_data *data, int *px, int *py, char dir)
 		return (0);
 	if (data->map[y][x] == WALL)
 		return (1);
-	if ((px && py) && ft_strchr(CR_CHARS, data->mask_cr[y][x]))
+	if ((px && py) && ft_strchr(CR_CHARS_ALL, data->mask_cr[y][x]))
 		return (2);
 	return (0);
 }
@@ -95,15 +95,13 @@ static void	sl_move_cr_2(t_sl_data *data, int **x, int **y, char dir)
 	**y += (dir == DIR_DOWN);
 	**x += (dir == DIR_RIGHT);
 	if (cr)
-	{
-		data->mask_cr[**y][**x] = data->mask_cr[oldy][oldx];
-		data->mask_cr[oldy][oldx] = '0';
-	}
+		data->mask_cr[**y][**x] = data->mask_cr[oldy][oldx] + ('a' - 'A');
 	sl_print_tile(data, oldx, oldy, 0);
 }
 
 // updates x-y
 // if x or y is NULL, plr is moved
+// cr isn't moved but a lowercase letter is put where it is moving to
 // returns 0 if moved, 1 if blocked by wall, 2 if by cr, 3 if turned
 int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 {
