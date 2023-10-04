@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:17:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 16:64:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:49:15 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	sl_advance_am(t_sl_data *data, t_creature *cr)
 	if (!cr->frame)
 	{
 		cr->offset = 0;
-		sl_cr_advance_tile(data, cr);
+		if (sl_cr_advance_tile(data, cr) == 2)
+			return ;
 		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
 		sl_print_tile(data, cr->cd[0] + (cr->dir[cr->dir_i] == DIR_LEFT)
 			- (cr->dir[cr->dir_i] == DIR_RIGHT), cr->cd[1]
@@ -50,7 +51,8 @@ void	sl_advance_am(t_sl_data *data, t_creature *cr)
 		else
 			cr->offset += OFF_K_INC;
 	}
-	sl_cr_advance_tile(data, cr);
+	if (sl_cr_advance_tile(data, cr) == 2)
+		return ;
 	sl_print_am_frame(data, cr);
 }
 

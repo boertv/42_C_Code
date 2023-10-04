@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 17:03:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:26:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int ac, char *av[])
 	data.map_file = av[1];
 	if (!data.map)
 		return (sl_print_errno(av[1], 1));
+// from here: clear_da char **data.map
 	if (sl_map_check(&data))
 	{
 		ft_clear_da(data.map);
@@ -29,13 +30,14 @@ int	main(int ac, char *av[])
 	}
 	if (sl_mlx_init(&data))
 		return (1);
+// from here: destroy void *data->win
 	if (sl_load_texs(&data))
 		return (1);
 	if (sl_init_map(&data))
 // hier moeten er zeker nog dingen bevrijd worden.
 		return (1);
 	sl_mlx_loop(&data);
-	// READ COMMENTS BEFORE PUSHING
+// READ COMMENTS BEFORE PUSHING
 }
 
 // load all imgs (sprites and animations) in one function, clear them in one too

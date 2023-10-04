@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:12:47 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/14 18:00:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:40:19 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ int	sl_shrink_plr(t_sl_data *data, int min)
 
 	err = NULL;
 	if (data->plr_size == 16)
+	{
+		data->plr_size = 0;
 		return (1);
+	}
 	sl_plr_destroy(data);
 	if (min)
 		data->plr_size = 32;

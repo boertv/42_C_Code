@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:25:32 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 14:57:31 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:54:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	sl_start_anim(t_sl_data *data, t_creature *cr)
 }
 
 // checks if cr should be advanced and does that
-void	sl_cr_advance_tile(t_sl_data *data, t_creature *cr)
+// returns 1 if plr got hit, 2 if player died
+int	sl_cr_advance_tile(t_sl_data *data, t_creature *cr)
 {
 	int	oldx;
 	int	oldy;
@@ -60,14 +61,21 @@ void	sl_cr_advance_tile(t_sl_data *data, t_creature *cr)
 	if (cr->offset > -30 && 30 > cr->offset)
 	{
 		if (data->mask_cr[cr->cd[1]][cr->cd[0]] == cr->type)
-			return ;
+			return (0);
 		data->mask_cr[cr->cd[1]][cr->cd[0]] = cr->type;
 		oldx = cr->cd[0] - (cr->dir[cr->dir_i] == DIR_RIGHT)
 			+ (cr->dir[cr->dir_i] == DIR_LEFT);
 		oldy = cr->cd[1] - (cr->dir[cr->dir_i] == DIR_DOWN)
 			+ (cr->dir[cr->dir_i] == DIR_UP);
 		data->mask_cr[oldy][oldx] = EMPTY;
+		if (sl_hitreg(data))
+		{
+			if (!data->plr_size)
+				return (2);
+			return (1);
+		}
 	}
+	return (0);
 }
 
 static int	sl_moving_knight(t_sl_data *data, t_creature *cr)
@@ -83,9 +91,11 @@ static int	sl_moving_knight(t_sl_data *data, t_creature *cr)
 	{
 		if (check != 3)
 			sl_cr_dir_next(data, cr);
+		if (!data->plr_size)
+			return (1);
 		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
 	}
-	return (1);
+	return (0);
 }
 
 void	sl_move_crs(t_sl_data *data)
@@ -93,7 +103,7 @@ void	sl_move_crs(t_sl_data *data)
 	t_list	*lst;
 
 	lst = *(data->crs);
-	while (lst)
+	while (lst && data->plr_size)
 	{
 		if (((t_creature *)(lst->content))->type == KNIGHT)
 			sl_moving_knight(data, lst->content);

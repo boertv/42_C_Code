@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 19:07:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:58:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	sl_flush_loop(t_sl_data *data)
 
 	level = malloc(sizeof(char) * (ft_strlen(data->map_file) - 8));
 	ft_strlcpy(level, data->map_file + 5, ft_strlen(data->map_file) - 8);
-	if (data->map[data->plr[1]][data->plr[0]] != EXIT_OPEN)
+	if (data->map[data->plr[1]][data->plr[0]] != EXIT_OPEN || !data->plr_size)
 		ft_printf("quitting the game\n");
 	else if (level)
 		ft_printf("completed the level '%s' in %i moves\n", level, data->mvs);
@@ -46,6 +46,8 @@ int	sl_flush_loop(t_sl_data *data)
 // returns 1 if sl_init_map failed
 int	sl_reset(t_sl_data *data)
 {
+// check all this stuff for leaks too... (like data->map)
+// and so i need to return or just call flush_loop?
 	ft_clear_da(data->map);
 	data->map = sl_create_map(data->map_file);
 	if (!data->map)

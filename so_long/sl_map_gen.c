@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:13:01 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/01 15:13:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:27:51 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ char	**sl_create_map(char *file)
 		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
+	{
+		free(map);
 		return (NULL);
+	}
 	i = 0;
 	map[i] = get_next_line(fd);
 	while (map[i])

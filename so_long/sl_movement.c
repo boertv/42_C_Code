@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 14:51:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:41:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static int	sl_move_blocked(t_sl_data *data, int *px, int *py, int check)
 // returns 1 when game ends
 static int	sl_move_upd(t_sl_data *data, int x, int y, char cr)
 {
+	if (!data->plr_size)
+		return (1);
 	if (!cr)
 		if (sl_upd_plmv(data, x, y))
 			return (1);
@@ -125,6 +127,8 @@ int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 		cr = 0;
 	}
 	sl_move_cr_2(data, &ogx, &ogy, dir);
+	if (!cr)
+		sl_hitreg(data);
 	if (!sl_move_upd(data, *ogx, *ogy, cr))
 		sl_print_tile(data, *ogx, *ogy, 0);
 	return (0);

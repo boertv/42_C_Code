@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:16:35 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/21 15:55:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:07:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ static int	sl_bottom_wall(t_sl_data *data, int x, int y, int os)
 
 void	sl_print_wall(t_sl_data *data, int x, int y, int offset)
 {
+	data->cords[0] = sl_cv_cdpx(x, 'x', offset) + 2;
+	data->cords[1] = sl_cv_cdpx(y, 'y', offset) + 2;
+	sl_print_rectangle(data, TILE_WIDTH - 4, TILE_HEIGHT - 4, BG_COL);
 	if (sl_bottom_wall(data, x, y, offset))
 		return ;
 	sl_put_wall_hub(data, x, y, offset);
