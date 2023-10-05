@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/04 17:26:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:02:24 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char *av[])
 // READ COMMENTS BEFORE PUSHING
 }
 
-// load all imgs (sprites and animations) in one function, clear them in one too
+// load all imgs (texs and animations) in one function, clear them in one too
 //		(don't forget free(data->tex) and free(data->lib))
 
 // MAKE SURE CHEATS IS OFF

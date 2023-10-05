@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/04 18:11:23 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:00:02 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void		sl_print_clbl(t_sl_data *data);
 void		sl_print_reset(t_sl_data *data);
 
 int			sl_load_texs(t_sl_data *data);
-void		*sl_load_sprite(t_sl_data *data, char *file, char **err);
+void		*sl_load_tex(t_sl_data *data, char *file, char **err);
 int			sl_load_animations(t_sl_data *data);
 int			sl_perror_am(const char *file, int err);
 char		*sl_join_frame_name(const char *folder, int i);
