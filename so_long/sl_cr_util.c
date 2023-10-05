@@ -6,54 +6,19 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:17:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/04 17:49:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:34:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	sl_print_am_frame(t_sl_data *data, t_creature *cr)
+void	sl_clear_crs(t_sl_data *data)
 {
-	int	w;
-	int	h;
-
-	w = sl_cv_cdpx(cr->cd[0], 'x', cr->offset);
-	h = sl_cv_cdpx(cr->cd[1], 'y', cr->offset);
-	sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
-	sl_print_tile(data, cr->cd[0] + (cr->dir[cr->dir_i] == DIR_LEFT)
-		- (cr->dir[cr->dir_i] == DIR_RIGHT), cr->cd[1]
-		+ (cr->dir[cr->dir_i] == DIR_UP) - (cr->dir[cr->dir_i] == DIR_DOWN), 0);
-	mlx_put_image_to_window(data->mlx, data->win, cr->frame->content, w, h);
-}
-
-// prints the next frame in the anim and increments or ends it
-void	sl_advance_am(t_sl_data *data, t_creature *cr)
-{
-	if (!cr->frame)
+	if (!data->crs)
 		return ;
-	cr->frame = cr->frame->next;
-	if (!cr->frame)
-	{
-		cr->offset = 0;
-		if (sl_cr_advance_tile(data, cr) == 2)
-			return ;
-		sl_print_tile(data, cr->cd[0], cr->cd[1], 0);
-		sl_print_tile(data, cr->cd[0] + (cr->dir[cr->dir_i] == DIR_LEFT)
-			- (cr->dir[cr->dir_i] == DIR_RIGHT), cr->cd[1]
-			+ (cr->dir[cr->dir_i] == DIR_UP)
-			- (cr->dir[cr->dir_i] == DIR_DOWN), 0);
-		return ;
-	}
-	if (cr->type == KNIGHT)
-	{
-		if (cr->dir[cr->dir_i] == DIR_LEFT)
-			cr->offset -= OFF_K_INC;
-		else
-			cr->offset += OFF_K_INC;
-	}
-	if (sl_cr_advance_tile(data, cr) == 2)
-		return ;
-	sl_print_am_frame(data, cr);
+	ft_lstclear(data->crs, free);
+	free(data->crs);
+	data->crs = NULL;
 }
 
 void	sl_cr_dir_next(t_sl_data *data, t_creature *cr)

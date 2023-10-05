@@ -6,21 +6,29 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:02:11 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:54:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// clears texs, anims, map, mask_cr, data->crs
+// clears texs, anims, map, mask_cr, crs, mlx_win
+// returns 1
 int	sl_flush_all(t_sl_data *data)
 {
-	sl_clear_sprs(data);
+	sl_clear_texs(data);
 	sl_clear_animations(data);
-	ft_clear_da(data->map);
-	ft_clear_da(data->mask_cr);
-	ft_lstclear(data->crs, free);
-	return (0);
+	if (data->map)
+		ft_clear_da(data->map);
+	data->map = NULL;
+	if (data->mask_cr)
+		ft_clear_da(data->mask_cr);
+	data->mask_cr = NULL;
+	sl_clear_crs(data);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	data->win = NULL;
+	return (1);
 }
 
 // exits
@@ -39,7 +47,6 @@ int	sl_flush_loop(t_sl_data *data)
 	if (level)
 		free(level);
 	sl_flush_all(data);
-	mlx_destroy_window(data->mlx, data->win);
 	exit (0);
 }
 

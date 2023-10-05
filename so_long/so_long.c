@@ -6,11 +6,21 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:02:24 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:59:30 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	sl_init_startup(t_sl_data *data)
+{
+	data->map = NULL;
+	data->win = NULL;
+	data->tex = NULL;
+	data->am = NULL;
+	data->mask_cr = NULL;
+	data->crs = NULL;
+}
 
 int	main(int ac, char *av[])
 {
@@ -18,23 +28,24 @@ int	main(int ac, char *av[])
 
 	if (ac != 2 || sl_file_check(av[1]))
 		return (sl_print_errmsg(NULL, "please provide one '.ber' map-file", 1));
+	sl_init_startup(&data);
 	data.map = sl_create_map(av[1]);
 	data.map_file = av[1];
 	if (!data.map)
 		return (sl_print_errno(av[1], 1));
-// from here: clear_da char **data.map
+// from here: clear_da(data->map)			at init: data->map = NULL;
 	if (sl_map_check(&data))
-	{
-		ft_clear_da(data.map);
-		return (1);
-	}
+		return (sl_flush_all(&data));
 	if (sl_mlx_init(&data))
-		return (1);
-// from here: destroy void *data->win
+		return (sl_flush_all(&data));
+// from here: mlx_destroy(data->win)		at init: data->win = NULL;
 	if (sl_load_texs(&data))
+// from here: call sl_clear_texs			at init: data->tex = NULL;
+// from here: call sl_clear_animations		at init: data->am = NULL;
 		return (1);
 	if (sl_init_map(&data))
-// hier moeten er zeker nog dingen bevrijd worden.
+// from here: clear_da(data->mask_cr)		at init: data->mask_cr = NULL;
+// from here: call sl_clear_crs				at init: data->crs = NULL;
 		return (1);
 	sl_mlx_loop(&data);
 // READ COMMENTS BEFORE PUSHING

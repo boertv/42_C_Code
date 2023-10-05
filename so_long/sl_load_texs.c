@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:01:34 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:43:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	sl_init_texs(t_sl_data *data)
 {
-	//data->tex = NULL;  //don't leave this in if ft is called after malloc
 	data->tex->floor1 = NULL;
 	data->tex->floor2 = NULL;
 	data->tex->floor3 = NULL;
@@ -51,7 +50,7 @@ void	*sl_load_tex(t_sl_data *data, char *file, char **err)
 	if (!ret)
 	{
 		*err = file;
-		sl_clear_sprs(data);
+		sl_clear_texs(data);
 	}
 	return (ret);
 }
@@ -104,7 +103,7 @@ int	sl_load_texs(t_sl_data *data)
 	}
 	if (sl_load_animations(data))
 	{
-		sl_clear_sprs(data);
+		sl_clear_texs(data);
 		return (1);
 	}
 	return (0);

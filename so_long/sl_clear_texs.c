@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 19:49:00 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:01:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:43:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static void	sl_destroy_ifn_null(t_sl_data *data, void *img)
 		mlx_destroy_image(data->mlx, img);
 }
 
-// destroys img if not NULL
-void	sl_clear_sprs(t_sl_data *data)
+static void	sl_destroy_all_texs(t_sl_data *data)
 {
 	sl_destroy_ifn_null(data, data->tex->floor1);
 	sl_destroy_ifn_null(data, data->tex->floor2);
@@ -45,5 +44,14 @@ void	sl_clear_sprs(t_sl_data *data)
 	sl_destroy_ifn_null(data, data->tex->plr_right);
 	sl_destroy_ifn_null(data, data->tex->knight_l);
 	sl_destroy_ifn_null(data, data->tex->knight_r);
+}
+
+// destroys img if not NULL
+void	sl_clear_texs(t_sl_data *data)
+{
+	if (!data->tex)
+		return ;
+	sl_destroy_all_texs(data);
 	free(data->tex);
+	data->tex = NULL;
 }

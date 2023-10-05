@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:00:02 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:43:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,11 @@ int			sl_perror_am(const char *file, int err);
 char		*sl_join_frame_name(const char *folder, int i);
 int			sl_grow_plr(t_sl_data *data);
 int			sl_shrink_plr(t_sl_data *data, int min);
-void		sl_clear_sprs(t_sl_data *data);
+void		sl_clear_texs(t_sl_data *data);
 int			sl_clear_animations(t_sl_data *data);
 
 int			sl_add_cr(t_sl_data *data, char cr, int x, int y);
+void		sl_clear_crs(t_sl_data *data);
 t_creature	*sl_search_cr_xy(t_sl_data *data, int x, int y);
 void		sl_cr_dir_next(t_sl_data *data, t_creature *cr);
 void		sl_print_am_frame(t_sl_data *data, t_creature *cr);

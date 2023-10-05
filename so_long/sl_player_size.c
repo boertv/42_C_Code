@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:12:47 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:00:02 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:53:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	sl_loading_plr_size(t_sl_data *data, char *err)
 }
 
 // returns 1 if already at max size
-// destroy, load, change size, print tile
+// destroy, change size, load, print tile
 // if error: calls sl_flush_loop
 int	sl_grow_plr(t_sl_data *data)
 {
@@ -90,7 +90,7 @@ int	sl_grow_plr(t_sl_data *data)
 
 // returns 1 if already at min size
 // if 'min' == 1 plr changes to min size, and no printing
-// destroy, load, change size, print tile
+// destroy, change size, load, print tile
 // if error: calls sl_flush_loop
 int	sl_shrink_plr(t_sl_data *data, int min)
 {

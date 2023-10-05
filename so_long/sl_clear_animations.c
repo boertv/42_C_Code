@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:13:32 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/28 17:13:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:10:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ static void	sl_amclear(t_sl_data *data, t_list **lst)
 	free(lst);
 }
 
+static void	sl_clear_all_anims(t_sl_data *data)
+{
+	sl_amclear(data, data->am->k_mv_l);
+	sl_amclear(data, data->am->k_mv_r);
+}
+
 // returns 1
 int	sl_clear_animations(t_sl_data *data)
 {
 	if (!data->am)
 		return (1);
-	sl_amclear(data, data->am->k_mv_l);
-	sl_amclear(data, data->am->k_mv_r);
+	sl_clear_all_anims(data);
 	free(data->am);
 	data->am = NULL;
 	return (1);

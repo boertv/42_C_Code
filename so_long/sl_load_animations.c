@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 17:29:25 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 17:42:45 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:20:31 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static int	sl_ams_mallocs(t_sl_data *data)
 	data->am->k_mv_r = malloc(sizeof(t_list *));
 	if (!data->am->k_mv_r)
 	{
-		free(data->am->k_mv_l);
 		ft_printf("%fdmalloc failed while loading animations\n", 2);
 		return (1);
 	}
@@ -90,7 +89,7 @@ int	sl_load_animations(t_sl_data *data)
 		return (1);
 	}
 	if (sl_ams_mallocs(data))
-		return (1);
+		return (sl_clear_animations(data));
 	if (sl_amload(data, AM_KNIGHT_MV_L, data->am->k_mv_l))
 		return (sl_clear_animations(data));
 	if (sl_amload(data, AM_KNIGHT_MV_R, data->am->k_mv_r))
