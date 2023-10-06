@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:12:47 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:53:16 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:33:42 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	sl_grow_plr(t_sl_data *data)
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
 		sl_flush_loop(data);
 	}
-	sl_print_tile(data, data->plr[0], data->plr[1], 0);
+	if (data->immunetmr != SL_IMMUNITY)
+		sl_print_tile(data, data->plr[0], data->plr[1], 0);
 	return (0);
 }
 

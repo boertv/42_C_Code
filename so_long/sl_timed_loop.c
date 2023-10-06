@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:15:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/04 17:56:21 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:21:32 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // returns 1 if player got hit
 int	sl_hitreg(t_sl_data *data)
 {
-	if (data->immunetimer || SL_CHEATS)
+	if (data->immunetmr || SL_CHEATS)
 		return (0);
 	if (ft_strchr(CR_CHARS_UPC, data->mask_cr[data->plr[1]][data->plr[0]]))
 	{
@@ -24,8 +24,9 @@ int	sl_hitreg(t_sl_data *data)
 			sl_death_screen(data);
 			return (1);
 		}
-		data->immunetimer = SL_IMMUNETMR;
-		sl_print_fullwin(data, COL_DRED, 0, NULL);
+		data->immunetmr = SL_IMMUNITY;
+		if (data->map[data->plr[1]][data->plr[0]] != EXIT_OPEN)
+			sl_print_fullwin(data, COL_DRED, 0, NULL);
 		return (1);
 	}
 	return (0);
@@ -44,14 +45,14 @@ static void	sl_print_clock(t_sl_data *data)
 	data->cords[0] = 0;
 	data->cords[1] = 0;
 	sl_print_rectangle(data, 70, 22, BG_COL);
-	if (!data->immunetimer)
+	if (!data->immunetmr)
 	{
 		bin = ft_itoa(data->clock);
 		mlx_string_put(data->mlx, data->win, 0, 0, UI_COL, bin);
 	}
 	else
 	{
-		bin = ft_itoa(data->immunetimer);
+		bin = ft_itoa(data->immunetmr);
 		mlx_string_put(data->mlx, data->win, 0, 0, COL_WHITE, bin);
 	}
 	free(bin);
@@ -75,11 +76,11 @@ static void	sl_animate_crs(t_sl_data *data)
 
 int	sl_timed_loop(t_sl_data *data)
 {
-	if (data->immunetimer)
+	if (data->immunetmr)
 	{
-		if (data->immunetimer == SL_IMMUNETMR)
+		if (data->immunetmr == SL_IMMUNITY)
 			sl_render_map(data);
-		data->immunetimer--;
+		data->immunetmr--;
 	}
 	data->clock++;
 	if (data->clock >= 1000000000)

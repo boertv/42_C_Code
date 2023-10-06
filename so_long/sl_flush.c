@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:54:54 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:05:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	sl_reset(t_sl_data *data)
 	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
 	data->clock = 0;
 	data->msgtimer = 0;
-	data->immunetimer = 0;
+	data->immunetmr = 0;
 	mlx_loop_hook(data->mlx, sl_timed_loop, (void *) data);
 	return (0);
 }

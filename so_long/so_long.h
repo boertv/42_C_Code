@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 14:44:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:19:48 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_sl_data
 	int		cords[2];
 	int		clock;
 	int		msgtimer;
-	int		immunetimer;
+	int		immunetmr;
 	int		end[2];
 	t_tex	*tex;
 	t_amlib	*am;
@@ -151,7 +151,7 @@ int			sl_print_errmsg(t_sl_map *checks, char *msg, int rtrn);
 int			sl_perr_map(int err, void *p, t_sl_map *checks);
 int			sl_error_credits(t_sl_map *checks);
 
-# define SL_NAME "Slime Escape 2: time 2 slime"
+# define SL_NAME "Slime Escape 2: Time 2 Slime"
 
 # define KEY_ESC 53
 # define KEY_UP 126
@@ -182,7 +182,7 @@ int			sl_error_credits(t_sl_map *checks);
 # define MAP_CHARS "01PCEK"
 
 # define SL_CHEATS 0
-# define SL_IMMUNETMR 150
+# define SL_IMMUNITY 150
 
 # define MAP_ERR_HOLE 1
 # define MAP_ERR_CHAR 2
