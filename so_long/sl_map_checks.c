@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:35:58 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 16:14:34 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:10:29 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	sl_row_check(char *row, int wall, t_sl_map *checks, t_sl_data *data)
 	err = -1;
 	if (row[0] != '1')
 		err = 0;
-	j = 1;
+	j = 0;
 	while (row[j])
 	{
 		if (wall && row[j] != '1')

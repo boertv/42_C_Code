@@ -6,7 +6,7 @@
 #    By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:06:40 by bvercaem          #+#    #+#              #
-#    Updated: 2023/10/05 17:32:19 by bvercaem         ###   ########.fr        #
+#    Updated: 2023/10/06 16:51:14 by bvercaem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,9 @@ BONUS_HEADER_WD	=
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-#FLAGS			=	-Wall -Wextra -Werror
+FLAGS			=	-Wall -Wextra -Werror
 #FLAGS			=	-Wall -Wextra -Werror -g
-FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+#FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 OPENGL_APPKIT	=	-framework OpenGL -framework AppKit
 LIBS			=	libft/libft.a -lmlx
 

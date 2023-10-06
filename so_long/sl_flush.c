@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 16:41:47 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:56:11 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	sl_flush_all(t_sl_data *data)
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	data->win = NULL;
+system("leaks so_long");
 	return (1);
 }
 
