@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:07:55 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 15:05:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:28:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	sl_key_hook_hub(int key, t_sl_data *data)
 {
 	if (key == KEY_ESC)
-		sl_flush_loop(data);
+		sl_flush_loop(data, 0);
 	else if (key == KEY_W || key == KEY_UP)
 		sl_move_cr(data, NULL, NULL, DIR_UP);
 	else if (key == KEY_A || key == KEY_LEFT)
@@ -29,10 +29,7 @@ int	sl_key_hook_hub(int key, t_sl_data *data)
 	else if (SL_CHEATS && key == KEY_G)
 		sl_grow_plr(data);
 	else if (key == KEY_R)
-	{
-		if (sl_reset(data))
-			sl_flush_loop(data);
-	}
+		sl_reset(data);
 	else if (SL_CHEATS)
 	{
 		ft_printf("key not in use [%i]\n", key);

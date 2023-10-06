@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:11:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 18:15:10 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:26:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ void	sl_put_answer_indicator(t_sl_data *data, int item)
 int	sl_end_hook(int key, t_sl_data *data)
 {
 	if (key == KEY_ESC)
-		sl_flush_loop(data);
+		sl_flush_loop(data, 0);
 	if (key == KEY_SPC || key == KEY_ENTR)
 	{
 		if (data->end[1] == 1)
-			sl_flush_loop(data);
+			sl_flush_loop(data, 0);
 		if (data->end[1] == 2)
-			if (sl_reset(data))
-				sl_flush_loop(data);
+			sl_reset(data);
 	}
 	if (key == KEY_W || key == KEY_UP)
 		data->end[1] = 1;

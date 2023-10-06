@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 15:05:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:41:47 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	sl_flush_all(t_sl_data *data)
 	return (1);
 }
 
-// exits
-int	sl_flush_loop(t_sl_data *data)
+// print std_out msg, flush_all, exit
+int	sl_flush_loop(t_sl_data *data, int exit_value)
 {
 	char	*level;
 
@@ -47,28 +47,25 @@ int	sl_flush_loop(t_sl_data *data)
 	if (level)
 		free(level);
 	sl_flush_all(data);
-	exit (0);
+	exit (exit_value);
 }
 
-// returns 1 if sl_init_map failed
-int	sl_reset(t_sl_data *data)
+// exits on failure
+void	sl_reset(t_sl_data *data)
 {
-// check all this stuff for leaks too... (like data->map)
-// and so i need to return or just call flush_loop?
 	ft_clear_da(data->map);
 	data->map = sl_create_map(data->map_file);
 	if (!data->map)
-		sl_flush_loop(data);
+		sl_flush_loop(data, 1);
 	ft_clear_da(data->mask_cr);
 	data->mask_cr = NULL;
-	ft_lstclear(data->crs, free);
+	sl_clear_crs(data);
 	sl_shrink_plr(data, 1);
 	if (sl_init_map(data))
-		return (1);
+		sl_flush_loop(data, 1);
 	mlx_key_hook(data->win, sl_key_hook_hub, (void *) data);
 	data->clock = 0;
 	data->msgtimer = 0;
 	data->immunetmr = 0;
 	mlx_loop_hook(data->mlx, sl_timed_loop, (void *) data);
-	return (0);
 }

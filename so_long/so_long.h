@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 16:16:44 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:41:55 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,9 @@ int			sl_upd_plmv(t_sl_data *data, int x, int y);
 void		sl_victory_screen(t_sl_data *data);
 void		sl_death_screen(t_sl_data *data);
 void		sl_put_answer_indicator(t_sl_data *data, int item);
-int			sl_reset(t_sl_data *data);
+void		sl_reset(t_sl_data *data);
 int			sl_flush_all(t_sl_data *data);
-int			sl_flush_loop(t_sl_data *data);
+int			sl_flush_loop(t_sl_data *data, int exit_value);
 
 int			sl_print_errno(char *msg, int rtrn);
 int			sl_print_errmsg(t_sl_map *checks, char *msg, int rtrn);
