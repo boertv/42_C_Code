@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/26 17:23:38 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:16:41 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	sl_search_map(t_sl_data *data, char c, int *x, int *y)
 	return (1);
 }
 
-int	sl_render_map(t_sl_data *data)
+void	sl_render_map(t_sl_data *data)
 {
 	int	x;
 	int	y;
@@ -54,7 +54,6 @@ int	sl_render_map(t_sl_data *data)
 		}
 		y++;
 	}
-	return (0);
 }
 
 // returns 1 if malloc (mask) failed ((or 'P' isn't found somehow))

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:35:34 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/09/20 14:57:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:13:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	sl_print_frame(t_sl_data *data, int w, int h, int color)
 }
 
 // cords provided in data->cords[2]:[x,y]
-int	sl_print_rectangle(t_sl_data *data, int w, int h, int color)
+void	sl_print_rectangle(t_sl_data *data, int w, int h, int color)
 {
 	int	i;
 	int	j;
@@ -50,5 +50,4 @@ int	sl_print_rectangle(t_sl_data *data, int w, int h, int color)
 		}
 		j++;
 	}
-	return (0);
 }

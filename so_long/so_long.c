@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 15:45:30 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:21:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,47 +33,46 @@ int	main(int ac, char *av[])
 	data.map_file = av[1];
 	if (!data.map)
 		return (sl_print_errno(av[1], 1));
-// from here: clear_da(data->map)			at init: data->map = NULL;
 	if (sl_map_check(&data))
 		return (sl_flush_all(&data));
 	if (sl_mlx_init(&data))
 		return (sl_flush_all(&data));
-// from here: mlx_destroy(data->win)		at init: data->win = NULL;
 	if (sl_load_texs(&data))
-		return (1);
-// from here: call sl_clear_texs			at init: data->tex = NULL;
-// from here: call sl_clear_animations		at init: data->am = NULL;
+		return (sl_flush_all(&data));
 	if (sl_init_map(&data))
-		return (1);
-// from here: clear_da(data->mask_cr)		at init: data->mask_cr = NULL;
-// from here: call sl_clear_crs				at init: data->crs = NULL;
+		return (sl_flush_all(&data));
 	sl_mlx_loop(&data);
 // READ COMMENTS BEFORE PUSHING
 }
 
-// load all imgs (texs and animations) in one function, clear them in one too
-//		(don't forget free(data->tex) and free(data->lib))
-
 // MAKE SURE CHEATS IS OFF
 // MAKE SURE MAKEFILE CFLAG IS STANDARD
-
 // remove all .DS_Store and .vscode
 
-//stuff to free;
-//	- map
-//	- masks
-//	- textures
-//	- window
-//
-//	- t_list crs
-//		- every t_list
-//		- every t_creature
-//
-//	- animations
-//		- am_lib
-//		- anim t_lists
+/*
+		MEMORY IN USE:
 
-//size of an mlx char:
-//	- one char  = 10-22
-// (actual height of normal char is 15, but print area (and artefacts) is 22)
-//	- two chars = 20-22
+[creator ft:]
+	[mem address]			[clearing ft]			[what to initialise]
+
+sl_create_map():
+	char **data->map		ft_clear_da()			data->map = NULL;
+
+sl_mlx_init():
+	void *data->win			mlx_destroy_window()	data->win = NULL;
+
+sl_load_texs():
+	t_tex *data->tex		sl_clear_texs()			data->tex = NULL;
+	t_amlib *data->am		sl_clear_animations()	data->am = NULL;
+
+sl_init_map():
+	char **data->mask_cr	ft_clear_da()			data->mask_cr = NULL;
+	t_list **data->crs		sl_clear_crs()			data->crs = NULL;
+*/
+
+/*
+		size of an mlx char:
+	one char:	10-22
+	two chars:	20-22
+ (actual height of normal char is 15, but the print area (with artefacts) is 22)
+*/

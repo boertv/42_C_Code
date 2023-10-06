@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 15:19:48 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:16:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,14 @@ int			sl_list_search(t_sl_list *last, int x, int y);
 int			sl_mlx_init(t_sl_data *data);
 int			sl_init_map(t_sl_data *data);
 int			sl_create_mask_cr(t_sl_data *data);
-int			sl_render_map(t_sl_data *data);
+void		sl_render_map(t_sl_data *data);
 void		sl_print_game_frame(t_sl_data *data, int color);
 int			sl_search_map(t_sl_data *data, char c, int *x, int *y);
 char		sl_getnb(t_sl_data *data, int x, int y, int dir);
 int			sl_check_dir_wall(t_sl_data *data, int x, int y, int dir);
 int			sl_create_color(int t, int r, int g, int b);
 int			sl_cv_cdpx(int cord, char xy, int offset);
-int			sl_print_rectangle(t_sl_data *data, int w, int h, int color);
+void		sl_print_rectangle(t_sl_data *data, int w, int h, int color);
 void		sl_print_frame(t_sl_data *data, int w, int h, int color);
 void		sl_print_midtext(t_sl_data *data, char *str, int y, int color);
 void		sl_print_fullwin(t_sl_data *data, int bgcol, int txcol, char *msg);
