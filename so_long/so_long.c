@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:11:29 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:59:30 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:46:44 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	main(int ac, char *av[])
 		return (sl_flush_all(&data));
 // from here: mlx_destroy(data->win)		at init: data->win = NULL;
 	if (sl_load_texs(&data))
+		return (1);
 // from here: call sl_clear_texs			at init: data->tex = NULL;
 // from here: call sl_clear_animations		at init: data->am = NULL;
-		return (1);
 	if (sl_init_map(&data))
+		return (1);
 // from here: clear_da(data->mask_cr)		at init: data->mask_cr = NULL;
 // from here: call sl_clear_crs				at init: data->crs = NULL;
-		return (1);
 	sl_mlx_loop(&data);
 // READ COMMENTS BEFORE PUSHING
 }

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:43:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:44:12 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int			sl_print_errmsg(t_sl_map *checks, char *msg, int rtrn);
 int			sl_perr_map(int err, void *p, t_sl_map *checks);
 int			sl_error_credits(t_sl_map *checks);
 
-# define SL_NAME "Slime Escape 2: 2 green 2 slippy"
+# define SL_NAME "Slime Escape 2: time 2 slime"
 
 # define KEY_ESC 53
 # define KEY_UP 126
