@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/05 17:43:26 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:25:43 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ void	*sl_load_tex(t_sl_data *data, char *file, char **err)
 		return (NULL);
 	ret = mlx_xpm_file_to_image(data->mlx, file, &data->tex->w, &data->tex->h);
 	if (!ret)
-	{
 		*err = file;
-		sl_clear_texs(data);
-	}
 	return (ret);
 }
 

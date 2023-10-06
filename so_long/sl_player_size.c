@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:12:47 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 16:28:39 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:31:36 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,39 @@ static void	sl_plr_destroy(t_sl_data *data)
 	data->tex->plr_right = NULL;
 }
 
-static void	sl_still_loading(t_sl_data *data, char *err)
+static void	sl_still_loading(t_sl_data *data, char **err)
 {
 	if (data->plr_size == 48)
 	{
-		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_48, &err);
-		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_48, &err);
-		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_48, &err);
-		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_48, &err);
+		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_48, err);
+		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_48, err);
+		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_48, err);
+		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_48, err);
 	}
 	else if (data->plr_size == 64)
 	{
-		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_64, &err);
-		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_64, &err);
-		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_64, &err);
-		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_64, &err);
+		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_64, err);
+		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_64, err);
+		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_64, err);
+		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_64, err);
 	}
 }
 
-static void	sl_loading_plr_size(t_sl_data *data, char *err)
+static void	sl_loading_plr_size(t_sl_data *data, char **err)
 {
 	if (data->plr_size == 16)
 	{
-		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_16, &err);
-		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_16, &err);
-		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_16, &err);
-		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_16, &err);
+		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_16, err);
+		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_16, err);
+		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_16, err);
+		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_16, err);
 	}
 	else if (data->plr_size == 32)
 	{
-		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_32, &err);
-		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_32, &err);
-		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_32, &err);
-		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_32, &err);
+		data->tex->plr_front = sl_load_tex(data, TEX_PLR_FRONT_32, err);
+		data->tex->plr_back = sl_load_tex(data, TEX_PLR_BACK_32, err);
+		data->tex->plr_left = sl_load_tex(data, TEX_PLR_LEFT_32, err);
+		data->tex->plr_right = sl_load_tex(data, TEX_PLR_RIGHT_32, err);
 	}
 	else
 		sl_still_loading(data, err);
@@ -78,7 +78,7 @@ int	sl_grow_plr(t_sl_data *data)
 		return (1);
 	sl_plr_destroy(data);
 	data->plr_size += 16;
-	sl_loading_plr_size(data, err);
+	sl_loading_plr_size(data, &err);
 	if (err)
 	{
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
@@ -107,7 +107,7 @@ int	sl_shrink_plr(t_sl_data *data, int min)
 	if (min)
 		data->plr_size = 32;
 	data->plr_size -= 16;
-	sl_loading_plr_size(data, err);
+	sl_loading_plr_size(data, &err);
 	if (err)
 	{
 		ft_printf("%fdtexture error: make sure '%s' exists\n", 2, err);
