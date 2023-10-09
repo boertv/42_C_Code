@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 16:23:48 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/09 16:53:57 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:03:48 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	sl_flush_loop(t_sl_data *data, int exit_value)
 	if (data->map[data->plr[1]][data->plr[0]] != EXIT_OPEN || !data->plr_size)
 		ft_printf("quitting the game\n");
 	else if (level)
-		ft_printf("completed the level '%s' in %i moves\n", level, data->mvs);
+		ft_printf("completed map '%s' in %i moves\n", level, data->mvs);
 	else
 		ft_printf("completed the level in %i moves\n", data->mvs);
 	if (level)
