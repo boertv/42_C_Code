@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:21:41 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 14:55:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:12:57 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	sl_print_plr(t_sl_data *data)
 	int		w;
 	int		h;
 
+	if (SL_BLINK && data->munetmr && data->munetmr % (SL_BLINK * 2) < SL_BLINK)
+		return ;
 	img = NULL;
 	w = sl_cv_cdpx(data->plr[0], 'x', 0);
 	h = sl_cv_cdpx(data->plr[1], 'y', 0);

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:17:19 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 16:16:41 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:17:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	sl_init_map(t_sl_data *data)
 	data->plr_size = 16;
 	data->mvs = 0;
 	data->clbls = 0;
+	data->munetmr = 0;
 	sl_render_map(data);
 	return (0);
 }

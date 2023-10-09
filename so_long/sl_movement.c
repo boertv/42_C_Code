@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:29:54 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 15:26:20 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:12:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	sl_move_cr(t_sl_data *data, int *x, int *y, char dir)
 	sl_move_cr_2(data, &ogx, &ogy, dir);
 	if (!cr)
 		sl_hitreg(data);
-	if (!sl_move_upd(data, *ogx, *ogy, cr) && data->immunetmr != SL_IMMUNITY)
+	if (!sl_move_upd(data, *ogx, *ogy, cr) && data->munetmr != SL_IMMUNITY)
 		sl_print_tile(data, *ogx, *ogy, 0);
 	return (0);
 }

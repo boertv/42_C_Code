@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 16:41:55 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:17:33 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_sl_data
 	int		cords[2];
 	int		clock;
 	int		msgtimer;
-	int		immunetmr;
+	int		munetmr;
 	int		end[2];
 	t_tex	*tex;
 	t_amlib	*am;
@@ -183,6 +183,7 @@ int			sl_error_credits(t_sl_map *checks);
 
 # define SL_CHEATS 0
 # define SL_IMMUNITY 150
+# define SL_BLINK 10
 
 # define MAP_ERR_HOLE 1
 # define MAP_ERR_CHAR 2

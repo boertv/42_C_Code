@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 15:32:04 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:12:14 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 	int	exit_y;
 
 	data->clbls++;
-	if (data->immunetmr != SL_IMMUNITY)
+	if (data->munetmr != SL_IMMUNITY)
 		sl_print_clbl(data);
 	if (data->clbls >= data->clblt)
 	{
 		if (!sl_search_map(data, EXIT_CLSD, &exit_x, &exit_y))
 		{
 			data->map[exit_y][exit_x] = EXIT_OPEN;
-			if (data->immunetmr != SL_IMMUNITY)
+			if (data->munetmr != SL_IMMUNITY)
 			{
 				sl_print_midtext(data, "The exit opened!", -1, MSG_COL);
 				data->msgtimer = 70;
@@ -34,7 +34,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 		}
 	}
 	data->map[y][x] = CLBL_OLD;
-	if (data->immunetmr != SL_IMMUNITY && y > 0 && data->map[y - 1][x] == WALL)
+	if (data->munetmr != SL_IMMUNITY && y > 0 && data->map[y - 1][x] == WALL)
 		sl_print_tile(data, x, y - 1, 0);
 	sl_grow_plr(data);
 	return (0);
@@ -44,7 +44,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 int	sl_upd_plmv(t_sl_data *data, int x, int y)
 {
 	(data->mvs)++;
-	if (data->immunetmr != SL_IMMUNITY || data->map[y][x] == EXIT_OPEN)
+	if (data->munetmr != SL_IMMUNITY || data->map[y][x] == EXIT_OPEN)
 		sl_print_mvs(data);
 	if (data->map[y][x] == EXIT_OPEN)
 	{
