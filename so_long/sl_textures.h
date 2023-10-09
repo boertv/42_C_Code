@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:18:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 17:16:49 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:42:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_animation_lib
 # define TAIL 45
 # define SHOLDR 25
 # define INDENT 25
+
+// hit_ind: 0 is msg, 1 is full window, 2 is just the plr tile
+# define SL_HIT_IND 1
 
 # define BG_COL 0
 # define CLBL_COL 3302410

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:54:08 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/09 16:12:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:42:05 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	sl_upd_clbl(t_sl_data *data, int x, int y)
 			if (data->munetmr != SL_IMMUNITY)
 			{
 				sl_print_midtext(data, "The exit opened!", -1, MSG_COL);
-				data->msgtimer = 70;
+				data->msgtimer = 100;
 				sl_print_tile(data, exit_x, exit_y, 0);
 			}
 		}

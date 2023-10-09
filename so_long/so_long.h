@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:13:24 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/09 16:17:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:29:46 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int			sl_move_cr(t_sl_data *data, int *x, int *y, char dir);
 int			sl_cr_advance_tile(t_sl_data *data, t_creature *cr);
 void		sl_move_crs(t_sl_data *data);
 int			sl_hitreg(t_sl_data *data);
+void		sl_undo_hit_indicator(t_sl_data *data);
 int			sl_upd_clbl(t_sl_data *data, int x, int y);
 int			sl_upd_crdir(t_sl_data *data, int *x, int *y, char *dir);
 int			sl_upd_plmv(t_sl_data *data, int x, int y);

@@ -6,31 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:15:15 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/09 16:12:14 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:29:38 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// returns 1 if player got hit
-int	sl_hitreg(t_sl_data *data)
-{
-	if (data->munetmr || SL_CHEATS)
-		return (0);
-	if (ft_strchr(CR_CHARS_UPC, data->mask_cr[data->plr[1]][data->plr[0]]))
-	{
-		if (sl_shrink_plr(data, 0))
-		{
-			sl_death_screen(data);
-			return (1);
-		}
-		data->munetmr = SL_IMMUNITY;
-		if (data->map[data->plr[1]][data->plr[0]] != EXIT_OPEN)
-			sl_print_fullwin(data, COL_DRED, 0, NULL);
-		return (1);
-	}
-	return (0);
-}
 
 static void	sl_print_clock(t_sl_data *data)
 {
@@ -79,7 +59,7 @@ int	sl_timed_loop(t_sl_data *data)
 	if (data->munetmr)
 	{
 		if (data->munetmr == SL_IMMUNITY)
-			sl_render_map(data);
+			sl_undo_hit_indicator(data);
 		data->munetmr--;
 		if (SL_BLINK && data->munetmr % SL_BLINK == 0)
 			sl_print_tile(data, data->plr[0], data->plr[1], 0);
