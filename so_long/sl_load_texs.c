@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/06 17:25:43 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:32:07 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	sl_load_texs(t_sl_data *data)
 	err = NULL;
 	data->tex = malloc(sizeof(t_tex));
 	if (!data->tex)
-		return (sl_print_errno("t_tex malloc: ", 1));
+		return (sl_print_errno("general textures malloc: ", 1));
 	sl_init_texs(data);
 	data->tex->w = TILE_WIDTH;
 	data->tex->h = TILE_HEIGHT;

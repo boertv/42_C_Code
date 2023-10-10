@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:18:13 by bvercaem          #+#    #+#             */
-/*   Updated: 2023/10/03 16:47:56 by bvercaem         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:30:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // doesn't free anything mind you.
 int	sl_print_errno(char *msg, int rtrn)
 {
+	write(2, "Error\n", 6);
 	perror(msg);
 	return (rtrn);
 }
