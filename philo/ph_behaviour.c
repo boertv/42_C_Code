@@ -6,14 +6,19 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:51:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/04 17:01:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:19:04 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_philosopher	*behaviour(t_philosopher *guts)
+void	*behaviour(void *input)
 {
+// stop if not all philos could be created (game_state?)
+	t_philosopher	*guts;
+
+	guts = input;
 	printf("created nr: %i\n", guts->id);
+	free(input);
 	return (NULL);
 }

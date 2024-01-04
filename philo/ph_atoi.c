@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:50:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/04 16:11:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:06:50 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ph_atoi_call(t_philo *data, char *str)
 		return (-1);
 	}
 	res = ph_atoi(data, str);
-	if (res == -1);
+	if (res == -1)
 		ph_perror(str, data->err_msg);
 	return (res);
 }

@@ -68,7 +68,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJS) $(MAIN_OBJ)
 	@printf "$(GREEN)Linking $(NAME)... %45s\r$(NO_COLOR)" " "
-	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) libft/libft.a -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(MAIN_OBJ) -o $(NAME)
 	@echo "\n$(GREEN)$(BOLD)Enjoy!$(BOLD_OFF)$(NO_COLOR)"
 
 clean:

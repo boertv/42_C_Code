@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/04 18:05:07 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:09:27 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
 
-static int	ph_perror(char *item, char *msg)
+int	ph_perror(char *item, char *msg)
 {
 	if (!msg)
 		return (1);
@@ -61,7 +61,7 @@ int	main(int ac, char **av)
 		return (ph_perror(NULL, "not enough arguments"));
 	if (ph_init(&data, av))
 		return (1);
-printf("seconds: %zu, microseconds: %zu\n", data.start_time.tv_sec, data.start_time.tv_usec);
+printf("seconds: %li, microseconds: %i\n", data.start_time.tv_sec, data.start_time.tv_usec);
 	if (assemble(&data))
 	{
 		ph_flush(&data);
