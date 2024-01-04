@@ -9,9 +9,9 @@ HEADER_WD		=	./
 #-------------------COMPILATION----------------------
 
 CC				=	cc
-FLAGS			=	-Wall -Wextra -Werror
-# FLAGS			=	-Wall -Wextra -Werror -g
-# FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+#FLAGS			=	-Wall -Wextra -Werror
+FLAGS			=	-Wall -Wextra -Werror -g
+#FLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 
 MAKE			=	make --no-print-directory
 
@@ -21,9 +21,10 @@ HEADERS			=	$(HEADER_WD)philo.h
 
 MAIN			=	$(SOURCES_WD)philo.c
 
-SRCS			=	$(SOURCES_WD)___.c \
-					$(SOURCES_WD)___.c \
-					$(SOURCES_WD)___.c \
+SRCS			=	$(SOURCES_WD)ph_atoi.c \
+					$(SOURCES_WD)ph_assemble.c \
+					$(SOURCES_WD)ph_behaviour.c \
+					$(SOURCES_WD)ph_flush.c \
 
 #-------------------OBJECTS----------------------
 

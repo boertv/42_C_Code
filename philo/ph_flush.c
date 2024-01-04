@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ph_flush.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/04 17:39:11 by bvercaem          #+#    #+#             */
+/*   Updated: 2024/01/04 17:50:35 by bvercaem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+// clears data->philos in reverse starting with i - 1
+// sets ptr to NULL
+void	clear_philo(t_philo *data, int i)
+{
+	if (!data->philos)
+		return ;
+	while (i--)
+		pthread_join(data->philos[i], NULL);
+	free(data->philos);
+	data->philos = NULL;
+}
+
+// clears data->forks in reverse starting with i - 1
+// sets ptr to NULL
+void	clear_forks(t_philo *data, int i)
+{
+	if (!data->forks)
+		return ;
+	while (i--)
+		pthread_mutex_destroy(data->forks + i);
+	free(data->forks);
+	data->forks = NULL;
+}
+
+void	ph_flush(t_philo *data)
+{
+	clear_philo(data, data->total);
+	clear_forks(data, data->total);
+}
