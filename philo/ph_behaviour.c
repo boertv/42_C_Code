@@ -6,13 +6,13 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:51:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/05 19:51:33 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:16:17 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// returns 1 if eat_target has been reached for all
+// returns 1 if eat_target has been reached for all, or game_state
 static int	ma_spagget(t_philosopher *guts)
 {
 	int	temp;
@@ -33,12 +33,23 @@ static int	ma_spagget(t_philosopher *guts)
 		}
 	}
 	usleep(guts->data->time_to_eat * 1000);
+	if (guts->data->game_state)
+		return (1);
+	return (0);
+}
+
+static int	drop_forks(t_philosopher *guts)
+{
+	int	left_fork;
+
 	if (guts->id == 1)
-		temp = guts->data->total - 1;
+		left_fork = guts->data->total - 1;
 	else
-		temp = guts->id - 2;
-	pthread_mutex_unlock(guts->data->forks + temp);
+		left_fork = guts->id - 2;
+	pthread_mutex_unlock(guts->data->forks + left_fork);
 	pthread_mutex_unlock(guts->data->forks + (guts->id - 1));
+	if (guts->data->game_state)
+		return (1);
 	return (0);
 }
 
@@ -85,7 +96,7 @@ void	*behaviour(void *input)
 			return (NULL);
 		if (ma_spagget(guts))
 			return (NULL);
-		if (guts->data->game_state)
+		if (drop_forks(guts))
 			return (NULL);
 		printf("%i %i is sleeping\n", guts->data->watch, guts->id);
 		usleep(guts->data->time_to_sleep * 1000);

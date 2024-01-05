@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:39:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/05 19:59:15 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:16:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ph_flush(t_philo *data)
 {
 	if (!data->game_state)
 		data->game_state = 1;
-	clear_philo(data, data->total);
 	clear_forks(data, data->total);
+	clear_philo(data, data->total);
 	pthread_mutex_destroy(&data->lock);
 }
