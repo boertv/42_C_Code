@@ -25,6 +25,7 @@ SRCS			=	$(SOURCES_WD)ph_atoi.c \
 					$(SOURCES_WD)ph_assemble.c \
 					$(SOURCES_WD)ph_behaviour.c \
 					$(SOURCES_WD)ph_flush.c \
+					$(SOURCES_WD)ph_reaper.c \
 
 #-------------------OBJECTS----------------------
 
@@ -78,6 +79,7 @@ clean:
 fclean:	clean
 	@echo "$(RED)Deleting executable...$(NO_COLOR)"
 	@rm -f $(NAME)
+	@rm -rf $(NAME).dSYM
 
 re: fclean all
 

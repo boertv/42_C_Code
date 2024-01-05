@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:21:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/04 18:11:05 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:44:59 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,37 @@
 typedef struct s_philo
 {
 	struct timeval	start_time;
-	struct timeval	temp_time;
+	int				watch;
 	char			game_state;
-	pthread_t		*philos;
+	void			*philos;
+	pthread_t		reaper;
 	pthread_mutex_t	*forks;
 	int				total;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				eat_target;
+	int				target_hits;
+	pthread_mutex_t	lock;
 	char			*err_msg;
 }					t_philo;
 
 typedef struct s_philosopher
 {
-	int		id;
-	int		timer;
-	int		meal_count;
-	t_philo	*data;
-}		t_philosopher;
+	int			id;
+	int			last_meal;
+	int			meal_count;
+	pthread_t	thread;
+	t_philo		*data;
+}				t_philosopher;
 
-int				ph_atoi_call(t_philo *data, char *str);
-int				assemble(t_philo *data);
-void			*behaviour(void *guts);
-void			ph_flush(t_philo *data);
-void			clear_philo(t_philo *data, int i);
-void			clear_forks(t_philo *data, int i);
-int				ph_perror(char *item, char *msg);
+int		ph_atoi_call(t_philo *data, char *str);
+int		assemble(t_philo *data);
+void	*behaviour(void *input);
+void	*reaper(void *input);
+void	ph_flush(t_philo *data);
+void	clear_philo(t_philo *data, int i);
+void	clear_forks(t_philo *data, int i);
+int		ph_perror(char *item, char *msg);
 
 #endif

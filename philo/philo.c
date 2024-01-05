@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/04 18:09:27 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:03:54 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,26 @@ int	ph_perror(char *item, char *msg)
 // error 1: prints msg
 static int	ph_init(t_philo *data, char **av)
 {
+	if (pthread_mutex_init(&data->lock, NULL))
+		return (ph_perror(NULL, "could not initialise a mutex"));
 	data->err_msg = NULL;
 	data->philos = NULL;
 	data->forks = NULL;
 	data->total = ph_atoi_call(data, av[1]);
-	if (!data->total)
-	{
-		data->err_msg = "at least one philosopher should be assembled";
-		return (ph_perror(NULL, data->err_msg));
-	}
 	data->time_to_die = ph_atoi_call(data, av[2]);
 	data->time_to_eat = ph_atoi_call(data, av[3]);
 	data->time_to_sleep = ph_atoi_call(data, av[4]);
+	data->target_hits = 0;
 	if (av[5])
 		data->eat_target = ph_atoi_call(data, av[5]);
 	else
 		data->eat_target = -1;
 	if (data->err_msg)
 		return (1);
-	if (gettimeofday(&data->start_time, NULL))
-	{
-		data->err_msg = "time of day could not be retrieved";
-		return (ph_perror(NULL, data->err_msg));
-	}
 	data->game_state = 0;
+	if (gettimeofday(&data->start_time, NULL))
+		return (ph_perror(NULL, "time of day could not be retrieved"));
+	data->watch = 0;
 	return (0);
 }
 
@@ -61,12 +57,15 @@ int	main(int ac, char **av)
 		return (ph_perror(NULL, "not enough arguments"));
 	if (ph_init(&data, av))
 		return (1);
-printf("seconds: %li, microseconds: %i\n", data.start_time.tv_sec, data.start_time.tv_usec);
+	if (!data.eat_target || !data.total)
+		return (0);
 	if (assemble(&data))
 	{
 		ph_flush(&data);
 		return (ph_perror(NULL, data.err_msg));
 	}
+	// can result in an error (fine with how the code is rn)
+	pthread_join(data.reaper, NULL);
 	ph_flush(&data);
 	return (0);
 }
