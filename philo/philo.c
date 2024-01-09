@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/09 18:24:06 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:02:37 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,12 @@ int	main(int ac, char **av)
 		ph_flush(&data);
 		return (ph_perror(NULL, data.err_msg));
 	}
-	// can result in an error (fine with how the code is rn)
 	pthread_join(data.reaper, NULL);
-// printf("reaper has finished\n");
 	ph_flush(&data);
 	return (0);
 }
 
 /*
-lots of philos will print a bunch of messages for a good while, all timestamped 0
-i think it's just too many threads tbh, can fix the timestamp but they still won't die
-
 test 4 410 200 200
 and? 5 610 200 200
 */
