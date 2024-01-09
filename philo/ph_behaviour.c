@@ -6,37 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:51:07 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/09 15:13:20 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:49:26 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// returns 1 if eat_target has been reached for all, or game_state
-static int	ma_spagget(t_philosopher *guts)
-{
-	int	temp;
-
-	temp = guts->data->watch;
-	printf("%i %i is eating\n", temp, guts->id);
-	guts->last_meal = temp;
-	guts->meal_count++;
-	usleep(guts->data->time_to_eat * 1000);
-	if (guts->data->game_state)
-		return (1);
-	if (guts->meal_count == guts->data->eat_target)
-	{
-		pthread_mutex_lock(&guts->data->lock);
-		guts->data->target_hits++;
-		pthread_mutex_unlock(&guts->data->lock);
-		if (guts->data->target_hits >= guts->data->total)
-		{
-			guts->data->game_state = 2;
-			return (1);
-		}
-	}
-	return (0);
-}
 
 static int	drop_forks(t_philosopher *guts)
 {
@@ -51,6 +25,31 @@ static int	drop_forks(t_philosopher *guts)
 	if (guts->data->game_state)
 		return (1);
 	return (0);
+}
+
+// returns 1 if eat_target has been reached for all, or game_state != 0
+static int	eat(t_philosopher *guts)
+{
+	int	temp;
+
+	pthread_mutex_lock(&guts->data->watch_lock);
+	temp = guts->data->watch;
+	pthread_mutex_unlock(&guts->data->watch_lock);
+	printf("%i %i is eating\n", temp, guts->id);
+	guts->last_meal = temp;
+	guts->meal_count++;
+	ft_msleep(guts->data->time_to_eat);
+	if (guts->data->game_state)
+		return (drop_forks(guts));
+	if (guts->meal_count == guts->data->eat_target)
+	{
+		pthread_mutex_lock(&guts->data->target_lock);
+		guts->data->target_hits++;
+		pthread_mutex_unlock(&guts->data->target_lock);
+		if (guts->data->target_hits >= guts->data->total)
+			guts->data->game_state = 2;
+	}
+	return (drop_forks(guts));
 }
 
 // returns forks[0]: first_fork and forks[1]: second_fork
@@ -90,12 +89,16 @@ static int	grab_forks(t_philosopher *guts)
 		pthread_mutex_unlock(guts->data->forks + forks[0]);
 		return (1);
 	}
+	pthread_mutex_lock(&guts->data->watch_lock);
 	printf("%i %i has taken a fork\n", guts->data->watch, guts->id);
+	pthread_mutex_unlock(&guts->data->watch_lock);
 	if (guts->data->total == 1)
 	{
-		printf("%i %i can't find another fork!\n", guts->data->watch, guts->id);
 		pthread_mutex_unlock(guts->data->forks + forks[0]);
-		usleep(guts->data->time_to_die * 1000);
+		pthread_mutex_lock(&guts->data->watch_lock);
+		printf("%i %i can't find another fork!\n", guts->data->watch, guts->id);
+		pthread_mutex_unlock(&guts->data->watch_lock);
+		ft_msleep(guts->data->time_to_die);
 		return (1);
 	}
 	if (pthread_mutex_lock(guts->data->forks + forks[1]))
@@ -110,7 +113,9 @@ static int	grab_forks(t_philosopher *guts)
 		drop_forks(guts);
 		return (1);
 	}
+	pthread_mutex_lock(&guts->data->watch_lock);
 	printf("%i %i has taken a fork\n", guts->data->watch, guts->id);
+	pthread_mutex_unlock(&guts->data->watch_lock);
 	return (0);
 }
 
@@ -124,14 +129,17 @@ void	*behaviour(void *input)
 	usleep(100);
 	while (!guts->data->game_state)
 	{
+		pthread_mutex_lock(&guts->data->watch_lock);
 		printf("%i %i is thinking\n", guts->data->watch, guts->id);
+		pthread_mutex_unlock(&guts->data->watch_lock);
 		if (grab_forks(guts))
 			return (NULL);
-		ma_spagget(guts);
-		if (drop_forks(guts))
+		if (eat(guts))
 			return (NULL);
+		pthread_mutex_lock(&guts->data->watch_lock);
 		printf("%i %i is sleeping\n", guts->data->watch, guts->id);
-		usleep(guts->data->time_to_sleep * 1000);
+		pthread_mutex_unlock(&guts->data->watch_lock);
+		ft_msleep(guts->data->time_to_sleep);
 	}
 	return (NULL);
 }

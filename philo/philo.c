@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/08 19:17:37 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:24:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	ph_perror(char *item, char *msg)
 // error 1: prints msg
 static int	ph_init(t_philo *data, char **av)
 {
-	if (pthread_mutex_init(&data->lock, NULL))
+	if (pthread_mutex_init(&data->target_lock, NULL))
+		return (ph_perror(NULL, "could not initialise a mutex"));
+	if (pthread_mutex_init(&data->watch_lock, NULL))
 		return (ph_perror(NULL, "could not initialise a mutex"));
 	data->err_msg = NULL;
 	data->philos = NULL;
@@ -43,8 +45,7 @@ static int	ph_init(t_philo *data, char **av)
 	if (data->err_msg)
 		return (1);
 	data->game_state = 0;
-	if (gettimeofday(&data->start_time, NULL))
-		return (ph_perror(NULL, "time of day could not be retrieved"));
+	gettimeofday(&data->start_time, NULL);
 	data->watch = 0;
 	return (0);
 }
@@ -74,4 +75,7 @@ int	main(int ac, char **av)
 /*
 lots of philos will print a bunch of messages for a good while, all timestamped 0
 i think it's just too many threads tbh, can fix the timestamp but they still won't die
+
+test 4 410 200 200
+and? 5 610 200 200
 */
