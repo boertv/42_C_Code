@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:21:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/05 19:44:59 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:48:16 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_philo
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				eat_target;
-	int				target_hits;
 	pthread_mutex_t	lock;
+	int				target_hits;
 	char			*err_msg;
 }					t_philo;
 

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:03:46 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/05 18:37:08 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:58:18 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	*reaper(void *input)
 	data = input;
 	while (!data->game_state)
 	{
-		usleep(1000);
+		usleep(500);
 		if (gettimeofday(&time, NULL))
 		{
 			ph_perror(NULL, "time of day could not be retrieved");
