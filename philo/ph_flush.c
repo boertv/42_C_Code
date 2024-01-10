@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:39:11 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/09 16:55:27 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:59:58 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ void	clear_philo(t_philo *data, int i)
 	if (!data->philos)
 		return ;
 	while (i--)
-	{
-// printf("joining philo %i\n", i + 1);
 		pthread_join(((t_philosopher *) data->philos)[i].thread, NULL);
-	}
 	free(data->philos);
 	data->philos = NULL;
 }
@@ -41,10 +38,13 @@ void	clear_forks(t_philo *data, int i)
 
 void	ph_flush(t_philo *data)
 {
+	pthread_mutex_lock(&data->state_lock);
 	if (!data->game_state)
 		data->game_state = 1;
+	pthread_mutex_unlock(&data->state_lock);
 	clear_philo(data, data->total);
 	clear_forks(data, data->total);
 	pthread_mutex_destroy(&data->target_lock);
 	pthread_mutex_destroy(&data->watch_lock);
+	pthread_mutex_destroy(&data->state_lock);
 }

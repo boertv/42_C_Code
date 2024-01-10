@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:21:30 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/09 16:54:34 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:50:06 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef struct s_philo
 	struct timeval	start_time;
 	pthread_mutex_t	watch_lock;
 	int				watch;
-	char			game_state;
+	pthread_mutex_t	state_lock;
+	int				game_state;
 	void			*philos;
 	pthread_t		reaper;
 	pthread_mutex_t	*forks;
@@ -50,6 +51,9 @@ typedef struct s_philosopher
 int		ph_atoi_call(t_philo *data, char *str);
 int		assemble(t_philo *data);
 void	*behaviour(void *input);
+void	ph_lock_and_print(t_philosopher *guts, int *watch, char *msg);
+int		grab_forks(t_philosopher *guts);
+int		eat(t_philosopher *guts);
 void	*reaper(void *input);
 void	ft_msleep(int ms);
 int		read_watch(t_philo *data);
@@ -58,5 +62,6 @@ void	ph_flush(t_philo *data);
 void	clear_philo(t_philo *data, int i);
 void	clear_forks(t_philo *data, int i);
 int		ph_perror(char *item, char *msg);
+int		ph_lock_and_check(int *var, pthread_mutex_t *lock);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:50:27 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/04 18:06:50 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:08:09 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static int	ph_atoi(t_philo *data, char *str)
 {
 	unsigned int	res;
 
-	while(*str == '+')
+	while (*str == '+')
 		str++;
 	res = 0;
-	while(*str)
+	while (*str)
 	{
 		if (*str < '0' || *str > '9')
 		{

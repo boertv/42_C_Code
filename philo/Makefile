@@ -27,6 +27,7 @@ SRCS			=	$(SOURCES_WD)ph_atoi.c \
 					$(SOURCES_WD)ph_flush.c \
 					$(SOURCES_WD)ph_reaper.c \
 					$(SOURCES_WD)ph_msleep.c \
+					$(SOURCES_WD)ph_eating.c \
 
 #-------------------OBJECTS----------------------
 
