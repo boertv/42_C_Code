@@ -24,10 +24,11 @@ MAIN			=	$(SOURCES_WD)philo.c
 SRCS			=	$(SOURCES_WD)ph_atoi.c \
 					$(SOURCES_WD)ph_assemble.c \
 					$(SOURCES_WD)ph_behaviour.c \
+					$(SOURCES_WD)ph_lock_operations.c \
 					$(SOURCES_WD)ph_flush.c \
 					$(SOURCES_WD)ph_reaper.c \
 					$(SOURCES_WD)ph_msleep.c \
-					$(SOURCES_WD)ph_eating.c \
+					$(SOURCES_WD)ph_eating.c
 
 #-------------------OBJECTS----------------------
 

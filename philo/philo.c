@@ -6,43 +6,11 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:20:21 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/10 19:55:37 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:49:34 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// returns *var after retrieving it inside a lock
-int	ph_lock_and_check(int *var, pthread_mutex_t *lock)
-{
-	int	value;
-
-	pthread_mutex_lock(lock);
-	value = *var;
-	pthread_mutex_unlock(lock);
-	return (value);
-}
-
-// prints "[watch] [id] [msg]\n"
-// doesn't print if (game_state), if (watch) uses that instead of data->watch
-void	ph_lock_and_print(t_philosopher *guts, int *watch, char *msg)
-{
-	pthread_mutex_lock(&guts->data->state_lock);
-	if (guts->data->game_state)
-	{
-		pthread_mutex_unlock(&guts->data->state_lock);
-		return ;
-	}
-	if (!watch)
-	{
-		pthread_mutex_lock(&guts->data->watch_lock);
-		printf("%i %i %s\n", guts->data->watch, guts->id, msg);
-		pthread_mutex_unlock(&guts->data->watch_lock);
-	}
-	else
-		printf("%i %i %s\n", *watch, guts->id, msg);
-	pthread_mutex_unlock(&guts->data->state_lock);
-}
 
 int	ph_perror(char *item, char *msg)
 {
@@ -55,15 +23,28 @@ int	ph_perror(char *item, char *msg)
 	return (1);
 }
 
-// error 1: prints msg
-static int	ph_init(t_philo *data, char **av)
+static int	ph_startup(t_philo *data)
 {
 	if (pthread_mutex_init(&data->target_lock, NULL))
 		return (ph_perror(NULL, "could not initialise a mutex"));
 	if (pthread_mutex_init(&data->watch_lock, NULL))
+	{
+		pthread_mutex_destroy(&data->target_lock);
 		return (ph_perror(NULL, "could not initialise a mutex"));
+	}
 	if (pthread_mutex_init(&data->state_lock, NULL))
+	{
+		pthread_mutex_destroy(&data->target_lock);
+		pthread_mutex_destroy(&data->watch_lock);
 		return (ph_perror(NULL, "could not initialise a mutex"));
+	}
+	gettimeofday(&data->start_time, NULL);
+	return (0);
+}
+
+// error 1: prints msg
+static int	ph_init(t_philo *data, char **av)
+{
 	data->err_msg = NULL;
 	data->philos = NULL;
 	data->forks = NULL;
@@ -79,9 +60,8 @@ static int	ph_init(t_philo *data, char **av)
 	if (data->err_msg)
 		return (1);
 	data->game_state = 0;
-	gettimeofday(&data->start_time, NULL);
 	data->watch = 0;
-	return (0);
+	return (ph_startup(data));
 }
 
 int	main(int ac, char **av)
@@ -89,7 +69,7 @@ int	main(int ac, char **av)
 	t_philo	data;
 
 	if (ac != 5 && ac != 6)
-		return (ph_perror(NULL, "not enough arguments"));
+		return (ph_perror(NULL, "there should be 4 or 5 arguments"));
 	if (ph_init(&data, av))
 		return (1);
 	if (!data.eat_target || !data.total)
