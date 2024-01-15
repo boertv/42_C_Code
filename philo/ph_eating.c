@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:28:57 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/12 17:24:18 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:50:39 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ int	eat(t_philosopher *guts)
 	if (guts->meal_count == guts->data->eat_target)
 	{
 		pthread_mutex_lock(&guts->data->target_lock);
-		guts->data->target_hits++;
-		if (guts->data->target_hits >= guts->data->total)
+		if (++(guts->data->target_hits) >= guts->data->total)
 		{
 			pthread_mutex_lock(&guts->data->state_lock);
 			guts->data->game_state = 100 + guts->id;
+			printf("%i %i is sleeping\n", ph_lock_and_check(&guts->data->watch,
+					&guts->data->watch_lock), guts->id);
 			pthread_mutex_unlock(&guts->data->state_lock);
 		}
 		pthread_mutex_unlock(&guts->data->target_lock);
