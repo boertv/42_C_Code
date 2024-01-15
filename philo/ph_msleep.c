@@ -6,7 +6,7 @@
 /*   By: bvercaem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:58:17 by bvercaem          #+#    #+#             */
-/*   Updated: 2024/01/09 18:52:12 by bvercaem         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:07:35 by bvercaem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	ft_msleep(int ms)
 	if (!ms)
 		return ;
 	gettimeofday(&start, NULL);
-	usleep(100);
+	usleep(500);
 	gettimeofday(&current, NULL);
 	while (get_ms(&start, &current) < ms)
 	{
-		usleep(100);
+		usleep(300);
 		gettimeofday(&current, NULL);
 	}
 }
