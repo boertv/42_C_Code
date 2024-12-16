@@ -3,9 +3,10 @@ My updated 42 library. This repository includes all the solo C projects i comple
 
 ## Highlight: so_long
 A 2D dungeon crawler that can parse any level given as input
+
 ![so_long](https://github.com/user-attachments/assets/13d2ca67-ba1a-4cf7-915c-72830a54a419)
 
-level used in the example:
+level file used in the example:
 ```
 111111111111111111
 111111100111P00011
@@ -15,7 +16,7 @@ level used in the example:
 111001110111100111
 110011110111001111
 100111110110011111
-1K000000000K111111
-1111111101K00E0001
+1K0000000C0K111111
+1111111101K00000E1
 111111111111111111
 ```
